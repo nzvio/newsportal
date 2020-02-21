@@ -1,0 +1,174 @@
+@import "../../var";
+
+header {
+    &#main {
+        @media (min-width:0) {display: none;}
+        @media (min-width:1000px) {display: block;}
+        height: 230px; background: $color-black;
+        #h-top {height:40px;}
+        #h-middle {
+            height:130px; border-bottom:1px $color-grey-dark solid;   
+            #h-middle-content {
+                display: flex; align-items: center; height: 100%;
+                #h-logo {                
+                    cursor: pointer; font-family: "teko", Arial, Helvetica, sans-serif; text-transform: uppercase;
+                    #h-logo-top {
+                        font-size: 40px;
+                        span {
+                            &:nth-child(1) {color: #fff;}
+                            &:nth-child(2) {color: $color-blue;}
+                        }
+                    }
+                    #h-logo-bottom {color:$color-grey-light; font-size: 16px; letter-spacing: 3px;}
+                }
+            }            
+        }
+        #h-bottom {height:60px;}
+    }
+    &#sticky {        
+        position: fixed; z-index: 10; left: 0; right: 0; top: 0; height: 60px; background: $color-black; display: none; 
+        &.visible {
+            @media (min-width:0) {display: none;}
+            @media (min-width:1000px) {display: block;}
+        }        
+    }
+    &#mobile {
+        @media (min-width:0) {display: flex;}
+        @media (min-width:1000px) {display: none;}
+        background: $color-black; height: 40px; padding: 0 10px; justify-content: space-between;
+        #hm-logo {                
+            cursor: pointer; font-family: "teko", Arial, Helvetica, sans-serif; text-transform: uppercase; font-size: 24px; height: 100%; display: flex; align-items: center;
+            span {
+                &:nth-child(1) {color: #fff;}
+                &:nth-child(2) {color: $color-blue;}
+            }
+        }
+        #hm-dash {
+            display: flex; height: 100%;
+            .hm-btn {
+                margin-left: 15px; height:100%; display: flex; align-items: center;
+                span {
+                    color: #fff; cursor: pointer; font-size: 20px;
+                    &::after {font-family: "ionicons";}
+                }
+                &.hm-search {span::after {content: "\f2f5";}}
+                &.hm-login {span::after {content: "\f29e";}}
+            }            
+        }
+        
+    }
+    .h-content {
+        max-width: 1200px; margin: 0 auto; padding: 0 10px; height: 100%;       
+    }   
+    .h-menu {
+        width:100%; display: flex; height: 100%; justify-content: space-between;
+        nav {
+            height: 100%; margin: 0;
+            ul {
+                display: flex; height: 100%; margin: 0; padding: 0; list-style: none;
+                li {
+                    height: 100%; display: flex; 
+                    a, a:visited {display: flex; height: 100%; align-items: center; text-decoration: none; font-family: "teko", Arial, Helvetica, sans-serif; text-transform: uppercase;}                    
+                }
+            }
+            &.h-nav-top {
+                ul {
+                    li {
+                        margin-right: 20px;
+                        a, a:visited {color:$color-grey-light; font-size: 16px; letter-spacing: 3px;}
+                        a:hover, a.active {color: $color-blue;}
+                    }
+                }                
+            }
+            &.h-nav-bottom {
+                ul {
+                    li {
+                        margin-right: 40px;
+                        a, a:visited {color:#fff; font-size: 20px;}
+                        a:hover, a.active {color: $color-blue;}
+                    }
+                }
+            }
+        }
+        .h-dash {
+            height: 100%; display: flex; align-items: center;
+            .h-btn {
+                font-family: "ionicons"; color: #fff; cursor: pointer; font-size: 24px; transition: color 0.3s ease 0s; margin-left: 20px;
+                &:hover {color: $color-blue;}
+                &.h-btn-search::after {content: "\f2f5";}
+                &.h-btn-login::after {content: "\f29e";}
+            } 
+            .h-langs {
+                ul {
+                    margin: 0; padding: 0; list-style: none; display: flex;
+                    li {
+                        a, a:visited {display: inline-block; padding: 3px; text-decoration: none; color: #fff; font-size: 14px; text-transform: uppercase; margin-left: 3px; transition: background-color 0.3s ease 0s; }
+                        a:hover, a.active {background-color: $color-blue;}
+                    }
+                }
+            }                   
+        }
+    }                 
+} 
+
+#mm {
+    @media (min-width:0) {display: block;}
+    @media (min-width:1000px) {display: none;}
+    position: fixed; height: 100%; width: 80%; left: -80%; top:0; background: $color-black; z-index: 21; transition: left 0.3s ease 0s; will-change: left;     
+    #mm-content {
+        height: 100%; width: 100%; overflow: hidden; 
+        #mm-langs {
+            height: 40px; padding: 0 20px; 
+            ul {
+                margin: 0; padding: 0; list-style: none; height: 100%; overflow: hidden; display: flex; align-items: center;
+                li {
+                    a, a:visited {display: inline-block; padding: 3px; text-decoration: none; color: #fff; font-size: 14px; text-transform: uppercase; margin-right: 3px; transition: background-color 0.3s ease 0s; }
+                    a:hover, a.active {background-color: $color-blue;}
+                }
+            }
+        }
+        #mm-menu {
+            height: calc(100% - 40px); overflow-y: auto; overflow-x: hidden; padding: 20px;
+            nav {            
+                &:nth-child(1) {border-bottom: 1px $color-grey-dark solid; margin: 0 0 20px 0;}
+                ul {
+                    margin: 0; padding: 0; list-style: none;
+                    li {
+                        margin: 0 0 20px 0;
+                        a, a:visited {color:#fff; font-size: 20px; font-family: "teko", Arial, Helvetica, sans-serif; text-transform: uppercase; text-decoration: none;}
+                        a:hover, a.active {color: $color-blue;}
+                    }
+                }
+            }
+        }
+        
+    }
+    #mm-btn {
+        position: absolute; width: 35px; height: 35px; background: $color-blue; right: -35px; top: 50px; cursor: pointer; display: flex; justify-content: center; align-items: center;
+        #mm-btn-glyph {
+            width:21px; height: 3px; background-color: #fff; position: relative; transition: background-color 1s ease 0s; will-change: background-color;
+            &::before, &::after {content: ""; position: absolute; display: block; left: 0; width:100%; height:3px; background-color: #fff; transition: transform 0.7s ease 0s; will-change: transform;}
+            &::before {top: -6px;}
+            &::after {top: 6px;}
+        }
+    }
+    &.active {
+        left:0;
+        #mm-btn {
+            #mm-btn-glyph {
+                background-color: rgba(0,0,0,0);
+                &::before {transform: translateY(6px) rotate(45deg);}
+                &::after {transform: translateY(-6px) rotate(-45deg);}
+            }            
+        }
+    }
+}
+#mm-overlay {
+    position: fixed; height: 100%; width: 100%; left: -100%; top:0; background: $color-black; z-index: 20; opacity: 0; will-change: opacity; transition: left 0s linear 1s, opacity 1s ease 0s;
+    &.active {left: 0; opacity: 0.7; transition: left 0s linear 0s, opacity 1s ease 0s;}
+}
+
+#scrollindicator {
+    position: fixed; z-index: 11; left: 0; top: 0; height: 3px;
+    #si-scale {height:100%; background-color: $color-blue;}
+}

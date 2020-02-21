@@ -1,0 +1,9 @@
+<div class="pagination" *ngIf="parts.length > 1">
+    <div class="pagination-head">Page:</div>
+    <ul>
+        <li class="back" (click)="back();"><span></span></li>
+        <li *ngFor="let p of parts" (click)="setCurrent (p);" [class]="(p==-1 || p==-2) ? 'skip' : (p == current ? 'active' : '')">{{(p==-1 || p==-2) ? "..." : p+1}}</li>
+        <li class="forward" (click)="forward();"><span></span></li>
+    </ul>
+    <input type="text" [(ngModel)]="changeTo" [placeholder]="current+1" (change)="setCurrentManual();">
+</div>

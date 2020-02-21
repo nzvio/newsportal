@@ -1,0 +1,244 @@
+@import "../var";
+
+.home-gal {
+    @media (min-width:0) {display: block;}
+    @media (min-width:640px) {display: grid; grid-template-columns: repeat(2, 1fr);}
+    @media (min-width:1000px) {display: grid; grid-template-columns: repeat(3, 1fr);}
+    margin: 0 0 80px 0;
+    * {box-sizing: border-box;}
+    article {
+        position: relative; height: 480px; background-size: cover; background-position: center top; 
+        .hg-layer1 {position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: 1; background-color: #000; opacity: 0; transition: opacity 0.3s ease 0s;}
+        
+        .hg-layer2 {
+            @media (min-width:0) {padding: 15px;}
+            @media (min-width:640px) {padding: 30px;}
+            position: absolute; width: 100%; height: 100%; overflow: hidden; z-index: 2; color: #fff; display: flex; flex-direction: column-reverse; cursor: pointer; border-bottom: 4px rgba(0,0,0,0) solid; transition: border-bottom 0.3s ease 0s;   
+            .hgi-title {
+                @media (min-width:0) {font-size: 24px;}
+                @media (min-width:640px) {font-size: 30px;}
+                font-family: "teko", Arial, Helvetica, sans-serif; max-height: 50%; overflow: hidden; margin-top: 20px;
+                a, a:visited {color: #fff; text-decoration: none;}
+            }
+            .hgi-info {
+                display: flex; margin-top: 20px; font-size: 14px;
+                .hgi-date {
+                    margin: 0 10px 0 0;
+                    &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+                }
+                .hgi-comments {
+                    &::before {font-family: "ionicons"; content: "\f11a"; font-size: 16px; display: inline-block; margin-right: 5px;}
+                }
+            }
+            .hgi-cat {
+                a, a:visited {color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; display: inline-block; background-color: $color-blue; padding: 5px; transition: background-color 0.3s ease 0s;}
+                a:hover {background-color: $color-blue-dark;}
+            }
+        }    
+        &:hover {
+            .hg-layer1 {opacity: 0.5;}
+            .hg-layer2 {border-bottom: 4px $color-blue solid;}
+        }    
+    }
+}
+
+.home-digest {
+    margin: 0 0 80px 0;
+    .hd-menu {
+        border-bottom: 1px $color-grey-superlight solid; margin: 0 0 25px 0;
+        ul {
+            margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap;
+            li {
+                @media (min-width:0) {margin-right: 10px;}
+                @media (min-width:1000px) {margin-right: 30px;}    
+                margin-bottom: 10px;
+                a, a:visited {
+                    text-decoration: none; color: $color-main; font-size: 12px; letter-spacing: 1px; display: inline-block; position: relative;
+                    &::after {
+                        @media (min-width:0) {top: 14px;}
+                        @media (min-width:1000px) {top: 30px;}            
+                        display: block; height: 1px; background-color: rgba(0,0,0,0); content: " "; position: absolute; width:100%; transition: background-color 0.3s ease 0s;
+                    }
+                }
+                a:hover, a.active {
+                    color: $color-blue;
+                    &::after {background-color: $color-blue;}
+                }
+            }
+        }
+    }
+    .hd-items {
+        @media (min-width:0) {display: block;}
+        @media (min-width:640px) {display: grid; grid-template-columns: repeat(2, 1fr);}
+        @media (min-width:1000px) {display: grid; grid-template-columns: repeat(3, 1fr);}
+        gap: 30px 20px;
+        article {
+            @media (min-width:0) {margin: 0 0 20px 0;}
+            @media (min-width:640px) {margin: 0;}
+            figure {
+                padding-bottom: 75%; background-size: cover; background-position: center top; margin: 0 0 10px 0; cursor: pointer; position: relative;
+                .hdi-cat {
+                    position: absolute; left: 10px; top: 10px;
+                    a, a:visited {color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; display: inline-block; background-color: $color-blue; padding: 5px; transition: background-color 0.3s ease 0s;}
+                    a:hover {background-color: $color-blue-dark;}
+                }
+            }
+            .hdi-date {font-size: 12px; color: $color-grey-light; letter-spacing: 1px; margin: 0 0 10px 0;}
+            .hdi-title {
+                font-family: "teko", Arial, Helvetica, sans-serif; font-size: 20px;
+                a, a:visited {
+                    color: #000; text-decoration: none;
+                    &:hover {color: $color-blue;}
+                }
+            }
+        }
+    }
+}
+
+.home-pop {
+    @media (min-width:0) {display: block;}
+    @media (min-width:640px) {display: flex;}
+    justify-content: space-between; margin: 0 0 80px 0;
+    .hp-left {
+        @media (min-width:0) {width: 100%; margin: 0 0 20px 0;}
+        @media (min-width:640px) {width: 40%; margin: 0; }        
+        figure {
+            padding-bottom: 75%; background-size: cover; background-position: center top; margin: 0 0 10px 0; cursor: pointer; position: relative;
+            .hpl-overlay {position: absolute; background: #000; opacity: 0; width: 100%; height: 100%; z-index: 1; transition: opacity 0.3s ease 0s;}
+            &:hover {
+                .hpl-overlay {opacity: 0.5;}
+            }
+            .hpl-cat {
+                position: absolute; left: 10px; top: 10px; z-index: 2;
+                a, a:visited {color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; display: inline-block; background-color: $color-blue; padding: 5px; transition: background-color 0.3s ease 0s;}
+                a:hover {background-color: $color-blue-dark;}
+            }
+        }
+        .hpl-date {
+            font-size: 12px; color: $color-grey-light; letter-spacing: 1px; margin: 0 0 10px 0;
+            &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+        }
+        .hpl-title {
+            font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; margin: 0 0 10px 0;
+            a, a:visited {
+                color: #000; text-decoration: none;
+                &:hover {color: $color-blue;}
+            }
+        }
+        .hpl-short {font-size: 12px; color: $color-grey-dark; line-height: 20px; max-height: 100px; overflow: hidden;}
+    }
+    .hp-right {
+        @media (min-width:0) {width: 100%; }
+        @media (min-width:640px) {width: 55%; }
+        article {
+            padding: 0 0 20px 0; margin: 0 0 20px 0; border-bottom: 1px $color-grey-superlight solid;
+            .hpr-date {
+                font-size: 12px; color: $color-grey-light; letter-spacing: 1px; margin: 0 0 10px 0;
+                &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+            }
+            .hpr-title {
+                font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; margin: 0 0 10px 0;
+                a, a:visited {
+                    color: #000; text-decoration: none;
+                    &:hover {color: $color-blue;}
+                }
+            }
+        }
+    }
+}
+
+.lastarticles {
+    margin: 0 0 80px 0;
+    article {
+        @media (min-width:0) {display: block;}
+        @media (min-width:640px) {display: flex;}
+        justify-content: space-between; margin: 0 0 40px 0;
+        .la-imgwrap {
+            @media (min-width:0) {width:100%; margin: 0 0 20px 0;}
+            @media (min-width:640px) {width:30%; margin: 0;}
+            overflow: hidden;
+            figure {padding-bottom: 75%; background-size: cover; background-position: center top; margin: 0; cursor: pointer;}
+        }        
+        .la-main {
+            @media (min-width:0) {width:100%;}
+            @media (min-width:640px) {width:67%;}
+            overflow: hidden;
+            .la-top {
+                display: flex; margin: 0 0 10px 0; align-items: center; flex-wrap: wrap;
+                .la-cat {
+                    @media (min-width:0) {margin-right: 10px;}
+                    @media (min-width:640px) {margin-right: 20px;}                     
+                    margin-bottom: 10px;
+                    a, a:visited {color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; display: inline-block; background-color: $color-blue; padding: 5px; transition: background-color 0.3s ease 0s; white-space: nowrap;}
+                    a:hover {background-color: $color-blue-dark;}
+                }
+                .la-date {
+                    @media (min-width:0) {margin-right: 10px;}
+                    @media (min-width:640px) {margin-right: 20px;}    
+                    color: $color-grey-light; letter-spacing: 1px; white-space: nowrap; font-size: 12px; margin-bottom: 10px;
+                    &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+                }                
+                .la-comments {
+                    @media (min-width:0) {margin-right: 10px;}
+                    @media (min-width:640px) {margin-right: 20px;}
+                    font-size: 12px; color: $color-grey-light; white-space: nowrap; margin-bottom: 10px;
+                    &::before {font-family: "ionicons"; content: "\f11a"; font-size: 16px; display: inline-block; margin-right: 5px;}
+                }
+                .la-views {
+                    font-size: 12px; color: $color-grey-light; white-space: nowrap; margin-bottom: 10px;
+                    &::before {font-family: "ionicons"; content: "\f133"; font-size: 16px; display: inline-block; margin-right: 5px;}
+                }
+            }
+            .la-title {
+                font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; margin: 0 0 20px 0;
+                a, a:visited {color: #000; text-decoration: none;}
+                a:hover {color: $color-blue;}
+            }
+            .la-bottom {
+                display: flex; align-items: center;
+                .la-socnets {
+                    display: flex; margin-right: 15px; 
+                    .la-socnet {
+                        width:30px; height: 30px; border-radius: 15px; border:1px $color-grey-light solid; margin-right: 5px; cursor: pointer; color: $color-grey-light; text-align: center; font-size: 18px; line-height: 28px; transition: all 0.3s ease 0s;
+                        span::after {font-family: "ionicons";}
+                        &.fb {
+                            &:hover {border-color: #3b5998; color: #3b5998;}                            
+                            span::after {content: "\f231";}
+                        }    
+                        &.tw {
+                            &:hover {border-color: #1DA1F2; color: #1DA1F2;}                            
+                            span::after {content: "\f243";}
+                        }                        
+                    }                    
+                }
+                .la-author {
+                    display: flex; align-items: center;
+                    .la-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-size: cover; background-position: center top; margin-right: 10px; cursor: pointer;}
+                    .la-author-name {
+                        font-size: 12px; letter-spacing: 1px;
+                        a, a:visited {text-decoration: none; color: $color-grey-light;}                        
+                        a:hover {color: $color-blue;}
+                    }                    
+                }
+            }
+        }
+    }
+    .la-paging {
+        display: flex; justify-content: center;
+        ul {
+            margin: 0; padding: 0; list-style: none; display: flex;
+            li {
+                margin: 0 10px; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; cursor: pointer; transition: color 0.3s ease 0s; color: $color-main;
+                &:hover {color: $color-blue;}
+                &.ellipsis {
+                    cursor: inherit;
+                    &:hover {color: $color-main;}
+                }
+                &.lt::before {font-family: "ionicons"; content: "\f124"; font-size: 14px; vertical-align: middle;}
+                &.gt::after {font-family: "ionicons"; content: "\f125"; font-size: 14px; vertical-align: middle;}                
+                &.disabled {cursor: inherit; color: $color-grey-superlight;}
+                &.active {color: $color-blue; cursor: inherit;}
+            }
+        }
+    }
+}

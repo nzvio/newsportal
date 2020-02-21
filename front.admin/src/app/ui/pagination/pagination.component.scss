@@ -1,0 +1,18 @@
+@import "../../_var";
+
+.pagination {
+    .pagination-head {color: $color-transparent; margin: 0 0 5px 0;}
+    ul {
+        display: flex; list-style: none; margin: 0 0 10px 0; padding: 0;
+        li {
+            cursor: pointer; background-color: $color-bg-light; color: $color-transparent; transition: all 0.3s; font-size: 14px; line-height: 24px; padding: 0 10px; height: 24px; margin: 0 5px 0 0;
+            &:hover {background-color: $color-bg-lighter;}
+            &.active {background-color: #fff; color: #000; cursor: inherit;}        
+            &.skip {background: none; color:$color-transparent; cursor: inherit;}
+            span::before {font-family: "awesome-solid"; font-size: 12px;}
+            &.back {span::before {content: "\f060";}}
+            &.forward {span::before {content: "\f061";}}
+        }    
+    }
+    input {width:50px; height: 24px;}
+}

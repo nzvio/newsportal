@@ -1,0 +1,149 @@
+@import "./var";
+
+html {
+    body {        
+        margin: 0; padding: 0; background-image: url("../assets/images/template/bg2.jpg"); background-attachment: fixed; background-size: cover; color: $color-main; font-family: Tahoma, Geneva, Verdana, sans-serif; font-size: 14px;        
+        // common
+        * {box-sizing: border-box; outline: none;}        
+        .error {color: #f00;}
+        a, a:visited {color: #fff;}
+        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {
+            background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
+            &:focus {border-color:#fff;}
+        }        
+        select {
+            background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
+            &:focus {border-color:#fff;}
+            option {color: #000;}
+        }
+        textarea {
+            background: none; border:1px $color-transparent-dark solid; height: 100px; color: $color-transparent; padding: 5px; transition: border-color 0.3s ease 0s;
+            &:focus {border-color:#fff;}
+        }
+        button {
+            border:none; background-color: $color-transparent; padding: 0 30px; height: 30px; cursor: pointer; transition: all 0.3s ease 0s;
+            &:hover {background-color: $color-transparent-dark; color: #fff;}
+        }
+        ::placeholder {color: $color-grey-light;}
+        // main layout
+        main {
+            @media (min-width:0) {padding: 112px 15px 15px 15px;}
+            @media (min-width:1000px) {padding: 112px 30px 30px 280px;}            
+            .content {
+                max-width: 1300px; margin: 0 auto;
+                .content-head {
+                    margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+                    h1 {
+                        @media (min-width:0) {padding: 0;}
+                        @media (min-width:1000px) {padding: 0 0 0 30px;}  
+                        margin: 0; font-size: 16px; text-transform: uppercase; font-weight: normal;
+                    }     
+                    .content-dash {
+                        @media (min-width:0) {padding: 0;}
+                        @media (min-width:1000px) {padding: 0 30px 0 0;}  
+                        display: flex; justify-content: flex-end;
+                        .cd-btn {
+                            height: 40px; width:40px; margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; line-height: 40px;
+                            &:hover {background-color: $color-bg-light;}
+                            &.disabled {
+                                cursor: inherit; color: $color-transparent-disabled;
+                                &:hover {background-color: inherit;}                                
+                            }
+                            span {
+                                font-size: 24px;  
+                                &::before {font-family: "awesome-solid";}                                
+                            }
+                            &.create {span::before {content: "\f067";}}
+                            &.delete {span::before {content: "\f05e";}}
+                        }
+                    }
+                }
+                .data {
+                    @media (min-width:0) {padding: 15px;}
+                    @media (min-width:1000px) {padding: 30px;}  
+                    background-color: $color-bg-dark; font-size: 13px; overflow: auto; position: relative;
+                    // tables
+                    .data-tablewrap {
+                        min-height: 550px; margin: 0 0 40px 0;
+                        table.data-table {
+                            width:100%; color: $color-transparent; border-collapse: collapse; 
+                            tr {
+                                border-bottom: 1px $color-grey solid;                            
+                                &:last-child {border-bottom: none;}
+                                &:not(:first-child):hover {background-color: $color-bg-light;}
+                                th {
+                                    padding: 5px 10px; text-align: left; 
+                                    &:not(:first-child) {min-width: 100px;}
+                                    &.wide {min-width:300px;}
+                                    label {
+                                        white-space: nowrap; cursor: pointer; transition: color 0.3s ease 0s; display: block;
+                                        &:hover {color: #fff;}
+                                        &::after {font-family: "awesome-solid"; display: inline-block; margin-left: 5px;}
+                                        &.sortable::after {content: "\f0dc";}
+                                        &.sorted-forward::after {content: "\f0dd";}
+                                        &.sorted-backward::after {content: "\f0de";}
+                                    }
+                                }
+                                td {
+                                    padding: 5px 10px;
+                                    .dt-inputwrap {
+                                        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {width: 100%;}
+                                    }   
+                                    .dt-actions {
+                                        display: flex; 
+                                        .dt-btn {
+                                            height: 40px; width:40px; margin-right: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; line-height: 40px;
+                                            &:hover {background-color: $color-bg-light;}
+                                            &.disabled {
+                                                cursor: inherit; color: $color-transparent-disabled;
+                                                &:hover {background-color: inherit;}                                
+                                            }
+                                            span {
+                                                font-size: 20px;  
+                                                &::before {font-family: "awesome-solid";}                                
+                                            }
+                                            &.edit {span::before {content: "\f303";}}
+                                            &.delete {span::before {content: "\f05e";}}
+                                        }
+                                    }                             
+                                }
+                            }
+                        }
+                    }                    
+                    // forms
+                    .data-form {
+                        @media (min-width:0) {display: block;}
+                        @media (min-width:1000px) {display: grid;}  
+                        grid-template-columns: min-content auto; color: $color-transparent;
+                        .df-title {padding: 5px 30px 0 0; white-space: nowrap;}
+                        .df-inputwrap {
+                            margin: 5px 0;
+                            input[type="text"], input[type="email"], input[type="email"], input[type="tel"] {
+                                @media (min-width:0) {width: 100%;}
+                                @media (min-width:1000px) {width:400px;}                                  
+                                &.small {width:50px;}
+                            }                       
+                            textarea {
+                                @media (min-width:0) {width: 100%;}
+                                @media (min-width:1000px) {width:400px;}
+                            }     
+                        }
+                    }
+                    // reloading overlay 
+                    .reloading {
+                        position: absolute; left: 0; top: 0; background-color: $color-bg-dark; width:100%; height: 100%; z-index: 2; display: flex; align-items: center; justify-content: center;
+                        span {
+                            display: inline-block; animation: reloadingspinner 1s infinite;
+                            &::before {font-family: "awesome-solid"; font-size: 40px; color: $color-transparent; content: "\f2f1";}                        
+                            
+                        }
+                        @keyframes reloadingspinner {
+                            0% {transform: rotate(0deg);}
+                            100% {transform: rotate(180deg);}                            
+                        }                        
+                    }
+                }
+            }
+        }
+    }
+}

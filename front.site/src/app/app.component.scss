@@ -1,0 +1,60 @@
+@import "./_var";
+
+html {
+    height: 100%; overflow: hidden;
+    body {
+        margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: Arial, Helvetica, sans-serif;
+        * {box-sizing: border-box; outline: none;}
+        p {margin: 0 0 20px 0;}
+        a {transition: color 0.3s ease 0s;}
+        .red {color: #f00;}        
+        #wrap {
+            height: 100%; width: 100%; overflow-y: scroll; overflow-x: hidden; position: relative; color: $color-main;                      
+            .wrap2 {
+                @media (min-width:0) {display: block;}
+                @media (min-width:1000px) {display: flex;}
+                max-width: 1200px; padding: 0 10px; margin: 0 auto;
+                &.padded {
+                    @media (min-width:0) {padding-top: 50px;}
+                    @media (min-width:1000px) {padding-top: 40px;}                    
+                }
+                h1, .h1 {
+                    @media (min-width:0) {font-size: 30px; margin: 0 0 25px 0;}
+                    @media (min-width:640px) {font-size: 40px; margin: 0 0 40px 0;}
+                    font-family: "teko", Arial, Helvetica, sans-serif; font-weight: normal; letter-spacing: 2px;
+                }
+                h2 {
+                    @media (min-width:0) {font-size: 20px; margin: 0 0 20px 0;}
+                    @media (min-width:640px) {font-size: 30px; margin: 0 0 30px 0;}
+                    font-family: "teko", Arial, Helvetica, sans-serif; font-weight: normal; letter-spacing: 2px;
+                }
+                main {
+                    @media (min-width:0) {width: 100%; padding: 0;}
+                    @media (min-width:1000px) {width: 75%; padding: 0 60px 0 0;}
+                    overflow: hidden; letter-spacing: 1px;
+                    &.full {width:100%;}   
+                    #breadcrumbs {
+                        border-bottom: 1px $color-grey-superlight solid; margin: 0 0 30px 0; font-size: 12px; letter-spacing: normal;
+                        span {
+                            display: inline-block; margin-right: 32px; position: relative; color: $color-grey-light; margin-bottom: 15px;
+                            &:not(:last-child)::after {content: "\f125"; font-family: "ionicons"; font-size: 10px; position: absolute; right: -20px; top:1px;}
+                            a, a:visited {color: $color-main; text-decoration: none;}
+                            a:hover {color: $color-blue;}
+                        }
+                    }                 
+                }
+                aside {
+                    @media (min-width:0) {width: 100%;}
+                    @media (min-width:1000px) {width: 25%;}
+                    overflow: hidden;
+                }
+                .content {
+                    font-size: 14px; line-height: 28px; margin-bottom: 50px;
+                    &::first-letter {font-size: 50px; vertical-align: text-top;}
+                    a, a:visited {color: $color-blue;}
+                    a:hover {color:#000;}
+                }
+            }            
+        }
+    }
+}

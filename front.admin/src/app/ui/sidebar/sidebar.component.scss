@@ -1,0 +1,67 @@
+@import "../../var";
+
+aside {
+    @media (min-width:0) {height: 100%; width: 100%; top: 0; left: -100%;}
+    @media (min-width:1000px) {height: calc(100% - 72px); width:250px; top: 72px; left: 0;}
+    display: flex; position: fixed; z-index: 10; overflow: hidden; transition: left 0.3s ease 0s; will-change: left; 
+    &.active {left: 0;}
+    #aside-left {
+        @media (min-width:0) {width: 250px; background-color: #000;}
+        @media (min-width:1000px) {width:100%; background-color: $color-bg-dark2;}
+        padding: 15px; box-shadow: 5px 0 10px rgba(0,0,0,.25);
+        #user {
+            background-color: $color-bg-light; transition: background-color 0.3s ease 0s; padding: 0 15px; height: 60px; overflow: hidden; display: flex; cursor: pointer; justify-content: space-between; align-items: center; margin-bottom: 20px;
+            &:hover {background-color: $color-bg-lighter;}
+            #u-imgwrap {width: 40px; height: 40px; border-radius: 20px; background-size: cover; background-position: center top;}
+            #u-info {
+                width:140px; overflow: hidden;
+                #u-name {font-size: 12px; color: $color-transparent; white-space: nowrap; margin: 0 0 3px 0; width:140px; overflow: hidden; text-overflow: ellipsis;}
+                #u-email {font-size: 11px; color: $color-transparent-dark; white-space: nowrap; width:140px; overflow: hidden; text-overflow: ellipsis;}
+            }
+        }
+        #login {
+            background-color: $color-bg-light; padding: 15px;
+            #login-head {
+                margin:0 0 15px 0; display: flex; justify-content: center;
+                span::before {font-family: "awesome-solid"; font-size: 30px; content: "\f084";}
+            }
+            form {
+                input {margin: 0 0 15px 0; width:100%;}
+                button {width:100%;}
+            }
+        }
+        #navwrap {
+            width:100%; height: calc(100% - 80px); overflow: hidden;
+            nav {
+                position: relative; height: 100%; overflow-x: hidden; overflow-y: scroll; width:calc(100% + 20px);
+                .nav-item {
+                    height: 40px; margin-bottom: 2px; display: flex; align-items: center; transition: background-color 0.3s ease 0s;                    
+                    a, a:visited {
+                        display: flex; width: 100%; height: 100%; align-items: center; padding: 0 15px; cursor: pointer; color: $color-transparent-dark; text-decoration: none; transition: color 0.3s ease 0s;
+                        span {
+                            font-size: 13px;
+                            &::before {font-family: "awesome-solid"; display: inline-block; margin-right: 10px; content: "-"; width:15px; font-size: 14px;}
+                            &.nav-home::before {content: "\f015";}
+                            &.nav-cat::before {content: "\f03a";}
+                            &.nav-page::before {content: "\f15c";}
+                            &.nav-users::before {content: "\f500";}
+                        }
+                    }
+                    &:hover, &.active {
+                        background-color: $color-bg-light;
+                        a, a:visited {color: #fff;}
+                    }
+                } 
+                .nav-sub {
+                    max-height: 0; overflow: hidden; transition: max-height 0.3s ease 0s;
+                    &.active {max-height: 500px; transition: max-height 0.6s ease 0s;}                    
+                }               
+            }
+        }
+    }
+    #aside-right {
+        @media (min-width:0) {width: calc(100% - 250px);}
+        @media (min-width:1000px) {width:0;}
+        cursor: pointer;
+    }        
+}

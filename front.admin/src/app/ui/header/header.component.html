@@ -1,0 +1,28 @@
+<header id="h-normal" [class]="opaque ? 'opaque' : ''">
+	<div id="hn-logo">VNE 4.0 panel</div>
+	<div id="hn-top">
+		<div id="hn-top-left">
+			<div id="hn-monitor-wrap">
+				<div id="hn-monitor" [innerHTML]="monitorContent" #monitor></div>
+			</div>
+		</div>
+		<div id="hn-top-right">			
+			<div id="hn-btns" *ngIf="authenticated">
+				<div class="hn-btn" title="Log out"><span id="logout"></span></div>								
+			</div>
+			<div id="hn-time">{{time}}</div>
+		</div>
+	</div>
+</header>
+<header id="h-mobile" [class]="opaque ? 'opaque' : ''">
+	<div id="hm-left">
+		<div class="hm-btns">
+			<div class="hm-btn" title="Menu" (click)="activateMobMenu();"><span id="menu"></span></div>		
+		</div>
+	</div>
+	<div id="hm-right">
+		<div class="hm-btns" *ngIf="authenticated">
+			<div class="hm-btn" title="Log out"><span id="logout"></span></div>		
+		</div>
+	</div>
+</header>

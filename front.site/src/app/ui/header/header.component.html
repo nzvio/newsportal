@@ -1,0 +1,114 @@
+<header id="main">
+    <div id="h-top">
+        <div class="h-content">
+            <div class="h-menu">
+                <nav class="h-nav-top">
+                    <ul>
+                        <li><a routerLink="/ru/about">Карта сайта</a></li>
+                        <li><a routerLink="/ru/contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>				
+        </div>			
+    </div>
+    <div id="h-middle">
+        <div class="h-content">		
+            <div id="h-middle-content">
+                <div id="h-logo" routerLink="/ru">
+                    <div id="h-logo-top"><span>Science</span><span>Club</span></div>
+                    <div id="h-logo-bottom">онлайн-журнал</div>
+                </div>
+            </div>				
+        </div>			
+    </div>
+    <div id="h-bottom">
+        <div class="h-content">
+            <div class="h-menu">
+                <nav class="h-nav-bottom">
+                    <ul>
+                        <li><a routerLink="/ru" class="active">Главная</a></li>
+                        <li><a routerLink="/ru/cat/space">Космос</a></li>
+                        <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
+                    </ul>
+                </nav>
+                <div class="h-dash">                    
+                    <div class="h-langs">
+                        <ul>
+                            <li><a routerLink="/ru" class="active">ru</a></li>
+                            <li><a routerLink="/en">en</a></li>
+                        </ul>
+                    </div>
+                    <span class="h-btn h-btn-search" title="Поиск"></span>
+                    <span class="h-btn h-btn-login" title="Войти"></span>
+                </div>
+            </div>			
+        </div>			
+    </div>
+</header>
+<header id="sticky" #sticky [class]="stickyVisible ? 'visible' : ''">
+    <div class="h-content">
+        <div class="h-menu">
+            <nav class="h-nav-bottom">
+                <ul>
+                    <li><a routerLink="/ru" class="active">Главная</a></li>
+                    <li><a routerLink="/ru/cat/space">Космос</a></li>
+                    <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
+                </ul>
+            </nav>
+            <div class="h-dash">
+                <div class="h-langs">
+                    <ul>
+                        <li><a routerLink="/ru" class="active">ru</a></li>
+                        <li><a routerLink="/en">en</a></li>
+                    </ul>
+                </div>
+                <span class="h-btn h-btn-search" title="Поиск"></span>
+                <span class="h-btn h-btn-login" title="Войти"></span>
+            </div>
+        </div>			
+    </div>			
+</header>
+<header id="mobile">
+    <div id="hm-logo"><span>Science</span><span>Club</span></div>
+    <div id="hm-dash">
+        <div class="hm-btn hm-search" title="Поиск"><span></span></div>
+        <div class="hm-btn hm-login" title="Войти"><span></span></div>
+    </div>    
+</header>
+<div id="mm-overlay" [class]="mmActive ? 'active' : ''" (click)="mmActive = false"></div>
+<div id="mm" [class]="mmActive ? 'active' : ''">
+    <div id="mm-content">
+        <div id="mm-langs">
+            <ul>
+                <li><a routerLink="/ru" class="active">ru</a></li>
+                <li><a routerLink="/en">en</a></li>
+            </ul>
+        </div>
+        <div id="mm-menu">
+            <nav>
+                <ul>
+                    <li><a routerLink="/" class="active">Главная</a></li>
+                    <li><a routerLink="/ru/cat/space">Космос</a></li>
+                    <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
+                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>                    
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><a routerLink="/ru/about">Карта сайта</a></li>
+                    <li><a routerLink="/ru/contacts">Контакты</a></li>
+                </ul>
+            </nav>            
+        </div>        
+    </div>    
+    <div id="mm-btn" (click)="mmActive = !mmActive;">
+        <div id="mm-btn-glyph"></div>
+    </div>
+</div>
+<div id="scrollindicator" #scrollindicator>
+    <div id="si-scale" [style.width]="indicatorWidth+'%'"></div>
+</div>

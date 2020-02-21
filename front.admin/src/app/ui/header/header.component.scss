@@ -1,0 +1,68 @@
+@import "../../var";
+
+header {
+    position: fixed; background-color: $color-bg-dark; z-index: 10; height: 72px; width:100%; left:0; top: 0; box-shadow: 0 0 13px rgba(0,0,0,.22); overflow: hidden; align-items: center; transition: background-color 0.6s ease 0s; will-change: background-color;
+    &.opaque {background-color: #000;}
+}
+
+header#h-normal {
+    @media (min-width:0) {display: none;}
+    @media (min-width:1000px) {display: flex;}    
+    #hn-logo {height: 100%; width: 250px; display: flex; align-items: center; font-size: 18px; padding: 0 15px;}
+    #hn-top {
+        height: 100%; width: calc(100% - 250px); display: flex;
+        #hn-top-left {
+            width: 50%; height: 100%; display: flex; align-items: center;
+            #hn-monitor-wrap {
+                width:100%; overflow: hidden; height: 40px;
+                #hn-monitor {height: 100%; width: calc(100% + 20px); padding: 0 20px 0 5px; overflow-x: hidden; overflow-y: scroll; background-color: $color-bg-light; font-size: 10px; color: $color-transparent;} 
+            }
+        }
+        #hn-top-right {
+            width: 50%; height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 15px;
+            #hn-time {background-color: $color-bg-light; height: 40px; padding: 0 15px; font-size: 20px; line-height: 40px; margin-left: 5px;}
+            #hn-btns {
+                display: flex; height: 100%; align-items: center;
+                .hn-btn {
+                    height: 40px; width:40px; margin: 0 5px; cursor: pointer; transition: background-color 0.3s ease 0s; text-align: center; line-height: 40px;
+                    &:hover {background-color: $color-bg-light;}
+                    span {
+                        font-size: 24px;  
+                        &::before {font-family: "awesome-solid";}
+                        &#logout::before {content: "\f2f5";}
+                    }
+                }                        
+            }
+        }
+    }
+}
+
+header#h-mobile {
+    @media (min-width:0) {display: flex;}
+    @media (min-width:1000px) {display: none;}
+    padding: 0 15px; justify-content: space-between;
+    #hm-left, #hm-right {display: flex; align-items: center; height: 100%;}
+    #hm-left {
+        .hm-btns {
+            .hm-btn {margin-right: 5px;}
+        }
+    }
+    #hm-right {
+        .hm-btns {
+            .hm-btn {margin-left: 5px;}
+        }
+    }
+    .hm-btns {
+        display: flex; height: 100%; align-items: center;
+        .hm-btn {
+            height: 40px; width:40px; cursor: pointer; transition: background-color 0.3s ease 0s; text-align: center; line-height: 40px;
+            &:hover {background-color: $color-bg-light;}
+            span {
+                font-size: 24px;  
+                &::before {font-family: "awesome-solid";}
+                &#logout::before {content: "\f2f5";}
+                &#menu::before {content: "\f0c9";}
+            }                    
+        }
+    }
+}

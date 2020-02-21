@@ -1,0 +1,5 @@
+<div id="wrap" #wrap (scroll)="onScroll($event);">
+	<the-header [stickyVisible]="stickyVisible" [indicatorWidth]="indicatorWidth"></the-header>
+	<router-outlet></router-outlet>	
+	<the-footer></the-footer>	
+</div>

@@ -1,0 +1,41 @@
+<aside [class]="active ? 'active' : ''">
+    <div id="aside-left">
+        <div id="user" *ngIf="user">            
+            <div id="u-imgwrap" [style.background-image]="'url(../assets/images/template/ava-test.gif)'"></div>
+            <div id="u-info">
+                <div id="u-name">Alex</div>
+                <div id="u-email">7573497@gmail.com</div>
+            </div>            
+        </div>
+        <div id="login" *ngIf="!user">
+            <div id="login-head"><span></span></div>
+            <form>
+                <input type="email" placeholder="login">
+                <input type="password" placeholder="password">
+                <button type="submit">Enter</button>
+            </form>
+        </div>            
+        <div id="navwrap" *ngIf="user">
+            <nav>		
+                <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">Home</span></a></div>
+                
+                <!--
+                <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="sub1Active = !sub1Active;"><span class="nav-cat">Catalogue</span></a></div>
+                <div [class]="sub1Active ? 'nav-sub active' : 'nav-sub'">
+                    <div [class]="currentUrl.parts[1] === 'categories' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/categories"><span>Categories</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>Articles</span></a></div>
+                </div>
+                
+                <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-page">Static pages</span></a></div>                         
+                -->
+
+                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="sub2Active = !sub2Active;"><span class="nav-users">Users</span></a></div>
+                <div [class]="sub2Active ? 'nav-sub active' : 'nav-sub'">
+                    <!--<div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>Users</span></a></div>-->
+                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>User groups</span></a></div>
+                </div>
+            </nav>
+        </div>	
+    </div>
+    <div id="aside-right" (click)="close();"></div>    
+</aside>
