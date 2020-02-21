@@ -9,9 +9,9 @@
         </div>
         <div id="login" *ngIf="!user">
             <div id="login-head"><span></span></div>
-            <form>
-                <input type="email" placeholder="login">
-                <input type="password" placeholder="password">
+            <form (submit)="login();">
+                <input type="email" name="email" placeholder="e-mail" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
+                <input type="password" name="password" placeholder="password" [(ngModel)]="password" [class]="errorPassword ? 'error' : ''">
                 <button type="submit">Enter</button>
             </form>
         </div>            

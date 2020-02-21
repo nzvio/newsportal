@@ -10,6 +10,7 @@ html {
         input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {
             background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
             &:focus {border-color:#fff;}
+            &.error {border: 1px #f00 solid;}
         }        
         select {
             background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;

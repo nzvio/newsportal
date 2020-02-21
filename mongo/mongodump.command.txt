@@ -1,0 +1,1 @@
+mongodump --username root --password "6vl1TfeXq" --authenticationDatabase admin --out 201019 --db 974news
