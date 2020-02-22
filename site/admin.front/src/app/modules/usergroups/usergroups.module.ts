@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { UIModule } from '../../ui/ui.module';
-import { UsergroupsPage } from "./usergroups.page";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { UIModule } from '../../ui/ui.module';
+import { UsergroupsListPage } from "./list/usergroups.list.page";
+import { UsergroupsCreatePage } from "./create/usergroups.create.page";
+import { UsergroupsEditPage } from "./edit/usergroups.edit.page";
+import { UsergroupComponent } from "./usergroup.component";
+
 let routing = RouterModule.forChild ([        
-    {path:"", component: UsergroupsPage, pathMatch: "full"},
+	{path:"", component: UsergroupsListPage, pathMatch: "full"},
+	{path:"create", component: UsergroupsCreatePage, pathMatch: "full"},
+	{path:"edit/:_id", component: UsergroupsEditPage},
 ]);
 
 @NgModule({	
@@ -18,7 +23,10 @@ let routing = RouterModule.forChild ([
 		routing,
 	],
 	declarations: [
-		UsergroupsPage,
+		UsergroupsListPage,
+		UsergroupsCreatePage,
+		UsergroupsEditPage,
+		UsergroupComponent,
 	],
     providers: [],    
 })

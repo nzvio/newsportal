@@ -1,5 +1,3 @@
-import { IAnswer } from 'src/app/model/answer.interface';
-
 export abstract class Repository<T> {
     public xlChunk: T[] = []; // fragment
     public chunkCurrentPart: number = 0; // current paging state for fragment
@@ -24,8 +22,16 @@ export abstract class Repository<T> {
         this.fullLoadedAt = 0;
     }
 
+    public invalidateAll(): void {
+        this.chunkLoadedAt = 0;
+        this.fullLoadedAt = 0;
+    }
+
     public abstract loadChunk(): Promise<void>;
+    public abstract loadOne(_id: string): Promise<T>;
     public abstract updateParam (_id: string, p: string, v: any): Promise<void>;
     public abstract delete(_id: string): Promise<void>;
     public abstract deleteBulk(_ids: string[]): Promise<void>;
+    public abstract create(x: T): Promise<void>;
+    public abstract update(x: T): Promise<void>;
 }

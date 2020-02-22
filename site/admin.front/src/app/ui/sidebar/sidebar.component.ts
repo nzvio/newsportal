@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { URL } from '../../model/url.class';
-import { User } from 'src/app/model/user.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { AppService } from 'src/app/services/app.service';
+import { User } from '../../model/user.model';
+import { AuthService } from '../../services/auth.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
 	selector: 'the-sidebar',
@@ -26,6 +26,7 @@ export class SidebarComponent {
 	) {}
 
 	get authenticated(): boolean {return this.authService.authData !== null;}
+	get user(): User {return this.authService.authData.user;}
 
 	public close(): void {
 		this.activeChanged.emit(false);

@@ -6,8 +6,10 @@ export class Usergroup extends Model {
     public title?: string;
     public defended?: boolean;    
 
-    /*public init(): void {
+    public init(): Usergroup {
         this.name = "";
         this.title = "";
-    }*/
+
+        return this;
+    }
 }

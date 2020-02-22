@@ -39,6 +39,7 @@ export abstract class ListPage {
             }       
         } catch (err) {
             this.appService.monitorLog(err, true);
+            setTimeout(() => {this.reloading = false;}, 500);    
         }        
     } 
 
@@ -54,9 +55,8 @@ export abstract class ListPage {
     }
     
     public async updateParam (_id: string, p: string, v: any): Promise<void> {        
-        this.appService.monitorLog(`updating object: id=${_id} param=${p} value=${v}`);
-        
         try {
+            this.appService.monitorLog(`updating object: id=${_id} param=${p} value=${v}`);
             await this.repository.updateParam(_id, p, v);
             this.appService.monitorLog("ok");
         } catch (err) {

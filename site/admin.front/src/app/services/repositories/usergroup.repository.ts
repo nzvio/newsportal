@@ -53,6 +53,22 @@ export class UsergroupRepository extends Repository<Usergroup> {
         });
     }
 
+    public loadOne(_id: string): Promise<Usergroup> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usergroupsOne(_id).subscribe(res => {
+                if (res.statusCode === 200) {
+                    let x: Usergroup = new Usergroup().build(res.data);
+                    resolve(x);
+                } else {
+                    this.errorService.processStatus(res.statusCode, this);
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
     public updateParam (_id: string, p: string, v: any): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.updateParam ("Usergroup", _id, p, v).subscribe(res => {
@@ -86,6 +102,36 @@ export class UsergroupRepository extends Repository<Usergroup> {
     public deleteBulk(_ids: string[]): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.usergroupsDeleteBulk(_ids).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {
+                    this.errorService.processStatus(res.statusCode, this);
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
+    public create(x: Usergroup): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usergroupsCreate(x).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {
+                    this.errorService.processStatus(res.statusCode, this);
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
+    public update(x: Usergroup): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usergroupsUpdate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {

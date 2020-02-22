@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from "@angular/core";
+import { Component, AfterViewInit, Input } from "@angular/core";
 
 @Component({
     selector: "loading-table",
@@ -6,6 +6,7 @@ import { Component, AfterViewInit } from "@angular/core";
     styleUrls: ["./loading-table.component.scss"]
 })
 export class LoadingtableComponent implements AfterViewInit {    
+    @Input() columns: number = 2;
     public visible: boolean = false;
     
     public ngAfterViewInit(): void {                

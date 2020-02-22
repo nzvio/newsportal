@@ -8,7 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
 	imports: [
-		MongooseModule.forRoot('mongodb://root:6vl1TfeXq@localhost:27017/newsportal?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true}),
+		MongooseModule.forRoot('mongodb://root:6vl1TfeXq@localhost:27017/newsportal?authSource=admin', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}),
 		
 		AuthModule,
 		ObjectsModule,

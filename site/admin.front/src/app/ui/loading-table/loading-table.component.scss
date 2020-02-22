@@ -3,7 +3,9 @@
 .loading-table {    
     @media (min-width:0) {display: block;}
     @media (min-width:640px) {display: grid;}
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
+    display: grid;  gap: 15px;
+    &.grid2 {grid-template-columns: repeat(2, 1fr);}
+    &.grid4 {grid-template-columns: repeat(4, 1fr);}
     div {
         @media (min-width:0) {margin: 0 0 15px 0;}
         @media (min-width:640px) {margin: 0;}

@@ -7,6 +7,8 @@ import { IAnswer } from "../../interfaces/answer.interface";
 import { UsergroupGetallDTO } from "./dto/usergroup.getall.dto";
 import { UsergroupGetchunkDTO } from "./dto/usergroup.getchunk.dto";
 import { APIService } from "../api.service";
+import { UsergroupCreateDTO } from "./dto/usergroup.create.dto";
+import { UsergroupUpdateDTO } from "./dto/usergroup.update.dto";
 
 @Injectable()
 export class UsergroupsService extends APIService {
@@ -19,10 +21,8 @@ export class UsergroupsService extends APIService {
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
 
         try {
-            return {
-                statusCode: 200,                 
-                data: await this.model.find ({}, null, {sort: {[sortBy]: sortDir}})
-            };
+            let data: IUsergroup[] = await this.model.find ({}, null, {sort: {[sortBy]: sortDir}});
+            return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.all: ${String(err)}`;
             console.log(errTxt);
@@ -39,18 +39,24 @@ export class UsergroupsService extends APIService {
         try {
             let data: IUsergroup[] = await this.model.find({}, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});
             let fullLength: number = await this.model.countDocuments();
-
-            return {
-                statusCode: 200,
-                data: data,
-                fullLength: fullLength
-            };
+            return {statusCode: 200, data, fullLength};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.chunk: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }
     } 
+
+    public async one(_id: string): Promise<IAnswer<IUsergroup>> {
+        try {
+            let data: IUsergroup = await this.model.findById(_id);
+            return {statusCode: 200, data};
+        } catch (err) {
+            let errTxt: string = `Error in UsergroupsService.one: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
     
     public async delete(_id: string): Promise<IAnswer<void>> {
         try {
@@ -72,5 +78,29 @@ export class UsergroupsService extends APIService {
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }
+    }
+
+    public async create(dto: UsergroupCreateDTO): Promise<IAnswer<void>> {        
+        try {
+            const x: IUsergroup = new this.model (dto);                    
+            x.save ();        
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in UsergroupsService.create: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }        
+    }
+
+    public async update(dto: UsergroupUpdateDTO): Promise<IAnswer<void>> {
+        try {
+            let _id: string = dto._id;
+            await this.model.updateOne ({_id: _id}, dto);
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in UsergroupsService.update: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        } 
     }
 }

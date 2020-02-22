@@ -1,10 +1,10 @@
 <aside [class]="active ? 'active' : ''">
     <div id="aside-left">
         <div id="user" *ngIf="authenticated">            
-            <div id="u-imgwrap" [style.background-image]="'url(../assets/images/template/ava-test.gif)'"></div>
+            <div id="u-imgwrap" [style.background-image]="'url(/assets/images/users/'+user.img_s+')'"></div>
             <div id="u-info">
-                <div id="u-name">Alex</div>
-                <div id="u-email">7573497@gmail.com</div>
+                <div id="u-name">{{user.name}}</div>
+                <div id="u-email">{{user.email}}</div>
             </div>            
         </div>
         <div id="login" *ngIf="!authenticated">

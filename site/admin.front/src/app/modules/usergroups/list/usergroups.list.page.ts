@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { UsergroupRepository } from '../../services/repositories/usergroup.repository';
-import { AppService } from '../../services/app.service';
-import { ListPage } from '../_list.page';
+import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
+import { AppService } from '../../../services/app.service';
+import { ListPage } from '../../_list.page';
 
 @Component({
-	selector: 'usergroups-page',
-	templateUrl: './usergroups.page.html',	
+	selector: 'usergroups-list-page',
+	templateUrl: './usergroups.list.page.html',	
 })
-export class UsergroupsPage extends ListPage implements OnInit {
+export class UsergroupsListPage extends ListPage implements OnInit {
     constructor(
         protected usergroupRepository: UsergroupRepository,
         protected appService: AppService,
@@ -22,7 +22,7 @@ export class UsergroupsPage extends ListPage implements OnInit {
         this.route.params.subscribe(async p => {
             try {
                 await this.usergroupRepository.loadChunk();
-                this.appService.monitorLog("usergroups data loaded");
+                this.appService.monitorLog("usergroups page loaded");
                 this.ready = true;
             } catch (err) {
                 this.appService.monitorLog(err, true);

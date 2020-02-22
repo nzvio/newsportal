@@ -1,0 +1,22 @@
+<div class="content">
+    <div class="content-head">
+        <h1>User groups - create</h1>
+        <div class="content-dash">
+            <div class="cd-btn back" title="Back" routerLink="/users/usergroups"><span></span></div>
+            <div class="cd-btn save" title="Save" (click)="create();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <form (submit)="create();">
+                <the-usergroup [x]="x"></the-usergroup>
+            </form>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="2"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>
