@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 	get monitorContent(): string {return this.appService.monitorContent;}
 	get mmActive(): boolean {return this.appService.mmActive;}
 	set mmActive(v: boolean) {this.appService.mmActive = v;}
-	get authenticated(): boolean {return this.authService.user !== null;}
+	get authenticated(): boolean {return this.authService.authData !== null;}
 
 	public ngOnInit(): void {
 		this.initRoutingRoutine();		

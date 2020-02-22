@@ -20,14 +20,13 @@ export class UsergroupsService extends APIService {
 
         try {
             return {
-                status: 200,                 
+                statusCode: 200,                 
                 data: await this.model.find ({}, null, {sort: {[sortBy]: sortDir}})
             };
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.all: ${String(err)}`;
             console.log(errTxt);
-
-            return {status: 500, error: errTxt};
+            return {statusCode: 500, error: errTxt};
         }
     }
 
@@ -42,39 +41,36 @@ export class UsergroupsService extends APIService {
             let fullLength: number = await this.model.countDocuments();
 
             return {
-                status: 200,
+                statusCode: 200,
                 data: data,
                 fullLength: fullLength
             };
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.chunk: ${String(err)}`;
             console.log(errTxt);
-
-            return {status: 500, error: errTxt};
+            return {statusCode: 500, error: errTxt};
         }
     } 
     
     public async delete(_id: string): Promise<IAnswer<void>> {
         try {
             await this.model.findByIdAndRemove(_id);        
-            return {status: 200};
+            return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.delete: ${String(err)}`;
             console.log(errTxt);
-
-            return {status: 500, error: errTxt};
+            return {statusCode: 500, error: errTxt};
         }        
     }
 
     public async deleteBulk(_ids: string[]): Promise<IAnswer<void>> {
         try {
             await this.model.deleteMany({_id: {$in: _ids}});
-            return {status: 200};
+            return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.deleteBulk: ${String(err)}`;
             console.log(errTxt);
-
-            return {status: 500, error: errTxt};
+            return {statusCode: 500, error: errTxt};
         }
     }
 }

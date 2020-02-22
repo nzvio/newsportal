@@ -34,7 +34,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                 resolve();
             } else {                
                 this.dataService.usergroupsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
-                    if (res.status === 200) {
+                    if (res.statusCode === 200) {
                         this.xlChunk = res.data.length ? res.data.map(d => new Usergroup().build(d)) : [];
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
@@ -52,7 +52,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
     public updateParam (_id: string, p: string, v: any): Promise<IAnswer<void>> {
         return new Promise((resolve, reject) => {
             this.dataService.updateParam ("Usergroup", _id, p, v).subscribe(res => {
-                if (res.status === 200) {
+                if (res.statusCode === 200) {
                     resolve();
                 } else {
                     reject(res.error);
@@ -66,7 +66,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
     public delete(_id: string): Promise<IAnswer<void>> {
         return new Promise((resolve, reject) => {
             this.dataService.usergroupDelete(_id).subscribe(res => {
-                if (res.status === 200) {
+                if (res.statusCode === 200) {
                     resolve();
                 } else {
                     reject(res.error);
@@ -80,7 +80,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
     public deleteBulk(_ids: string[]): Promise<IAnswer<void>> {
         return new Promise((resolve, reject) => {
             this.dataService.usergroupsDeleteBulk(_ids).subscribe(res => {
-                if (res.status === 200) {
+                if (res.statusCode === 200) {
                     resolve();
                 } else {
                     reject(res.error);

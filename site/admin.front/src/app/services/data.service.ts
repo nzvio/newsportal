@@ -17,6 +17,11 @@ export class DataService {
     public usergroupDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `usergroups/delete/${_id}`);}
     public usergroupsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "usergroups/deletebulk", _ids);}
 
+    
+    // TODO
+    // перед каждым запросом данных надо проверить, не просрочен ли токен, и если просрочен, то разлогинить и выкинуть на страницу логина
+    
+    
     private sendRequest (method: string, url: string, body: Object = {}, withProgress: boolean = false): Observable<any> | null {        
         if (method === "GET") {
             return this.http.get (`${this.root}/${url}`);

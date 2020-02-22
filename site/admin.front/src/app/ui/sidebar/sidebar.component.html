@@ -1,13 +1,13 @@
 <aside [class]="active ? 'active' : ''">
     <div id="aside-left">
-        <div id="user" *ngIf="user">            
+        <div id="user" *ngIf="authenticated">            
             <div id="u-imgwrap" [style.background-image]="'url(../assets/images/template/ava-test.gif)'"></div>
             <div id="u-info">
                 <div id="u-name">Alex</div>
                 <div id="u-email">7573497@gmail.com</div>
             </div>            
         </div>
-        <div id="login" *ngIf="!user">
+        <div id="login" *ngIf="!authenticated">
             <div id="login-head"><span></span></div>
             <form (submit)="login();">
                 <input type="email" name="email" placeholder="e-mail" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
@@ -15,7 +15,7 @@
                 <button type="submit">Enter</button>
             </form>
         </div>            
-        <div id="navwrap" *ngIf="user">
+        <div id="navwrap" *ngIf="authenticated">
             <nav>		
                 <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">Home</span></a></div>
                 

@@ -25,7 +25,7 @@ export class SidebarComponent {
 		private appService: AppService,
 	) {}
 
-	get user(): User {return this.authService.user;}
+	get authenticated(): boolean {return this.authService.authData !== null;}
 
 	public close(): void {
 		this.activeChanged.emit(false);

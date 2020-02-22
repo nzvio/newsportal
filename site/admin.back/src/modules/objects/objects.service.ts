@@ -21,12 +21,11 @@ export class ObjectsService extends APIService {
             model[dto.p] = dto.v;
             await model.save ();
 
-            return {status: 200};
+            return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in ObjectsService.updateparam: ${String(err)}`;
             console.log(errTxt);
-
-            return {status: 500, error: errTxt};
+            return {statusCode: 500, error: errTxt};
         }
     }
 }
