@@ -8,20 +8,24 @@ export abstract class Repository<T> {
     public chunkLength: number = 10; // current length of fragment
     protected chunkLoadedAt: number = 0; // last load timestamp for fragment loading
 
-    public xlAll: T[] = []; // all objects
-    public allSortBy: string = "_id"; // current sort by for all objects
-    public allSortDir: number = 1; // curent sort direction for all objects        
-    protected allLoadedAt: number = 0; // last load timestamp for full loading
+    public xlFull: T[] = []; // all objects
+    public fullSortBy: string = "_id"; // current sort by for all objects
+    public fullSortDir: number = 1; // curent sort direction for all objects        
+    protected fullLoadedAt: number = 0; // last load timestamp for full loading
     
     public fullLength: number = 0; // quantity of all objects in table    
     protected ttl: number = 1000*60; // time to live = 1 min    
 
     public invalidateChunk(): void {        
         this.chunkLoadedAt = 0;
-    }    
+    }
+    
+    public invalidateFull(): void {
+        this.fullLoadedAt = 0;
+    }
 
     public abstract loadChunk(): Promise<void>;
-    public abstract updateParam (_id: string, p: string, v: any): Promise<IAnswer<void>>;
-    public abstract delete(_id: string): Promise<IAnswer<void>>;
-    public abstract deleteBulk(_ids: string[]): Promise<IAnswer<void>>;
+    public abstract updateParam (_id: string, p: string, v: any): Promise<void>;
+    public abstract delete(_id: string): Promise<void>;
+    public abstract deleteBulk(_ids: string[]): Promise<void>;
 }

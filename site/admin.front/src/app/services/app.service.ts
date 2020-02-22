@@ -1,14 +1,19 @@
 import { Injectable } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AppService {
     public monitorContent: string = "";
-    public mmActive: boolean = false;    
+    public mmActive: boolean = false;   
+    
+    constructor() {}
     
     public monitorLog(s: string, error: boolean = false): void {
         let classSt: string = error ? "class='error'" : "";
         let date: Date = new Date();
-        this.monitorContent += `> ${this.twoDigits(date.getHours())}:${this.twoDigits(date.getMinutes())}:${this.twoDigits(date.getSeconds())} <span ${classSt}>${s}</span><br>`;
+        setTimeout(() => {
+            this.monitorContent += `> ${this.twoDigits(date.getHours())}:${this.twoDigits(date.getMinutes())}:${this.twoDigits(date.getSeconds())} <span ${classSt}>${s}</span><br>`;
+        }, 1);        
     }
     
     public twoDigits(n: number): string {
@@ -42,5 +47,5 @@ export class AppService {
     public validateEmail (email: string): boolean {
         const re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test (email.toLowerCase());
-    }
+    }    
 }

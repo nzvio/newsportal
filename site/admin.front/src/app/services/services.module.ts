@@ -5,12 +5,14 @@ import { DataService } from './data.service';
 import { UsergroupRepository } from './repositories/usergroup.repository';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { ErrorService } from './error.service';
 
 @NgModule({
     declarations: [],
     imports: [],
     providers: [
 		AppService,
+		ErrorService,
     	DataService,
 		AuthService,
 		AuthGuard,

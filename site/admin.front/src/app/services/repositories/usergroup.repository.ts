@@ -3,11 +3,14 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { Usergroup } from '../../model/usergroup.model';
 import { DataService } from '../data.service';
-import { IAnswer } from 'src/app/model/answer.interface';
+import { ErrorService } from '../error.service';
 
 @Injectable()
 export class UsergroupRepository extends Repository<Usergroup> {
-    constructor(private dataService: DataService) {
+    constructor(
+        private dataService: DataService,
+        private errorService: ErrorService,
+    ) {
         super();
     }
 
@@ -40,6 +43,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
                     } else {
+                        this.errorService.processStatus(res.statusCode, this);
                         reject(res.error);
                     }                    
                 }, err => {
@@ -49,12 +53,13 @@ export class UsergroupRepository extends Repository<Usergroup> {
         });
     }
 
-    public updateParam (_id: string, p: string, v: any): Promise<IAnswer<void>> {
+    public updateParam (_id: string, p: string, v: any): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.updateParam ("Usergroup", _id, p, v).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {
+                    this.errorService.processStatus(res.statusCode, this);
                     reject(res.error);
                 }
             }, err => {
@@ -63,12 +68,13 @@ export class UsergroupRepository extends Repository<Usergroup> {
         });        
     }
 
-    public delete(_id: string): Promise<IAnswer<void>> {
+    public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.usergroupDelete(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {
+                    this.errorService.processStatus(res.statusCode, this);
                     reject(res.error);
                 }
             }, err => {
@@ -77,12 +83,13 @@ export class UsergroupRepository extends Repository<Usergroup> {
         });
     }
 
-    public deleteBulk(_ids: string[]): Promise<IAnswer<void>> {
+    public deleteBulk(_ids: string[]): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.usergroupsDeleteBulk(_ids).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {
+                    this.errorService.processStatus(res.statusCode, this);
                     reject(res.error);
                 }
             }, err => {

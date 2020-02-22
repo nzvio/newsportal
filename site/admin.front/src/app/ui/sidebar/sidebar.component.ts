@@ -34,11 +34,13 @@ export class SidebarComponent {
 	public login(): void {
 		if (this.validateLogin()) {
 			this.appService.monitorLog("authenticating...");
+			this.authService.login(this.email, this.password);
 		}
 	}
 
 	private validateLogin(): boolean {
 		this.appService.monitorLog("checking login form...");
+		this.email = this.email.trim();		
 		let error = false;
 
 		if (!this.email.length) {

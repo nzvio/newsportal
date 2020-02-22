@@ -24,14 +24,12 @@ export class AuthService extends APIService {
             let user: IUser | null = await this.validateUser(dto.email, dto.password);
 
             if (user) {
-                const payload: Object = {username: user.email, sub: user._id};
-                const expiration: number = new Date().getTime() + jwtConstants.signOptions.expiresIn * 1000;
+                const payload: Object = {username: user.email, sub: user._id};                
 
                 return {
                     statusCode: 200,
                     data: {
-                        token: this.jwtService.sign(payload),
-                        expiration,
+                        token: this.jwtService.sign(payload),                        
                         user,                        
                     }            
                 };

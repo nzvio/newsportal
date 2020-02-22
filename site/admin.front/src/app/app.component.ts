@@ -38,10 +38,10 @@ export class AppComponent implements OnInit {
 		this.router.events
 			.pipe(filter((event: RouterEvent) => event instanceof NavigationStart))
 			.subscribe(event => {
-				this.currentUrl.build(event.url);
-				this.sub1Active = this.currentUrl.parts[0] === "catalogue";
-				this.sub2Active = this.currentUrl.parts[0] === "users";
+				this.currentUrl.build(event.url);				
 				setTimeout(() => {
+					this.sub1Active = this.currentUrl.parts[0] === "catalogue";
+					this.sub2Active = this.currentUrl.parts[0] === "users";
 					window.scrollTo(0, 0);
 				}, 1);
 			});

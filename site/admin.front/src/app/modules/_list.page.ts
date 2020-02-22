@@ -24,18 +24,22 @@ export abstract class ListPage {
     get canDeleteBulk(): boolean {return !!this.xl.filter(x => x.selected).length;}
 
     public async rebuildList(): Promise<void> {		        
-        this.reloading = true;
-        this.allSelected = false;
-        this.repository.invalidateChunk();
-        await this.repository.loadChunk();
-        this.appService.monitorLog(`data reloaded, currentPart=${this.currentPart}, sortBy=${this.sortBy}, sortDir=${this.sortDir}`);
-                
-        if (this.currentPart > Math.ceil(this.fullLength / this.length) - 1) { // after deleting may be currentPart is out of possible diapason, then decrease and reload again            
-            this.currentPart--;
-            this.rebuildList();
-        } else {
-            setTimeout(() => {this.reloading = false;}, 500);        
-        }       
+        try {
+            this.reloading = true;
+            this.allSelected = false;
+            this.repository.invalidateChunk();
+            await this.repository.loadChunk();
+            this.appService.monitorLog(`data reloaded, currentPart=${this.currentPart}, sortBy=${this.sortBy}, sortDir=${this.sortDir}`);
+                    
+            if (this.currentPart > Math.ceil(this.fullLength / this.length) - 1) { // after deleting may be currentPart is out of possible diapason, then decrease and reload again            
+                this.currentPart--;
+                this.rebuildList();
+            } else {
+                setTimeout(() => {this.reloading = false;}, 500);        
+            }       
+        } catch (err) {
+            this.appService.monitorLog(err, true);
+        }        
     } 
 
     public changeSorting(sortBy: string): void {
