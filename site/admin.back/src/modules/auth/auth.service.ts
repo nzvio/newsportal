@@ -48,7 +48,7 @@ export class AuthService extends APIService {
         let user: IUser = await this.usersService.oneByEmail(email);
 
         if (user && await this.compare(password, user.password)) {
-            user.password = null;
+            delete user.password;
             return user;
         } else {
             return null;

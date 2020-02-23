@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+
 import { IAnswer } from '../model/answer.interface';
 import { Usergroup } from '../model/usergroup.model';
 import { IAuthData } from "../model/authdata.interface";
+import { User } from '../model/user.model';
 
 @Injectable()
 export class DataService {
@@ -18,10 +20,17 @@ export class DataService {
     public usergroupsAll(sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/all", {sortBy, sortDir}, true);}
     public usergroupsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/chunk", {from, q, sortBy, sortDir}, true);}
     public usergroupsOne(_id: string): Observable<IAnswer<Usergroup>> {return this.sendRequest("GET", `usergroups/one/${_id}`, null, true);}
-    public usergroupDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `usergroups/delete/${_id}`, null, true);}
+    public usergroupsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `usergroups/delete/${_id}`, null, true);}
     public usergroupsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "usergroups/deletebulk", _ids, true);}
     public usergroupsCreate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/create", x, true);}
     public usergroupsUpdate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/update", x, true);}
+
+    public usersChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/chunk", {from, q, sortBy, sortDir}, true);}
+    public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, true);}
+    public usersDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `users/delete/${_id}`, null, true);}
+    public usersDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "users/deletebulk", _ids, true);}
+    public usersCreate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/create", x, true);}
+    public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/update", x, true);}    
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

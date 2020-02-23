@@ -4,8 +4,8 @@ import { Model } from "mongoose";
 
 import { IUsergroup } from "./interfaces/usergroup.interface";
 import { IAnswer } from "../../interfaces/answer.interface";
-import { UsergroupGetallDTO } from "./dto/usergroup.getall.dto";
-import { UsergroupGetchunkDTO } from "./dto/usergroup.getchunk.dto";
+import { GetallDTO } from "../../dto/getall.dto";
+import { GetchunkDTO } from "../../dto/getchunk.dto";
 import { APIService } from "../api.service";
 import { UsergroupCreateDTO } from "./dto/usergroup.create.dto";
 import { UsergroupUpdateDTO } from "./dto/usergroup.update.dto";
@@ -16,7 +16,7 @@ export class UsergroupsService extends APIService {
         super();
     }
 
-    public async all(dto: UsergroupGetallDTO): Promise<IAnswer<IUsergroup[]>> {
+    public async all(dto: GetallDTO): Promise<IAnswer<IUsergroup[]>> {
         let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "title";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
 
@@ -30,7 +30,7 @@ export class UsergroupsService extends APIService {
         }
     }
 
-    public async chunk(dto: UsergroupGetchunkDTO): Promise<IAnswer<IUsergroup[]>> {
+    public async chunk(dto: GetchunkDTO): Promise<IAnswer<IUsergroup[]>> {
         let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "title";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
         let from: number = !this.isEmpty(dto.from) ? dto.from : 0;

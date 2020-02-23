@@ -3,8 +3,8 @@ import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/c
 import { UsergroupsService } from "./usergroups.service";
 import { IUsergroup } from "./interfaces/usergroup.interface";
 import { IAnswer } from "../../interfaces/answer.interface";
-import { UsergroupGetallDTO } from "./dto/usergroup.getall.dto";
-import { UsergroupGetchunkDTO } from "./dto/usergroup.getchunk.dto";
+import { GetallDTO } from "../../dto/getall.dto";
+import { GetchunkDTO } from "../../dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { UsergroupCreateDTO } from "./dto/usergroup.create.dto";
 import { UsergroupUpdateDTO } from "./dto/usergroup.update.dto";
@@ -16,14 +16,14 @@ export class UsergroupsController {
     // get all
     @UseGuards(AuthGuard)
     @Post("all")
-    public all(@Body() dto: UsergroupGetallDTO): Promise<IAnswer<IUsergroup[]>> {
+    public all(@Body() dto: GetallDTO): Promise<IAnswer<IUsergroup[]>> {
         return this.usergroupsService.all(dto);
     }
 
     // get fragment
     @UseGuards(AuthGuard)
     @Post("chunk")
-    public chunk(@Body() dto: UsergroupGetchunkDTO): Promise<IAnswer<IUsergroup[]>> {
+    public chunk(@Body() dto: GetchunkDTO): Promise<IAnswer<IUsergroup[]>> {
         return this.usergroupsService.chunk(dto);
     }
 

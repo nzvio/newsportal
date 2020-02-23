@@ -1,4 +1,4 @@
-export class UsergroupGetchunkDTO {
+export class GetchunkDTO {
     public readonly sortBy?: string;
     public readonly sortDir?: number;
     public readonly from: number;

@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 
 import { AppService } from './app.service';
 import { DataService } from './data.service';
-import { UsergroupRepository } from './repositories/usergroup.repository';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { ErrorService } from './error.service';
+import { UsergroupRepository } from './repositories/usergroup.repository';
+import { UserRepository } from './repositories/user.repository';
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import { ErrorService } from './error.service';
 		AuthService,
 		AuthGuard,
 		UsergroupRepository,
+		UserRepository,
 	],
 })
 export class ServicesModule { }

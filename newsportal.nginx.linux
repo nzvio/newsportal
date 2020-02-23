@@ -1,0 +1,50 @@
+server {
+    #listen 80;    
+    listen 444 ssl;    
+    ssl_certificate /var/www/html/FREELANCE/newsportal/ssl/sc.vio.net.ua.crt;
+    ssl_certificate_key /var/www/html/FREELANCE/newsportal/ssl/sc.vio.net.ua.key;
+    server_name sc.vio.net.ua;	    
+
+    location / {
+        proxy_set_header   X-Forwarded-For $remote_addr;
+        proxy_set_header   Host $http_host;
+        proxy_pass         "http://localhost:3017";
+    }    
+    
+    location /assets {
+        rewrite ^ https://static.sc.vio.net.ua$request_uri permanent;
+	}
+}
+
+server {
+    #listen 80;    
+    listen 444 ssl;    
+    ssl_certificate /var/www/html/FREELANCE/newsportal/ssl/admin.sc.vio.net.ua.crt;
+    ssl_certificate_key /var/www/html/FREELANCE/newsportal/ssl/admin.sc.vio.net.ua.key;
+    server_name admin.sc.vio.net.ua;
+    root /var/www/html/FREELANCE/newsportal/site/admin.front/dist/front-admin;
+    try_files $uri $uri/ /index.html;    
+    
+    location /api/admin {
+		proxy_pass         "http://localhost:3019";
+	}
+	
+	location /assets {
+        rewrite ^ https://static.sc.vio.net.ua$request_uri permanent;
+	}
+}
+
+server {
+    #listen 80;    
+    listen 444 ssl;    
+    ssl_certificate /var/www/html/FREELANCE/newsportal/ssl/static.sc.vio.net.ua.crt;
+    ssl_certificate_key /var/www/html/FREELANCE/newsportal/ssl/static.sc.vio.net.ua.key;
+    server_name static.sc.vio.net.ua;
+    root /var/www/html/FREELANCE/newsportal/site/static;   
+    
+    location / {
+        if ($http_origin ~ "(admin.sc.vio.net.ua)|(sc.vio.net.ua)") {
+            add_header "Access-Control-Allow-Origin" $http_origin;
+        }
+    }    
+}

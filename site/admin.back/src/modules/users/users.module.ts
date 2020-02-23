@@ -5,6 +5,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { jwtConstants } from "../auth/auth.constants";
 import { UserSchema } from "./schemas/user.schema";
 import { UsersService } from "./users.service";
+import { UsersController } from "./users.controller";
 
 @Module({
     imports: [
@@ -12,7 +13,7 @@ import { UsersService } from "./users.service";
         JwtModule.register(jwtConstants),
     ],
     exports: [UsersService],
-    controllers: [],
+    controllers: [UsersController],
     providers: [UsersService],
 })
 export class UsersModule {}

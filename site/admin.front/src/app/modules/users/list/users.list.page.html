@@ -1,0 +1,39 @@
+<div class="content">
+    <div class="content-head">
+        <h1>Users ({{fullLength}})</h1>
+        <div class="content-dash">
+            <div class="cd-btn create" title="Create" routerLink="/users/users/create"><span></span></div>
+            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" title="Delete selected" (click)="deleteBulk();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <div class="data-tablewrap">
+                <table class="data-table">
+                    <tr>
+                        <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
+                        <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
+                        <th>Actions</th>
+                    </tr>   
+                    <tr *ngFor="let x of xl">
+                        <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
+                        <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                        
+                        <td>
+                            <div class="dt-actions">
+                                <div class="dt-btn edit" title="Edit" [routerLink]="'/users/users/edit/'+x._id"><span></span></div>
+                                <div class="dt-btn delete" title="Delete" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                            </div>
+                        </td>
+                    </tr>                            
+                </table>
+            </div>            
+            <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="4"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { UIModule } from './ui/ui.module';
 import { ServicesModule } from './services/services.module';
-import { CatalogueModule } from './catalogue/catalogue.module';
 import { PagesModule } from './pages/pages.module';
 
 @NgModule({
@@ -21,7 +20,6 @@ import { PagesModule } from './pages/pages.module';
 		ServicesModule,
 		HomeModule,
 		PagesModule,
-		CatalogueModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

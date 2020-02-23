@@ -24,10 +24,14 @@ export class UsergroupsEditPage extends ObjectPage implements OnInit {
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(async p => {
-			this.ready = false;
-			this.x = await this.usergroupRepository.loadOne(p["_id"]);
-			this.appService.monitorLog("usergroups edit page loaded");
-			this.ready = true;
+			try {
+				this.ready = false;
+				this.x = await this.usergroupRepository.loadOne(p["_id"]);
+				this.appService.monitorLog("usergroups edit page loaded");
+				this.ready = true;
+			} catch (err) {
+				this.appService.monitorLog(err, true);
+			}			
 		});
 	}
 }
