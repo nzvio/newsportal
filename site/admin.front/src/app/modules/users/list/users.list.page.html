@@ -23,11 +23,12 @@
                         <td>
                             <div class="dt-inputwrap">
                                 <select [(ngModel)]="x.usergroup" (change)="updateParam (x._id, 'usergroup', x.usergroup);" [disabled]="x.defended">
-                                    <option *ngFor="let ug of ugl" [value]="ug.name">{{ug.title}}</option>
+                                    <option *ngFor="let ug of ugl" [value]="ug._id">{{ug.title}}</option>
                                 </select>
                             </div>
                         </td>
-                        <td><input type="checkbox" name="active" [(ngModel)]="x.active" (ngModelChange)="updateParam (x._id, 'active', x.active);" [disabled]="x.defended"></td>
+                        <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);" [disabled]="x.defended"></checkbox-slider></div>
+                        </td>
                         <td>
                             <div class="dt-actions">
                                 <div class="dt-btn edit" title="Edit" [routerLink]="'/users/users/edit/'+x._id"><span></span></div>

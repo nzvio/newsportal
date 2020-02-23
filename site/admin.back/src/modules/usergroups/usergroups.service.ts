@@ -103,4 +103,9 @@ export class UsergroupsService extends APIService {
             return {statusCode: 500, error: errTxt};
         } 
     }
+
+    // for auth service
+    public async oneByName(name: string): Promise<IUsergroup> {
+        return this.model.findOne({name});
+    }
 }

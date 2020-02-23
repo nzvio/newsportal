@@ -8,6 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoadingtableComponent } from './loading-table/loading-table.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { ImageviewerComponent } from './imageviewer/imageviewer.component';
+import { CheckboxsliderComponent } from './checkbox-slider/checkboxslider.component';
 
 @NgModule({
     imports: [             
@@ -21,6 +23,8 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
         PaginationComponent, 
         LoadingtableComponent,
         ProgressbarComponent,
+        ImageviewerComponent,
+        CheckboxsliderComponent,
     ],
     exports: [
         HeaderComponent, 
@@ -28,6 +32,8 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
         PaginationComponent,  
         LoadingtableComponent,     
         ProgressbarComponent,
+        ImageviewerComponent,
+        CheckboxsliderComponent,
     ],
     providers: []
 })

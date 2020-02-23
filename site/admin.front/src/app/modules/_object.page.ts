@@ -8,22 +8,23 @@ import { HttpEventType } from '@angular/common/http';
 import { IAnswer } from '../model/answer.interface';
 import { IImagable } from '../model/imagable.interface';
 
-export abstract class ObjectPage {
+export abstract class ObjectPage<T extends Model> {
     public ready: boolean = false;
     public reloading: boolean = false;      
-    public x: Model & IImagable;
     public progressImg: number = 0;
+
+    public abstract x: T & IImagable;
+    public abstract homeUrl: string;
+	public abstract folder: string | null;    
     
     constructor(        
         protected repository: Repository<any>,
         protected appService: AppService,
         protected router: Router,
-        protected homeUrl: string,
-        protected folder?: string,
         protected uploadService?: UploadService,
     ) {}
 
-    public async create(): Promise<void> {
+    public async create(): Promise<boolean> {
 		try {
 			this.reloading = true;
 			this.appService.monitorLog(`creating object...`);
@@ -33,14 +34,18 @@ export abstract class ObjectPage {
             setTimeout(() => {
                 this.reloading = false;
                 this.router.navigateByUrl(this.homeUrl);			
-            }, 500);			
+            }, 500);	
+            
+            return true;
 		} catch (err) {
             this.appService.monitorLog(`error: ${err}`, true);
             setTimeout(() => {this.reloading = false;}, 500);    
+
+            return false;
 		}
     }
     
-    public async update(): Promise<void> {
+    public async update(): Promise<boolean> {
 		try {
 			this.reloading = true;
 			this.appService.monitorLog(`updating object...`);
@@ -50,10 +55,14 @@ export abstract class ObjectPage {
             setTimeout(() => {
                 this.reloading = false;
                 this.router.navigateByUrl(this.homeUrl);			
-            }, 500);			
+            }, 500);
+            
+            return true;
 		} catch (err) {
             this.appService.monitorLog(`error: ${err}`, true);
             setTimeout(() => {this.reloading = false;}, 500);    
+
+            return  false;
 		}
     }
 
@@ -61,7 +70,7 @@ export abstract class ObjectPage {
         this.progressImg = 0;
         let fileToUpload: File = <File>event.target.files[0];        
         
-        if (fileToUpload) {
+        if (fileToUpload && this.folder) {
             let fd: FormData = new FormData ();
             fd.append ("dir", this.folder);
             fd.append ("img", fileToUpload, fileToUpload.name);
@@ -84,5 +93,11 @@ export abstract class ObjectPage {
                 this.appService.monitorLog (err.message, true);
             });            
         }  
+    }
+
+    public deleteImg(): void {
+        this.x.img = null;
+        this.x.img_s = null;
+        this.progressImg = 0;
     }
 }

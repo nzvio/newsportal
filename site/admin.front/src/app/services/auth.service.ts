@@ -3,6 +3,7 @@ import { IAuthData } from '../model/authdata.interface';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { DataService } from './data.service';
+import { User } from '../model/user.model';
 
 @Injectable()
 export class AuthService {
@@ -47,5 +48,10 @@ export class AuthService {
             localStorage.setItem("authdata", JSON.stringify(this.authData));
             this.appService.monitorLog("auth data saved");
         } 
-    }    
+    }
+    
+    public updateUser(user: User): void {
+        this.authData.user = user;
+        this.save();
+    }
 }

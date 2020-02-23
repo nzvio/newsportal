@@ -1,0 +1,9 @@
+@import "../../var";
+
+.chbs {
+    width: 50px; height: 30px; position: relative; cursor: pointer; 
+    .chbs-scale {height: 10px; width: 100%; position: absolute; background-color: #666; left: 0; top:50%; transform: translateY(-50%); border-radius: 5px;}
+    .chbs-handle {position: absolute; width:20px; height: 20px; border-radius: 10px; background-color: #777; left: 0; top:50%; transform: translateY(-50%); box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75); transition: all 0.3s ease 0s;}
+    &.active {.chbs-handle {left: calc(100% - 20px); background-color: #ddd;}}
+    &.disabled {opacity: 0.4; cursor: inherit; pointer-events: none;}
+}

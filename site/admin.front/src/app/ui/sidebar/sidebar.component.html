@@ -1,6 +1,6 @@
 <aside [class]="active ? 'active' : ''">
     <div id="aside-left">
-        <div id="user" *ngIf="authenticated">            
+        <div id="user" *ngIf="authenticated" [routerLink]="'/users/users/edit/'+user._id">
             <div id="u-imgwrap" [style.background-image]="'url(/assets/images/users/'+user.img_s+')'"></div>
             <div id="u-info">
                 <div id="u-name">{{user.name}}</div>

@@ -6,10 +6,12 @@ import { jwtConstants } from "./auth.constants";
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
 import { AuthGuard } from "./auth.guard";
+import { UsergroupsModule } from "../usergroups/usergroups.module";
 
 @Module({
     imports: [
-        UsersModule,        
+        UsersModule,
+        UsergroupsModule,
         JwtModule.register(jwtConstants),
     ],
     controllers: [AuthController],

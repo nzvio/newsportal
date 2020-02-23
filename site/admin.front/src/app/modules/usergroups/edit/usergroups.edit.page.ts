@@ -10,8 +10,10 @@ import { Usergroup } from '../../../model/usergroup.model';
 	selector: 'usergroups-edit-page',
 	templateUrl: './usergroups.edit.page.html',	
 })
-export class UsergroupsEditPage extends ObjectPage implements OnInit {
-    public x: Usergroup | null = null;
+export class UsergroupsEditPage extends ObjectPage<Usergroup> implements OnInit {
+	public x: Usergroup | null = null;
+	public homeUrl: string = "/users/usergroups";
+	public folder: string | null = null;
 
 	constructor(
 		protected usergroupRepository: UsergroupRepository,
@@ -19,7 +21,7 @@ export class UsergroupsEditPage extends ObjectPage implements OnInit {
 		protected router: Router,
 		private route: ActivatedRoute,		
 	) {
-		super(usergroupRepository, appService, router, "/users/usergroups");
+		super(usergroupRepository, appService, router);
 	}
 
 	public ngOnInit(): void {

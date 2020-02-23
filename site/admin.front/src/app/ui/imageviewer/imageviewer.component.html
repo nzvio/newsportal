@@ -1,0 +1,8 @@
+<div [class]="active ? 'image-viewer active' : 'image-viewer'">
+    <div class="iv-head">        
+        <div class="iv-close" (click)="close();"><span></span></div>
+    </div>
+    <div class="iv-content" *ngIf="img">
+        <img [src]="'/assets/images/'+folder+'/'+img">
+    </div>
+</div>

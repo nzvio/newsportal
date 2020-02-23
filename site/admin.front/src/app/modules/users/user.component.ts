@@ -13,8 +13,14 @@ export class UserComponent {
     @Input() ugl: Usergroup[] = [];
     @Input() progressImg: number = 0;
     @Output() uploadImg: EventEmitter<Event> = new EventEmitter();
+    @Output() deleteImg: EventEmitter<void> = new EventEmitter();
+    public viewerActive: boolean = false;
 
-    public handleUploadImg(event: IHTMLInputEvent): void {
+    public onUploadImg(event: IHTMLInputEvent): void {
         this.uploadImg.emit(event);
+    }
+
+    public onDeleteImg(): void {
+        this.deleteImg.emit();
     }
 }

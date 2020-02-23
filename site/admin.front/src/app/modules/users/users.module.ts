@@ -6,13 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { UIModule } from '../../ui/ui.module';
 import { UsersListPage } from "./list/users.list.page";
 import { UsersCreatePage } from "./create/users.create.page";
-//import { UsersEditPage } from "./edit/users.edit.page";
+import { UsersEditPage } from "./edit/users.edit.page";
 import { UserComponent } from "./user.component";
 
 let routing = RouterModule.forChild ([        
 	{path:"", component: UsersListPage, pathMatch: "full"},
 	{path:"create", component: UsersCreatePage, pathMatch: "full"},
-//	{path:"edit/:_id", component: UsersEditPage},
+	{path:"edit/:_id", component: UsersEditPage},
 ]);
 
 @NgModule({	
@@ -25,7 +25,7 @@ let routing = RouterModule.forChild ([
 	declarations: [
 		UsersListPage,
 		UsersCreatePage,
-//		UsersEditPage,
+		UsersEditPage,
 		UserComponent,
 	],
     providers: [],    

@@ -53,7 +53,7 @@ aside {
                     }
                 } 
                 .nav-sub {
-                    max-height: 0; overflow: hidden; transition: max-height 0.3s ease 0s;
+                    max-height: 0; overflow: hidden; transition: max-height 0.2s ease 0s;
                     &.active {max-height: 500px; transition: max-height 0.6s ease 0s;}                    
                 }               
             }

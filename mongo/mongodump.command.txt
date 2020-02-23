@@ -1,1 +1,1 @@
-mongodump --username root --password "6vl1TfeXq" --authenticationDatabase admin --out 201019 --db 974news
+mongodump --username root --password "PASSWORD" --authenticationDatabase admin --out 230220 --db newsportal

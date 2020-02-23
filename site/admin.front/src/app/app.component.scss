@@ -120,7 +120,7 @@ html {
                         @media (min-width:0) {display: block;}
                         @media (min-width:1000px) {display: grid;}  
                         grid-template-columns: min-content auto; color: $color-transparent;
-                        .df-title {padding: 5px 30px 0 0; white-space: nowrap;}
+                        .df-title {white-space: nowrap; display: flex; align-items: center; padding-right: 30px;}
                         .df-inputwrap {
                             margin: 5px 0;
                             input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
@@ -133,7 +133,27 @@ html {
                                 @media (min-width:1000px) {width:400px;}
                             }  
                             .df-imgwrap {
-                                img {width:200px; height: auto; border:1px $color-transparent-dark solid;}
+                                display: flex;
+                                .df-imgwrap2 {
+                                    margin-right: 5px;
+                                    img {
+                                        @media (min-width:0) {max-width:150px;}
+                                        @media (min-width:1000px) {max-width:200px;}
+                                        min-height: 100px; border:1px $color-transparent-dark solid;
+                                    }
+                                }                                
+                                .df-imgbtns {
+                                    .df-magnify, .df-deletefile {
+                                        width: 40px; height: 40px; line-height: 40px; text-align: center; cursor: pointer; transition: background-color 0.3s ease 0s; margin-bottom: 5px;
+                                        &:hover {background-color: $color-bg-light;}
+                                        span {
+                                            font-size: 20px;  
+                                            &::before {font-family: "awesome-solid";}  
+                                        }
+                                    }
+                                    .df-magnify {span::before {content: "\f06e";}}
+                                    .df-deletefile {span::before {content: "\f05e";}}
+                                }                                
                             }   
                         }
                     }
@@ -142,8 +162,7 @@ html {
                         position: absolute; left: 0; top: 0; background-color: $color-bg-dark; width:100%; height: 100%; z-index: 2; display: flex; align-items: center; justify-content: center;
                         span {
                             display: inline-block; animation: reloadingspinner 1s infinite;
-                            &::before {font-family: "awesome-solid"; font-size: 40px; color: $color-transparent; content: "\f2f1";}                        
-                            
+                            &::before {font-family: "awesome-solid"; font-size: 40px; color: $color-transparent; content: "\f2f1";}                            
                         }
                         @keyframes reloadingspinner {
                             0% {transform: rotate(0deg);}

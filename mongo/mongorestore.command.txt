@@ -1,1 +1,1 @@
-mongorestore --username root --password "6vl1TfeXq" --authenticationDatabase admin --db DATABASENAME DIRECTORY
+mongorestore --username root --password "PASSWORD" --authenticationDatabase admin --db DATABASENAME DIRECTORY

@@ -11,26 +11,30 @@
     <div class="df-title">Group:</div>
     <div class="df-inputwrap">
         <select name="usergroup" [(ngModel)]="x.usergroup" [disabled]="x.defended">
-            <option *ngFor="let ug of ugl" [value]="ug.name">{{ug.title}}</option>
+            <option *ngFor="let ug of ugl" [value]="ug._id">{{ug.title}}</option>
         </select>
     </div>
     
     <div class="df-title">Picture:</div>
     <div class="df-inputwrap">
         <ng-container *ngIf="x.img">
-            <div class="df-imgwrap viewable">
-                <img src="/assets/images/users/{{x.img}}">
-                <div class="df-magnify" title="View picture"><span></span></div>
-                <div class="df-deletefile" title="Remove picture"><span></span></div>                                   
+            <div class="df-imgwrap">
+                <div class="df-imgwrap2"><img src="/assets/images/users/{{x.img}}"></div>
+                <div class="df-imgbtns">
+                    <div class="df-magnify" title="View picture" (click)="viewerActive = true;"><span></span></div>
+                    <div class="df-deletefile" title="Remove picture" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
+                </div>                
             </div>                                
         </ng-container>
-        <input type="file" name="img" (change)="handleUploadImg($event);">
+        <input #imginput type="file" name="img" (change)="onUploadImg($event);">
         <progressbar [progress]="progressImg" *ngIf="progressImg"></progressbar>
     </div>
 
     <div class="df-title">Active:</div>
-    <div class="df-inputwrap"><input type="checkbox" name="active" [(ngModel)]="x.active" [disabled]="x.defended"></div>
+    <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>
     
     <div class="df-title"></div>
     <div class="df-inputwrap"><button type="submit">Save</button></div>                
 </div>
+
+<image-viewer [img]="x.img" folder="users" [(active)]="viewerActive"></image-viewer>
