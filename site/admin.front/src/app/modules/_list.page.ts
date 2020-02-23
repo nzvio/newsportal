@@ -58,6 +58,7 @@ export abstract class ListPage {
         try {
             this.appService.monitorLog(`updating object: id=${_id} param=${p} value=${v}`);
             await this.repository.updateParam(_id, p, v);
+            this.repository.invalidateAll();
             this.appService.monitorLog("ok");
         } catch (err) {
             this.appService.monitorLog(`error: ${err}`, true);
@@ -87,6 +88,7 @@ export abstract class ListPage {
 
             try {
                 await this.repository.delete(_id);
+                this.repository.invalidateAll();
                 this.appService.monitorLog("ok");
                 this.rebuildList();
             } catch (err) {
@@ -102,6 +104,7 @@ export abstract class ListPage {
 
             try {
                 await this.repository.deleteBulk(_ids);
+                this.repository.invalidateAll();
                 this.appService.monitorLog("ok");
                 this.rebuildList();
             } catch (err) {

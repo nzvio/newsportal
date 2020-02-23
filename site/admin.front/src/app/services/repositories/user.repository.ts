@@ -25,8 +25,7 @@ export class UserRepository extends Repository<User> {
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
-                    } else {
-                        this.errorService.processStatus(res.statusCode, this);
+                    } else {                        
                         reject(res.error);
                     }                    
                 }, err => {
@@ -47,7 +46,7 @@ export class UserRepository extends Repository<User> {
                         reject("Object not found");
                     }                    
                 } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                    
                     reject(res.error);
                 }
             }, err => {
@@ -61,8 +60,7 @@ export class UserRepository extends Repository<User> {
             this.dataService.updateParam ("User", _id, p, v).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -76,8 +74,7 @@ export class UserRepository extends Repository<User> {
             this.dataService.usersDelete(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -91,8 +88,7 @@ export class UserRepository extends Repository<User> {
             this.dataService.usersDeleteBulk(_ids).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -106,8 +102,7 @@ export class UserRepository extends Repository<User> {
             this.dataService.usersCreate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -121,8 +116,7 @@ export class UserRepository extends Repository<User> {
             this.dataService.usersUpdate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {

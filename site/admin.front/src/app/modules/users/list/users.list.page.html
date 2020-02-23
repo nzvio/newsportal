@@ -12,12 +12,20 @@
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
-                        <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
+                        <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
+                        <th><label [class]="sortBy === 'usergroup' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('usergroup');">Group</label></th>
                         <th>Actions</th>
                     </tr>   
                     <tr *ngFor="let x of xl">
                         <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
                         <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                        
+                        <td>
+                            <div class="dt-inputwrap">
+                                <select [(ngModel)]="x.usergroup" (change)="updateParam (x._id, 'usergroup', x.usergroup);">
+                                    <option *ngFor="let ug of ugl" [value]="ug.name">{{ug.title}}</option>
+                                </select>
+                            </div>
+                        </td>
                         <td>
                             <div class="dt-actions">
                                 <div class="dt-btn edit" title="Edit" [routerLink]="'/users/users/edit/'+x._id"><span></span></div>

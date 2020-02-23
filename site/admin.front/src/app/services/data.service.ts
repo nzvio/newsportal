@@ -6,13 +6,18 @@ import { IAnswer } from '../model/answer.interface';
 import { Usergroup } from '../model/usergroup.model';
 import { IAuthData } from "../model/authdata.interface";
 import { User } from '../model/user.model';
+import { filter } from 'rxjs/operators';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class DataService {
     private root: string = "/api/admin";
     public authData: IAuthData | null = null;                
     
-    constructor (private http: HttpClient) {}
+    constructor (
+        private http: HttpClient,
+        private errorService: ErrorService,
+    ) {}
 
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public updateParam (obj: string, _id: string, p: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparam", {obj, _id, p, v}, true);}    
@@ -40,16 +45,24 @@ export class DataService {
         }
 
         if (method === "GET") {
-            return this.http.get (`${this.root}/${url}`, {headers});
+            return this.http
+                .get (`${this.root}/${url}`, {headers})
+                .pipe(filter(res => this.errorService.processResponse(res)));
         } else if (method === "POST") {
             if (withProgress) {
-                return this.http.post (`${this.root}/${url}`, body, {headers, observe: "events", reportProgress: true});
+                return this.http
+                    .post (`${this.root}/${url}`, body, {headers, observe: "events", reportProgress: true})
+                    .pipe(filter(res => this.errorService.processResponse(res)));
             } else {
-                return this.http.post (`${this.root}/${url}`, body, {headers});
+                return this.http
+                    .post (`${this.root}/${url}`, body, {headers})
+                    .pipe(filter(res => this.errorService.processResponse(res)));
             }                        
         } else if (method === "DELETE") {
             let options: Object = {body, headers};
-            return this.http.delete(`${this.root}/${url}`, options);
+            return this.http
+                .delete(`${this.root}/${url}`, options)
+                .pipe(filter(res => this.errorService.processResponse(res)));
         }                
         
         return null;                  

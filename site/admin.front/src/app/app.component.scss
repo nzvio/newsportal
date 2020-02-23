@@ -90,7 +90,7 @@ html {
                                 td {
                                     padding: 5px 10px;
                                     .dt-inputwrap {
-                                        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {width: 100%;}
+                                        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"], select {width: 100%;}
                                     }   
                                     .dt-actions {
                                         display: flex; 

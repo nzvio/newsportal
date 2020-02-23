@@ -47,7 +47,7 @@ export class AuthService extends APIService {
     private async validateUser(email: string, password: string): Promise<IUser> {
         let user: IUser = await this.usersService.oneByEmail(email);
 
-        if (user && await this.compare(password, user.password)) {
+        if (user && user.usergroup === "admin" && user.active && await this.compare(password, user.password)) {
             delete user.password;
             return user;
         } else {

@@ -1,16 +1,22 @@
 import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
-import { Repository } from './repositories/repository';
+
+import { AppService } from './app.service';
 
 @Injectable()
 export class ErrorService {
-    constructor(private router: Router) {}
+    constructor(
+        private router: Router,
+        private appService: AppService,
+    ) {}
 
-    public processStatus(statusCode: number, repository: Repository<any>): void {
-        if (statusCode === 403) {
-            repository.invalidateChunk();
-            repository.invalidateFull();
-            this.router.navigateByUrl("/auth/logout");            
-        }
+    public processResponse(res: any): boolean {        
+        if (res.statusCode === 403) {
+            (res.error) ? this.appService.monitorLog(res.error, true) : null;
+            this.router.navigateByUrl("/auth/logout");
+            return false;
+        } else {
+            return true;
+        }        
     }
 }

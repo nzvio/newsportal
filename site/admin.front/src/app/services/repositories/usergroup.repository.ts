@@ -16,7 +16,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
         super();
     }
 
-    public loadAll(): Promise<void> {
+    public loadFull(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
@@ -27,8 +27,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                         this.fullLength = this.xlFull.length;
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
-                    } else {
-                        this.errorService.processStatus(res.statusCode, this);
+                    } else {                        
                         reject(res.error);
                     }
                 }, err => {
@@ -49,8 +48,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
-                    } else {
-                        this.errorService.processStatus(res.statusCode, this);
+                    } else {                        
                         reject(res.error);
                     }                    
                 }, err => {
@@ -70,8 +68,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                     } else {
                         reject("Object not found");
                     }                    
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -85,8 +82,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             this.dataService.updateParam ("Usergroup", _id, p, v).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -100,8 +96,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             this.dataService.usergroupsDelete(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -115,8 +110,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             this.dataService.usergroupsDeleteBulk(_ids).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -130,8 +124,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             this.dataService.usergroupsCreate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {
@@ -145,8 +138,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             this.dataService.usergroupsUpdate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
-                } else {
-                    this.errorService.processStatus(res.statusCode, this);
+                } else {                    
                     reject(res.error);
                 }
             }, err => {

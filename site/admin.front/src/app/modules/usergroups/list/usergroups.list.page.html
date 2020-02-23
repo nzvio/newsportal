@@ -12,8 +12,8 @@
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>
-                        <th class="wide"><label [class]="sortBy === 'title' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('title');">Title</label></th>
-                        <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
+                        <th><label [class]="sortBy === 'title' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('title');">Title</label></th>
+                        <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
                         <th>Actions</th>
                     </tr>   
                     <tr *ngFor="let x of xl">

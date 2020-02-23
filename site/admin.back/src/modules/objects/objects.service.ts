@@ -2,15 +2,17 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { IUsergroup } from "../usergroups/interfaces/usergroup.interface";
+import { APIService } from "../api.service";
 import { UpdateparamDTO } from "./dto/updateparam.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
-import { APIService } from "../api.service";
+import { IUsergroup } from "../usergroups/interfaces/usergroup.interface";
+import { IUser } from "../users/interfaces/user.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
     constructor (
         @InjectModel("Usergroup") private readonly modelUsergroup: Model<IUsergroup>,
+        @InjectModel("User") private readonly modelUser: Model<IUser>,
     ) {
         super();
     }
