@@ -7,6 +7,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoadingtableComponent } from './loading-table/loading-table.component';
+import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 @NgModule({
     imports: [             
@@ -19,12 +20,14 @@ import { LoadingtableComponent } from './loading-table/loading-table.component';
         SidebarComponent,        
         PaginationComponent, 
         LoadingtableComponent,
+        ProgressbarComponent,
     ],
     exports: [
         HeaderComponent, 
         SidebarComponent,    
         PaginationComponent,  
         LoadingtableComponent,     
+        ProgressbarComponent,
     ],
     providers: []
 })

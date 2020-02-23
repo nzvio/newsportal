@@ -19,7 +19,7 @@ export class UsergroupsEditPage extends ObjectPage implements OnInit {
 		protected router: Router,
 		private route: ActivatedRoute,		
 	) {
-		super(usergroupRepository, appService, router);
+		super(usergroupRepository, appService, router, "/users/usergroups");
 	}
 
 	public ngOnInit(): void {

@@ -2,16 +2,25 @@ import { Repository } from '../services/repositories/repository';
 import { AppService } from '../services/app.service';
 import { Router } from '@angular/router';
 import { Model } from '../model/model';
+import { UploadService } from '../services/upload.service';
+import { IHTMLInputEvent } from '../model/htmlinputevent.interface';
+import { HttpEventType } from '@angular/common/http';
+import { IAnswer } from '../model/answer.interface';
+import { IImagable } from '../model/imagable.interface';
 
 export abstract class ObjectPage {
     public ready: boolean = false;
     public reloading: boolean = false;      
-    public x: Model;
+    public x: Model & IImagable;
+    public progressImg: number = 0;
     
     constructor(        
         protected repository: Repository<any>,
         protected appService: AppService,
         protected router: Router,
+        protected homeUrl: string,
+        protected folder?: string,
+        protected uploadService?: UploadService,
     ) {}
 
     public async create(): Promise<void> {
@@ -23,7 +32,7 @@ export abstract class ObjectPage {
             this.repository.invalidateAll();
             setTimeout(() => {
                 this.reloading = false;
-                this.router.navigateByUrl("/users/usergroups");			
+                this.router.navigateByUrl(this.homeUrl);			
             }, 500);			
 		} catch (err) {
             this.appService.monitorLog(`error: ${err}`, true);
@@ -40,11 +49,40 @@ export abstract class ObjectPage {
             this.repository.invalidateAll();
             setTimeout(() => {
                 this.reloading = false;
-                this.router.navigateByUrl("/users/usergroups");			
+                this.router.navigateByUrl(this.homeUrl);			
             }, 500);			
 		} catch (err) {
             this.appService.monitorLog(`error: ${err}`, true);
             setTimeout(() => {this.reloading = false;}, 500);    
 		}
+    }
+
+    public uploadImg(event: IHTMLInputEvent): void {
+        this.progressImg = 0;
+        let fileToUpload: File = <File>event.target.files[0];        
+        
+        if (fileToUpload) {
+            let fd: FormData = new FormData ();
+            fd.append ("dir", this.folder);
+            fd.append ("img", fileToUpload, fileToUpload.name);
+            this.appService.monitorLog(`uploading image ${fileToUpload.name}...`);
+            this.uploadService.uploadImgWithCopy (fd, 100).subscribe (event => {                
+                if (event.type == HttpEventType.UploadProgress) {
+                    this.progressImg = Math.round (100 * event.loaded / event.total);                    
+                } else if (event.type == HttpEventType.Response) {
+                    const res: IAnswer<IImagable> = event.body;
+    
+                    if (res.statusCode === 200) {                        
+                        this.appService.monitorLog(`uploaded: ${res.data.img}, ${res.data.img_s}`);
+                        this.x.img = res.data.img;
+                        this.x.img_s = res.data.img_s; 
+                    } else {
+                        this.appService.monitorLog (res.error, true);
+                    }                    
+                }                
+            }, err => {
+                this.appService.monitorLog (err.message, true);
+            });            
+        }  
     }
 }

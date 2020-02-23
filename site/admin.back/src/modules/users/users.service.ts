@@ -74,7 +74,7 @@ export class UsersService extends APIService {
                 x.password = bcrypt.hashSync(x.password, 10);
             }
             
-            x.save ();
+            await x.save ();
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsersService.create: ${String(err)}`;

@@ -1,0 +1,6 @@
+Backend requires environment variables:
+ 
+export NEWSPORTALAPIKEY=...
+export MONGODBPW=...
+
+In Kubuntu 19 they are in /home/[user]/.profile

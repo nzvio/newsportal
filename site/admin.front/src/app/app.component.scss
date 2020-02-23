@@ -10,11 +10,13 @@ html {
         input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {
             background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
             &:focus {border-color:#fff;}
+            &:disabled {border-color:rgba(255,255,255,0.1);}
             &.error {border: 1px #f00 solid;}
         }        
         select {
             background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
             &:focus {border-color:#fff;}
+            &:disabled {border-color:rgba(255,255,255,0.1);}
             option {color: #000;}
         }
         textarea {
@@ -121,7 +123,7 @@ html {
                         .df-title {padding: 5px 30px 0 0; white-space: nowrap;}
                         .df-inputwrap {
                             margin: 5px 0;
-                            input[type="text"], input[type="email"], input[type="email"], input[type="tel"] {
+                            input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
                                 @media (min-width:0) {width: 100%;}
                                 @media (min-width:1000px) {width:400px;}                                  
                                 &.small {width:50px;}
@@ -129,7 +131,10 @@ html {
                             textarea {
                                 @media (min-width:0) {width: 100%;}
                                 @media (min-width:1000px) {width:400px;}
-                            }     
+                            }  
+                            .df-imgwrap {
+                                img {width:200px; height: auto; border:1px $color-transparent-dark solid;}
+                            }   
                         }
                     }
                     // reloading overlay 

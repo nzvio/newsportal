@@ -1,0 +1,8 @@
+.pb-container {
+    max-width: 200px; margin: 5px 0; display: flex; justify-content: space-between; align-items: center;
+    .pb-scale {
+        height: 4px; background: #999; width: 80%;
+        .pb-filled {height:100%; background: #fff;}
+    }
+    .pb-number {white-space: nowrap; margin: 0 0 0 5px; width:20%;}
+}

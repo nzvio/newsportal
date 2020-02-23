@@ -83,7 +83,7 @@ export class UsergroupsService extends APIService {
     public async create(dto: UsergroupCreateDTO): Promise<IAnswer<void>> {        
         try {
             const x: IUsergroup = new this.model (dto);                    
-            x.save ();        
+            await x.save ();        
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.create: ${String(err)}`;

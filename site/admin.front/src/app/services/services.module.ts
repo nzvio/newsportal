@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { ErrorService } from './error.service';
 import { UsergroupRepository } from './repositories/usergroup.repository';
 import { UserRepository } from './repositories/user.repository';
+import { UploadService } from './upload.service';
 
 @NgModule({
     declarations: [],
@@ -17,6 +18,7 @@ import { UserRepository } from './repositories/user.repository';
     	DataService,
 		AuthService,
 		AuthGuard,
+		UploadService,
 		UsergroupRepository,
 		UserRepository,
 	],

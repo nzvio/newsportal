@@ -1,12 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpEvent } from "@angular/common/http";
+import { filter } from 'rxjs/operators';
 
 import { IAnswer } from '../model/answer.interface';
+import { IImagable } from '../model/imagable.interface';
 import { Usergroup } from '../model/usergroup.model';
 import { IAuthData } from "../model/authdata.interface";
 import { User } from '../model/user.model';
-import { filter } from 'rxjs/operators';
 import { ErrorService } from './error.service';
 
 @Injectable()
@@ -36,6 +37,10 @@ export class DataService {
     public usersDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "users/deletebulk", _ids, true);}
     public usersCreate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/create", x, true);}
     public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/update", x, true);}    
+
+    public upload (fd: FormData): Observable<HttpEvent<IAnswer<string>>> {return this.sendRequest("POST", `files/upload`, fd, true, true);}
+    public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
+    public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;
