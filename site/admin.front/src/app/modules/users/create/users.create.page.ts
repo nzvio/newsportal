@@ -8,6 +8,7 @@ import { AppService } from '../../../services/app.service';
 import { Usergroup } from '../../../model/usergroup.model';
 import { User } from '../../../model/user.model';
 import { UploadService } from '../../../services/upload.service';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'users-create-page',
@@ -19,6 +20,7 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 	public folder: string = "users";
 
 	constructor(
+		protected admlangRepository: AdmLangRepository,
 		protected userRepository: UserRepository,
 		private usergroupRepository: UsergroupRepository,     
 		protected appService: AppService,
@@ -26,7 +28,7 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 		protected router: Router,
 		private route: ActivatedRoute,		
 	) {
-		super(userRepository, appService, router, uploadService);
+		super(admlangRepository, userRepository, appService, router, uploadService);
 	}
 
 	get ugl(): Usergroup[] {return this.usergroupRepository.xlFull;}

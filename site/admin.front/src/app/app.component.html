@@ -1,17 +1,21 @@
-<the-header 
-	[currentUrl]="currentUrl" 
-	[sub1Active]="sub1Active" 
-	[sub2Active]="sub2Active" 
-	[monitorContent]="monitorContent"
-	[authenticated]="authenticated"
-></the-header>
-<the-sidebar 
-	[currentUrl]="currentUrl" 
-	[sub1Active]="sub1Active" 
-	[sub2Active]="sub2Active" 
-	[active]="mmActive" 
-	(activeChanged)="mmActive = $event;"	
-></the-sidebar>
-<main>
-	<router-outlet></router-outlet>
-</main>
+<ng-container *ngIf="langsReady">
+	<the-header 
+		[currentUrl]="currentUrl" 
+		[sub1Active]="sub1Active" 
+		[sub2Active]="sub2Active" 
+		[monitorContent]="monitorContent"
+		[authenticated]="authenticated"
+		[currentLang]="currentLang"
+	></the-header>
+	<the-sidebar 
+		[currentUrl]="currentUrl" 
+		[sub1Active]="sub1Active" 
+		[sub2Active]="sub2Active" 
+		[active]="mmActive" 
+		(activeChanged)="mmActive = $event;"	
+		[currentLang]="currentLang"
+	></the-sidebar>
+	<main>
+		<router-outlet></router-outlet>
+	</main>
+</ng-container>

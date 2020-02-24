@@ -10,14 +10,14 @@
         <div id="login" *ngIf="!authenticated">
             <div id="login-head"><span></span></div>
             <form (submit)="login();">
-                <input type="email" name="email" placeholder="e-mail" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
-                <input type="password" name="password" placeholder="password" [(ngModel)]="password" [class]="errorPassword ? 'error' : ''">
-                <button type="submit">Enter</button>
+                <input type="email" name="email" [placeholder]="currentLang.words['sidebar-email']" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
+                <input type="password" name="password" [placeholder]="currentLang.words['sidebar-password']" [(ngModel)]="password" [class]="errorPassword ? 'error' : ''">
+                <button type="submit">{{currentLang.words['sidebar-enter']}}</button>
             </form>
         </div>            
         <div id="navwrap" *ngIf="authenticated">
             <nav>		
-                <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">Home</span></a></div>
+                <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">{{currentLang.words['sidebar-chapter-home']}}</span></a></div>
                 
                 <!--
                 <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="sub1Active = !sub1Active;"><span class="nav-cat">Catalogue</span></a></div>
@@ -29,10 +29,10 @@
                 <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-page">Static pages</span></a></div>                         
                 -->
 
-                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="sub2Active = !sub2Active;"><span class="nav-users">Users</span></a></div>
+                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="sub2Active = !sub2Active;"><span class="nav-users">{{currentLang.words['sidebar-chapter-users']}}</span></a></div>
                 <div [class]="sub2Active ? 'nav-sub active' : 'nav-sub'">
-                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>Users</span></a></div>
-                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>User groups</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>{{currentLang.words['sidebar-module-users']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>{{currentLang.words['sidebar-module-usergroups']}}</span></a></div>
                 </div>
             </nav>
         </div>	

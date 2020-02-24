@@ -2,9 +2,10 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AppService } from './services/app.service';
 import { Router, RouterEvent, NavigationStart } from '@angular/router';
 import { filter } from "rxjs/operators";
-import { URL } from './model/url.class';
+import { URL } from './model/url';
 import { AuthService } from './services/auth.service';
-import { User } from './model/user.model';
+import { AdmLangRepository } from './services/repositories/admlang.repository';
+import { AdmLang } from './model/admlang.model';
 
 @Component({
 	selector: 'app-root',
@@ -17,10 +18,11 @@ export class AppComponent implements OnInit {
 	public currentUrl: URL = new URL();
 	public sub1Active: boolean = false;	
 	public sub2Active: boolean = false;	
-
+	
 	constructor(
 		private appService: AppService,
 		private authService: AuthService,
+		private admlangRepository: AdmLangRepository,
 		private router: Router,
 	) {	}
 
@@ -28,10 +30,13 @@ export class AppComponent implements OnInit {
 	get mmActive(): boolean {return this.appService.mmActive;}
 	set mmActive(v: boolean) {this.appService.mmActive = v;}
 	get authenticated(): boolean {return this.authService.authData !== null;}
+	get langsReady(): boolean {return this.admlangRepository.currentLang != null;}
+	get currentLang(): AdmLang {return this.admlangRepository.currentLang;}
 
 	public ngOnInit(): void {
+		this.admlangRepository.load();
 		this.initRoutingRoutine();		
-		this.appService.monitorLog("VNE panel initiated");
+		this.appService.monitorLog("VNE panel loaded");		
 	}
 
 	private initRoutingRoutine(): void {

@@ -4,10 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
-import { UsergroupRepository } from 'src/app/services/repositories/usergroup.repository';
-import { Usergroup } from 'src/app/model/usergroup.model';
-import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/model/user.model';
+import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
+import { Usergroup } from '../../../model/usergroup.model';
+import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../model/user.model';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'users-list-page',
@@ -15,13 +16,14 @@ import { User } from 'src/app/model/user.model';
 })
 export class UsersListPage extends ListPage<User> implements OnInit {
     constructor(
+        protected admlangRepository: AdmLangRepository,
         protected userRepository: UserRepository, 
         private usergroupRepository: UsergroupRepository,       
         protected appService: AppService,
         private route: ActivatedRoute,    
         private authService: AuthService,    
     ) {      
-        super(userRepository, appService);
+        super(admlangRepository, userRepository, appService);
     }    
     
     get ugl(): Usergroup[] {return this.usergroupRepository.xlFull;}

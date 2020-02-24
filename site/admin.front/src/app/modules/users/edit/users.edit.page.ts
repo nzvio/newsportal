@@ -8,7 +8,8 @@ import { User } from '../../../model/user.model';
 import { UploadService } from '../../../services/upload.service';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { Usergroup } from '../../../model/usergroup.model';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from '../../../services/auth.service';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'users-edit-page',
@@ -20,6 +21,7 @@ export class UsersEditPage extends ObjectPage<User> implements OnInit {
 	public folder: string = "users";
 
 	constructor(
+		protected admlangRepository: AdmLangRepository,
 		protected userRepository: UserRepository,
 		private usergroupRepository: UsergroupRepository,
 		protected appService: AppService,
@@ -28,7 +30,7 @@ export class UsersEditPage extends ObjectPage<User> implements OnInit {
 		private route: ActivatedRoute,	
 		private authService: AuthService,	
 	) {
-		super(userRepository, appService, router, uploadService);
+		super(admlangRepository, userRepository, appService, router, uploadService);
 	}
 
 	get ugl(): Usergroup[] {return this.usergroupRepository.xlFull;}

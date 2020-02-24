@@ -5,6 +5,7 @@ import { ObjectPage } from '../../_object.page';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { AppService } from '../../../services/app.service';
 import { Usergroup } from '../../../model/usergroup.model';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'usergroups-create-page',
@@ -16,12 +17,13 @@ export class UsergroupsCreatePage extends ObjectPage<Usergroup> implements OnIni
 	public folder: string | null = null;
 
 	constructor(
+		protected admlangRepository: AdmLangRepository,
 		protected usergroupRepository: UsergroupRepository,
         protected appService: AppService,
 		protected router: Router,
 		private route: ActivatedRoute,		
 	) {
-		super(usergroupRepository, appService, router);
+		super(admlangRepository, usergroupRepository, appService, router);
 	}
 
 	public ngOnInit(): void {

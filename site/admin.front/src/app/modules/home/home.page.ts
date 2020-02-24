@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
+import { Page } from '../_page';
+import { AdmLangRepository } from '../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'home-page',
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],	
 })
-export class HomePage {
+export class HomePage extends Page {
 	public length: number = 100000;
 	public perPage: number = 10;
-	public currentPart: number = 0;
+    public currentPart: number = 0;
+    
+    constructor(protected admlangRepository: AdmLangRepository) {
+        super(admlangRepository);
+    }
 
 	public buildList(): void {		
 		console.log("pagination changed: "+this.currentPart);

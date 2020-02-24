@@ -1,0 +1,86 @@
+[    
+    {
+        "name": "en",
+        "dir": "ltr",
+        "words": {            
+            "header-logout": "Log out",
+
+            "sidebar-email": "e-mail",
+            "sidebar-password": "password",
+            "sidebar-enter": "Enter",
+            "sidebar-chapter-home": "Home",
+            "sidebar-chapter-users": "Users",
+            "sidebar-module-users": "Users",
+            "sidebar-module-usergroups": "User groups",
+
+            "workspace-login-txt": "<p>VNE 4.0 welcomes you! Please log into system.</p><p>If you have any problems with this application, please contact VNE support team by <a href='mailto:7573497@gmail.com'>e-mail</a>.</p>",
+            "workspace-logout-txt": "<p>Bye!</p>",
+
+            "workspace-create": "Create",
+            "workspace-deleteselected": "Delete selected",
+            "workspace-edit": "Edit",
+            "workspace-delete": "Delete",
+            "workspace-back": "Back",
+            "workspace-save": "Save",
+            "workspace-actions": "Actions",
+            "workspace-viewpicture": "View picture",
+            "workspace-removepicture": "Remove picture",
+
+            "workspace-home-h1": "Home",
+
+            "workspace-users-h1": "Users",
+            "workspace-users-name": "Name",
+            "workspace-users-email": "E-mail",
+            "workspace-users-password": "Password",
+            "workspace-users-group": "Group",
+            "workspace-users-picture": "Picture",
+            "workspace-users-active": "Active",
+
+            "workspace-usergroups-h1": "User groups",
+            "workspace-usergroups-title": "Title",
+            "workspace-usergroups-name": "Name"
+        }
+    },
+    {
+        "name": "ru",
+        "dir": "ltr",
+        "words": {
+            "header-logout": "Выйти",
+
+            "sidebar-email": "e-mail",
+            "sidebar-password": "пароль",
+            "sidebar-enter": "Войти",
+            "sidebar-chapter-home": "Главная",
+            "sidebar-chapter-users": "Пользователи и группы",
+            "sidebar-module-users": "Пользователи",
+            "sidebar-module-usergroups": "Группы пользователей",
+
+            "workspace-login-txt": "<p>Панель управления VNE 4.0 приветствует вас! Пожалуйста, войдите в систему.</p><p>Если у вас есть вопросы или пожелания по поводу данного приложения, вы можете связаться со <a href='mailto:7573497@gmail.com'>службой поддержки</a> VNE.</p>",
+            "workspace-logout-txt": "<p>До свидания!</p>",
+
+            "workspace-create": "Создать",
+            "workspace-deleteselected": "Удалить выбранное",
+            "workspace-edit": "Редактировать",
+            "workspace-delete": "Удалить",
+            "workspace-back": "Назад",
+            "workspace-save": "Сохранить",
+            "workspace-actions": "Действия",
+            "workspace-viewpicture": "Просмотреть изображение",
+            "workspace-removepicture": "Удалить изображение",
+
+            "workspace-home-h1": "Главная",
+
+            "workspace-users-h1": "Пользователи",
+            "workspace-users-name": "Имя",
+            "workspace-users-email": "E-mail",
+            "workspace-users-password": "Пароль",
+            "workspace-users-group": "Группа",
+            "workspace-users-picture": "Изображение",
+            "workspace-users-active": "Вкл.",
+
+            "workspace-usergroups-h1": "Группы пользователей",
+            "workspace-usergroups-title": "Название",
+            "workspace-usergroups-name": "Системное имя"
+        }
+    }
+]

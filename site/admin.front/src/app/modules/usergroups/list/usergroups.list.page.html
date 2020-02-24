@@ -1,9 +1,9 @@
 <div class="content">
     <div class="content-head">
-        <h1>User groups ({{fullLength}})</h1>
+        <h1>{{currentLang.words['workspace-usergroups-h1']}} ({{fullLength}})</h1>
         <div class="content-dash">
-            <div class="cd-btn create" title="Create" routerLink="/users/usergroups/create"><span></span></div>
-            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" title="Delete selected" (click)="deleteBulk();"><span></span></div>
+            <div class="cd-btn create" [title]="currentLang.words['workspace-create']" routerLink="/users/usergroups/create"><span></span></div>
+            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.words['workspace-deleteselected']" (click)="deleteBulk();"><span></span></div>
         </div>
     </div>    
     <div class="data">
@@ -12,9 +12,9 @@
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>
-                        <th><label [class]="sortBy === 'title' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('title');">Title</label></th>
-                        <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">Name</label></th>
-                        <th>Actions</th>
+                        <th><label [class]="sortBy === 'title' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('title');">{{currentLang.words['workspace-usergroups-title']}}</label></th>
+                        <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.words['workspace-usergroups-name']}}</label></th>
+                        <th>{{currentLang.words['workspace-actions']}}</th>
                     </tr>   
                     <tr *ngFor="let x of xl">
                         <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
@@ -22,8 +22,8 @@
                         <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);" [disabled]="x.defended"></div></td>
                         <td>
                             <div class="dt-actions">
-                                <div class="dt-btn edit" title="Edit" [routerLink]="'/users/usergroups/edit/'+x._id"><span></span></div>
-                                <div class="dt-btn delete" title="Delete" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                <div class="dt-btn edit" [title]="currentLang.words['workspace-edit']" [routerLink]="'/users/usergroups/edit/'+x._id"><span></span></div>
+                                <div class="dt-btn delete" [title]="currentLang.words['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
                             </div>
                         </td>
                     </tr>                            

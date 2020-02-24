@@ -1,10 +1,10 @@
 <div class="data-form">            
-    <div class="df-title">Title:</div>
+    <div class="df-title">{{currentLang.words['workspace-usergroups-title']}}:</div>
     <div class="df-inputwrap"><input type="text" name="title" [(ngModel)]="x.title"></div>
     
-    <div class="df-title">Name:</div>
+    <div class="df-title">{{currentLang.words['workspace-usergroups-name']}}:</div>
     <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name" [disabled]="x.defended"></div>
     
     <div class="df-title"></div>
-    <div class="df-inputwrap"><button type="submit">Save</button></div>                
+    <div class="df-inputwrap"><button type="submit">{{currentLang.words['workspace-save']}}</button></div>
 </div>

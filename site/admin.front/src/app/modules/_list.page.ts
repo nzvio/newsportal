@@ -1,16 +1,21 @@
 import { AppService } from '../services/app.service';
 import { Repository } from '../services/repositories/repository';
 import { Model } from '../model/model';
+import { Page } from './_page';
+import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ListPage<T extends Model> {
+export abstract class ListPage<T extends Model> extends Page {
     public ready: boolean = false;
     public reloading: boolean = false;    
     public allSelected: boolean = false;
     
     constructor(        
+        protected admlangRepository: AdmLangRepository,
         protected repository: Repository<any>,
         protected appService: AppService,
-    ) {}
+    ) {
+        super(admlangRepository);
+    }
 
     get currentPart(): number {return this.repository.chunkCurrentPart;}
     set currentPart(v: number) {this.repository.chunkCurrentPart = v;}

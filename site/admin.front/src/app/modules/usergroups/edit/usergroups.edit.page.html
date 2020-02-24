@@ -1,15 +1,15 @@
 <div class="content">
     <div class="content-head">
-        <h1>User groups - edit</h1>
+        <h1>{{currentLang.words['workspace-usergroups-h1']}} - {{currentLang.words['workspace-edit']}}</h1>
         <div class="content-dash">
-            <div class="cd-btn back" title="Back" [routerLink]="homeUrl"><span></span></div>
-            <div class="cd-btn save" title="Save" (click)="update();"><span></span></div>
+            <div class="cd-btn back" [title]="currentLang.words['workspace-back']" [routerLink]="homeUrl"><span></span></div>
+            <div class="cd-btn save" [title]="currentLang.words['workspace-save']" (click)="update();"><span></span></div>
         </div>
-    </div>    
+    </div>     
     <div class="data">
         <ng-container *ngIf="ready">
             <form (submit)="update();">
-                <the-usergroup [x]="x"></the-usergroup>
+                <the-usergroup [currentLang]="currentLang" [x]="x"></the-usergroup>
             </form>
         </ng-container>
         <ng-container  *ngIf="!ready">

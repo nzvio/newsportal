@@ -9,6 +9,7 @@ import { Usergroup } from '../model/usergroup.model';
 import { IAuthData } from "../model/authdata.interface";
 import { User } from '../model/user.model';
 import { ErrorService } from './error.service';
+import { AdmLang } from '../model/admlang.model';
 
 @Injectable()
 export class DataService {
@@ -20,6 +21,7 @@ export class DataService {
         private errorService: ErrorService,
     ) {}
 
+    public admlangs(): Observable<AdmLang[]> {return this.http.get<AdmLang[]>("/assets/json/admin.languages.json");}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public updateParam (obj: string, _id: string, p: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparam", {obj, _id, p, v}, true);}    
 

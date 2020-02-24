@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 
-import { URL } from '../../model/url.class';
+import { URL } from '../../model/url';
 import { AppService } from 'src/app/services/app.service';
-import { User } from 'src/app/model/user.model';
+import { AdmLang } from 'src/app/model/admlang.model';
 
 @Component({
 	selector: 'the-header',
@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() sub2Active: boolean = false;
     @Input() monitorContent: string = "";
     @Input() authenticated: boolean = false;
+    @Input() currentLang: AdmLang;
     public time: string = "";
     @ViewChild("monitor", {static: false}) monitorRef: ElementRef;
     private monitor: HTMLElement | null = null;

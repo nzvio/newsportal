@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { URL } from '../../model/url.class';
+import { URL } from '../../model/url';
 import { User } from '../../model/user.model';
 import { AuthService } from '../../services/auth.service';
 import { AppService } from '../../services/app.service';
+import { AdmLang } from 'src/app/model/admlang.model';
 
 @Component({
 	selector: 'the-sidebar',
@@ -13,7 +14,8 @@ export class SidebarComponent {
     @Input() currentUrl: URL = new URL();
 	@Input() sub1Active: boolean = false;
 	@Input() sub2Active: boolean = false;
-	@Input() active: boolean = false;	
+	@Input() currentLang: AdmLang;
+	@Input() active: boolean = false;		
 	@Output() activeChanged: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	public email: string = "";
 	public password: string = "";

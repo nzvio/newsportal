@@ -8,6 +8,7 @@ import { ErrorService } from './error.service';
 import { UsergroupRepository } from './repositories/usergroup.repository';
 import { UserRepository } from './repositories/user.repository';
 import { UploadService } from './upload.service';
+import { AdmLangRepository } from './repositories/admlang.repository';
 
 @NgModule({
     declarations: [],
@@ -15,7 +16,8 @@ import { UploadService } from './upload.service';
     providers: [
 		AppService,
 		ErrorService,
-    	DataService,
+		DataService,
+		AdmLangRepository,
 		AuthService,
 		AuthGuard,
 		UploadService,

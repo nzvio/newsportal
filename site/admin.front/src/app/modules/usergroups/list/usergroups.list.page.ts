@@ -5,6 +5,7 @@ import { UsergroupRepository } from '../../../services/repositories/usergroup.re
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
 import { Usergroup } from 'src/app/model/usergroup.model';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'usergroups-list-page',
@@ -12,11 +13,12 @@ import { Usergroup } from 'src/app/model/usergroup.model';
 })
 export class UsergroupsListPage extends ListPage<Usergroup> implements OnInit {
     constructor(
+        protected admlangRepository: AdmLangRepository,
         protected usergroupRepository: UsergroupRepository,
         protected appService: AppService,
         private route: ActivatedRoute,        
     ) {      
-        super(usergroupRepository, appService);
+        super(admlangRepository, usergroupRepository, appService);
     }    
     
     public ngOnInit(): void {

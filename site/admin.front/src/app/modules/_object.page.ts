@@ -7,8 +7,10 @@ import { IHTMLInputEvent } from '../model/htmlinputevent.interface';
 import { HttpEventType } from '@angular/common/http';
 import { IAnswer } from '../model/answer.interface';
 import { IImagable } from '../model/imagable.interface';
+import { Page } from './_page';
+import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ObjectPage<T extends Model> {
+export abstract class ObjectPage<T extends Model> extends Page {
     public ready: boolean = false;
     public reloading: boolean = false;      
     public progressImg: number = 0;
@@ -18,11 +20,14 @@ export abstract class ObjectPage<T extends Model> {
 	public abstract folder: string | null;    
     
     constructor(        
+        protected admlangRepository: AdmLangRepository,
         protected repository: Repository<any>,
         protected appService: AppService,
         protected router: Router,
         protected uploadService?: UploadService,
-    ) {}
+    ) {
+        super(admlangRepository);
+    }
 
     public async create(): Promise<boolean> {
 		try {
