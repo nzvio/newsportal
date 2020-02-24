@@ -1,9 +1,11 @@
 [    
     {
         "name": "en",
+        "title": "English",
         "dir": "ltr",
         "words": {            
             "header-logout": "Log out",
+            "header-options": "System options",
 
             "sidebar-email": "e-mail",
             "sidebar-password": "password",
@@ -38,14 +40,19 @@
 
             "workspace-usergroups-h1": "User groups",
             "workspace-usergroups-title": "Title",
-            "workspace-usergroups-name": "Name"
+            "workspace-usergroups-name": "Name",
+
+            "workspace-options-h1": "System options",
+            "workspace-options-lang": "Language"
         }
     },
     {
         "name": "ru",
+        "title": "Русский",
         "dir": "ltr",
         "words": {
             "header-logout": "Выйти",
+            "header-options": "Настройки панели",
 
             "sidebar-email": "e-mail",
             "sidebar-password": "пароль",
@@ -80,7 +87,10 @@
 
             "workspace-usergroups-h1": "Группы пользователей",
             "workspace-usergroups-title": "Название",
-            "workspace-usergroups-name": "Системное имя"
+            "workspace-usergroups-name": "Системное имя",
+
+            "workspace-options-h1": "Настройки панели",
+            "workspace-options-lang": "Язык"
         }
     }
 ]

@@ -7,19 +7,11 @@ import { AdmLangRepository } from '../../services/repositories/admlang.repositor
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],	
 })
-export class HomePage extends Page {
-	public length: number = 100000;
-	public perPage: number = 10;
-    public currentPart: number = 0;
-    
+export class HomePage extends Page {	
     constructor(protected admlangRepository: AdmLangRepository) {
         super(admlangRepository);
     }
-
-	public buildList(): void {		
-		console.log("pagination changed: "+this.currentPart);
-	}
-
+    	
 	public tinyInit (/*lang: Lang*/): Object {
         let self = this;
         return {

@@ -1,0 +1,20 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.words['workspace-options-h1']}}</h1>
+        <div class="content-dash">
+            
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <div class="data-form">            
+                <div class="df-title">{{currentLang.words['workspace-options-lang']}}:</div>
+                <div class="df-inputwrap">
+                    <select [(ngModel)]="selectedLang" (change)="setCurrentLang();">
+                        <option *ngFor="let l of admlangs" [value]="l.name">{{l.title}}</option>
+                    </select>
+                </div>                
+            </div>
+        </ng-container>
+    </div>
+</div>

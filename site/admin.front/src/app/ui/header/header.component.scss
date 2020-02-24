@@ -30,6 +30,7 @@ header#h-normal {
                         font-size: 24px;  
                         &::before {font-family: "awesome-solid";}
                         &#logout::before {content: "\f2f5";}
+                        &#options::before {content: "\f142";}
                     }
                 }                        
             }
@@ -62,6 +63,7 @@ header#h-mobile {
                 &::before {font-family: "awesome-solid";}
                 &#logout::before {content: "\f2f5";}
                 &#menu::before {content: "\f0c9";}
+                &#options::before {content: "\f142";}
             }                    
         }
     }

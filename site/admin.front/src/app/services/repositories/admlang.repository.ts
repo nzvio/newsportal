@@ -40,4 +40,14 @@ export class AdmLangRepository {
     public save(): void {
         localStorage.setItem("lang", this.currentLangName);
     }
+
+    public setCurrentLang(langName: string): void {        
+        let lang: AdmLang | null = this.langs.find(l => l.name === langName) || null;
+
+        if (lang) {
+            this.currentLang = lang;
+            this.currentLangName = lang.name;
+            this.save();
+        }
+    }
 }

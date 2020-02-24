@@ -6,12 +6,14 @@ import { AuthGuard } from './services/auth.guard';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsergroupsModule } from './modules/usergroups/usergroups.module';
 import { UsersModule } from './modules/users/users.module';
+import { OptionsModule } from './modules/options/options.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
 	{path: "users/usergroups", loadChildren: () => UsergroupsModule, canActivate: [AuthGuard]}, 
 	{path: "users/users", loadChildren: () => UsersModule, canActivate: [AuthGuard]}, 
 	{path: "auth", loadChildren: () => AuthModule}, 
+	{path: "options", loadChildren: () => OptionsModule}, 
 	{path:"**", component: HomePage},
 ];
 
