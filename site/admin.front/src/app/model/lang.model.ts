@@ -13,4 +13,13 @@ export class Lang extends Model {
     public dir: string; 
     public defended: boolean;
     public phrases: Phrase[];
+
+    public init(): Lang {
+        this.active = true;
+        this.pos = 0;
+        this.dir = "ltr";
+        this.phrases = [];
+        
+        return this;
+    }
 }

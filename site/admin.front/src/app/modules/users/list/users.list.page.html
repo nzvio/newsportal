@@ -16,26 +16,31 @@
                         <th><label [class]="sortBy === 'usergroup' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('usergroup');">{{currentLang.phrases['workspace-users-group']}}</label></th>
                         <th>{{currentLang.phrases['workspace-users-active']}}</th>
                         <th>{{currentLang.phrases['workspace-actions']}}</th>
-                    </tr>   
-                    <tr *ngFor="let x of xl">
-                        <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
-                        <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                        
-                        <td>
-                            <div class="dt-inputwrap">
-                                <select [(ngModel)]="x.usergroup" (change)="updateParam (x._id, 'usergroup', x.usergroup);" [disabled]="x.defended">
-                                    <option *ngFor="let ug of ugl" [value]="ug._id">{{ug.title}}</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);" [disabled]="x.defended"></checkbox-slider></div>
-                        </td>
-                        <td>
-                            <div class="dt-actions">
-                                <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="'/users/users/edit/'+x._id"><span></span></div>
-                                <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
-                            </div>
-                        </td>
-                    </tr>                            
+                    </tr>  
+                    <ng-container *ngIf="xl.length">
+                        <tr *ngFor="let x of xl">
+                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
+                            <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                        
+                            <td>
+                                <div class="dt-inputwrap">
+                                    <select [(ngModel)]="x.usergroup" (change)="updateParam (x._id, 'usergroup', x.usergroup);" [disabled]="x.defended">
+                                        <option *ngFor="let ug of ugl" [value]="ug._id">{{ug.title}}</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);" [disabled]="x.defended"></checkbox-slider></div>
+                            </td>
+                            <td>
+                                <div class="dt-actions">
+                                    <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="'/users/users/edit/'+x._id"><span></span></div>
+                                    <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                </div>
+                            </td>
+                        </tr>                            
+                    </ng-container> 
+                    <ng-container *ngIf="!xl.length">
+                        <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+                    </ng-container>                    
                 </table>
             </div>            
             <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>

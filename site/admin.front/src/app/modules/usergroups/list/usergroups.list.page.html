@@ -16,17 +16,22 @@
                         <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.phrases['workspace-usergroups-name']}}</label></th>
                         <th>{{currentLang.phrases['workspace-actions']}}</th>
                     </tr>   
-                    <tr *ngFor="let x of xl">
-                        <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
-                        <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.title" (change)="updateParam (x._id, 'title', x.title);"></div></td>
-                        <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);" [disabled]="x.defended"></div></td>
-                        <td>
-                            <div class="dt-actions">
-                                <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="'/users/usergroups/edit/'+x._id"><span></span></div>
-                                <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
-                            </div>
-                        </td>
-                    </tr>                            
+                    <ng-container *ngIf="xl.length">
+                        <tr *ngFor="let x of xl">
+                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
+                            <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.title" (change)="updateParam (x._id, 'title', x.title);"></div></td>
+                            <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);" [disabled]="x.defended"></div></td>
+                            <td>
+                                <div class="dt-actions">
+                                    <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="'/users/usergroups/edit/'+x._id"><span></span></div>
+                                    <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                </div>
+                            </td>
+                        </tr>                            
+                    </ng-container>
+                    <ng-container *ngIf="!xl.length">
+                        <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+                    </ng-container>
                 </table>
             </div>            
             <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>

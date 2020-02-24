@@ -7,7 +7,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsergroupsModule } from './modules/usergroups/usergroups.module';
 import { UsersModule } from './modules/users/users.module';
 import { OptionsModule } from './modules/options/options.module';
-import { LangsModule } from './modules/langs/list/langs.module';
+import { LangsModule } from './modules/langs/langs.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},

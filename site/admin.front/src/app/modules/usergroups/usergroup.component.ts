@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
+
 import { Usergroup } from '../../model/usergroup.model';
-import { AdmLang } from 'src/app/model/admlang.model';
+import { AdmLang } from '../../model/admlang.model';
 import { ObjectComponent } from '../_object.component';
 
 @Component({
