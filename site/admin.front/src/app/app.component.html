@@ -9,10 +9,9 @@
 	></the-header>
 	<the-sidebar 
 		[currentUrl]="currentUrl" 
-		[sub1Active]="sub1Active" 
-		[sub2Active]="sub2Active" 
-		[active]="mmActive" 
-		(activeChanged)="mmActive = $event;"	
+		[(sub1Active)]="sub1Active" 
+		[(sub2Active)]="sub2Active" 
+		[(active)]="mmActive" 		
 		[currentLang]="currentLang"
 	></the-sidebar>
 	<main>

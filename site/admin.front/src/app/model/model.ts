@@ -1,7 +1,7 @@
 export class Model {    
     // real data
     public _id: string;    
-    public defended?: boolean;
+    public defended: boolean;
     // utils
     public selected: boolean = false;
 

@@ -1,18 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Page } from '../_page';
 import { AdmLangRepository } from '../../services/repositories/admlang.repository';
+import { AppService } from 'src/app/services/app.service';
 
 @Component({
 	selector: 'home-page',
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],	
 })
-export class HomePage extends Page {	
-    constructor(protected admlangRepository: AdmLangRepository) {
+export class HomePage extends Page implements OnInit {	
+    public ready: boolean = false;
+
+    constructor(
+        protected admlangRepository: AdmLangRepository,
+        private appService: AppService,
+    ) {
         super(admlangRepository);
     }
+
+    public ngOnInit(): void {
+        this.appService.monitorLog("home page loaded");
+        this.ready = true;
+    }
     	
-	public tinyInit (/*lang: Lang*/): Object {
+	/*public tinyInit (ang: Lang): Object {
         let self = this;
         return {
             branding:false, 
@@ -27,5 +38,5 @@ export class HomePage extends Page {
 				//self.tinyUpload (this);
 			}
         };
-    }    
+    } */   
 }

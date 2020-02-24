@@ -1,15 +1,23 @@
 <div class="content">
     <div class="content-head">
-        <h1>{{currentLang.words['workspace-users-h1']}} - {{currentLang.words['workspace-edit']}}</h1>
+        <h1>{{currentLang.phrases['workspace-users-h1']}} - {{currentLang.phrases['workspace-edit']}}</h1>
         <div class="content-dash">
-            <div class="cd-btn back" [title]="currentLang.words['workspace-back']" [routerLink]="homeUrl"><span></span></div>
-            <div class="cd-btn save" [title]="currentLang.words['workspace-save']" (click)="update();"><span></span></div>
+            <div class="cd-btn back" [title]="currentLang.phrases['workspace-back']" [routerLink]="homeUrl"><span></span></div>
+            <div class="cd-btn save" [title]="currentLang.phrases['workspace-save']" (click)="update();"><span></span></div>
         </div>
     </div>    
     <div class="data">
         <ng-container *ngIf="ready">
             <form (submit)="update();">
-                <the-user [currentLang]="currentLang" [x]="x" [ugl]="ugl" [progressImg]="progressImg" (uploadImg)="uploadImg($event);" (deleteImg)="deleteImg();"></the-user>
+                <the-user 
+                    [currentLang]="currentLang" 
+                    [x]="x" 
+                    [ugl]="ugl" 
+                    [progressImg]="progressImg" 
+                    (uploadImg)="uploadImg($event);" 
+                    (deleteImg)="deleteImg();"
+                    [requiredFields]="requiredFields"
+                ></the-user>
             </form>
         </ng-container>
         <ng-container  *ngIf="!ready">

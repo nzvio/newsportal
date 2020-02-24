@@ -3,16 +3,12 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { User } from '../../model/user.model';
 import { DataService } from '../data.service';
-import { ErrorService } from '../error.service';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
-    constructor(
-        private dataService: DataService,
-        private errorService: ErrorService,
-    ) {
+    constructor(private dataService: DataService) {
         super();
-    }    
+    } 
     
     public loadChunk(): Promise<void> {
         return new Promise((resolve, reject) => {

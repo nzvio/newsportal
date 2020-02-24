@@ -19,6 +19,7 @@ export class UsersEditPage extends ObjectPage<User> implements OnInit {
 	public x: User | null = null;
 	public homeUrl: string = "/users/users";
 	public folder: string = "users";
+	public requiredFields: string[] = ["name", "email", "usergroup"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,

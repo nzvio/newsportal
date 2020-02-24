@@ -6,6 +6,7 @@ import { ObjectsModule } from './modules/objects/objects.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { FilesModule } from './modules/files/files.module';
+import { LangsModule } from './modules/langs/langs.module';
 
 const pw: string = process.env.MONGODBPW;
 
@@ -15,9 +16,10 @@ const pw: string = process.env.MONGODBPW;
 		
 		AuthModule,
 		ObjectsModule,
+		FilesModule,
 		UsergroupsModule,
 		UsersModule,
-		FilesModule,
+		LangsModule,		
 	],	
 })
 export class AppModule {}

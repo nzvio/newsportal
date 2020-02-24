@@ -5,8 +5,13 @@ export const UsergroupSchema = new mongoose.Schema ({
         type: String,
         required: true,
         unique: true,
+        trim: true
     },
-    title: String,
+    title: {
+        type: String,
+        required: true,
+        trim: true
+    },
     defended: {
         type: Boolean,
         required: true,

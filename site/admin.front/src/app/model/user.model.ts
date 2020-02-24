@@ -12,10 +12,7 @@ export class User extends Model {
     public defended: boolean;
 
     public init(): User {
-        this.name = "";
-        this.email = "";
-        this.active = true;
-        this.usergroup = "default";
+        this.active = true;        
         
         return this;
     }

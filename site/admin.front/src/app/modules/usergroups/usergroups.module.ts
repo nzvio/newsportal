@@ -27,7 +27,6 @@ let routing = RouterModule.forChild ([
 		UsergroupsCreatePage,
 		UsergroupsEditPage,
 		UsergroupComponent,
-	],
-    providers: [],    
+	],    
 })
 export class UsergroupsModule { }

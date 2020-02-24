@@ -8,8 +8,8 @@
 		</div>
 		<div id="hn-top-right">			
 			<div id="hn-btns" *ngIf="authenticated">
-				<div class="hn-btn" [title]="currentLang.words['header-options']" routerLink="/options"><span id="options"></span></div>								
-				<div class="hn-btn" [title]="currentLang.words['header-logout']" routerLink="/auth/logout"><span id="logout"></span></div>								
+				<div class="hn-btn" [title]="currentLang.phrases['header-options']" routerLink="/options"><span id="options"></span></div>								
+				<div class="hn-btn" [title]="currentLang.phrases['header-logout']" routerLink="/auth/logout"><span id="logout"></span></div>								
 			</div>
 			<div id="hn-time">{{time}}</div>
 		</div>
@@ -23,8 +23,8 @@
 	</div>
 	<div id="hm-right">
 		<div class="hm-btns" *ngIf="authenticated">
-			<div class="hm-btn" [title]="currentLang.words['header-options']" routerLink="/options"><span id="options"></span></div>		
-			<div class="hm-btn" [title]="currentLang.words['header-logout']" routerLink="/auth/logout"><span id="logout"></span></div>		
+			<div class="hm-btn" [title]="currentLang.phrases['header-options']" routerLink="/options"><span id="options"></span></div>		
+			<div class="hm-btn" [title]="currentLang.phrases['header-logout']" routerLink="/auth/logout"><span id="logout"></span></div>		
 		</div>
 	</div>
 </header>

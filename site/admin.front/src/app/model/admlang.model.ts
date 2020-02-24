@@ -4,5 +4,5 @@ export class AdmLang extends Model {
     public name: string;
     public title: string;
     public dir: string;
-    public words: Object;
+    public phrases: Object;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ObjectPage } from '../../_object.page';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
@@ -15,23 +15,20 @@ export class UsergroupsCreatePage extends ObjectPage<Usergroup> implements OnIni
 	public x: Usergroup | null = null;
 	public homeUrl: string = "/users/usergroups";
 	public folder: string | null = null;
+	public requiredFields: string[] = ["name", "title"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,
 		protected usergroupRepository: UsergroupRepository,
         protected appService: AppService,
-		protected router: Router,
-		private route: ActivatedRoute,		
+		protected router: Router,		
 	) {
 		super(admlangRepository, usergroupRepository, appService, router);
 	}
 
 	public ngOnInit(): void {
-		this.route.params.subscribe(p => {
-			this.ready = false;
-			this.x = new Usergroup().init();
-			this.appService.monitorLog("usergroups create page loaded");
-			this.ready = true;
-		});
+		this.x = new Usergroup();
+		this.appService.monitorLog("usergroups create page loaded");
+		this.ready = true;
 	}
 }

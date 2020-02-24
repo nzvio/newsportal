@@ -10,6 +10,7 @@ import { IAuthData } from "../model/authdata.interface";
 import { User } from '../model/user.model';
 import { ErrorService } from './error.service';
 import { AdmLang } from '../model/admlang.model';
+import { Lang } from '../model/lang.model';
 
 @Injectable()
 export class DataService {
@@ -39,6 +40,14 @@ export class DataService {
     public usersDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "users/deletebulk", _ids, true);}
     public usersCreate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/create", x, true);}
     public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/update", x, true);}    
+
+    public langsAll(sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", {sortBy, sortDir}, true);}
+    public langsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/chunk", {from, q, sortBy, sortDir}, true);}
+    public langsOne(_id: string): Observable<IAnswer<Lang>> {return this.sendRequest("GET", `langs/one/${_id}`, null, true);}
+    public langsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `langs/delete/${_id}`, null, true);}
+    public langsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "langs/deletebulk", _ids, true);}
+    public langsCreate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/create", x, true);}
+    public langsUpdate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/update", x, true);}    
 
     public upload (fd: FormData): Observable<HttpEvent<IAnswer<string>>> {return this.sendRequest("POST", `files/upload`, fd, true, true);}
     public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}

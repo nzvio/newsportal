@@ -45,6 +45,7 @@ aside {
                             &.nav-cat::before {content: "\f03a";}
                             &.nav-page::before {content: "\f15c";}
                             &.nav-users::before {content: "\f500";}
+                            &.nav-langs::before {content: "\f57d";}
                         }
                     }
                     &:hover, &.active {

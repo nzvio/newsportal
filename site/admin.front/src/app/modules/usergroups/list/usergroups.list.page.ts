@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { AppService } from '../../../services/app.service';
@@ -15,21 +14,18 @@ export class UsergroupsListPage extends ListPage<Usergroup> implements OnInit {
     constructor(
         protected admlangRepository: AdmLangRepository,
         protected usergroupRepository: UsergroupRepository,
-        protected appService: AppService,
-        private route: ActivatedRoute,        
+        protected appService: AppService,        
     ) {      
         super(admlangRepository, usergroupRepository, appService);
     }    
     
-    public ngOnInit(): void {
-        this.route.params.subscribe(async p => {
-            try {
-                await this.usergroupRepository.loadChunk();
-                this.appService.monitorLog("usergroups page loaded");
-                this.ready = true;
-            } catch (err) {
-                this.appService.monitorLog(err, true);
-            }
-        });
+    public async ngOnInit(): Promise<void> {
+        try {
+            await this.usergroupRepository.loadChunk();
+            this.appService.monitorLog("usergroups page loaded");
+            this.ready = true;
+        } catch (err) {
+            this.appService.monitorLog(err, true);
+        }
     }       
 }

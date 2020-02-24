@@ -10,17 +10,18 @@
         <div id="login" *ngIf="!authenticated">
             <div id="login-head"><span></span></div>
             <form (submit)="login();">
-                <input type="email" name="email" [placeholder]="currentLang.words['sidebar-email']" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
-                <input type="password" name="password" [placeholder]="currentLang.words['sidebar-password']" [(ngModel)]="password" [class]="errorPassword ? 'error' : ''">
-                <button type="submit">{{currentLang.words['sidebar-enter']}}</button>
+                <input type="email" name="email" [placeholder]="currentLang.phrases['sidebar-email']" [(ngModel)]="email" [class]="errorEmail ? 'error' : ''">
+                <input type="password" name="password" [placeholder]="currentLang.phrases['sidebar-password']" [(ngModel)]="password" [class]="errorPassword ? 'error' : ''">
+                <button type="submit">{{currentLang.phrases['sidebar-enter']}}</button>
             </form>
         </div>            
         <div id="navwrap" *ngIf="authenticated">
             <nav>		
-                <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">{{currentLang.words['sidebar-chapter-home']}}</span></a></div>
+                <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">{{currentLang.phrases['sidebar-module-home']}}</span></a></div>
+
                 
                 <!--
-                <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="sub1Active = !sub1Active;"><span class="nav-cat">Catalogue</span></a></div>
+                <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(1);"><span class="nav-cat">Catalogue</span></a></div>
                 <div [class]="sub1Active ? 'nav-sub active' : 'nav-sub'">
                     <div [class]="currentUrl.parts[1] === 'categories' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/categories"><span>Categories</span></a></div>
                     <div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>Articles</span></a></div>
@@ -29,11 +30,12 @@
                 <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-page">Static pages</span></a></div>                         
                 -->
 
-                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="sub2Active = !sub2Active;"><span class="nav-users">{{currentLang.words['sidebar-chapter-users']}}</span></a></div>
+                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(2);"><span class="nav-users">{{currentLang.phrases['sidebar-module-users']}}</span></a></div>
                 <div [class]="sub2Active ? 'nav-sub active' : 'nav-sub'">
-                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>{{currentLang.words['sidebar-module-users']}}</span></a></div>
-                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>{{currentLang.words['sidebar-module-usergroups']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>{{currentLang.phrases['sidebar-submodule-users']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>{{currentLang.phrases['sidebar-submodule-usergroups']}}</span></a></div>
                 </div>
+                <div [class]="currentUrl.parts[0] === 'langs' ? 'nav-item active' : 'nav-item'"><a routerLink="/langs"><span class="nav-langs">{{currentLang.phrases['sidebar-module-langs']}}</span></a></div>
             </nav>
         </div>	
     </div>

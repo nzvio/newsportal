@@ -7,6 +7,7 @@ import { ObjectsService } from "./objects.service";
 import { jwtConstants } from "../auth/auth.constants";
 import { UsergroupSchema } from "../usergroups/schemas/usergroup.schema";
 import { UserSchema } from "../users/schemas/user.schema";
+import { LangSchema } from "../langs/schemas/lang.schema";
 
 @Module({
 	controllers: [ObjectsController],
@@ -15,6 +16,7 @@ import { UserSchema } from "../users/schemas/user.schema";
 		MongooseModule.forFeature([
 			{name: 'Usergroup', schema: UsergroupSchema},
 			{name: 'User', schema: UserSchema},
+			{name: 'Lang', schema: LangSchema},
 		]),	
 		JwtModule.register(jwtConstants),			
 	],

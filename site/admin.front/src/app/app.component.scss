@@ -92,7 +92,10 @@ html {
                                 td {
                                     padding: 5px 10px;
                                     .dt-inputwrap {
-                                        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"], select {width: 100%;}
+                                        input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"], select {                                            
+                                            width: 100%;
+                                            &.small {width: 60px;}
+                                        }
                                     }   
                                     .dt-actions {
                                         display: flex; 
@@ -120,13 +123,16 @@ html {
                         @media (min-width:0) {display: block;}
                         @media (min-width:1000px) {display: grid;}  
                         grid-template-columns: min-content auto; color: $color-transparent;
-                        .df-title {white-space: nowrap; display: flex; align-items: center; padding-right: 30px;}
+                        .df-title {
+                            white-space: nowrap; display: flex; align-items: center; padding-right: 30px;
+                            &.required::after {display: inline-block; margin-left: 5px; color: #f00; content: "*";}
+                        }
                         .df-inputwrap {
                             margin: 5px 0;
                             input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
                                 @media (min-width:0) {width: 100%;}
                                 @media (min-width:1000px) {width:400px;}                                  
-                                &.small {width:50px;}
+                                &.small {width:60px;}
                             }                       
                             textarea {
                                 @media (min-width:0) {width: 100%;}

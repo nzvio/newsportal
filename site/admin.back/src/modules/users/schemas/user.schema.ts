@@ -25,8 +25,7 @@ export const UserSchema = new mongoose.Schema ({
     },
     usergroup: {
         type: String,
-        required: true,
-        default: "default"
+        required: true,        
     },
     defended: {
         type: Boolean,

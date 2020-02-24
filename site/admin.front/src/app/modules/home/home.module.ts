@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { EditorModule } from '@tinymce/tinymce-angular';
+//import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { HomePage } from './home.page';
 import { UIModule } from '../../ui/ui.module';
 
 @NgModule({	
     imports: [	
-		EditorModule,	
+//		EditorModule,	
 		UIModule,
 	],
 	declarations: [

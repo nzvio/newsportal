@@ -15,6 +15,7 @@ export class UsergroupsEditPage extends ObjectPage<Usergroup> implements OnInit 
 	public x: Usergroup | null = null;
 	public homeUrl: string = "/users/usergroups";
 	public folder: string | null = null;
+	public requiredFields: string[] = ["name", "title"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,

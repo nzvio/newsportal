@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ObjectPage } from '../../_object.page';
 import { UserRepository } from '../../../services/repositories/user.repository';
@@ -18,6 +18,7 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 	public x: User | null = null;
 	public homeUrl: string = "/users/users";
 	public folder: string = "users";
+	public requiredFields: string[] = ["name", "email", "password", "usergroup"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,
@@ -25,25 +26,22 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 		private usergroupRepository: UsergroupRepository,     
 		protected appService: AppService,
 		protected uploadService: UploadService,
-		protected router: Router,
-		private route: ActivatedRoute,		
+		protected router: Router,		
 	) {
 		super(admlangRepository, userRepository, appService, router, uploadService);
 	}
 
 	get ugl(): Usergroup[] {return this.usergroupRepository.xlFull;}
 
-	public ngOnInit(): void {
-		this.route.params.subscribe(async p => {
-			try {
-				this.ready = false;
-				this.x = new User().init();
-				await this.usergroupRepository.loadFull();
-				this.appService.monitorLog("users create page loaded");
-				this.ready = true;
-			} catch (err) {
-				this.appService.monitorLog(err, true);
-			}			
-		});
+	public async ngOnInit(): Promise<void> {
+		try {
+			this.ready = false;
+			this.x = new User().init();
+			await this.usergroupRepository.loadFull();
+			this.appService.monitorLog("users create page loaded");
+			this.ready = true;
+		} catch (err) {
+			this.appService.monitorLog(err, true);
+		}	
 	}
 }

@@ -7,12 +7,14 @@ import { UpdateparamDTO } from "./dto/updateparam.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { IUsergroup } from "../usergroups/interfaces/usergroup.interface";
 import { IUser } from "../users/interfaces/user.interface";
+import { ILang } from "../langs/interfaces/lang.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
     constructor (
         @InjectModel("Usergroup") private readonly modelUsergroup: Model<IUsergroup>,
         @InjectModel("User") private readonly modelUser: Model<IUser>,
+        @InjectModel("Lang") private readonly modelLang: Model<ILang>,
     ) {
         super();
     }

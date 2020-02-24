@@ -4,16 +4,17 @@ import { User } from '../../model/user.model';
 import { Usergroup } from '../../model/usergroup.model';
 import { IHTMLInputEvent } from "../../model/htmlinputevent.interface";
 import { AdmLang } from 'src/app/model/admlang.model';
+import { ObjectComponent } from '../_object.component';
 
 @Component({
     selector: "the-user",
     templateUrl: "./user.component.html"
 })
-export class UserComponent {
+export class UserComponent extends ObjectComponent {
     @Input() currentLang: AdmLang;
     @Input() x: User | null = null;
     @Input() ugl: Usergroup[] = [];
-    @Input() progressImg: number = 0;
+    @Input() progressImg: number = 0;    
     @Output() uploadImg: EventEmitter<Event> = new EventEmitter();
     @Output() deleteImg: EventEmitter<void> = new EventEmitter();
     public viewerActive: boolean = false;
@@ -24,5 +25,5 @@ export class UserComponent {
 
     public onDeleteImg(): void {
         this.deleteImg.emit();
-    }
+    }    
 }

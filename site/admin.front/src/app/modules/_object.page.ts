@@ -14,6 +14,7 @@ export abstract class ObjectPage<T extends Model> extends Page {
     public ready: boolean = false;
     public reloading: boolean = false;      
     public progressImg: number = 0;
+    public requiredFields: string[] = [];
 
     public abstract x: T & IImagable;
     public abstract homeUrl: string;

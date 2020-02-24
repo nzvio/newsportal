@@ -13,10 +13,12 @@ import { AdmLang } from 'src/app/model/admlang.model';
 export class SidebarComponent {
     @Input() currentUrl: URL = new URL();
 	@Input() sub1Active: boolean = false;
+	@Output() sub1ActiveChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	@Input() sub2Active: boolean = false;
+	@Output() sub2ActiveChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	@Input() currentLang: AdmLang;
 	@Input() active: boolean = false;		
-	@Output() activeChanged: EventEmitter<boolean> = new EventEmitter<boolean> (); 
+	@Output() activeChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	public email: string = "";
 	public password: string = "";
 	public errorEmail: boolean = false;
@@ -31,7 +33,12 @@ export class SidebarComponent {
 	get user(): User {return this.authService.authData.user;}
 
 	public close(): void {
-		this.activeChanged.emit(false);
+		this.activeChange.emit(false);
+	}
+
+	public toggleSub(n: number): void {
+		let value: boolean = !this[`sub${n}Active`];
+		this[`sub${n}ActiveChange`].emit(value);
 	}
 
 	public login(): void {

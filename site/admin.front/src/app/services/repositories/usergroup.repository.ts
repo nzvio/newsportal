@@ -3,16 +3,12 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { Usergroup } from '../../model/usergroup.model';
 import { DataService } from '../data.service';
-import { ErrorService } from '../error.service';
 
 @Injectable()
 export class UsergroupRepository extends Repository<Usergroup> {
     public fullSortBy: string = "title";
 
-    constructor(
-        private dataService: DataService,
-        private errorService: ErrorService,
-    ) {
+    constructor(private dataService: DataService) {
         super();
     }
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { AppService } from '../../../services/app.service';
@@ -19,8 +18,7 @@ export class UsersListPage extends ListPage<User> implements OnInit {
         protected admlangRepository: AdmLangRepository,
         protected userRepository: UserRepository, 
         private usergroupRepository: UsergroupRepository,       
-        protected appService: AppService,
-        private route: ActivatedRoute,    
+        protected appService: AppService,        
         private authService: AuthService,    
     ) {      
         super(admlangRepository, userRepository, appService);
@@ -28,17 +26,15 @@ export class UsersListPage extends ListPage<User> implements OnInit {
     
     get ugl(): Usergroup[] {return this.usergroupRepository.xlFull;}
 
-    public ngOnInit(): void {
-        this.route.params.subscribe(async p => {
-            try {
-                await this.userRepository.loadChunk();
-                await this.usergroupRepository.loadFull();
-                this.appService.monitorLog("users page loaded");
-                this.ready = true;
-            } catch (err) {
-                this.appService.monitorLog(err, true);
-            }
-        });
+    public async ngOnInit(): Promise<void> {
+        try {
+            await this.userRepository.loadChunk();
+            await this.usergroupRepository.loadFull();
+            this.appService.monitorLog("users page loaded");
+            this.ready = true;
+        } catch (err) {
+            this.appService.monitorLog(err, true);
+        }
     } 
     
     public async updateParam (_id: string, p: string, v: any): Promise<boolean> {

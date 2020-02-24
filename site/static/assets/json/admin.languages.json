@@ -3,17 +3,18 @@
         "name": "en",
         "title": "English",
         "dir": "ltr",
-        "words": {            
+        "phrases": {            
             "header-logout": "Log out",
             "header-options": "System options",
 
             "sidebar-email": "e-mail",
             "sidebar-password": "password",
             "sidebar-enter": "Enter",
-            "sidebar-chapter-home": "Home",
-            "sidebar-chapter-users": "Users",
+            "sidebar-module-home": "Home",
             "sidebar-module-users": "Users",
-            "sidebar-module-usergroups": "User groups",
+            "sidebar-submodule-users": "Users",
+            "sidebar-submodule-usergroups": "User groups",
+            "sidebar-module-langs": "Languages",
 
             "workspace-login-txt": "<p>VNE 4.0 welcomes you! Please log into system.</p><p>If you have any problems with this application, please contact VNE support team by <a href='mailto:7573497@gmail.com'>e-mail</a>.</p>",
             "workspace-logout-txt": "<p>Bye!</p>",
@@ -43,24 +44,38 @@
             "workspace-usergroups-name": "Name",
 
             "workspace-options-h1": "System options",
-            "workspace-options-lang": "Language"
+            "workspace-options-lang": "Language",
+
+            "workspace-langs-h1": "Languages",
+            "workspace-langs-name": "Canonical name",
+            "workspace-langs-slug": "Slug",
+            "workspace-langs-title": "Title",
+            "workspace-langs-picture": "Picture",
+            "workspace-langs-pos": "Position",            
+            "workspace-langs-active": "Active",
+            "workspace-langs-dir": "Direction",
+            "workspace-langs-phrases": "Words and phrases",
+            "workspace-langs-text": "Text",
+            "workspace-langs-mark": "Mark",
+            "workspace-langs-note": "Note"
         }
     },
     {
         "name": "ru",
         "title": "Русский",
         "dir": "ltr",
-        "words": {
+        "phrases": {
             "header-logout": "Выйти",
             "header-options": "Настройки панели",
 
             "sidebar-email": "e-mail",
             "sidebar-password": "пароль",
             "sidebar-enter": "Войти",
-            "sidebar-chapter-home": "Главная",
-            "sidebar-chapter-users": "Пользователи и группы",
-            "sidebar-module-users": "Пользователи",
-            "sidebar-module-usergroups": "Группы пользователей",
+            "sidebar-module-home": "Главная",
+            "sidebar-module-users": "Пользователи и группы",
+            "sidebar-submodule-users": "Пользователи",
+            "sidebar-submodule-usergroups": "Группы пользователей",
+            "sidebar-module-langs": "Языки",
 
             "workspace-login-txt": "<p>Панель управления VNE 4.0 приветствует вас! Пожалуйста, войдите в систему.</p><p>Если у вас есть вопросы или пожелания по поводу данного приложения, вы можете связаться со <a href='mailto:7573497@gmail.com'>службой поддержки</a> VNE.</p>",
             "workspace-logout-txt": "<p>До свидания!</p>",
@@ -90,7 +105,20 @@
             "workspace-usergroups-name": "Системное имя",
 
             "workspace-options-h1": "Настройки панели",
-            "workspace-options-lang": "Язык"
+            "workspace-options-lang": "Язык",
+
+            "workspace-langs-h1": "Языки",
+            "workspace-langs-name": "Каноническое имя",
+            "workspace-langs-slug": "URL",
+            "workspace-langs-title": "Название",
+            "workspace-langs-picture": "Изображение",
+            "workspace-langs-pos": "Позиция",            
+            "workspace-langs-active": "Вкл.",
+            "workspace-langs-dir": "Направление",
+            "workspace-langs-phrases": "Слова и фразы",
+            "workspace-langs-text": "Текст",
+            "workspace-langs-mark": "Метка",
+            "workspace-langs-note": "Примечание"
         }
     }
 ]
