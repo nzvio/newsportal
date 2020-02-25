@@ -11,6 +11,7 @@ import { User } from '../model/user.model';
 import { ErrorService } from './error.service';
 import { AdmLang } from '../model/admlang.model';
 import { Lang } from '../model/lang.model';
+import { Page } from '../model/page.model';
 
 @Injectable()
 export class DataService {
@@ -26,6 +27,10 @@ export class DataService {
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public updateParam (obj: string, _id: string, p: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparam", {obj, _id, p, v}, true);}    
     public updateEgoisticParam (obj: string, _id: string, p: string, v:boolean): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateegoisticparam", {obj, _id, p, v}, true);}    
+    public updateParamParam (obj: string, _id: string, p: string, pp: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparamparam", {obj, _id, p, pp, v}, true);}    
+    public upload (fd: FormData): Observable<HttpEvent<IAnswer<string>>> {return this.sendRequest("POST", `files/upload`, fd, true, true);}
+    public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
+    public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}
 
     public usergroupsAll(sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/all", {sortBy, sortDir}, true);}
     public usergroupsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/chunk", {from, q, sortBy, sortDir}, true);}
@@ -50,9 +55,13 @@ export class DataService {
     public langsCreate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/create", x, true);}
     public langsUpdate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/update", x, true);}    
 
-    public upload (fd: FormData): Observable<HttpEvent<IAnswer<string>>> {return this.sendRequest("POST", `files/upload`, fd, true, true);}
-    public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
-    public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}
+    public pagesAll(sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", {sortBy, sortDir}, true);}
+    public pagesChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/chunk", {from, q, sortBy, sortDir}, true);}
+    public pagesOne(_id: string): Observable<IAnswer<Page>> {return this.sendRequest("GET", `pages/one/${_id}`, null, true);}
+    public pagesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `pages/delete/${_id}`, null, true);}
+    public pagesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "pages/deletebulk", _ids, true);}
+    public pagesCreate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/create", x, true);}
+    public pagesUpdate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/update", x, true);}    
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

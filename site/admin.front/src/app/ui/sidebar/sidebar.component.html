@@ -18,8 +18,17 @@
         <div id="navwrap" *ngIf="authenticated">
             <nav>		
                 <div [class]="currentUrl.parts[0] === '' ? 'nav-item active' : 'nav-item'"><a routerLink="/"><span class="nav-home">{{currentLang.phrases['sidebar-module-home']}}</span></a></div>
-
                 
+                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(2);"><span class="nav-users">{{currentLang.phrases['sidebar-module-users']}}</span></a></div>
+                <div [class]="sub2Active ? 'nav-sub active' : 'nav-sub'">
+                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>{{currentLang.phrases['sidebar-submodule-users']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>{{currentLang.phrases['sidebar-submodule-usergroups']}}</span></a></div>
+                </div>
+                
+                <div [class]="currentUrl.parts[0] === 'langs' ? 'nav-item active' : 'nav-item'"><a routerLink="/langs"><span class="nav-langs">{{currentLang.phrases['sidebar-module-langs']}}</span></a></div>
+
+                <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-pages">{{currentLang.phrases['sidebar-module-pages']}}</span></a></div>
+
                 <!--
                 <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(1);"><span class="nav-cat">Catalogue</span></a></div>
                 <div [class]="sub1Active ? 'nav-sub active' : 'nav-sub'">
@@ -27,15 +36,10 @@
                     <div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>Articles</span></a></div>
                 </div>
                 
-                <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-page">Static pages</span></a></div>                         
+                                         
                 -->
 
-                <div [class]="currentUrl.parts[0] === 'users' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(2);"><span class="nav-users">{{currentLang.phrases['sidebar-module-users']}}</span></a></div>
-                <div [class]="sub2Active ? 'nav-sub active' : 'nav-sub'">
-                    <div [class]="currentUrl.parts[1] === 'users' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/users"><span>{{currentLang.phrases['sidebar-submodule-users']}}</span></a></div>
-                    <div [class]="currentUrl.parts[1] === 'usergroups' ? 'nav-item active' : 'nav-item'"><a routerLink="/users/usergroups"><span>{{currentLang.phrases['sidebar-submodule-usergroups']}}</span></a></div>
-                </div>
-                <div [class]="currentUrl.parts[0] === 'langs' ? 'nav-item active' : 'nav-item'"><a routerLink="/langs"><span class="nav-langs">{{currentLang.phrases['sidebar-module-langs']}}</span></a></div>
+                
             </nav>
         </div>	
     </div>

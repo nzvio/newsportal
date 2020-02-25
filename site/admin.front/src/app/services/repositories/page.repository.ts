@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './repository';
-import { Lang } from '../../model/lang.model';
+import { Page } from '../../model/page.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';
 
 @Injectable()
-export class LangRepository extends Repository<Lang> {
-    public schema: string = "Lang";
-    public fullSortBy: string = "pos";
+export class PageRepository extends Repository<Page> {
+    public schema: string = "Page";
+    public fullSortBy: string = "title";
     public chunkSortBy: string = "pos";
 
     constructor(
@@ -23,9 +23,9 @@ export class LangRepository extends Repository<Lang> {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.langsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                this.dataService.pagesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlFull = res.data.length ? res.data.map(d => new Lang().build(d)) : [];
+                        this.xlFull = res.data.length ? res.data.map(d => new Page().build(d)) : [];
                         this.fullLength = this.xlFull.length;
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
@@ -44,9 +44,9 @@ export class LangRepository extends Repository<Lang> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.langsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                this.dataService.pagesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlChunk = res.data.length ? res.data.map(d => new Lang().build(d)) : [];
+                        this.xlChunk = res.data.length ? res.data.map(d => new Page().build(d)) : [];
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
@@ -60,13 +60,12 @@ export class LangRepository extends Repository<Lang> {
         });
     }
 
-    public loadOne(_id: string): Promise<Lang> {
+    public loadOne(_id: string): Promise<Page> {
         return new Promise((resolve, reject) => {
-            this.dataService.langsOne(_id).subscribe(res => {
+            this.dataService.pagesOne(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     if (res.data) {
-                        let x: Lang = new Lang().build(res.data);   
-                        this.appService.sort(x.phrases, "pos", 1);
+                        let x: Page = new Page().build(res.data);                           
                         resolve(x);
                     } else {
                         reject("Object not found");
@@ -82,7 +81,7 @@ export class LangRepository extends Repository<Lang> {
 
     public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.langsDelete(_id).subscribe(res => {
+            this.dataService.pagesDelete(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -96,7 +95,7 @@ export class LangRepository extends Repository<Lang> {
 
     public deleteBulk(_ids: string[]): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.langsDeleteBulk(_ids).subscribe(res => {
+            this.dataService.pagesDeleteBulk(_ids).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -108,9 +107,9 @@ export class LangRepository extends Repository<Lang> {
         });
     }
 
-    public create(x: Lang): Promise<void> {
+    public create(x: Page): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.langsCreate(x).subscribe(res => {
+            this.dataService.pagesCreate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -122,9 +121,9 @@ export class LangRepository extends Repository<Lang> {
         });
     }
 
-    public update(x: Lang): Promise<void> {
+    public update(x: Page): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.langsUpdate(x).subscribe(res => {
+            this.dataService.pagesUpdate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    

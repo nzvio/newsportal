@@ -1,10 +1,10 @@
 import { AppService } from '../services/app.service';
 import { Repository } from '../services/repositories/repository';
 import { Model } from '../model/model';
-import { Page } from './_page';
+import { ThePage } from './_page';
 import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ListPage<T extends Model> extends Page {
+export abstract class ListPage<T extends Model> extends ThePage {
     public ready: boolean = false;
     public reloading: boolean = false;    
     public allSelected: boolean = false;
@@ -63,6 +63,19 @@ export abstract class ListPage<T extends Model> extends Page {
         try {
             this.appService.monitorLog(`updating object: id=${_id} param=${p} value=${v}`);
             await this.repository.updateParam(_id, p, v);
+            this.repository.invalidateAll();
+            this.appService.monitorLog("ok");
+            return true;
+        } catch (err) {
+            this.appService.monitorLog(`error: ${err}`, true);
+            return false;
+        }        
+    }
+
+    public async updateParamParam (_id: string, p: string, pp: string, v: any): Promise<boolean> {        
+        try {
+            this.appService.monitorLog(`updating object: id=${_id} param=${p} paramparam=${pp} value=${v}`);
+            await this.repository.updateParamParam(_id, p, pp, v);
             this.repository.invalidateAll();
             this.appService.monitorLog("ok");
             return true;

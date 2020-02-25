@@ -97,7 +97,12 @@ html {
                                     &.back {span::before {content: "\f060";}}
                                 }
                             }
-                        }         
+                        }     
+                        // langs
+                        .data-langs {
+                            margin: 0 0 20px 0;
+                            label {margin-right: 10px;}
+                        }    
                         // tables               
                         table.data-table {
                             width:100%; color: $color-transparent; border-collapse: collapse; 
@@ -116,7 +121,7 @@ html {
                                         &.sortable::after {content: "\f0dc";}
                                         &.sorted-forward::after {content: "\f0dd";}
                                         &.sorted-backward::after {content: "\f0de";}
-                                    }
+                                    }                                    
                                 }
                                 td {
                                     padding: 5px 10px;

@@ -15,6 +15,7 @@
             "sidebar-submodule-users": "Users",
             "sidebar-submodule-usergroups": "User groups",
             "sidebar-module-langs": "Languages",
+            "sidebar-module-pages": "Static pages",
 
             "workspace-create": "Create",
             "workspace-deleteselected": "Delete selected",
@@ -60,7 +61,21 @@
             "workspace-langs-mark": "Mark",
             "workspace-langs-note": "Note",
             "workspace-langs-params": "Language parameters",
-            "workspace-langs-sluggable": "Sluggable"
+            "workspace-langs-sluggable": "Sluggable",
+
+            "workspace-pages-h1": "Static pages",
+            "workspace-pages-name": "Name in menu",
+            "workspace-pages-header": "H1 header",
+            "workspace-pages-contentshort": "Short content",
+            "workspace-pages-content": "Content",
+            "workspace-pages-title": "Title",
+            "workspace-pages-keywords": "Keywords",
+            "workspace-pages-description": "Description",
+            "workspace-pages-picture": "Picture",
+            "workspace-pages-parent": "Parent page",
+            "workspace-pages-slug": "Slug",
+            "workspace-pages-active": "Active",
+            "workspace-pages-pos": "Position"
         }
     },
     {
@@ -79,6 +94,7 @@
             "sidebar-submodule-users": "Пользователи",
             "sidebar-submodule-usergroups": "Группы пользователей",
             "sidebar-module-langs": "Языки",
+            "sidebar-module-pages": "Текстовые страницы",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -124,7 +140,21 @@
             "workspace-langs-mark": "Метка",
             "workspace-langs-note": "Примечание",
             "workspace-langs-params": "Параметры языка",
-            "workspace-langs-sluggable": "Исп. для ЧПУ"
+            "workspace-langs-sluggable": "Исп. для ЧПУ",
+
+            "workspace-pages-h1": "Текстовые страницы",
+            "workspace-pages-name": "Имя в меню",
+            "workspace-pages-header": "Заголовок (H1)",
+            "workspace-pages-contentshort": "Краткое содержание",
+            "workspace-pages-content": "Содержание",
+            "workspace-pages-title": "Title",
+            "workspace-pages-keywords": "Keywords",
+            "workspace-pages-description": "Description",
+            "workspace-pages-picture": "Изображение",
+            "workspace-pages-parent": "Родительская",
+            "workspace-pages-slug": "ЧПУ",
+            "workspace-pages-active": "Вкл.",
+            "workspace-pages-pos": "Позиция"
         }
     }
 ]

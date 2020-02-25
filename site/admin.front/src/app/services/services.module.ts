@@ -10,6 +10,7 @@ import { UserRepository } from './repositories/user.repository';
 import { UploadService } from './upload.service';
 import { AdmLangRepository } from './repositories/admlang.repository';
 import { LangRepository } from './repositories/lang.repository';
+import { PageRepository } from './repositories/page.repository';
 
 @NgModule({
     declarations: [],
@@ -25,6 +26,7 @@ import { LangRepository } from './repositories/lang.repository';
 		UsergroupRepository,
 		UserRepository,
 		LangRepository,
+		PageRepository,
 	],
 })
 export class ServicesModule { }

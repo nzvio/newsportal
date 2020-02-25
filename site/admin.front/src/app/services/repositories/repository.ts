@@ -61,6 +61,20 @@ export abstract class Repository<T> {
         });        
     }
 
+    public updateParamParam (_id: string, p: string, pp: string, v: any): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.updateParamParam (this.schema, _id, p, pp, v).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });        
+    }
+
     public abstract loadChunk(): Promise<void>;
     public abstract loadOne(_id: string): Promise<T>;    
     public abstract delete(_id: string): Promise<void>;

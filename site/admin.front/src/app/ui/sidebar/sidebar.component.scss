@@ -43,9 +43,9 @@ aside {
                             &::before {font-family: "awesome-solid"; display: inline-block; margin-right: 10px; content: "-"; width:15px; font-size: 14px;}
                             &.nav-home::before {content: "\f015";}
                             &.nav-cat::before {content: "\f03a";}
-                            &.nav-page::before {content: "\f15c";}
+                            &.nav-pages::before {content: "\f15c";}
                             &.nav-users::before {content: "\f500";}
-                            &.nav-langs::before {content: "\f57d";}
+                            &.nav-langs::before {content: "\f57d";}                            
                         }
                     }
                     &:hover, &.active {

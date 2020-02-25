@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Page } from '../_page';
+import { ThePage } from '../_page';
 import { AdmLangRepository } from '../../services/repositories/admlang.repository';
 import { AppService } from 'src/app/services/app.service';
 
@@ -8,7 +8,7 @@ import { AppService } from 'src/app/services/app.service';
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],	
 })
-export class HomePage extends Page implements OnInit {	
+export class HomePage extends ThePage implements OnInit {	
     public ready: boolean = false;
 
     constructor(
