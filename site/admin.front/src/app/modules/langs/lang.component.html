@@ -1,75 +1,83 @@
-<div class="data-form">    
-    <div [class]="isRequired('title') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-title']}}:</div>
-    <div class="df-inputwrap"><input type="text" name="title" [(ngModel)]="x.title"></div>
-
-    <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-name']}}:</div>
-    <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name"></div>
-
-    <div [class]="isRequired('slug') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-slug']}}:</div>
-    <div class="df-inputwrap"><input type="text" name="slug" [(ngModel)]="x.slug"></div>
-
-    <div [class]="isRequired('img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-picture']}}:</div>
-    <div class="df-inputwrap">
-        <ng-container *ngIf="x.img">
-            <div class="df-imgwrap">
-                <div class="df-imgwrap2"><img src="/assets/images/langs/{{x.img}}"></div>
-                <div class="df-imgbtns">
-                    <div class="df-magnify" [title]="currentLang.phrases['workspace-viewpicture']" (click)="viewerActive = true;"><span></span></div>
-                    <div class="df-deletefile" [title]="currentLang.phrases['workspace-removepicture']" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
-                </div>                
-            </div>                                
-        </ng-container>
-        <input #imginput type="file" name="img" (change)="onUploadImg($event);">
-        <progressbar [progress]="progressImg" *ngIf="progressImg"></progressbar>
-    </div>
-
-    <div [class]="isRequired('pos') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-pos']}}:</div>
-    <div class="df-inputwrap"><input class="small" type="number" name="pos" [(ngModel)]="x.pos"></div>
-
-    <div [class]="isRequired('dir') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-dir']}}:</div>
-    <div class="df-inputwrap">
-        <select name="dir" [(ngModel)]="x.dir"><option value="ltr">LTR</option><option value="rtl">RTL</option></select>
-    </div>
-
-    <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-active']}}:</div>
-    <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>    
+<div class="data-tabs">
+    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-langs-params']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-langs-phrases']}}</div>
 </div>
 
-<hr>
-<div class="subhead">
-    <h2>{{currentLang.phrases['workspace-langs-phrases']}}</h2>
-    <div class="subhead-dash">
-        <div class="sd-btn create" [title]="currentLang.phrases['workspace-create']" (click)="addPhrase();"><span></span></div>
+<ng-container *ngIf="tab === 1">
+    <div class="data-form padded">    
+        <div [class]="isRequired('title') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-title']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="title" [(ngModel)]="x.title"></div>
+    
+        <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-name']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name"></div>
+    
+        <div [class]="isRequired('slug') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-slug']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="slug" [(ngModel)]="x.slug"></div>
+    
+        <div [class]="isRequired('img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-picture']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngIf="x.img">
+                <div class="df-imgwrap">
+                    <div class="df-imgwrap2"><img src="/assets/images/langs/{{x.img}}"></div>
+                    <div class="df-imgbtns">
+                        <div class="df-magnify" [title]="currentLang.phrases['workspace-viewpicture']" (click)="viewerActive = true;"><span></span></div>
+                        <div class="df-deletefile" [title]="currentLang.phrases['workspace-removepicture']" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
+                    </div>                
+                </div>                                
+            </ng-container>
+            <input #imginput type="file" name="img" (change)="onUploadImg($event);">
+            <progressbar [progress]="progressImg" *ngIf="progressImg"></progressbar>
+        </div>
+    
+        <div [class]="isRequired('pos') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-pos']}}:</div>
+        <div class="df-inputwrap"><input class="small" type="number" name="pos" [(ngModel)]="x.pos"></div>
+    
+        <div [class]="isRequired('dir') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-dir']}}:</div>
+        <div class="df-inputwrap">
+            <select name="dir" [(ngModel)]="x.dir"><option value="ltr">LTR</option><option value="rtl">RTL</option></select>
+        </div>
+    
+        <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-active']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>    
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>                    
     </div>
-</div>
-<div class="data-tablewrap compact">
-    <table class="data-table">
-        <tr>            
-            <th>{{currentLang.phrases['workspace-langs-mark']}}</th>
-            <th>{{currentLang.phrases['workspace-langs-text']}}</th>
-            <th>{{currentLang.phrases['workspace-langs-note']}}</th>
-            <th>{{currentLang.phrases['workspace-langs-pos']}}</th>
-            <th>{{currentLang.phrases['workspace-actions']}}</th>
-        </tr>   
-        <ng-container *ngIf="x.phrases.length">
-            <tr *ngFor="let p of x.phrases">            
-                <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.mark"></div></td>
-                <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.text"></div></td>
-                <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.note"></div></td>
-                <td><div class="dt-inputwrap"><input class="small" type="number" [(ngModel)]="p.pos" (change)="onPosChanged();"></div></td>            
-                <td>
-                    <div class="dt-actions">                    
-                        <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" (click)="deletePhrase(p);"><span></span></div>
-                    </div>
-                </td>
-            </tr>                            
-        </ng-container>
-        <ng-container *ngIf="!x.phrases.length">
-            <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
-        </ng-container>        
-    </table>
-</div>
+    <image-viewer [img]="x.img" folder="langs" [(active)]="viewerActive"></image-viewer>
+</ng-container>
 
-<button type="submit">{{currentLang.phrases['workspace-save']}}</button>
-
-<image-viewer [img]="x.img" folder="langs" [(active)]="viewerActive"></image-viewer>
+<ng-container *ngIf="tab === 2">    
+    <div class="data-tablewrap compact padded">
+        <div class="data-head">            
+            <div class="datahead-dash">
+                <div class="dhd-btn create" [title]="currentLang.phrases['workspace-create']" (click)="addPhrase();"><span></span></div>
+            </div>
+        </div>
+        <table class="data-table">
+            <tr>            
+                <th><label [class]="sortBy === 'mark' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('mark');">{{currentLang.phrases['workspace-langs-mark']}}</label></th>
+                <th><label [class]="sortBy === 'text' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('text');">{{currentLang.phrases['workspace-langs-text']}}</label></th>
+                <th><label [class]="sortBy === 'note' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('note');">{{currentLang.phrases['workspace-langs-note']}}</label></th>
+                <th><label [class]="sortBy === 'pos' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('pos');">{{currentLang.phrases['workspace-langs-pos']}}</label></th>            
+                <th>{{currentLang.phrases['workspace-actions']}}</th>
+            </tr>   
+            <ng-container *ngIf="x.phrases.length">
+                <tr *ngFor="let p of x.phrases">            
+                    <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.mark"></div></td>
+                    <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.text"></div></td>
+                    <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="p.note"></div></td>
+                    <td><div class="dt-inputwrap"><input class="small" type="number" [(ngModel)]="p.pos"></div></td>            
+                    <td>
+                        <div class="dt-actions">                    
+                            <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" (click)="deletePhrase(p);"><span></span></div>
+                        </div>
+                    </td>
+                </tr>                            
+            </ng-container>
+            <ng-container *ngIf="!x.phrases.length">
+                <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+            </ng-container>        
+        </table>
+    </div>
+    <button type="submit">{{currentLang.phrases['workspace-save']}}</button>
+</ng-container>

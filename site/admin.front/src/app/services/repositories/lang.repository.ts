@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
+import { AppService } from '../app.service';
 
 @Injectable()
 export class LangRepository extends Repository<Lang> {
     public fullSortBy: string = "title";
+    public chunkSortBy: string = "pos";
 
-    constructor(private dataService: DataService) {
+    constructor(
+        private dataService: DataService,
+        private appService: AppService,
+    ) {
         super();
     }
 
@@ -59,7 +64,8 @@ export class LangRepository extends Repository<Lang> {
             this.dataService.langsOne(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     if (res.data) {
-                        let x: Lang = new Lang().build(res.data);                    
+                        let x: Lang = new Lang().build(res.data);   
+                        this.appService.sort(x.phrases, "pos", 1);
                         resolve(x);
                     } else {
                         reject("Object not found");

@@ -4,7 +4,7 @@
     
     <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-usergroups-name']}}:</div>
     <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name" [disabled]="x.defended"></div>
-    
+        
     <div class="df-title"></div>
-    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>
+    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>    
 </div>

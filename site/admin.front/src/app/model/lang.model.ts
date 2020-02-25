@@ -21,5 +21,5 @@ export class Lang extends Model {
         this.phrases = [];
         
         return this;
-    }
+    }    
 }

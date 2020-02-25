@@ -7,11 +7,12 @@ import { LangsListPage } from './list/langs.list.page';
 import { LangsCreatePage } from './create/langs.create.page';
 import { UIModule } from '../../ui/ui.module';
 import { LangComponent } from './lang.component';
+import { LangsEditPage } from './edit/langs.edit.page';
 
 let routing = RouterModule.forChild ([        
 	{path:"", component: LangsListPage, pathMatch: "full"},
 	{path:"create", component: LangsCreatePage, pathMatch: "full"},
-	//{path:"edit/:_id", component: LangsEditPage},
+	{path:"edit/:_id", component: LangsEditPage},
 ]);
 
 @NgModule({	
@@ -24,7 +25,7 @@ let routing = RouterModule.forChild ([
 	declarations: [
 		LangsListPage,
 		LangsCreatePage,
-		//LangsEditPage,
+		LangsEditPage,
 		LangComponent,
 	]    
 })

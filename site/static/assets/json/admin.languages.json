@@ -58,7 +58,8 @@
             "workspace-langs-phrases": "Words and phrases",
             "workspace-langs-text": "Text",
             "workspace-langs-mark": "Mark",
-            "workspace-langs-note": "Note"
+            "workspace-langs-note": "Note",
+            "workspace-langs-params": "Language parameters"
         }
     },
     {
@@ -120,7 +121,8 @@
             "workspace-langs-phrases": "Слова и фразы",
             "workspace-langs-text": "Текст",
             "workspace-langs-mark": "Метка",
-            "workspace-langs-note": "Примечание"
+            "workspace-langs-note": "Примечание",
+            "workspace-langs-params": "Параметры языка"
         }
     }
 ]

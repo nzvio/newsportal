@@ -47,5 +47,26 @@ export class AppService {
     public validateEmail (email: string): boolean {
         const re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test (email.toLowerCase());
-    }    
+    }  
+    
+    public sort(arr: any[], by: string = "pos", dir: number = 1): void {
+        if (arr && arr.length) {
+            arr.sort((a: any, b: any) => {
+                let x: any = (typeof(a[by]) === "string") ? (a[by] as string).toLowerCase() : a[by];
+                let y: any = (typeof(b[by]) === "string") ? (b[by] as string).toLowerCase() : b[by];
+                                
+                if (dir === 1) {
+                    if (x > y) return 1;
+                    if (x < y) return -1;                    
+                    return 0;
+                } else if (dir === -1) {
+                    if (x < y) return 1;
+                    if (x > y) return -1;
+                    return 0;
+                }
+
+                return 0;
+            });
+        }
+    }
 }

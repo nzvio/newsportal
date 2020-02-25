@@ -32,9 +32,9 @@
 
     <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-users-active']}}:</div>
     <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>
-    
+        
     <div class="df-title"></div>
-    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>                
+    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>                    
 </div>
 
 <image-viewer [img]="x.img" folder="users" [(active)]="viewerActive"></image-viewer>
