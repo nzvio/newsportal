@@ -81,7 +81,11 @@ export class LangsService extends APIService {
     }
 
     public async create(dto: LangCreateDTO): Promise<IAnswer<void>> {        
-        try {
+        try {            
+            if (dto.sluggable) { // check sluggable first, only one language can be such, so set sluggable to false for all languages
+                await this.model.updateMany({}, {$set: {sluggable: false}});
+            }
+            
             const x: ILang = new this.model(dto);                    
             await x.save ();        
             return {statusCode: 200};
@@ -93,7 +97,11 @@ export class LangsService extends APIService {
     }
 
     public async update(dto: LangUpdateDTO): Promise<IAnswer<void>> {
-        try {
+        try {            
+            if (dto.sluggable) {// check sluggable first, only one language can be such, so set sluggable to false for all languages
+                await this.model.updateMany({}, {$set: {sluggable: false}});
+            }
+
             let _id: string = dto._id;
             await this.model.updateOne ({_id: _id}, dto);
             return {statusCode: 200};

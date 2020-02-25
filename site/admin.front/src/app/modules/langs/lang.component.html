@@ -37,8 +37,11 @@
             <select name="dir" [(ngModel)]="x.dir"><option value="ltr">LTR</option><option value="rtl">RTL</option></select>
         </div>
     
+        <div [class]="isRequired('sluggable') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-sluggable']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.sluggable"></checkbox-slider></div>
+
         <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-langs-active']}}:</div>
-        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>    
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>    
 
         <div class="df-title"></div>
         <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>                    

@@ -1,4 +1,8 @@
+import { DataService } from '../data.service';
+
 export abstract class Repository<T> {
+    public abstract schema: string; // name of Mongoose schema
+    
     public xlChunk: T[] = []; // fragment
     public chunkCurrentPart: number = 0; // current paging state for fragment
     public chunkSortBy: string = "_id"; // current sort by for fragment
@@ -14,6 +18,8 @@ export abstract class Repository<T> {
     public fullLength: number = 0; // quantity of all objects in table    
     protected ttl: number = 1000*60; // time to live = 1 min    
 
+    constructor(protected dataService: DataService) {}
+
     public invalidateChunk(): void {        
         this.chunkLoadedAt = 0;
     }
@@ -25,11 +31,38 @@ export abstract class Repository<T> {
     public invalidateAll(): void {
         this.chunkLoadedAt = 0;
         this.fullLoadedAt = 0;
+    }    
+
+    public updateParam (_id: string, p: string, v: any): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.updateParam (this.schema, _id, p, v).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });        
+    }
+
+    public updateEgoisticParam (_id: string, p: string, v: boolean): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.updateEgoisticParam (this.schema, _id, p, v).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });        
     }
 
     public abstract loadChunk(): Promise<void>;
-    public abstract loadOne(_id: string): Promise<T>;
-    public abstract updateParam (_id: string, p: string, v: any): Promise<void>;
+    public abstract loadOne(_id: string): Promise<T>;    
     public abstract delete(_id: string): Promise<void>;
     public abstract deleteBulk(_ids: string[]): Promise<void>;
     public abstract create(x: T): Promise<void>;

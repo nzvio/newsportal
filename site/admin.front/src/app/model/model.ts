@@ -3,7 +3,7 @@ export class Model {
     public _id: string;    
     public defended: boolean;
     // utils
-    public selected: boolean = false;
+    public __selected: boolean = false;
 
     public build (o: Object): any {
         for (let field in o) {

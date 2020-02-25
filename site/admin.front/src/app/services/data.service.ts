@@ -25,6 +25,7 @@ export class DataService {
     public admlangs(): Observable<AdmLang[]> {return this.http.get<AdmLang[]>("/assets/json/admin.languages.json");}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public updateParam (obj: string, _id: string, p: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparam", {obj, _id, p, v}, true);}    
+    public updateEgoisticParam (obj: string, _id: string, p: string, v:boolean): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateegoisticparam", {obj, _id, p, v}, true);}    
 
     public usergroupsAll(sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/all", {sortBy, sortDir}, true);}
     public usergroupsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/chunk", {from, q, sortBy, sortDir}, true);}

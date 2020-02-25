@@ -19,7 +19,7 @@
                     </tr>  
                     <ng-container *ngIf="xl.length">
                         <tr *ngFor="let x of xl">
-                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.selected" (ngModelChange)="onSelect();"></td>
+                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
                             <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                        
                             <td>
                                 <div class="dt-inputwrap">

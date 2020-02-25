@@ -11,6 +11,7 @@ export interface ILang extends Document
     readonly img_s: string;
     readonly pos: number;
     readonly active: boolean;
+    readonly sluggable: boolean;
     readonly dir: string; 
     readonly defended: boolean;
     readonly phrases: IPhrase[];

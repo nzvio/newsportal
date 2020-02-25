@@ -6,8 +6,10 @@ import { DataService } from '../data.service';
 
 @Injectable()
 export class UserRepository extends Repository<User> {
-    constructor(private dataService: DataService) {
-        super();
+    public schema: string = "User";
+
+    constructor(protected dataService: DataService) {
+        super(dataService);
     } 
     
     public loadChunk(): Promise<void> {
@@ -49,21 +51,7 @@ export class UserRepository extends Repository<User> {
                 reject(err.message);
             });
         });
-    }
-
-    public updateParam (_id: string, p: string, v: any): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.dataService.updateParam ("User", _id, p, v).subscribe(res => {
-                if (res.statusCode === 200) {
-                    resolve();
-                } else {                    
-                    reject(res.error);
-                }
-            }, err => {
-                reject(err.message);
-            });
-        });        
-    }
+    }    
 
     public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {

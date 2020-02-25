@@ -8,6 +8,7 @@ import { jwtConstants } from "../auth/auth.constants";
 import { UsergroupSchema } from "../usergroups/schemas/usergroup.schema";
 import { UserSchema } from "../users/schemas/user.schema";
 import { LangSchema } from "../langs/schemas/lang.schema";
+import { PageSchema } from "../pages/schemas/page.schema";
 
 @Module({
 	controllers: [ObjectsController],
@@ -17,6 +18,7 @@ import { LangSchema } from "../langs/schemas/lang.schema";
 			{name: 'Usergroup', schema: UsergroupSchema},
 			{name: 'User', schema: UserSchema},
 			{name: 'Lang', schema: LangSchema},
+			{name: 'Page', schema: PageSchema},
 		]),	
 		JwtModule.register(jwtConstants),			
 	],

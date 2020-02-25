@@ -7,14 +7,15 @@ import { AppService } from '../app.service';
 
 @Injectable()
 export class LangRepository extends Repository<Lang> {
+    public schema: string = "Lang";
     public fullSortBy: string = "title";
     public chunkSortBy: string = "pos";
 
     constructor(
-        private dataService: DataService,
+        protected dataService: DataService,
         private appService: AppService,
     ) {
-        super();
+        super(dataService);
     }
 
     public loadFull(): Promise<void> {
@@ -77,21 +78,7 @@ export class LangRepository extends Repository<Lang> {
                 reject(err.message);
             });
         });
-    }
-
-    public updateParam (_id: string, p: string, v: any): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.dataService.updateParam ("Lang", _id, p, v).subscribe(res => {
-                if (res.statusCode === 200) {
-                    resolve();
-                } else {                    
-                    reject(res.error);
-                }
-            }, err => {
-                reject(err.message);
-            });
-        });        
-    }
+    }    
 
     public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {

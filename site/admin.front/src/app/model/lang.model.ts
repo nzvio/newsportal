@@ -10,6 +10,7 @@ export class Lang extends Model {
     public img_s: string;
     public pos: number;
     public active: boolean;
+    public sluggable: boolean;
     public dir: string; 
     public defended: boolean;
     public phrases: Phrase[];

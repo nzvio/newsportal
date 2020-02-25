@@ -59,7 +59,8 @@
             "workspace-langs-text": "Text",
             "workspace-langs-mark": "Mark",
             "workspace-langs-note": "Note",
-            "workspace-langs-params": "Language parameters"
+            "workspace-langs-params": "Language parameters",
+            "workspace-langs-sluggable": "Sluggable"
         }
     },
     {
@@ -112,7 +113,7 @@
 
             "workspace-langs-h1": "Языки",
             "workspace-langs-name": "Каноническое имя",
-            "workspace-langs-slug": "URL",
+            "workspace-langs-slug": "ЧПУ",
             "workspace-langs-title": "Название",
             "workspace-langs-picture": "Изображение",
             "workspace-langs-pos": "Позиция",            
@@ -122,7 +123,8 @@
             "workspace-langs-text": "Текст",
             "workspace-langs-mark": "Метка",
             "workspace-langs-note": "Примечание",
-            "workspace-langs-params": "Параметры языка"
+            "workspace-langs-params": "Параметры языка",
+            "workspace-langs-sluggable": "Исп. для ЧПУ"
         }
     }
 ]

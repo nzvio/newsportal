@@ -6,10 +6,11 @@ import { DataService } from '../data.service';
 
 @Injectable()
 export class UsergroupRepository extends Repository<Usergroup> {
+    public schema: string = "Usergroup";
     public fullSortBy: string = "title";
 
-    constructor(private dataService: DataService) {
-        super();
+    constructor(protected dataService: DataService) {
+        super(dataService);
     }
 
     public loadFull(): Promise<void> {
@@ -71,21 +72,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
                 reject(err.message);
             });
         });
-    }
-
-    public updateParam (_id: string, p: string, v: any): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.dataService.updateParam ("Usergroup", _id, p, v).subscribe(res => {
-                if (res.statusCode === 200) {
-                    resolve();
-                } else {                    
-                    reject(res.error);
-                }
-            }, err => {
-                reject(err.message);
-            });
-        });        
-    }
+    }    
 
     public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {

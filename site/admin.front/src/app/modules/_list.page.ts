@@ -26,7 +26,7 @@ export abstract class ListPage<T extends Model> extends Page {
     get xl(): T[] {return this.repository.xlChunk;}
     get length(): number {return this.repository.chunkLength;}
     get fullLength(): number {return this.repository.fullLength;}    
-    get canDeleteBulk(): boolean {return !!this.xl.filter(x => x.selected).length;}
+    get canDeleteBulk(): boolean {return !!this.xl.filter(x => x.__selected).length;}
 
     public async rebuildList(): Promise<void> {		        
         try {
@@ -70,7 +70,27 @@ export abstract class ListPage<T extends Model> extends Page {
             this.appService.monitorLog(`error: ${err}`, true);
             return false;
         }        
-    }    
+    }
+    
+    // egoistic param - boolean that can be true only in one element, other must be false
+    public async updateEgoisticParam (_id: string, p: string, v: boolean): Promise<boolean> {        
+        try {
+            if (v) {
+                this.xl.filter(x => x._id !== _id).forEach(x => {
+                    x[p] = false;
+                });
+            }            
+            
+            this.appService.monitorLog(`updating egoistic parameter: id=${_id} param=${p} value=${v}`);
+            await this.repository.updateEgoisticParam(_id, p, v);
+            this.repository.invalidateAll();
+            this.appService.monitorLog("ok");
+            return true;
+        } catch (err) {
+            this.appService.monitorLog(`error: ${err}`, true);
+            return false;
+        }        
+    }
 
     public async delete(_id: string): Promise<boolean> {
         if (confirm("Are you sure?")) {
@@ -93,7 +113,7 @@ export abstract class ListPage<T extends Model> extends Page {
 
     public async deleteBulk(): Promise<boolean> {
         if (this.canDeleteBulk && confirm("Are you sure?")) {
-            let _ids: string[] = this.xl.filter(x => x.selected).map(x => x._id);
+            let _ids: string[] = this.xl.filter(x => x.__selected).map(x => x._id);
             this.appService.monitorLog(`deleting multiple objects: id=${_ids.toString()}`);
 
             try {
@@ -115,7 +135,7 @@ export abstract class ListPage<T extends Model> extends Page {
         let allSelected: boolean = true;
 
         for (let x of this.xl) {
-            if (!x.selected) {
+            if (!x.__selected && !x.defended) {
                 allSelected = false;
                 break;
             }
@@ -125,6 +145,6 @@ export abstract class ListPage<T extends Model> extends Page {
     }
 
     public onSelectAll(): void {
-        this.xl.filter(x => !x.defended).forEach(x => {x.selected = this.allSelected});
+        this.xl.filter(x => !x.defended).forEach(x => {x.__selected = this.allSelected});
     }
 }

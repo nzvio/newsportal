@@ -8,6 +8,7 @@ export class LangCreateDTO {
     public readonly img_s: string;
     public readonly pos: number;
     public readonly active: boolean;
+    public readonly sluggable: boolean;
     public readonly dir: string;     
     public readonly phrases: PhraseDTO[];
 }

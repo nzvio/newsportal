@@ -29,6 +29,11 @@ export const LangSchema = new mongoose.Schema ({
         required: true,
         default: true
     },
+    sluggable: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
     dir: {
         type: String,
         required: true,
