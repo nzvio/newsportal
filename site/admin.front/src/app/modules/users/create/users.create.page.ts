@@ -38,7 +38,7 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 			this.ready = false;
 			this.x = new User().init();
 			await this.usergroupRepository.loadFull();
-			this.appService.monitorLog("users create page loaded");
+			this.appService.monitorLog("[users create] page loaded");
 			this.ready = true;
 		} catch (err) {
 			this.appService.monitorLog(err, true);

@@ -23,7 +23,7 @@ export class OptionsPage extends ModulePage implements OnInit {
 
     public ngOnInit(): void {
         this.selectedLang = this.currentLang.name;
-        this.appService.monitorLog("options page loaded");
+        this.appService.monitorLog("[options] page loaded");
         this.ready = true;
     }
 

@@ -8,10 +8,11 @@ import { UIModule } from 'src/app/ui/ui.module';
 import { PagesListPage } from './list/pages.list.page';
 import { PagesEditPage } from './edit/pages.edit.page';
 import { PageComponent } from './page.component';
+import { PagesCreatePage } from './create/pages.create.page';
 
 let routing = RouterModule.forChild ([        
 	{path:"", component: PagesListPage, pathMatch: "full"},
-	//{path:"create", component: PagesCreatePage, pathMatch: "full"},
+	{path:"create", component: PagesCreatePage, pathMatch: "full"},
 	{path:"edit/:_id", component: PagesEditPage},
 ]);
 
@@ -25,7 +26,7 @@ let routing = RouterModule.forChild ([
 	],
 	declarations: [
 		PagesListPage,
-		//PagesCreatePage,
+		PagesCreatePage,
 		PagesEditPage,
 		PageComponent,
 	]    

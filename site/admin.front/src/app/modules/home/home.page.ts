@@ -19,7 +19,7 @@ export class HomePage extends ModulePage implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.appService.monitorLog("home page loaded");
+        this.appService.monitorLog("[home] page loaded");
         this.ready = true;
     }
     	

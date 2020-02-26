@@ -22,7 +22,7 @@ export class UsergroupsListPage extends ListPage<Usergroup> implements OnInit {
     public async ngOnInit(): Promise<void> {
         try {
             await this.usergroupRepository.loadChunk();
-            this.appService.monitorLog("usergroups page loaded");
+            this.appService.monitorLog("[usergroups] page loaded");
             this.ready = true;
         } catch (err) {
             this.appService.monitorLog(err, true);

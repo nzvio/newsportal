@@ -30,7 +30,7 @@ export class UsersListPage extends ListPage<User> implements OnInit {
         try {
             await this.userRepository.loadChunk();
             await this.usergroupRepository.loadFull();            
-            this.appService.monitorLog("users page loaded");
+            this.appService.monitorLog("[users] page loaded");
             this.ready = true;
         } catch (err) {
             this.appService.monitorLog(err, true);

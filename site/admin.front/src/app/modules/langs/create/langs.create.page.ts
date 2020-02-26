@@ -30,7 +30,7 @@ export class LangsCreatePage extends ObjectPage<Lang> implements OnInit {
 
 	public ngOnInit(): void {
 		this.x = new Lang().init();
-		this.appService.monitorLog("langs create page loaded");
+		this.appService.monitorLog("[langs create] page loaded");
 		this.ready = true;
 	}
 }

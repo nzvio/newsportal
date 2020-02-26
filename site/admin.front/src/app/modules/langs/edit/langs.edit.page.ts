@@ -35,7 +35,7 @@ export class LangsEditPage extends ObjectPage<Lang> implements OnInit {
 			try {
 				this.ready = false;				
 				this.x = await this.langRepository.loadOne(p["_id"]);
-				this.appService.monitorLog("langs edit page loaded");
+				this.appService.monitorLog("[langs edit] page loaded");
 				this.ready = true;
 			} catch (err) {
 				this.appService.monitorLog(err, true);

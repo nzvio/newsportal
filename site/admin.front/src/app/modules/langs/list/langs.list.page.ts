@@ -22,7 +22,7 @@ export class LangsListPage extends ListPage<Lang> implements OnInit {
     public async ngOnInit(): Promise<void> {
         try {
             await this.langRepository.loadChunk();                
-            this.appService.monitorLog("langs page loaded");
+            this.appService.monitorLog("[langs] page loaded");
             this.ready = true;
         } catch (err) {
             this.appService.monitorLog(err, true);

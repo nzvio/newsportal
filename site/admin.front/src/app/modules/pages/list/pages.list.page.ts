@@ -31,7 +31,7 @@ export class PagesListPage extends ListPage<Page> implements OnInit {
             await this.pageRepository.loadChunk(); 
             await this.langRepository.loadFull();               
             this.selectedLang = this.ll[0];
-            this.appService.monitorLog("pages page loaded");            
+            this.appService.monitorLog("[pages] page loaded");            
             this.ready = true;
         } catch (err) {
             this.appService.monitorLog(err, true);

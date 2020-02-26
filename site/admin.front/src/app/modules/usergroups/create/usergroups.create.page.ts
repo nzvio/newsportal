@@ -28,7 +28,7 @@ export class UsergroupsCreatePage extends ObjectPage<Usergroup> implements OnIni
 
 	public ngOnInit(): void {
 		this.x = new Usergroup();
-		this.appService.monitorLog("usergroups create page loaded");
+		this.appService.monitorLog("[usergroups create] page loaded");
 		this.ready = true;
 	}
 }

@@ -42,7 +42,7 @@ export class UsersEditPage extends ObjectPage<User> implements OnInit {
 				this.ready = false;				
 				this.x = await this.userRepository.loadOne(p["_id"]);
 				await this.usergroupRepository.loadFull();
-				this.appService.monitorLog("users edit page loaded");
+				this.appService.monitorLog("[users edit] page loaded");
 				this.ready = true;
 			} catch (err) {
 				this.appService.monitorLog(err, true);

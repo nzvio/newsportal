@@ -43,7 +43,7 @@ export class PagesEditPage extends ObjectPage<Page> implements OnInit {
 				this.x = await this.pageRepository.loadOne(p["_id"]);
 				await this.langRepository.loadFull();
 				await this.pageRepository.loadFull();				
-				this.appService.monitorLog("pages edit page loaded");
+				this.appService.monitorLog("[pages edit] page loaded");
 				this.ready = true;
 			} catch (err) {
 				this.appService.monitorLog(err, true);

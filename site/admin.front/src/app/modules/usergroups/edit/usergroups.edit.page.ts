@@ -32,7 +32,7 @@ export class UsergroupsEditPage extends ObjectPage<Usergroup> implements OnInit 
 			try {
 				this.ready = false;
 				this.x = await this.usergroupRepository.loadOne(p["_id"]);
-				this.appService.monitorLog("usergroups edit page loaded");
+				this.appService.monitorLog("[usergroups edit] page loaded");
 				this.ready = true;
 			} catch (err) {
 				this.appService.monitorLog(err, true);
