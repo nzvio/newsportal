@@ -16,6 +16,8 @@
             "sidebar-submodule-usergroups": "User groups",
             "sidebar-module-langs": "Languages",
             "sidebar-module-pages": "Static pages",
+            "sidebar-module-catalogue": "Catalogue",
+            "sidebar-submodule-categories": "Categories",
 
             "workspace-create": "Create",
             "workspace-deleteselected": "Delete selected",
@@ -78,7 +80,24 @@
             "workspace-pages-pos": "Position",
             "workspace-pages-lang": "Language",
             "workspace-pages-main": "Main",
-            "workspace-pages-seo": "SEO"
+            "workspace-pages-seo": "SEO",
+
+            "workspace-categories-h1": "Categories",
+            "workspace-categories-name": "Name in menu",
+            "workspace-categories-header": "H1 header",
+            "workspace-categories-contentshort": "Short content",
+            "workspace-categories-content": "Content",
+            "workspace-categories-title": "Title",
+            "workspace-categories-keywords": "Keywords",
+            "workspace-categories-description": "Description",
+            "workspace-categories-picture": "Picture",
+            "workspace-categories-parent": "Parent page",
+            "workspace-categories-slug": "Slug",
+            "workspace-categories-active": "Active",
+            "workspace-categories-pos": "Position",
+            "workspace-categories-lang": "Language",
+            "workspace-categories-main": "Main",
+            "workspace-categories-seo": "SEO"
         }
     },
     {
@@ -98,6 +117,8 @@
             "sidebar-submodule-usergroups": "Группы пользователей",
             "sidebar-module-langs": "Языки",
             "sidebar-module-pages": "Статические страницы",
+            "sidebar-module-catalogue": "Каталог",
+            "sidebar-submodule-categories": "Категории",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -160,7 +181,24 @@
             "workspace-pages-pos": "Позиция",
             "workspace-pages-lang": "Язык",
             "workspace-pages-main": "Основное",
-            "workspace-pages-seo": "SEO"
+            "workspace-pages-seo": "SEO",
+
+            "workspace-categories-h1": "Категории",
+            "workspace-categories-name": "Имя в меню",
+            "workspace-categories-header": "Заголовок (H1)",
+            "workspace-categories-contentshort": "Краткое содержание",
+            "workspace-categories-content": "Содержание",
+            "workspace-categories-title": "Title",
+            "workspace-categories-keywords": "Keywords",
+            "workspace-categories-description": "Description",
+            "workspace-categories-picture": "Изображение",
+            "workspace-categories-parent": "Родительская",
+            "workspace-categories-slug": "ЧПУ",
+            "workspace-categories-active": "Вкл.",
+            "workspace-categories-pos": "Позиция",
+            "workspace-categories-lang": "Язык",
+            "workspace-categories-main": "Основное",
+            "workspace-categories-seo": "SEO"
         }
     }
 ]

@@ -11,6 +11,9 @@ import { AdmLangRepository } from '../../../services/repositories/admlang.reposi
 	templateUrl: './usergroups.list.page.html',	
 })
 export class UsergroupsListPage extends ListPage<Usergroup> implements OnInit {
+    // inherited
+    public homeUrl: string = "/users/usergroups";
+
     constructor(
         protected admlangRepository: AdmLangRepository,
         protected usergroupRepository: UsergroupRepository,

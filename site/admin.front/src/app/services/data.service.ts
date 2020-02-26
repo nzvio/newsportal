@@ -12,6 +12,7 @@ import { ErrorService } from './error.service';
 import { AdmLang } from '../model/admlang.model';
 import { Lang } from '../model/lang.model';
 import { Page } from '../model/page.model';
+import { Category } from '../model/category.model';
 
 @Injectable()
 export class DataService {
@@ -60,7 +61,15 @@ export class DataService {
     public pagesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `pages/delete/${_id}`, null, true);}
     public pagesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "pages/deletebulk", _ids, true);}
     public pagesCreate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/create", x, true);}
-    public pagesUpdate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/update", x, true);}    
+    public pagesUpdate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/update", x, true);}  
+
+    public categoriesAll(sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", {sortBy, sortDir}, true);}
+    public categoriesChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/chunk", {from, q, sortBy, sortDir}, true);}
+    public categoriesOne(_id: string): Observable<IAnswer<Category>> {return this.sendRequest("GET", `categories/one/${_id}`, null, true);}
+    public categoriesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `categories/delete/${_id}`, null, true);}
+    public categoriesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "categories/deletebulk", _ids, true);}
+    public categoriesCreate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/create", x, true);}
+    public categoriesUpdate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/update", x, true);}    
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

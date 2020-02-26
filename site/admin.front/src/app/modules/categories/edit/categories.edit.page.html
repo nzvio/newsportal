@@ -1,6 +1,6 @@
 <div class="content">
     <div class="content-head">
-        <h1>{{currentLang.phrases['workspace-pages-h1']}} - {{currentLang.phrases['workspace-edit']}}</h1>
+        <h1>{{currentLang.phrases['workspace-categories-h1']}} - {{currentLang.phrases['workspace-edit']}}</h1>
         <div class="content-dash">
             <div class="cd-btn back" [title]="currentLang.phrases['workspace-back']" [routerLink]="homeUrl"><span></span></div>
             <div class="cd-btn save" [title]="currentLang.phrases['workspace-save']" (click)="update();"><span></span></div>
@@ -9,18 +9,18 @@
     <div class="data">
         <ng-container *ngIf="ready">
             <form (submit)="update();">                
-                <the-page 
+                <the-category 
                     [currentLang]="currentLang" 
                     [x]="x"
                     [ll]="ll"
-                    [pl]="pl"                    
+                    [cl]="cl"                    
                     [requiredFields]="requiredFields"
                     [progressImg]="progressImg" 
                     [canBuildSlug]="false"
                     (uploadImg)="uploadImg($event);" 
                     (deleteImg)="deleteImg();"
                     (uploadImgTiny)="uploadImgTiny($event);"
-                ></the-page>                
+                ></the-category>                
             </form>
         </ng-container>
         <ng-container  *ngIf="!ready">

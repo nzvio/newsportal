@@ -12,6 +12,7 @@ import { AdmLangRepository } from './repositories/admlang.repository';
 import { LangRepository } from './repositories/lang.repository';
 import { PageRepository } from './repositories/page.repository';
 import { SlugService } from './slug.service';
+import { CategoryRepository } from './repositories/category.repository';
 
 @NgModule({
     declarations: [],
@@ -29,6 +30,7 @@ import { SlugService } from './slug.service';
 		UserRepository,
 		LangRepository,
 		PageRepository,
+		CategoryRepository,
 	],
 })
 export class ServicesModule { }

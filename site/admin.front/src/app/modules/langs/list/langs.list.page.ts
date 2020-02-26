@@ -11,6 +11,9 @@ import { Lang } from '../../../model/lang.model';
 	templateUrl: './langs.list.page.html',	
 })
 export class LangsListPage extends ListPage<Lang> implements OnInit {
+    // inherited
+    public homeUrl: string = "/langs";
+
     constructor(
         protected admlangRepository: AdmLangRepository,
         protected langRepository: LangRepository,         

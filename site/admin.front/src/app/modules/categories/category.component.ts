@@ -1,18 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Page } from '../../model/page.model';
+import { Category } from '../../model/category.model';
 import { ObjectComponent } from '../_object.component';
 import { Lang } from '../../model/lang.model';
 import { SlugService } from '../../services/slug.service';
 
 @Component({
-    selector: "the-page",
-    templateUrl: "./page.component.html"
+    selector: "the-category",
+    templateUrl: "./category.component.html"
 })
-export class PageComponent extends ObjectComponent implements OnInit {    
-    @Input() x: Page;   
+export class CategoryComponent extends ObjectComponent implements OnInit {    
+    @Input() x: Category;   
     @Input() ll: Lang[]; 
-    @Input() pl: Page[];    
+    @Input() cl: Category[];    
     @Input() canBuildSlug: boolean = false;
     public tab: number = 1;    
     public selectedLang: Lang;

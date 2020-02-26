@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from '@tinymce/tinymce-angular';
 
-import { UIModule } from 'src/app/ui/ui.module';
+import { UIModule } from '../../ui/ui.module';
 import { PagesListPage } from './list/pages.list.page';
 import { PagesEditPage } from './edit/pages.edit.page';
 import { PageComponent } from './page.component';

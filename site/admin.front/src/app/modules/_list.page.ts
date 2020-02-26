@@ -8,6 +8,8 @@ export abstract class ListPage<T extends Model> extends ModulePage {
     public ready: boolean = false;
     public reloading: boolean = false;    
     public allSelected: boolean = false;
+
+    public abstract homeUrl: string;
     
     constructor(        
         protected admlangRepository: AdmLangRepository,

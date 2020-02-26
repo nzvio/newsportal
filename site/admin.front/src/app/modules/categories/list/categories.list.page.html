@@ -1,6 +1,6 @@
 <div class="content">
     <div class="content-head">
-        <h1>{{currentLang.phrases['workspace-pages-h1']}} ({{fullLength}})</h1>
+        <h1>{{currentLang.phrases['workspace-categories-h1']}} ({{fullLength}})</h1>
         <div class="content-dash">
             <div class="cd-btn create" [title]="currentLang.phrases['workspace-create']" [routerLink]="homeUrl + '/create'"><span></span></div>
             <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.phrases['workspace-deleteselected']" (click)="deleteBulk();"><span></span></div>
@@ -9,7 +9,7 @@
     <div class="data">
         <ng-container *ngIf="ready">
             <div class="data-langs">
-                <div class="data-langs-title">{{currentLang.phrases['workspace-pages-lang']}}:</div>
+                <div class="data-langs-title">{{currentLang.phrases['workspace-categories-lang']}}:</div>
                 <div class="data-langs-btns">
                     <label *ngFor="let l of ll" (click)="selectedLang = l;"><input type="radio" [checked]="selectedLang._id === l._id">{{l.name}}</label>
                 </div>                    
@@ -18,9 +18,9 @@
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
-                        <th class="wide">{{currentLang.phrases['workspace-pages-name']}}</th>
-                        <th><label [class]="sortBy === 'pos' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('pos');">{{currentLang.phrases['workspace-pages-pos']}}</label></th>                        
-                        <th>{{currentLang.phrases['workspace-pages-active']}}</th>
+                        <th class="wide">{{currentLang.phrases['workspace-categories-name']}}</th>
+                        <th><label [class]="sortBy === 'pos' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('pos');">{{currentLang.phrases['workspace-categories-pos']}}</label></th>                        
+                        <th>{{currentLang.phrases['workspace-categories-active']}}</th>
                         <th>{{currentLang.phrases['workspace-actions']}}</th>
                     </tr>   
                     <ng-container *ngIf="xl.length">

@@ -9,6 +9,7 @@ import { UsersModule } from './modules/users/users.module';
 import { OptionsModule } from './modules/options/options.module';
 import { LangsModule } from './modules/langs/langs.module';
 import { PagesModule } from './modules/pages/pages.module';
+import { CategoriesModule } from './modules/categories/categories.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
@@ -18,6 +19,7 @@ const routes: Routes = [
 	{path: "auth", loadChildren: () => AuthModule}, 	
 	{path: "langs", loadChildren: () => LangsModule}, 
 	{path: "pages", loadChildren: () => PagesModule}, 
+	{path: "catalogue/categories", loadChildren: () => CategoriesModule}, 
 	{path:"**", component: HomePage},
 ];
 
