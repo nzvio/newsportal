@@ -21,7 +21,7 @@ export class UsergroupsService extends APIService {
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
 
         try {
-            let data: IUsergroup[] = await this.model.find ({}, null, {sort: {[sortBy]: sortDir}});
+            let data: IUsergroup[] = await this.model.find ({}, {title: 1}, {sort: {[sortBy]: sortDir}}); // load only titles
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.all: ${String(err)}`;

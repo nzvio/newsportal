@@ -8,7 +8,7 @@ export class PageCreateDTO {
     public readonly description: Object;
     public readonly img: string;
     public readonly img_s: string;
-    public readonly parent: string;
+    public parent: string; // not readonly because we will delete null values
     public readonly slug: string;
     public readonly active: boolean;
     public readonly pos: number;    

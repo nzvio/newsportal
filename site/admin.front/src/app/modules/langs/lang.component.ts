@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { ObjectComponent } from '../_object.component';
 import { Lang } from '../../model/lang.model';
-import { Phrase } from 'src/app/model/phrase';
-import { AppService } from 'src/app/services/app.service';
+import { Phrase } from '../../model/phrase';
+import { AppService } from '../../services/app.service';
 
 @Component({
     selector: "the-lang",

@@ -7,13 +7,14 @@ import { IHTMLInputEvent } from '../model/htmlinputevent.interface';
 import { HttpEventType } from '@angular/common/http';
 import { IAnswer } from '../model/answer.interface';
 import { IImagable } from '../model/imagable.interface';
-import { ThePage } from './_page';
+import { ModulePage } from './_module.page';
 import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ObjectPage<T extends Model> extends ThePage {
+export abstract class ObjectPage<T extends Model> extends ModulePage {
     public ready: boolean = false;
     public reloading: boolean = false;      
     public progressImg: number = 0;
+    public imgCopyWidth: number = 100;
     public requiredFields: string[] = [];
 
     public abstract x: T & IImagable;
@@ -81,7 +82,7 @@ export abstract class ObjectPage<T extends Model> extends ThePage {
             fd.append ("dir", this.folder);
             fd.append ("img", fileToUpload, fileToUpload.name);
             this.appService.monitorLog(`uploading image ${fileToUpload.name}...`);
-            this.uploadService.uploadImgWithCopy (fd, 100).subscribe (event => {                
+            this.uploadService.uploadImgWithCopy (fd, this.imgCopyWidth).subscribe (event => {                
                 if (event.type == HttpEventType.UploadProgress) {
                     this.progressImg = Math.round (100 * event.loaded / event.total);                    
                 } else if (event.type == HttpEventType.Response) {
@@ -100,6 +101,38 @@ export abstract class ObjectPage<T extends Model> extends ThePage {
             });            
         }  
     }
+
+    public uploadImgTiny (editor: any): void {        
+        let input: HTMLInputElement = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.onchange = () => {                
+            let fileToUpload = <File>input.files[0];
+
+            if (fileToUpload && this.folder) {
+                let fd = new FormData ();
+                fd.append ("dir", this.folder);
+                fd.append ("img", fileToUpload, fileToUpload.name);
+                this.appService.monitorLog(`uploading image ${fileToUpload.name}...`);
+                this.uploadService.uploadImg(fd).subscribe (event => {  
+                    if (event.type == HttpEventType.UploadProgress) {
+                        // TODO: show upload progress
+                    } else if (event.type == HttpEventType.Response) {
+                        const res: IAnswer<IImagable> = event.body;
+                            
+                        if (res.statusCode === 200) {
+                            editor.windowManager.close ();
+                            editor.editorManager.activeEditor.insertContent(`<img src="/assets/images/${this.folder}/${res.data.img}" width="200">`);                            
+                            this.appService.monitorLog(`uploaded: ${res.data.img}`);
+                        } else {
+                            this.appService.monitorLog (res.error, true);
+                        } 
+                    }                                               
+                });                                
+            }                
+        };
+        input.click ();
+    } 
 
     public deleteImg(): void {
         this.x.img = null;

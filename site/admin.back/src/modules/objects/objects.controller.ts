@@ -5,7 +5,6 @@ import { UpdateParamDTO } from "./dto/updateparam.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { AuthGuard } from "../auth/auth.guard";
 import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
-import { UpdateParamParamDTO } from "./dto/updateparamparam.dto";
 
 @Controller('api/admin/objects')
 export class ObjectsController {
@@ -23,12 +22,5 @@ export class ObjectsController {
     @Post("updateegoisticparam")    
     public updateEgoisticParam (@Body() dto: UpdateEgoisticParamDTO): Promise<IAnswer<void>> {
         return this.objectsService.updateEgoisticParam(dto);
-    }
-
-    // update parameter of parameter of any object    
-    @UseGuards(AuthGuard)
-    @Post("updateparamparam")    
-    public updateParamParam (@Body() dto: UpdateParamParamDTO): Promise<IAnswer<void>> {
-        return this.objectsService.updateParamParam(dto);
-    }
+    }   
 }

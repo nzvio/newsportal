@@ -16,7 +16,8 @@ export class Page extends Model {
     public active: boolean;
     public pos: number;
     public defended: boolean;
-    public __children: Page[];    
+    public __children: Page[]; // from API but not from DB
+    public __shift: string = ""; // not from API
 
     public init(): Page {
         this.name = {};

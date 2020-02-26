@@ -1,0 +1,66 @@
+<div class="data-tabs">
+    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-pages-main']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-pages-seo']}}</div>
+</div>
+
+<div class="data-langs padded">
+    <div class="data-langs-title">{{currentLang.phrases['workspace-pages-lang']}}:</div>
+    <div class="data-langs-btns">
+        <label *ngFor="let l of ll" (click)="selectedLang = l;"><input type="radio" [checked]="selectedLang._id === l._id">{{l.name}}</label>
+    </div>                    
+</div>
+
+<ng-container *ngIf="tab === 1">
+    <div class="data-form">  
+        <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-name']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <input type="text" name="name_{{l.name}}" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id">
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('contentshort') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-contentshort']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <textarea name="contentshort_{{l.name}}" [(ngModel)]="x.contentshort[l._id]" *ngIf="selectedLang._id === l._id"></textarea>
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('content') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-content']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <editor apiKey="vyqpgkbwnitqsjn9livngxdsuxggz6aowmwwx6d1spe78nnv" name="content_{{l.name}}" [init]="tinyInit(l)" [(ngModel)]="x.content[l._id]" *ngIf="selectedLang._id === l._id"></editor>
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-picture']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngIf="x.img">
+                <div class="df-imgwrap">
+                    <div class="df-imgwrap2"><img src="/assets/images/pages/{{x.img}}"></div>
+                    <div class="df-imgbtns">
+                        <div class="df-magnify" [title]="currentLang.phrases['workspace-viewpicture']" (click)="viewerActive = true;"><span></span></div>
+                        <div class="df-deletefile" [title]="currentLang.phrases['workspace-removepicture']" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
+                    </div>                
+                </div>                                
+            </ng-container>
+            <input #imginput type="file" name="img" (change)="onUploadImg($event);">
+            <progressbar [progress]="progressImg" *ngIf="progressImg"></progressbar>
+        </div>
+
+        <div [class]="isRequired('parent') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-parent']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.parent">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let p of pl" [value]="p._id" [innerHTML]="p.__shift+p.name[selectedLang._id]"></option>
+            </select>
+        </div>
+    </div>
+        
+</ng-container>
+
+<ng-container *ngIf="tab === 2">
+    <div class="data-form">
+
+    </div>
+</ng-container>

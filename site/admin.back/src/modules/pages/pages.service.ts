@@ -23,12 +23,12 @@ export class PagesService extends APIService {
 
         try {
             // first level
-            let data: IPage[] = await this.model.find({$or: [{parent: null}, {parent: {$exists: false}}]}, {}, {sort: {[sortBy]: sortDir}}); 
+            let data: IPage[] = await this.model.find({$or: [{parent: null}, {parent: {$exists: false}}]}, {name: 1}, {sort: {[sortBy]: sortDir}}); 
             let pages: PageDTO[] = data.length ? data.map(d => d.toObject()) : [];
             
             // children
             for (let page of pages) {
-                page.__children = await this.buildChildren(page, sortBy, sortDir);
+                page.__children = await this.buildChildren(page, sortBy, sortDir, {name: 1});
             }                        
             
             return {statusCode: 200, data: pages};
@@ -110,7 +110,7 @@ export class PagesService extends APIService {
     }
 
     public async update(dto: PageUpdateDTO): Promise<IAnswer<void>> {
-        try {
+        try {            
             let _id: string = dto._id;
             await this.model.updateOne ({_id: _id}, dto);
             return {statusCode: 200};
@@ -121,12 +121,12 @@ export class PagesService extends APIService {
         } 
     }
 
-    private async buildChildren(page: PageDTO, sortBy: string, sortDir: number): Promise<PageDTO[]> {
-        let data: IPage[] = await this.model.find({parent: page._id}, {}, {sort: {[sortBy]: sortDir}});
+    private async buildChildren(page: PageDTO, sortBy: string, sortDir: number, projection: Object = {}): Promise<PageDTO[]> {
+        let data: IPage[] = await this.model.find({parent: page._id}, projection, {sort: {[sortBy]: sortDir}});
         let children: PageDTO[] = data.length ? data.map(d => d.toObject()) : [];
 
         for (let child of children) {
-            child.__children = await this.buildChildren(child, sortBy, sortDir);
+            child.__children = await this.buildChildren(child, sortBy, sortDir, projection);
         }
 
         return children;

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ThePage } from '../_page';
+import { ModulePage } from '../_module.page';
 import { AdmLangRepository } from '../../services/repositories/admlang.repository';
 
 @Component({
 	selector: 'login-page',
 	templateUrl: './login.page.html',	
 })
-export class LoginPage extends ThePage {
+export class LoginPage extends ModulePage {
 	constructor(protected admlangRepository: AdmLangRepository) {
 		super(admlangRepository);
 	}

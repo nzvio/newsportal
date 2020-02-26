@@ -68,6 +68,15 @@ html {
                     @media (min-width:0) {padding: 15px;}
                     @media (min-width:1000px) {padding: 30px;}  
                     background-color: $color-bg-dark; font-size: 13px; overflow: auto; position: relative;
+                    // langs
+                    .data-langs {
+                        margin: 0 0 15px 0; display: flex; flex-wrap: wrap;
+                        &.padded {padding-top: 30px;}
+                        .data-langs-title {margin: 0 10px 5px 0;}
+                        .data-langs-btns {
+                            label {margin-right: 10px;}
+                        }                            
+                    }
                     // table blocks
                     .data-tablewrap {
                         min-height: 550px; margin: 0 0 40px 0;
@@ -97,12 +106,7 @@ html {
                                     &.back {span::before {content: "\f060";}}
                                 }
                             }
-                        }     
-                        // langs
-                        .data-langs {
-                            margin: 0 0 20px 0;
-                            label {margin-right: 10px;}
-                        }    
+                        }                                 
                         // tables               
                         table.data-table {
                             width:100%; color: $color-transparent; border-collapse: collapse; 
@@ -111,7 +115,7 @@ html {
                                 &:last-child {border-bottom: none;}
                                 &:not(:first-child):hover {background-color: $color-bg-light;}
                                 th {
-                                    padding: 5px 10px; text-align: left; 
+                                    padding: 5px 10px; text-align: left; white-space: nowrap;
                                     &:not(:first-child) {min-width: 100px;}
                                     &.wide {min-width:300px;}
                                     label {

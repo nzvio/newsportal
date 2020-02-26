@@ -26,8 +26,7 @@ export class DataService {
     public admlangs(): Observable<AdmLang[]> {return this.http.get<AdmLang[]>("/assets/json/admin.languages.json");}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public updateParam (obj: string, _id: string, p: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparam", {obj, _id, p, v}, true);}    
-    public updateEgoisticParam (obj: string, _id: string, p: string, v:boolean): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateegoisticparam", {obj, _id, p, v}, true);}    
-    public updateParamParam (obj: string, _id: string, p: string, pp: string, v:any): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateparamparam", {obj, _id, p, pp, v}, true);}    
+    public updateEgoisticParam (obj: string, _id: string, p: string, v:boolean): Observable<IAnswer<void>> {return this.sendRequest("POST", "objects/updateegoisticparam", {obj, _id, p, v}, true);}        
     public upload (fd: FormData): Observable<HttpEvent<IAnswer<string>>> {return this.sendRequest("POST", `files/upload`, fd, true, true);}
     public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
     public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}

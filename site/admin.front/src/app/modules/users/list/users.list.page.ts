@@ -29,7 +29,7 @@ export class UsersListPage extends ListPage<User> implements OnInit {
     public async ngOnInit(): Promise<void> {
         try {
             await this.userRepository.loadChunk();
-            await this.usergroupRepository.loadFull();
+            await this.usergroupRepository.loadFull();            
             this.appService.monitorLog("users page loaded");
             this.ready = true;
         } catch (err) {

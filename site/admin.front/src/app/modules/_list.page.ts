@@ -1,10 +1,10 @@
 import { AppService } from '../services/app.service';
 import { Repository } from '../services/repositories/repository';
 import { Model } from '../model/model';
-import { ThePage } from './_page';
+import { ModulePage } from './_module.page';
 import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ListPage<T extends Model> extends ThePage {
+export abstract class ListPage<T extends Model> extends ModulePage {
     public ready: boolean = false;
     public reloading: boolean = false;    
     public allSelected: boolean = false;
@@ -70,20 +70,7 @@ export abstract class ListPage<T extends Model> extends ThePage {
             this.appService.monitorLog(`error: ${err}`, true);
             return false;
         }        
-    }
-
-    public async updateParamParam (_id: string, p: string, pp: string, v: any): Promise<boolean> {        
-        try {
-            this.appService.monitorLog(`updating object: id=${_id} param=${p} paramparam=${pp} value=${v}`);
-            await this.repository.updateParamParam(_id, p, pp, v);
-            this.repository.invalidateAll();
-            this.appService.monitorLog("ok");
-            return true;
-        } catch (err) {
-            this.appService.monitorLog(`error: ${err}`, true);
-            return false;
-        }        
-    }
+    }    
     
     // egoistic param - boolean that can be true only in one element, other must be false
     public async updateEgoisticParam (_id: string, p: string, v: boolean): Promise<boolean> {        

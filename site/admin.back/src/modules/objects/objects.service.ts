@@ -10,7 +10,6 @@ import { IUser } from "../users/interfaces/user.interface";
 import { ILang } from "../langs/interfaces/lang.interface";
 import { IPage } from "../pages/interfaces/page.interface";
 import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
-import { UpdateParamParamDTO } from "./dto/updateparamparam.dto";
 
 @Injectable()
 export class ObjectsService extends APIService {
@@ -53,20 +52,5 @@ export class ObjectsService extends APIService {
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }
-    }
-
-    public async updateParamParam (dto: UpdateParamParamDTO): Promise<IAnswer<void>> {        
-        try {
-            let model = await this[`model${dto.obj}`].findById (dto._id);        
-            console.log(model[dto.p][dto.pp], dto.v);
-            model[dto.p][dto.pp] = dto.v;
-            await model.save ();
-
-            return {statusCode: 200};
-        } catch (err) {
-            let errTxt: string = `Error in ObjectsService.updateParamParam: ${String(err)}`;
-            console.log(errTxt);
-            return {statusCode: 500, error: errTxt};
-        }
-    }
+    }    
 }

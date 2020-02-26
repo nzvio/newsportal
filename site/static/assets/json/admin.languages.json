@@ -75,7 +75,10 @@
             "workspace-pages-parent": "Parent page",
             "workspace-pages-slug": "Slug",
             "workspace-pages-active": "Active",
-            "workspace-pages-pos": "Position"
+            "workspace-pages-pos": "Position",
+            "workspace-pages-lang": "Language",
+            "workspace-pages-main": "Main",
+            "workspace-pages-seo": "SEO"
         }
     },
     {
@@ -154,7 +157,10 @@
             "workspace-pages-parent": "Родительская",
             "workspace-pages-slug": "ЧПУ",
             "workspace-pages-active": "Вкл.",
-            "workspace-pages-pos": "Позиция"
+            "workspace-pages-pos": "Позиция",
+            "workspace-pages-lang": "Язык",
+            "workspace-pages-main": "Основное",
+            "workspace-pages-seo": "SEO"
         }
     }
 ]

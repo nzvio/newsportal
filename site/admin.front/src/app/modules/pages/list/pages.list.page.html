@@ -8,10 +8,13 @@
     </div>    
     <div class="data">
         <ng-container *ngIf="ready">
-            <div class="data-tablewrap">
-                <div class="data-langs">
+            <div class="data-langs">
+                <div class="data-langs-title">{{currentLang.phrases['workspace-pages-lang']}}:</div>
+                <div class="data-langs-btns">
                     <label *ngFor="let l of ll" (click)="selectedLang = l;"><input type="radio" [checked]="selectedLang._id === l._id">{{l.name}}</label>
-                </div>
+                </div>                    
+            </div>
+            <div class="data-tablewrap">                
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
@@ -26,7 +29,7 @@
                             <td>
                                 <div class="dt-inputwrap">
                                     <ng-container *ngFor="let l of ll">
-                                        <input type="text" [(ngModel)]="x.name[selectedLang._id]" *ngIf="selectedLang._id === l._id" (change)="updateParamParam(x._id, 'name', l._id, x.name[l._id])">
+                                        <input type="text" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id" (change)="updateParam(x._id, 'name', x.name)">
                                     </ng-container>                                    
                                 </div>
                             </td>

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Router } from '@angular/router';
+
+import { Page } from '../model/page.model';
+import { Lang } from '../model/lang.model';
 
 @Injectable()
 export class AppService {
@@ -68,5 +70,32 @@ export class AppService {
                 return 0;
             });
         }
+    }
+
+    public tree2list(tree: Page[], langs: Lang[]): Page[] {
+        let list: Page[] = [];
+        let buildChildren = (children: Page[], level: number) => {            
+            let res: Page[] = [];
+            let shift: string = "";
+
+            for (let i: number = 0; i < level; i++) {
+                shift += "&nbsp;&nbsp;&nbsp;";
+            }
+
+            for (let child of children) {
+                child.__shift = shift;            
+                res.push(child);
+                res = res.concat(buildChildren(child.__children, level+1));
+            }            
+            
+            return res;
+        };
+
+        tree.forEach(page => {
+            list.push(page);
+            list = list.concat(buildChildren(page.__children, 1));
+        });
+
+        return list;
     }
 }
