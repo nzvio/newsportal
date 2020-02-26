@@ -18,7 +18,7 @@
                 <table class="data-table">
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
-                        <th class="langable">{{currentLang.phrases['workspace-pages-name']}}</th>
+                        <th class="wide">{{currentLang.phrases['workspace-pages-name']}}</th>
                         <th><label [class]="sortBy === 'pos' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('pos');">{{currentLang.phrases['workspace-pages-pos']}}</label></th>                        
                         <th>{{currentLang.phrases['workspace-pages-active']}}</th>
                         <th>{{currentLang.phrases['workspace-actions']}}</th>
@@ -27,7 +27,7 @@
                         <tr *ngFor="let x of xl">
                             <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
                             <td>
-                                <div class="dt-inputwrap">
+                                <div class="dt-inputwrap" [style.padding-left.px]="x.__level*20">
                                     <ng-container *ngFor="let l of ll">
                                         <input type="text" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id" (change)="updateParam(x._id, 'name', x.name)">
                                     </ng-container>                                    

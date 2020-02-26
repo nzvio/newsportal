@@ -15,7 +15,7 @@
         <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-name']}}:</div>
         <div class="df-inputwrap">
             <ng-container *ngFor="let l of ll">
-                <input type="text" name="name_{{l.name}}" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id">
+                <input type="text" name="name_{{l.name}}" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id" (change)="l.sluggable ? buildSlug(l._id) : null;">
             </ng-container>            
         </div>
 
@@ -52,15 +52,58 @@
         <div class="df-inputwrap">
             <select [(ngModel)]="x.parent">
                 <option [ngValue]="null"></option>
-                <option *ngFor="let p of pl" [value]="p._id" [innerHTML]="p.__shift+p.name[selectedLang._id]"></option>
+                <ng-container *ngFor="let p of pl">
+                    <option *ngIf="p._id !== x._id" [value]="p._id" [innerHTML]="p.__shift+p.name[selectedLang._id]"></option>
+                </ng-container>                
             </select>
         </div>
+
+        <div [class]="isRequired('pos') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-pos']}}:</div>
+        <div class="df-inputwrap"><input class="small" type="number" name="pos" [(ngModel)]="x.pos"></div>
+
+        <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-active']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>   
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
     </div>
-        
+    <image-viewer [img]="x.img" folder="pages" [(active)]="viewerActive"></image-viewer>
 </ng-container>
 
 <ng-container *ngIf="tab === 2">
     <div class="data-form">
+        <div [class]="isRequired('slug') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-slug']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="slug" [(ngModel)]="x.slug"></div>
 
+        <div [class]="isRequired('h1') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-header']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <input type="text" name="h1_{{l.name}}" [(ngModel)]="x.h1[l._id]" *ngIf="selectedLang._id === l._id">
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('title') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-title']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <input type="text" name="title_{{l.name}}" [(ngModel)]="x.title[l._id]" *ngIf="selectedLang._id === l._id">
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('keywords') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-keywords']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <input type="text" name="keywords_{{l.name}}" [(ngModel)]="x.keywords[l._id]" *ngIf="selectedLang._id === l._id">
+            </ng-container>            
+        </div>
+
+        <div [class]="isRequired('description') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-pages-description']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngFor="let l of ll">
+                <input type="text" name="description_{{l.name}}" [(ngModel)]="x.description[l._id]" *ngIf="selectedLang._id === l._id">
+            </ng-container>            
+        </div>
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
     </div>
 </ng-container>

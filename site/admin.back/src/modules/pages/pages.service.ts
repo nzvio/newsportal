@@ -111,6 +111,7 @@ export class PagesService extends APIService {
 
     public async update(dto: PageUpdateDTO): Promise<IAnswer<void>> {
         try {            
+            dto.slug = await this.checkSlug(dto.slug, dto._id, 0);
             let _id: string = dto._id;
             await this.model.updateOne ({_id: _id}, dto);
             return {statusCode: 200};
@@ -130,5 +131,16 @@ export class PagesService extends APIService {
         }
 
         return children;
+    }
+
+    private async checkSlug(slug: string, _id: string | null, iteration: number): Promise<string> {
+        let candidate: string = (iteration) ? `${slug}-${iteration}` : slug;
+        let res: IPage | null = await this.model.findOne({slug: candidate, _id: {$ne: _id}});
+        
+        if (res) {            
+            return this.checkSlug(slug, _id, iteration + 1);
+        }
+
+        return candidate;
     }
 }

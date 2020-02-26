@@ -40,5 +40,5 @@ export abstract class ObjectComponent {
                 self.uploadImgTiny.emit(this);                
 			}
         };
-    }
+    }    
 }

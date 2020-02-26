@@ -14,15 +14,12 @@ import { Lang } from 'src/app/model/lang.model';
 	selector: 'pages-edit-page',
 	templateUrl: './pages.edit.page.html',	
 })
-export class PagesEditPage extends ObjectPage<Page> implements OnInit {	
-	// inherited
+export class PagesEditPage extends ObjectPage<Page> implements OnInit {		
 	public x: Page | null = null;
 	public homeUrl: string = "/pages";
 	public folder: string = "pages";
 	public requiredFields: string[] = ["slug"];
-	public imgCopyWidth: number = 200;
-	// extra
-	public pl: Page[] = [];
+	public imgCopyWidth: number = 200;	
 	
 	constructor(
 		protected admlangRepository: AdmLangRepository,
@@ -37,6 +34,7 @@ export class PagesEditPage extends ObjectPage<Page> implements OnInit {
 	}
 
 	get ll(): Lang[] {return this.langRepository.xlFull;}	
+	get pl(): Page[] {return this.pageRepository.xlFull;}	
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(async p => {			
@@ -44,8 +42,7 @@ export class PagesEditPage extends ObjectPage<Page> implements OnInit {
 				this.ready = false;				
 				this.x = await this.pageRepository.loadOne(p["_id"]);
 				await this.langRepository.loadFull();
-				await this.pageRepository.loadFull();
-				this.pl = this.appService.tree2list(this.pageRepository.xlFull, this.ll);				
+				await this.pageRepository.loadFull();				
 				this.appService.monitorLog("pages edit page loaded");
 				this.ready = true;
 			} catch (err) {

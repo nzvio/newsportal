@@ -36,25 +36,28 @@ html {
             .content {
                 max-width: 1300px; margin: 0 auto;
                 .content-head {
-                    margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+                    margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
                     h1 {
-                        @media (min-width:0) {padding: 0;}
-                        @media (min-width:1000px) {padding: 0 0 0 30px;}  
-                        margin: 0; font-size: 16px; text-transform: uppercase; font-weight: normal;
+                        @media (min-width:0) {padding: 0; font-size: 14px;}
+                        @media (min-width:1000px) {padding: 0 0 0 30px; font-size: 16px;}  
+                        margin: 0 0 10px 0; text-transform: uppercase; font-weight: normal;
                     }     
                     .content-dash {
                         @media (min-width:0) {padding: 0;}
                         @media (min-width:1000px) {padding: 0 30px 0 0;}  
-                        display: flex; justify-content: flex-end;
+                        display: flex; justify-content: flex-end; margin: 0 0 10px 0; 
                         .cd-btn {
-                            height: 40px; width:40px; margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; line-height: 40px;
+                            @media (min-width:0) {height: 30px; width:30px; line-height: 30px; }
+                            @media (min-width:1000px) {height: 40px; width:40px; line-height: 40px; } 
+                            margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; 
                             &:hover {background-color: $color-bg-light;}
                             &.disabled {
                                 cursor: inherit; color: $color-transparent-disabled;
                                 &:hover {background-color: inherit;}                                
                             }
                             span {
-                                font-size: 24px;  
+                                @media (min-width:0) {font-size: 20px;}
+                                @media (min-width:1000px) {font-size: 24px;}
                                 &::before {font-family: "awesome-solid";}                                
                             }
                             &.create {span::before {content: "\f067";}}
@@ -90,14 +93,17 @@ html {
                             .datahead-dash {
                                 display: flex; justify-content: flex-end;
                                 .dhd-btn {
-                                    height: 40px; width:40px; margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; line-height: 40px;
+                                    @media (min-width:0) {height: 30px; width:30px; line-height: 30px; }
+                                    @media (min-width:1000px) {height: 40px; width:40px; line-height: 40px; } 
+                                    margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; 
                                     &:hover {background-color: $color-bg-light;}
                                     &.disabled {
                                         cursor: inherit; color: $color-transparent-disabled;
                                         &:hover {background-color: inherit;}                                
                                     }
                                     span {
-                                        font-size: 24px;  
+                                        @media (min-width:0) {font-size: 20px;}
+                                        @media (min-width:1000px) {font-size: 24px;}
                                         &::before {font-family: "awesome-solid";}                                
                                     }
                                     &.create {span::before {content: "\f067";}}
@@ -168,7 +174,7 @@ html {
                         }
                         .df-inputwrap {
                             margin: 5px 0;
-                            input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+                            input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="number"] {
                                 @media (min-width:0) {width: 100%;}
                                 @media (min-width:1000px) {width:400px;}                                  
                                 &.small {width:60px;}

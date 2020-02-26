@@ -11,6 +11,7 @@ import { UploadService } from './upload.service';
 import { AdmLangRepository } from './repositories/admlang.repository';
 import { LangRepository } from './repositories/lang.repository';
 import { PageRepository } from './repositories/page.repository';
+import { SlugService } from './slug.service';
 
 @NgModule({
     declarations: [],
@@ -23,6 +24,7 @@ import { PageRepository } from './repositories/page.repository';
 		AuthService,
 		AuthGuard,
 		UploadService,
+		SlugService,
 		UsergroupRepository,
 		UserRepository,
 		LangRepository,

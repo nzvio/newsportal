@@ -25,7 +25,8 @@ export class PageRepository extends Repository<Page> {
             } else {
                 this.dataService.pagesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlFull = res.data.length ? res.data.map(d => new Page().build(d)) : [];
+                        let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : []
+                        this.xlFull = this.appService.tree2list(xl);
                         this.fullLength = this.xlFull.length;
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
@@ -46,7 +47,8 @@ export class PageRepository extends Repository<Page> {
             } else {                
                 this.dataService.pagesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlChunk = res.data.length ? res.data.map(d => new Page().build(d)) : [];
+                        let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : [];
+                        this.xlChunk = this.appService.tree2list(xl);
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();

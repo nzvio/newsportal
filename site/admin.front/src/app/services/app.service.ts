@@ -72,21 +72,22 @@ export class AppService {
         }
     }
 
-    public tree2list(tree: Page[], langs: Lang[]): Page[] {
+    public tree2list(tree: Page[]): Page[] {
         let list: Page[] = [];
         let buildChildren = (children: Page[], level: number) => {            
             let res: Page[] = [];
-            let shift: string = "";
+            
+            children.forEach(child => {
+                child.__level = level;
+                child.__shift = "";
 
-            for (let i: number = 0; i < level; i++) {
-                shift += "&nbsp;&nbsp;&nbsp;";
-            }
+                for (let i: number = 0; i < level; i++) {
+                    child.__shift += "&nbsp;&nbsp;&nbsp;";
+                }
 
-            for (let child of children) {
-                child.__shift = shift;            
                 res.push(child);
                 res = res.concat(buildChildren(child.__children, level+1));
-            }            
+            });           
             
             return res;
         };
@@ -97,5 +98,5 @@ export class AppService {
         });
 
         return list;
-    }
+    }    
 }

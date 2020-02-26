@@ -97,7 +97,7 @@
             "sidebar-submodule-users": "Пользователи",
             "sidebar-submodule-usergroups": "Группы пользователей",
             "sidebar-module-langs": "Языки",
-            "sidebar-module-pages": "Текстовые страницы",
+            "sidebar-module-pages": "Статические страницы",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -145,7 +145,7 @@
             "workspace-langs-params": "Параметры языка",
             "workspace-langs-sluggable": "Исп. для ЧПУ",
 
-            "workspace-pages-h1": "Текстовые страницы",
+            "workspace-pages-h1": "Статические страницы",
             "workspace-pages-name": "Имя в меню",
             "workspace-pages-header": "Заголовок (H1)",
             "workspace-pages-contentshort": "Краткое содержание",
