@@ -123,7 +123,7 @@ export class PagesService extends APIService {
         } 
     }
 
-    private async buildChildren(page: PageDTO, sortBy: string, sortDir: number, projection: Object = {}): Promise<PageDTO[]> {
+    private async buildChildren(page: PageDTO, sortBy: string, sortDir: number, projection: Object | null = null): Promise<PageDTO[]> {
         let data: IPage[] = await this.model.find({parent: page._id}, projection, {sort: {[sortBy]: sortDir}});
         let children: PageDTO[] = data.length ? data.map(d => d.toObject()) : [];
 

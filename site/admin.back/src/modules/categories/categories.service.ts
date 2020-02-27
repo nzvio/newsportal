@@ -123,7 +123,7 @@ export class CategoriesService extends APIService {
         } 
     }
 
-    private async buildChildren(category: CategoryDTO, sortBy: string, sortDir: number, projection: Object = {}): Promise<CategoryDTO[]> {
+    private async buildChildren(category: CategoryDTO, sortBy: string, sortDir: number, projection: Object | null = null): Promise<CategoryDTO[]> {
         let data: ICategory[] = await this.model.find({parent: category._id}, projection, {sort: {[sortBy]: sortDir}});
         let children: CategoryDTO[] = data.length ? data.map(d => d.toObject()) : [];
 

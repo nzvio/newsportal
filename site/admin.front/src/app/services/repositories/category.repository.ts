@@ -25,7 +25,7 @@ export class CategoryRepository extends Repository<Category> {
             } else {
                 this.dataService.categoriesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : []
+                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
                         this.xlFull = this.appService.tree2list(xl);
                         this.fullLength = this.xlFull.length;
                         this.fullLoadedAt = new Date().getTime();
@@ -47,7 +47,7 @@ export class CategoryRepository extends Repository<Category> {
             } else {                
                 this.dataService.categoriesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];
+                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
                         this.xlChunk = this.appService.tree2list(xl);
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    

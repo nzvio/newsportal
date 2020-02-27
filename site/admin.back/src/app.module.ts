@@ -9,6 +9,7 @@ import { FilesModule } from './modules/files/files.module';
 import { LangsModule } from './modules/langs/langs.module';
 import { PagesModule } from './modules/pages/pages.module';
 import { CategoriesModule } from './modules/categories/categories.module';
+import { ArticlesModule } from './modules/articles/articles.module';
 
 const pw: string = process.env.MONGODBPW;
 
@@ -24,6 +25,7 @@ const pw: string = process.env.MONGODBPW;
 		LangsModule,		
 		PagesModule,
 		CategoriesModule,
+		ArticlesModule,
 	],	
 })
 export class AppModule {}

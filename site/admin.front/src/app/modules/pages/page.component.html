@@ -9,6 +9,7 @@
         <label *ngFor="let l of ll" (click)="selectedLang = l;"><input type="radio" [checked]="selectedLang._id === l._id">{{l.name}}</label>
     </div>                    
 </div>
+<hr>
 
 <ng-container *ngIf="tab === 1">
     <div class="data-form">  

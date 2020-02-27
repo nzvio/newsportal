@@ -28,7 +28,7 @@ html {
             &:hover {background-color: $color-transparent-dark; color: #fff;}
         }
         ::placeholder {color: $color-grey-light;}
-        hr {margin: 30px 0;}
+        hr {margin: 10px 0; height: 1px; border: none; background-color: $color-transparent-dark;}
         // main layout
         main {
             @media (min-width:0) {padding: 112px 15px 15px 15px;}
