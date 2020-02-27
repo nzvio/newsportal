@@ -9,28 +9,31 @@ import { UploadService } from '../../../services/upload.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Lang } from '../../../model/lang.model';
+import { Article } from '../../../model/article.model';
+import { ArticleRepository } from '../../../services/repositories/article.repository';
 
 @Component({
-	selector: 'categories-edit-page',
-	templateUrl: './categories.edit.page.html',	
+	selector: 'articles-edit-page',
+	templateUrl: './articles.edit.page.html',	
 })
-export class CategoriesEditPage extends ObjectPage<Category> implements OnInit {		
-	public x: Category | null = null;
-	public homeUrl: string = "/catalogue/categories";
-	public folder: string = "categories";
-	public requiredFields: string[] = ["slug"];
+export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {		
+	public x: Article | null = null;
+	public homeUrl: string = "/catalogue/articles";
+	public folder: string = "articles";
+	public requiredFields: string[] = ["slug", "name"];
 	public imgCopyWidth: number = 200;	
 	
 	constructor(
 		protected admlangRepository: AdmLangRepository,
-		protected categoryRepository: CategoryRepository,
+		protected articleRepository: ArticleRepository,
 		private langRepository: LangRepository,
+		private categoryRepository: CategoryRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,
 		private route: ActivatedRoute,	
 	) {
-		super(admlangRepository, categoryRepository, appService, router, uploadService);
+		super(admlangRepository, articleRepository, appService, router, uploadService);
 	}
 
 	get ll(): Lang[] {return this.langRepository.xlFull;}	
@@ -40,12 +43,12 @@ export class CategoriesEditPage extends ObjectPage<Category> implements OnInit {
 		this.route.params.subscribe(async p => {			
 			try {
 				this.ready = false;				
-				this.x = await this.categoryRepository.loadOne(p["_id"]);				
+				this.x = await this.articleRepository.loadOne(p["_id"]);				
 				await this.categoryRepository.loadFull();								
 				await this.langRepository.loadFull();
 
 				if (this.ll.length) {
-					this.appService.monitorLog("[categories edit] page loaded");
+					this.appService.monitorLog("[articles edit] page loaded");
 					this.ready = true;
 				} else {
 					this.appService.monitorLog("no languages found", true);

@@ -6,14 +6,14 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 
 import { UIModule } from '../../ui/ui.module';
 import { ArticlesListPage } from './list/articles.list.page';
-//import { ArticlesEditPage } from './edit/articles.edit.page';
+import { ArticlesEditPage } from './edit/articles.edit.page';
 //import { ArticleComponent } from './article.component';
 //import { ArticlesCreatePage } from './create/articles.create.page';
 
 let routing = RouterModule.forChild ([        
 	{path:"", component: ArticlesListPage, pathMatch: "full"},
 //	{path:"create", component: ArticlesCreatePage, pathMatch: "full"},
-	//{path:"edit/:_id", component: ArticlesEditPage},
+	{path:"edit/:_id", component: ArticlesEditPage},
 ]);
 
 @NgModule({	
@@ -27,7 +27,7 @@ let routing = RouterModule.forChild ([
 	declarations: [
 		ArticlesListPage,
 //		ArticlesCreatePage,
-//		ArticlesEditPage,
+		ArticlesEditPage,
 //		ArticleComponent,
 	]    
 })
