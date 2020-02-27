@@ -10,5 +10,5 @@ import { ObjectComponent } from '../_object.component';
 })
 export class UserComponent extends ObjectComponent {    
     @Input() x: User | null = null;
-    @Input() ugl: Usergroup[] = [];        
+    @Input() ugl: Usergroup[] = [];         
 }

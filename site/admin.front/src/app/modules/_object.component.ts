@@ -8,6 +8,7 @@ export abstract class ObjectComponent {
     @Input() currentLang: AdmLang;
     @Input() requiredFields: string[] = [];
     @Input() progressImg: number = 0;    
+    @Input() folder: string = "";
     @Output() uploadImg: EventEmitter<Event> = new EventEmitter();
     @Output() deleteImg: EventEmitter<void> = new EventEmitter();
     @Output() uploadImgTiny: EventEmitter<object> = new EventEmitter();
@@ -25,11 +26,11 @@ export abstract class ObjectComponent {
         return this.requiredFields.includes(field);
     }
 
-    public tinyInit (lang: Lang): Object {
+    public tinyInit (lang: Lang | null = null): Object {
         let self = this;
         return {
             branding:false, 
-            directionality: lang.dir,
+            directionality: lang ? lang.dir : "ltr",
             height:300, 
             width:"100%", 
             menubar:false, 

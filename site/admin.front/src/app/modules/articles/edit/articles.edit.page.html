@@ -8,9 +8,8 @@
     </div>    
     <div class="data">
         <ng-container *ngIf="ready">
-            <form (submit)="update();">                
-                <!--
-                <the-category 
+            <form (submit)="update();">                                
+                <the-article 
                     [currentLang]="currentLang" 
                     [x]="x"
                     [ll]="ll"
@@ -21,8 +20,8 @@
                     (uploadImg)="uploadImg($event);" 
                     (deleteImg)="deleteImg();"
                     (uploadImgTiny)="uploadImgTiny($event);"
-                ></the-category>                
-                -->
+                    [folder]="folder"
+                ></the-article>
             </form>
         </ng-container>
         <ng-container  *ngIf="!ready">

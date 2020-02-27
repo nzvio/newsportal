@@ -1,0 +1,17 @@
+<div class="dtp-component">
+    <div class="dtp-date">{{formatedDate}}</div>
+    <div class="dtp-btn" (click)="active = !active;"><span></span></div>
+    <div [class]="active ? 'dtp-picker active' : 'dtp-picker'">
+        <div class="dtp-content">
+            <div class="dtp-month">
+                <div class="dtp-month-back" (click)="onMonthBack();"><span></span></div>
+                <div class="dtp-month-current"><span>{{monthAndYear}}</span></div>
+                <div class="dtp-month-forward" (click)="onMonthForward();"><span></span></div>
+            </div>
+            <div class="dtp-days">                
+                <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
+                <div *ngFor="let day of days">{{day}}</div>
+            </div>
+        </div>        
+    </div>
+</div>

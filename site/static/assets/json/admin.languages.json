@@ -101,7 +101,7 @@
             "workspace-categories-seo": "SEO",
 
             "workspace-articles-h1": "Articles",
-            "workspace-articles-date": "Date",
+            "workspace-articles-date": "Date (UTC)",
             "workspace-articles-name": "Header",
             "workspace-articles-header": "H1 header",
             "workspace-articles-contentshort": "Short content",
@@ -114,7 +114,9 @@
             "workspace-articles-source": "Source",
             "workspace-articles-active": "Active",
             "workspace-articles-category": "Category",
-            "workspace-articles-lang": "Language"
+            "workspace-articles-lang": "Language",
+            "workspace-articles-main": "Main",
+            "workspace-articles-seo": "SEO"
         }
     },
     {
@@ -219,7 +221,7 @@
             "workspace-categories-seo": "SEO",
 
             "workspace-articles-h1": "Статьи",
-            "workspace-articles-date": "Дата",
+            "workspace-articles-date": "Дата (UTC)",
             "workspace-articles-name": "Заголовок",
             "workspace-articles-header": "Заголовок H1",
             "workspace-articles-contentshort": "Краткое содержание",
@@ -232,7 +234,9 @@
             "workspace-articles-source": "Источник",
             "workspace-articles-active": "Вкл.",
             "workspace-articles-category": "Категория",
-            "workspace-articles-lang": "Язык"
+            "workspace-articles-lang": "Язык",
+            "workspace-articles-main": "Основное",
+            "workspace-articles-seo": "SEO"
         }
     }
 ]

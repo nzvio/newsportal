@@ -1,21 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Page } from '../../model/page.model';
+import { Category } from '../../model/category.model';
 import { ObjectComponent } from '../_object.component';
 import { Lang } from '../../model/lang.model';
 import { SlugService } from '../../services/slug.service';
+import { Article } from '../../model/article.model';
 
 @Component({
-    selector: "the-page",
-    templateUrl: "./page.component.html"
+    selector: "the-article",
+    templateUrl: "./article.component.html"
 })
-export class PageComponent extends ObjectComponent implements OnInit {    
-    @Input() x: Page;   
+export class ArticleComponent extends ObjectComponent implements OnInit {    
+    @Input() x: Article;   
     @Input() ll: Lang[]; 
-    @Input() pl: Page[];    
+    @Input() cl: Category[];    
     @Input() canBuildSlug: boolean = false;
-    public tab: number = 1;    
-    public selectedLang: Lang;
+    public tab: number = 1;     
+    public selectedLang: Lang;   
 
     constructor(private slugService: SlugService) {
         super();
@@ -24,7 +25,7 @@ export class PageComponent extends ObjectComponent implements OnInit {
     public ngOnInit(): void {
         this.selectedLang = this.ll[0];        
     }
-
+    
     public buildSlug(name: string): void {
         this.x.slug = this.slugService.buildSlug(name);
     }

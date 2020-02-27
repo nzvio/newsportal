@@ -25,7 +25,7 @@ export class CategoryComponent extends ObjectComponent implements OnInit {
         this.selectedLang = this.ll[0];        
     }
 
-    public buildSlug(langId): void {
-        this.x.slug = this.slugService.buildSlug(this.x.name[langId]);
+    public buildSlug(name: string): void {
+        this.x.slug = this.slugService.buildSlug(name);
     }
 }

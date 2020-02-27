@@ -19,7 +19,7 @@
     <div class="df-inputwrap">
         <ng-container *ngIf="x.img">
             <div class="df-imgwrap">
-                <div class="df-imgwrap2"><img src="/assets/images/users/{{x.img}}"></div>
+                <div class="df-imgwrap2"><img src="/assets/images/{{folder}}/{{x.img}}"></div>
                 <div class="df-imgbtns">
                     <div class="df-magnify" [title]="currentLang.phrases['workspace-viewpicture']" (click)="viewerActive = true;"><span></span></div>
                     <div class="df-deletefile" [title]="currentLang.phrases['workspace-removepicture']" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
@@ -37,4 +37,4 @@
     <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>                    
 </div>
 
-<image-viewer [img]="x.img" folder="users" [(active)]="viewerActive"></image-viewer>
+<image-viewer [img]="x.img" [folder]="folder" [(active)]="viewerActive"></image-viewer>

@@ -10,6 +10,7 @@ import { LoadingtableComponent } from './loading-table/loading-table.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { ImageviewerComponent } from './imageviewer/imageviewer.component';
 import { CheckboxsliderComponent } from './checkbox-slider/checkboxslider.component';
+import { DatetimePicker } from './datetime-picker/datetime-picker.component';
 
 @NgModule({
     imports: [             
@@ -25,6 +26,7 @@ import { CheckboxsliderComponent } from './checkbox-slider/checkboxslider.compon
         ProgressbarComponent,
         ImageviewerComponent,
         CheckboxsliderComponent,
+        DatetimePicker,
     ],
     exports: [
         HeaderComponent, 
@@ -34,6 +36,7 @@ import { CheckboxsliderComponent } from './checkbox-slider/checkboxslider.compon
         ProgressbarComponent,
         ImageviewerComponent,
         CheckboxsliderComponent,
+        DatetimePicker,
     ],
     providers: []
 })

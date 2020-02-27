@@ -1,0 +1,83 @@
+<div class="data-tabs">
+    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-articles-main']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-articles-seo']}}</div>
+</div>
+
+<ng-container *ngIf="tab === 1">
+    <div class="data-form padded">  
+        <div [class]="isRequired('date') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-date']}}:</div>
+        <div class="df-inputwrap"><datetime-picker [(value)]="x.date"></datetime-picker></div>
+        
+        <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-name']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name" (change)="canBuildSlug ? buildSlug(x.name) : null;"></div>
+
+        <div [class]="isRequired('contentshort') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-contentshort']}}:</div>
+        <div class="df-inputwrap"><textarea name="contentshort" [(ngModel)]="x.contentshort"></textarea></div>
+
+        <div [class]="isRequired('content') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-content']}}:</div>
+        <div class="df-inputwrap"><editor apiKey="vyqpgkbwnitqsjn9livngxdsuxggz6aowmwwx6d1spe78nnv" name="content" [init]="tinyInit()" [(ngModel)]="x.content"></editor></div>
+
+        <div [class]="isRequired('img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-picture']}}:</div>
+        <div class="df-inputwrap">
+            <ng-container *ngIf="x.img">
+                <div class="df-imgwrap">
+                    <div class="df-imgwrap2"><img src="/assets/images/{{folder}}/{{x.img}}"></div>
+                    <div class="df-imgbtns">
+                        <div class="df-magnify" [title]="currentLang.phrases['workspace-viewpicture']" (click)="viewerActive = true;"><span></span></div>
+                        <div class="df-deletefile" [title]="currentLang.phrases['workspace-removepicture']" (click)="imginput.value = null; onDeleteImg();"><span></span></div>                                   
+                    </div>                
+                </div>                                
+            </ng-container>
+            <input #imginput type="file" name="img" (change)="onUploadImg($event);">
+            <progressbar [progress]="progressImg" *ngIf="progressImg"></progressbar>
+        </div>
+
+        <div [class]="isRequired('category') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-category']}} ({{selectedLang.name}}):</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.category">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                
+            </select>
+        </div>
+
+        <div [class]="isRequired('lang') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-lang']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.lang">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                
+            </select>
+        </div>
+
+        <div [class]="isRequired('source') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-source']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="source" [(ngModel)]="x.source"></div>
+
+        <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-active']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>   
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
+    </div>
+    <image-viewer [img]="x.img" [folder]="folder" [(active)]="viewerActive"></image-viewer>
+</ng-container>
+
+<ng-container *ngIf="tab === 2">
+    <div class="data-form padded">
+        <div [class]="isRequired('slug') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-slug']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="slug" [(ngModel)]="x.slug"></div>
+
+        <div [class]="isRequired('h1') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-header']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="h1" [(ngModel)]="x.h1"></div>
+
+        <div [class]="isRequired('title') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-title']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="title" [(ngModel)]="x.title"></div>
+
+        <div [class]="isRequired('keywords') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-keywords']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="keywords" [(ngModel)]="x.keywords"></div>
+
+        <div [class]="isRequired('description') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-description']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="description" [(ngModel)]="x.description"></div>
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
+    </div>
+</ng-container>
