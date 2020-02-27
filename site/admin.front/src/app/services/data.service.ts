@@ -13,6 +13,7 @@ import { AdmLang } from '../model/admlang.model';
 import { Lang } from '../model/lang.model';
 import { Page } from '../model/page.model';
 import { Category } from '../model/category.model';
+import { Article } from '../model/article.model';
 
 @Injectable()
 export class DataService {
@@ -70,6 +71,13 @@ export class DataService {
     public categoriesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "categories/deletebulk", _ids, true);}
     public categoriesCreate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/create", x, true);}
     public categoriesUpdate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/update", x, true);}    
+
+    public articlesChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", {from, q, sortBy, sortDir}, true);}
+    public articlesOne(_id: string): Observable<IAnswer<Article>> {return this.sendRequest("GET", `articles/one/${_id}`, null, true);}
+    public articlesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `articles/delete/${_id}`, null, true);}
+    public articlesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "articles/deletebulk", _ids, true);}
+    public articlesCreate(x: Article): Observable<IAnswer<void>> {return this.sendRequest("POST", "articles/create", x, true);}
+    public articlesUpdate(x: Article): Observable<IAnswer<void>> {return this.sendRequest("POST", "articles/update", x, true);}    
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

@@ -16,4 +16,8 @@ export class Model {
         
         return this;
     }
+
+    protected twoDigits(n: number): string {
+        return (n < 10) ? `0${n}` : `${n}`;
+    }
 }

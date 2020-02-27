@@ -13,6 +13,7 @@ import { LangRepository } from './repositories/lang.repository';
 import { PageRepository } from './repositories/page.repository';
 import { SlugService } from './slug.service';
 import { CategoryRepository } from './repositories/category.repository';
+import { ArticleRepository } from './repositories/article.repository';
 
 @NgModule({
     declarations: [],
@@ -31,6 +32,7 @@ import { CategoryRepository } from './repositories/category.repository';
 		LangRepository,
 		PageRepository,
 		CategoryRepository,
+		ArticleRepository,
 	],
 })
 export class ServicesModule { }

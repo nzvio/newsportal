@@ -8,7 +8,7 @@ import { AppService } from '../app.service';
 @Injectable()
 export class PageRepository extends Repository<Page> {
     public schema: string = "Page";
-    public fullSortBy: string = "title";
+    public fullSortBy: string = "pos";
     public chunkSortBy: string = "pos";
 
     constructor(
@@ -26,7 +26,7 @@ export class PageRepository extends Repository<Page> {
                 this.dataService.pagesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : []
-                        this.xlFull = this.appService.tree2list(xl);
+                        this.xlFull = this.appService.tree2list(xl) as Page[];
                         this.fullLength = this.xlFull.length;
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
@@ -48,7 +48,7 @@ export class PageRepository extends Repository<Page> {
                 this.dataService.pagesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : [];
-                        this.xlChunk = this.appService.tree2list(xl);
+                        this.xlChunk = this.appService.tree2list(xl) as Page[];
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();

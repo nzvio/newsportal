@@ -37,10 +37,15 @@ export class CategoriesCreatePage extends ObjectPage<Category> implements OnInit
 	get cl(): Category[] {return this.categoryRepository.xlFull;}	
 
 	public async ngOnInit(): Promise<void> {
-        this.x = new Category().init();
-        await this.langRepository.loadFull();
+        this.x = new Category().init();        
 		await this.categoryRepository.loadFull();	
-		this.appService.monitorLog("[categories create] page loaded");
-		this.ready = true;
+		await this.langRepository.loadFull();
+
+		if (this.ll.length) {
+			this.appService.monitorLog("[categories create] page loaded");
+			this.ready = true;
+		} else {
+			this.appService.monitorLog("no languages found", true);
+		}		
 	}
 }

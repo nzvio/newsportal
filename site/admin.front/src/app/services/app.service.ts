@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Page } from '../model/page.model';
-import { Lang } from '../model/lang.model';
+import { Childable } from '../model/childable.interface';
 
 @Injectable()
 export class AppService {
@@ -72,10 +72,10 @@ export class AppService {
         }
     }
 
-    public tree2list(tree: Page[]): Page[] {
-        let list: Page[] = [];
-        let buildChildren = (children: Page[], level: number) => {            
-            let res: Page[] = [];
+    public tree2list(tree: Childable[]): Childable[] {
+        let list: Childable[] = [];
+        let buildChildren = (children: Childable[], level: number) => {            
+            let res: Childable[] = [];
             
             children.forEach(child => {
                 child.__level = level;

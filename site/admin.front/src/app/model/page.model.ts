@@ -31,6 +31,7 @@ export class Page extends Model {
         this.description = {};
         this.active = true;
         this.pos = 0;
+        this.parent = null;
         
         return this;
     }

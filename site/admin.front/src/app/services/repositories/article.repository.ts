@@ -1,54 +1,27 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './repository';
-import { Category } from '../../model/category.model';
+import { Article } from '../../model/article.model';
 import { DataService } from '../data.service';
-import { AppService } from '../app.service';
 
 @Injectable()
-export class CategoryRepository extends Repository<Category> {
-    public schema: string = "Category";
-    public fullSortBy: string = "pos";
-    public chunkSortBy: string = "pos";
+export class ArticleRepository extends Repository<Article> {
+    public schema: string = "Article";    
+    public chunkSortBy: string = "date"; 
+    public chunkSortDir: number = -1; 
 
-    constructor(
-        protected dataService: DataService,
-        private appService: AppService,
-    ) {
+    constructor(protected dataService: DataService) {
         super(dataService);
-    }
-
-    public loadFull(): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
-                resolve();
-            } else {
-                this.dataService.categoriesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
-                    if (res.statusCode === 200) {
-                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
-                        this.xlFull = this.appService.tree2list(xl) as Category[];
-                        this.fullLength = this.xlFull.length;
-                        this.fullLoadedAt = new Date().getTime();
-                        resolve();
-                    } else {                        
-                        reject(res.error);
-                    }
-                }, err => {
-                    reject(err.message);
-                });
-            }            
-        });
-    }
+    }    
     
     public loadChunk(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.categoriesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
-                    if (res.statusCode === 200) {
-                        let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
-                        this.xlChunk = this.appService.tree2list(xl) as Category[];
+                this.dataService.articlesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                    if (res.statusCode === 200) {                        
+                        this.xlChunk = res.data.length ? res.data.map(d => new Article().build(d)) : [];
                         this.fullLength = res.fullLength;
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
@@ -62,12 +35,12 @@ export class CategoryRepository extends Repository<Category> {
         });
     }
 
-    public loadOne(_id: string): Promise<Category> {
+    public loadOne(_id: string): Promise<Article> {
         return new Promise((resolve, reject) => {
-            this.dataService.categoriesOne(_id).subscribe(res => {
+            this.dataService.articlesOne(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     if (res.data) {
-                        let x: Category = new Category().build(res.data);                           
+                        let x: Article = new Article().build(res.data);                    
                         resolve(x);
                     } else {
                         reject("Object not found");
@@ -83,7 +56,7 @@ export class CategoryRepository extends Repository<Category> {
 
     public delete(_id: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.categoriesDelete(_id).subscribe(res => {
+            this.dataService.articlesDelete(_id).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -97,7 +70,7 @@ export class CategoryRepository extends Repository<Category> {
 
     public deleteBulk(_ids: string[]): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.categoriesDeleteBulk(_ids).subscribe(res => {
+            this.dataService.articlesDeleteBulk(_ids).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -109,9 +82,9 @@ export class CategoryRepository extends Repository<Category> {
         });
     }
 
-    public create(x: Category): Promise<void> {
+    public create(x: Article): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.categoriesCreate(x).subscribe(res => {
+            this.dataService.articlesCreate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    
@@ -123,9 +96,9 @@ export class CategoryRepository extends Repository<Category> {
         });
     }
 
-    public update(x: Category): Promise<void> {
+    public update(x: Article): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.dataService.categoriesUpdate(x).subscribe(res => {
+            this.dataService.articlesUpdate(x).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    

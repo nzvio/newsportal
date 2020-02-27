@@ -37,10 +37,15 @@ export class PagesCreatePage extends ObjectPage<Page> implements OnInit {
 	get pl(): Page[] {return this.pageRepository.xlFull;}	
 
 	public async ngOnInit(): Promise<void> {
-        this.x = new Page().init();
-        await this.langRepository.loadFull();
+        this.x = new Page().init();        
 		await this.pageRepository.loadFull();	
-		this.appService.monitorLog("[pages create] page loaded");
-		this.ready = true;
+		await this.langRepository.loadFull();
+
+		if (this.ll.length) {
+			this.appService.monitorLog("[pages create] page loaded");
+			this.ready = true;
+		} else {
+			this.appService.monitorLog("no languages found", true);
+		}		
 	}
 }

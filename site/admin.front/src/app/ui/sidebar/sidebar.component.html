@@ -30,7 +30,7 @@
                 <div [class]="currentUrl.parts[0] === 'catalogue' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(1);"><span class="nav-cat">{{currentLang.phrases['sidebar-module-catalogue']}}</span></a></div>
                 <div [class]="sub1Active ? 'nav-sub active' : 'nav-sub'">
                     <div [class]="currentUrl.parts[1] === 'categories' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/categories"><span>{{currentLang.phrases['sidebar-submodule-categories']}}</span></a></div>
-                    <!--<div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>Articles</span></a></div>-->
+                    <div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>{{currentLang.phrases['sidebar-submodule-articles']}}</span></a></div>
                 </div>
                 
                 <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-pages">{{currentLang.phrases['sidebar-module-pages']}}</span></a></div>

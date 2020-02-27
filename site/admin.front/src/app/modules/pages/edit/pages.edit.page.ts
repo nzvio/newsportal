@@ -40,11 +40,16 @@ export class PagesEditPage extends ObjectPage<Page> implements OnInit {
 		this.route.params.subscribe(async p => {			
 			try {
 				this.ready = false;				
-				this.x = await this.pageRepository.loadOne(p["_id"]);
-				await this.langRepository.loadFull();
+				this.x = await this.pageRepository.loadOne(p["_id"]);				
 				await this.pageRepository.loadFull();				
-				this.appService.monitorLog("[pages edit] page loaded");
-				this.ready = true;
+				await this.langRepository.loadFull();
+
+				if (this.ll.length) {
+					this.appService.monitorLog("[pages edit] page loaded");
+					this.ready = true;
+				} else {
+					this.appService.monitorLog("no languages found", true);
+				}				
 			} catch (err) {
 				this.appService.monitorLog(err, true);
 			}			

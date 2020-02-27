@@ -40,11 +40,16 @@ export class CategoriesEditPage extends ObjectPage<Category> implements OnInit {
 		this.route.params.subscribe(async p => {			
 			try {
 				this.ready = false;				
-				this.x = await this.categoryRepository.loadOne(p["_id"]);
+				this.x = await this.categoryRepository.loadOne(p["_id"]);				
+				await this.categoryRepository.loadFull();								
 				await this.langRepository.loadFull();
-				await this.categoryRepository.loadFull();				
-				this.appService.monitorLog("[categories edit] page loaded");
-				this.ready = true;
+
+				if (this.ll.length) {
+					this.appService.monitorLog("[categories edit] page loaded");
+					this.ready = true;
+				} else {
+					this.appService.monitorLog("no languages found", true);
+				}				
 			} catch (err) {
 				this.appService.monitorLog(err, true);
 			}			

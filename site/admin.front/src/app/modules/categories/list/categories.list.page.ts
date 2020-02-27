@@ -32,10 +32,15 @@ export class CategoriesListPage extends ListPage<Category> implements OnInit {
     public async ngOnInit(): Promise<void> {
         try {
             await this.categoryRepository.loadChunk(); 
-            await this.langRepository.loadFull();               
-            this.selectedLang = this.ll[0];
-            this.appService.monitorLog("[categories] page loaded");            
-            this.ready = true;
+            await this.langRepository.loadFull();    
+            
+            if (this.ll.length) {
+                this.selectedLang = this.ll[0];
+                this.appService.monitorLog("[categories] page loaded");            
+                this.ready = true;
+            } else {
+                this.appService.monitorLog("no languages found", true);            
+            }            
         } catch (err) {
             this.appService.monitorLog(err, true);
         }

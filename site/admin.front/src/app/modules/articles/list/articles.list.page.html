@@ -1,0 +1,66 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.phrases['workspace-articles-h1']}} ({{fullLength}})</h1>
+        <div class="content-dash">
+            <div class="cd-btn create" [title]="currentLang.phrases['workspace-create']" [routerLink]="homeUrl + '/create'"><span></span></div>
+            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.phrases['workspace-deleteselected']" (click)="deleteBulk();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">            
+            <div class="data-tablewrap">                
+                <table class="data-table">
+                    <tr>
+                        <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
+                        <th><label [class]="sortBy === 'date' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('date');">{{currentLang.phrases['workspace-articles-date']}}</label></th>                        
+                        <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.phrases['workspace-articles-name']}}</label></th>                        
+                        <th><label [class]="sortBy === 'category' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('category');">{{currentLang.phrases['workspace-articles-category']}} ({{selectedLang.name}})</label></th>                        
+                        <th><label [class]="sortBy === 'lang' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('lang');">{{currentLang.phrases['workspace-articles-lang']}}</label></th>                        
+                        <th>{{currentLang.phrases['workspace-articles-active']}}</th>
+                        <th>{{currentLang.phrases['workspace-actions']}}</th>
+                    </tr>   
+                    <ng-container *ngIf="xl.length">
+                        <tr *ngFor="let x of xl">
+                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
+                            <td>{{x.formatedDate}}</td>
+                            <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.name" (change)="updateParam (x._id, 'name', x.name);"></div></td>                            
+                            <td>
+                                <div class="dt-inputwrap">
+                                    <select [(ngModel)]="x.category" (change)="updateParam (x._id, 'category', x.category);">
+                                        <option [ngValue]="null"></option>                                        
+                                        <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                                        
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="dt-inputwrap">
+                                    <select [(ngModel)]="x.lang" (change)="updateParam (x._id, 'lang', x.lang);">
+                                        <option [ngValue]="null"></option>                                        
+                                        <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                                        
+                                    </select>
+                                </div>
+                            </td>
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);" [disabled]="x.defended"></checkbox-slider></div></td>
+                            <td>
+                                <div class="dt-actions">
+                                    <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="homeUrl + '/edit/'+x._id"><span></span></div>
+                                    <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                </div>
+                            </td>
+                        </tr>                            
+                    </ng-container>
+                    <ng-container *ngIf="!xl.length">
+                        <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+                    </ng-container>                    
+                </table>
+            </div>            
+            <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="4"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>
