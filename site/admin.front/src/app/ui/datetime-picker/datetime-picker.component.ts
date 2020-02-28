@@ -130,6 +130,14 @@ export class DatetimePicker implements OnInit {
         return c;
     }
 
+    public getPickerClass(): string {
+        let c: string = "dtp-picker";
+        c += !this.withTime ? " compact" : "";
+        c += this.active ? " active" : "";
+
+        return c;
+    }
+
     public setDate(day: IDtpDay): void {
         if (day.n) {
             this.currentDay = day.n;

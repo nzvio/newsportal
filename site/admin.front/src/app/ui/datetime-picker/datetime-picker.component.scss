@@ -11,7 +11,10 @@
     }
     .dtp-picker {
         position: absolute; top: calc(100% + 5px); left: -5px; width: 0; height: 0; z-index: 2; color: #333; overflow: hidden; box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3); transition: all 0.3s ease 0s; will-change: height, width; font-size: 14px;
-        &.active {height: 300px; width: 250px;}
+        &.active {
+            height: 300px; width: 250px;
+            &.compact {height: 250px;}
+        }
         .dtp-content {
             width: 100%; height: 100%; border:1px #666 solid; padding: 10px; background-color: #fff;
             .dtp-month {

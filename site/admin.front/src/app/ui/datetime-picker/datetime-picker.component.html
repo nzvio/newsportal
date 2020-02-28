@@ -2,7 +2,7 @@
     <div class="dtp-date">{{formatedDate}}</div>
     <div class="dtp-btn active" (click)="toggleActive();"><span></span></div>
     <div class="dtp-btn setnull" (click)="setNull();" *ngIf="value && canBeNull"><span></span></div>
-    <div [class]="active ? 'dtp-picker active' : 'dtp-picker'">
+    <div [class]="getPickerClass()">
         <div class="dtp-content">
             <div class="dtp-month">
                 <div class="dtp-month-back" (click)="onMonthBack();"><span></span></div>

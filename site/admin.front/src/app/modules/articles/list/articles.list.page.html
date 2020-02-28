@@ -12,7 +12,7 @@
                 <table class="data-table">
                     <tr class="no-border">
                         <td>{{currentLang.phrases['workspace-articles-filter']}}:</td>
-                        <td><datetime-picker [(value)]="filterDate" [langName]="currentLang.name" [canBeNull]="true" [withTime]="false"></datetime-picker></td>
+                        <td><datetime-picker [(value)]="filterDate" (valueChange)="rebuildList();" [langName]="currentLang.name" [canBeNull]="true" [withTime]="false"></datetime-picker></td>
                     </tr>
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
