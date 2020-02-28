@@ -49,13 +49,9 @@ export class DatetimePicker implements OnInit {
         }        
     }
 
-    public toggleActive(): void {
-        if (this.active) {
-            this.active = false;
-        } else {
-            this.init();
-            this.active = true;
-        }
+    public activate(): void {
+        this.init();
+        this.active = true;        
     }
 
     private init(): void {

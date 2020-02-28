@@ -10,10 +10,10 @@
         &.setnull {span::before {content: "\f05e";}}
     }
     .dtp-picker {
-        position: absolute; top: calc(100% + 5px); left: -5px; width: 0; height: 0; z-index: 2; color: #333; overflow: hidden; box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3); transition: all 0.3s ease 0s; will-change: height, width; font-size: 14px;
+        position: absolute; top: calc(100% + 5px); left: -5px; width: 0; height: 0; z-index: 3; color: #333; overflow: hidden; box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3); transition: all 0.3s ease 0s; will-change: height, width; font-size: 14px;
         &.active {
-            height: 300px; width: 250px;
-            &.compact {height: 250px;}
+            height: 320px; width: 250px;
+            &.compact {height: 280px;}
         }
         .dtp-content {
             width: 100%; height: 100%; border:1px #666 solid; padding: 10px; background-color: #fff;
@@ -27,18 +27,21 @@
                 .dtp-month-forward {span::before {content: "\f051";}}
             }
             .dtp-days {
-                display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; font-size: 12px; margin-bottom: 15px;
-                div {
-                    border:1px #eee solid; text-align: center; padding: 3px 0; 
-                    &.head {background-color: #333; color: #fff; border:1px #333 solid; }
-                    &.day {
-                        cursor: pointer;
-                        &:hover {background-color: #eee;}
-                        &.hidden {opacity: 0; cursor: inherit;}
-                        &.current {background-color: #333; color: #fff; border:1px #333 solid;}
-                        &.holiday {color: #f00;}
-                    }                    
-                }
+                height: 180px;
+                .dtp-days-content {
+                    display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; font-size: 12px; 
+                    div {
+                        border:1px #eee solid; text-align: center; padding: 3px 0; 
+                        &.head {background-color: #333; color: #fff; border:1px #333 solid; }
+                        &.day {
+                            cursor: pointer;
+                            &:hover {background-color: #eee;}
+                            &.hidden {opacity: 0; cursor: inherit;}
+                            &.current {background-color: #333; color: #fff; border:1px #333 solid;}
+                            &.holiday {color: #f00;}
+                        }                    
+                    }
+                }                
             }
             .dtp-time {
                 display: flex; justify-content: center; align-items: center; margin-bottom: 15px;
@@ -52,5 +55,9 @@
                 button {background-color: #333; color: #fff; cursor: pointer; border: none;}
             }
         }
+    }
+    .dtp-bgoverlay {
+        position: fixed; left: 0; top: 0; width: 0; height: 0; z-index: 2;
+        &.active {width:100%; height: 100%;}
     }
 }
