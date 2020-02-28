@@ -10,6 +10,10 @@
         <ng-container *ngIf="ready">            
             <div class="data-tablewrap">                
                 <table class="data-table">
+                    <tr class="no-border">
+                        <td>{{currentLang.phrases['workspace-articles-filter']}}:</td>
+                        <td><datetime-picker [(value)]="filterDate" [langName]="currentLang.name" [canBeNull]="true" [withTime]="false"></datetime-picker></td>
+                    </tr>
                     <tr>
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
                         <th><label [class]="sortBy === 'date' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('date');">{{currentLang.phrases['workspace-articles-date']}}</label></th>                        

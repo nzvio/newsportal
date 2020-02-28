@@ -12,9 +12,11 @@ import { dtpLangs } from './datetime-picker.constants';
 export class DatetimePicker implements OnInit {
     @Input() value: Date = new Date();
     @Input() langName: string = "en";
-    @Output() valueChange: EventEmitter<Date> = new EventEmitter();  
+    @Input() canBeNull: boolean = false;
+    @Input() withTime: boolean = true;
+    @Output() valueChange: EventEmitter<Date | null> = new EventEmitter();  
     public currentLang: IDtpLang | null = null;  
-    public ready: boolean = false;
+    public ready: boolean = false;    
     public active: boolean = false;    
     public days: IDtpDay[] = []; // will select
     private year: number; // will select
@@ -25,7 +27,15 @@ export class DatetimePicker implements OnInit {
     public currentHour: number; // now selected
     public currentMinute: number; // now selected
 
-    get formatedDate(): string {return `${this.twoDigits(this.value.getUTCDate())}.${this.twoDigits(this.value.getUTCMonth()+1)}.${this.value.getUTCFullYear()} ${this.twoDigits(this.value.getUTCHours())}:${this.twoDigits(this.value.getUTCMinutes())}`;}
+    get formatedDate(): string {
+        if (this.value) {
+            let time: string = this.withTime ? ` ${this.twoDigits(this.value.getUTCHours())}:${this.twoDigits(this.value.getUTCMinutes())}` : "";
+            return `${this.twoDigits(this.value.getUTCDate())}.${this.twoDigits(this.value.getUTCMonth()+1)}.${this.value.getUTCFullYear()}${time}`;
+        } else {
+            return this.currentLang.phrases["nodate"];
+        }
+    }
+
     get monthAndYear(): string {return `${this.twoDigits(this.month+1)}.${this.year}`;}    
 
     public ngOnInit(): void { 
@@ -49,11 +59,12 @@ export class DatetimePicker implements OnInit {
     }
 
     private init(): void {
-        this.year = this.currentYear = this.value.getUTCFullYear();
-        this.month = this.currentMonth = this.value.getUTCMonth();
-        this.currentDay = this.value.getUTCDate();
-        this.currentHour = this.value.getUTCHours();
-        this.currentMinute = this.value.getUTCMinutes();
+        let iniDate: Date = this.value ? this.value : new Date();    
+        this.year = this.currentYear = iniDate.getUTCFullYear();
+        this.month = this.currentMonth = iniDate.getUTCMonth();
+        this.currentDay = iniDate.getUTCDate();
+        this.currentHour = this.withTime ? iniDate.getUTCHours() : 0;
+        this.currentMinute = this.withTime ? iniDate.getUTCMinutes() : 0;
         this.buildDays();        
     }
 
@@ -139,5 +150,11 @@ export class DatetimePicker implements OnInit {
             this.apply();
             return false;
         }
+    }
+
+    public setNull(): void {
+        this.value = null;
+        this.valueChange.emit(null);
+        this.init();
     }
 }

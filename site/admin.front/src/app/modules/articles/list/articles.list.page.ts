@@ -32,6 +32,14 @@ export class ArticlesListPage extends ListPage<Article> implements OnInit {
 
     get ll(): Lang[] {return this.langRepository.xlFull;}
     get cl(): Category[] {return this.categoryRepository.xlFull;}
+    get filterDate(): Date | null {return this.articleRepository.filterDate;}
+    set filterDate(v: Date | null) {this.articleRepository.filterDate = v;}
+    get filterName(): string {return this.articleRepository.filterName;}
+    set filterName(v: string) {this.articleRepository.filterName = v;}
+    get filterCategory(): string | null {return this.articleRepository.filterCategory;}
+    set filterCategory(v: string | null) {this.articleRepository.filterCategory = v;}
+    get filterLang(): string | null {return this.articleRepository.filterLang;}
+    set filterLang(v: string | null) {this.articleRepository.filterLang = v;}
 
     public async ngOnInit(): Promise<void> {
         try {

@@ -116,7 +116,8 @@
             "workspace-articles-category": "Category",
             "workspace-articles-lang": "Language",
             "workspace-articles-main": "Main",
-            "workspace-articles-seo": "SEO"
+            "workspace-articles-seo": "SEO",
+            "workspace-articles-filter": "Filter"
         }
     },
     {
@@ -236,7 +237,8 @@
             "workspace-articles-category": "Категория",
             "workspace-articles-lang": "Язык",
             "workspace-articles-main": "Основное",
-            "workspace-articles-seo": "SEO"
+            "workspace-articles-seo": "SEO",
+            "workspace-articles-filter": "Фильтр"
         }
     }
 ]

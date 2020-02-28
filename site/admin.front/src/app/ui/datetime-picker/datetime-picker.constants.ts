@@ -12,7 +12,8 @@ export const dtpLangs: IDtpLang[] = [
             "fr": "Пт",
             "sa": "Сб",
             "su": "Вс",
-            "apply": "Применить"
+            "apply": "Применить",
+            "nodate": "[дата не задана]"
         }
     },
     {
@@ -26,7 +27,8 @@ export const dtpLangs: IDtpLang[] = [
             "fr": "Fr",
             "sa": "Sa",
             "su": "Su",
-            "apply": "Apply"
+            "apply": "Apply",
+            "nodate": "[date is not set]"
         }
     }
 ];

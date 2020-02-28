@@ -117,7 +117,8 @@ html {
                         table.data-table {
                             width:100%; color: $color-transparent; border-collapse: collapse; 
                             tr {
-                                border-bottom: 1px $color-grey solid;                            
+                                border-bottom: 1px $color-grey solid;   
+                                &.no-border {border-bottom: none;}
                                 &:last-child {border-bottom: none;}
                                 &:not(:first-child):hover {background-color: $color-bg-light;}
                                 th {

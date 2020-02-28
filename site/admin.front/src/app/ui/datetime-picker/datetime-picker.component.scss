@@ -4,11 +4,10 @@
     display: flex; position: relative;
     .dtp-date {margin-right: 10px;}
     .dtp-btn {
-        cursor: pointer;
-        span {
-            font-family: "awesome-solid"; font-size: 16px;
-            &::before {content: "\f073";}
-        }
+        cursor: pointer; margin-right: 10px;
+        span {font-family: "awesome-solid"; font-size: 16px;}
+        &.active {span::before {content: "\f073";}}
+        &.setnull {span::before {content: "\f05e";}}
     }
     .dtp-picker {
         position: absolute; top: calc(100% + 5px); left: -5px; width: 0; height: 0; z-index: 2; color: #333; overflow: hidden; box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3); transition: all 0.3s ease 0s; will-change: height, width; font-size: 14px;
@@ -16,7 +15,7 @@
         .dtp-content {
             width: 100%; height: 100%; border:1px #666 solid; padding: 10px; background-color: #fff;
             .dtp-month {
-                display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
                 .dtp-month-back, .dtp-month-forward {
                     cursor: pointer;
                     span {font-family: "awesome-solid"; font-size: 16px;}
@@ -25,7 +24,7 @@
                 .dtp-month-forward {span::before {content: "\f051";}}
             }
             .dtp-days {
-                display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; font-size: 12px; margin-bottom: 10px;
+                display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; font-size: 12px; margin-bottom: 15px;
                 div {
                     border:1px #eee solid; text-align: center; padding: 3px 0; 
                     &.head {background-color: #333; color: #fff; border:1px #333 solid; }
@@ -33,13 +32,13 @@
                         cursor: pointer;
                         &:hover {background-color: #eee;}
                         &.hidden {opacity: 0; cursor: inherit;}
-                        &.current {background-color: #333; color: #fff; border:1px #333 solid; cursor: inherit;}
+                        &.current {background-color: #333; color: #fff; border:1px #333 solid;}
                         &.holiday {color: #f00;}
                     }                    
                 }
             }
             .dtp-time {
-                display: flex; justify-content: center; align-items: center; margin-bottom: 10px;
+                display: flex; justify-content: center; align-items: center; margin-bottom: 15px;
                 div {
                     margin: 0 5px;
                     input {width: 50px; color: #333; border: 1px #eee solid;}

@@ -3,12 +3,19 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { Article } from '../../model/article.model';
 import { DataService } from '../data.service';
+import { GetArticlesChunkDTO } from 'src/app/model/getarticleschunk.dto';
 
 @Injectable()
 export class ArticleRepository extends Repository<Article> {
+    // inherited
     public schema: string = "Article";    
     public chunkSortBy: string = "date"; 
     public chunkSortDir: number = -1; 
+    // local
+    public filterDate: Date | null = null;
+    public filterName: string = "";
+    public filterCategory: string | null = null;
+    public filterLang: string | null = null;
 
     constructor(protected dataService: DataService) {
         super(dataService);
@@ -19,7 +26,17 @@ export class ArticleRepository extends Repository<Article> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.articlesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                let dto: GetArticlesChunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,
+                    filterDate: this.filterDate,
+                    filterName: this.filterName,
+                    filterCategory: this.filterCategory,
+                    filterLang: this.filterLang,
+                };
+                this.dataService.articlesChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {                        
                         this.xlChunk = res.data.length ? res.data.map(d => new Article().build(d)) : [];
                         this.fullLength = res.fullLength;
