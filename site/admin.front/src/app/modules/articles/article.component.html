@@ -6,7 +6,7 @@
 <ng-container *ngIf="tab === 1">
     <div class="data-form padded">  
         <div [class]="isRequired('date') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-date']}}:</div>
-        <div class="df-inputwrap"><datetime-picker [(value)]="x.date"></datetime-picker></div>
+        <div class="df-inputwrap"><datetime-picker [(value)]="x.date" [langName]="currentLang.name"></datetime-picker></div>
         
         <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-name']}}:</div>
         <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name" (change)="canBuildSlug ? buildSlug(x.name) : null;"></div>

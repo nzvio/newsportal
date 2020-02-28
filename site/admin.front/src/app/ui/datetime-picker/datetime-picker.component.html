@@ -1,6 +1,6 @@
-<div class="dtp-component">
+<div class="dtp-component" *ngIf="ready">
     <div class="dtp-date">{{formatedDate}}</div>
-    <div class="dtp-btn" (click)="active = !active;"><span></span></div>
+    <div class="dtp-btn" (click)="toggleActive();"><span></span></div>
     <div [class]="active ? 'dtp-picker active' : 'dtp-picker'">
         <div class="dtp-content">
             <div class="dtp-month">
@@ -9,9 +9,21 @@
                 <div class="dtp-month-forward" (click)="onMonthForward();"><span></span></div>
             </div>
             <div class="dtp-days">                
-                <div>Mo</div><div>Tu</div><div>We</div><div>Th</div><div>Fr</div><div>Sa</div><div>Su</div>
-                <div *ngFor="let day of days">{{day}}</div>
+                <div class="head">{{currentLang.phrases['mo']}}</div>
+                <div class="head">{{currentLang.phrases['tu']}}</div>
+                <div class="head">{{currentLang.phrases['we']}}</div>
+                <div class="head">{{currentLang.phrases['th']}}</div>
+                <div class="head">{{currentLang.phrases['fr']}}</div>
+                <div class="head">{{currentLang.phrases['sa']}}</div>
+                <div class="head">{{currentLang.phrases['su']}}</div>
+                <div *ngFor="let day of days" [class]="getDayClass(day)" (click)="setDate(day);">{{day.n}}</div>
             </div>
+            <div class="dtp-time">
+                <div><input type="number" min="0" max="23" [(ngModel)]="currentHour" (keydown)="onKeyDown($event);"></div>
+                <div>:</div>
+                <div><input type="number" min="0" max="59" [ngModel]="currentMinute | number : '2.0-0'" (ngModelChange)="currentMinute = $event;" (keydown)="onKeyDown($event);"></div>
+            </div>
+            <div class="dtp-apply"><button type="button" (click)="apply();">{{currentLang.phrases['apply']}}</button></div>
         </div>        
     </div>
 </div>
