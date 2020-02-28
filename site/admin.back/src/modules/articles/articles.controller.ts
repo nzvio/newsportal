@@ -3,11 +3,10 @@ import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/c
 import { ArticlesService } from "./articles.service";
 import { IArticle } from "./interfaces/article.interface";
 import { IAnswer } from "../../interfaces/answer.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { ArticleCreateDTO } from "./dto/article.create.dto";
 import { ArticleUpdateDTO } from "./dto/article.update.dto";
+import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 
 @Controller('api/admin/articles')
 export class ArticlesController {
@@ -16,7 +15,7 @@ export class ArticlesController {
     // get fragment
     @UseGuards(AuthGuard)
     @Post("chunk")
-    public chunk(@Body() dto: GetchunkDTO): Promise<IAnswer<IArticle[]>> {
+    public chunk(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
         return this.articlesService.chunk(dto);
     }
 

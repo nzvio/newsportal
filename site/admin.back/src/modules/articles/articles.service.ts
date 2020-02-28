@@ -4,10 +4,10 @@ import { Model } from "mongoose";
 
 import { APIService } from "../api.service";
 import { IArticle } from "./interfaces/article.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { ArticleCreateDTO } from "./dto/article.create.dto";
 import { ArticleUpdateDTO } from "./dto/article.update.dto";
+import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 
 @Injectable()
 export class ArticlesService extends APIService {
@@ -15,15 +15,20 @@ export class ArticlesService extends APIService {
         super();
     }
 
-    public async chunk(dto: GetchunkDTO): Promise<IAnswer<IArticle[]>> {
+    public async chunk(dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
         let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         let from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         let q: number = !this.isEmpty(dto.q) ? dto.q : 10;
+        let filterDate: string | null = dto.filterDate !== undefined ? dto.filterDate : null; // can be null in DTO!
+        let filterName: string = !this.isEmpty(dto.q) ? dto.filterName : "";
+        let filterCategory: string = dto.filterCategory !== undefined ? dto.filterCategory : "any"; // can be null in DTO!
+        let filterLang: string = dto.filterLang !== undefined ? dto.filterLang : "any"; // can be null in DTO!
+        let filter: Object = this.buildFilter(filterDate, filterName, filterCategory, filterLang);        
 
         try {            
-            let data: IArticle[] = await this.model.find({}, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});            
-            let fullLength: number = await this.model.countDocuments();
+            let data: IArticle[] = await this.model.find(filter, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});            
+            let fullLength: number = await this.model.countDocuments(filter);
             return {statusCode: 200, data, fullLength};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.chunk: ${String(err)}`;
@@ -89,5 +94,30 @@ export class ArticlesService extends APIService {
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         } 
+    }
+
+    private buildFilter(filterDate: string | null, filterName: string, filterCategory: string, filterLang: string): Object {
+        let request: any = {};
+
+        if (filterCategory != "any") {
+            request.category = filterCategory;
+        }
+
+        if (filterLang != "any") {
+            request.lang = filterLang;
+        }
+
+        if (filterName) {
+            request.name = {$regex: '.*'+filterName+'.*', $options: "i"};
+        }
+
+        if (filterDate) {
+            let startDate: Date = new Date(filterDate);
+            let endDate: Date = new Date(filterDate);
+            endDate.setDate(endDate.getDate() + 1);
+            request.date = {"$gte": startDate, "$lt": endDate};
+        }
+
+        return request;
     }
 }

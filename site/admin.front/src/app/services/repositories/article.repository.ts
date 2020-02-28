@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Repository } from './repository';
 import { Article } from '../../model/article.model';
 import { DataService } from '../data.service';
-import { GetArticlesChunkDTO } from 'src/app/model/getarticleschunk.dto';
+import { ArticlesGetchunkDTO } from '../../model/articles.getchunk.dto';
 
 @Injectable()
 export class ArticleRepository extends Repository<Article> {
@@ -26,7 +26,7 @@ export class ArticleRepository extends Repository<Article> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                let dto: GetArticlesChunkDTO = {
+                let dto: ArticlesGetchunkDTO = {
                     from: this.chunkCurrentPart * this.chunkLength,
                     q: this.chunkLength,
                     sortBy: this.chunkSortBy,
