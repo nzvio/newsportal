@@ -35,7 +35,7 @@
         <div [class]="isRequired('category') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-category']}} ({{selectedLang.name}}):</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.category">
-                <option [ngValue]="null"></option>
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
                 <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                
             </select>
         </div>
@@ -43,7 +43,7 @@
         <div [class]="isRequired('lang') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-lang']}}:</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.lang">
-                <option [ngValue]="null"></option>
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
                 <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                
             </select>
         </div>

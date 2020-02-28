@@ -82,7 +82,7 @@ html {
                     }
                     // table blocks
                     .data-tablewrap {
-                        min-height: 550px; margin: 0 0 40px 0;
+                        min-height: 600px; margin: 0 0 40px 0;
                         &.compact {min-height: auto;}
                         &.padded {padding-top: 30px;}
                         // subheads
@@ -120,7 +120,10 @@ html {
                                 border-bottom: 1px $color-grey solid;   
                                 &.no-border {border-bottom: none;}
                                 &:last-child {border-bottom: none;}
-                                &:not(:first-child):hover {background-color: $color-bg-light;}
+                                &:hover {
+                                    background-color: $color-bg-light;
+                                    &.no-selection {background-color: inherit;}
+                                }
                                 th {
                                     padding: 5px 10px; text-align: left; white-space: nowrap;
                                     &:not(:first-child) {min-width: 100px;}

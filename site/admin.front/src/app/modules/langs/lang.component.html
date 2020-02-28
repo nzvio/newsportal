@@ -57,7 +57,7 @@
             </div>
         </div>
         <table class="data-table">
-            <tr>            
+            <tr class="no-selection">            
                 <th><label [class]="sortBy === 'mark' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('mark');">{{currentLang.phrases['workspace-langs-mark']}}</label></th>
                 <th><label [class]="sortBy === 'text' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('text');">{{currentLang.phrases['workspace-langs-text']}}</label></th>
                 <th><label [class]="sortBy === 'note' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('note');">{{currentLang.phrases['workspace-langs-note']}}</label></th>

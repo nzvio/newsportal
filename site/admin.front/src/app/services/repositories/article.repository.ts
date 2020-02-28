@@ -14,8 +14,8 @@ export class ArticleRepository extends Repository<Article> {
     // local
     public filterDate: Date | null = null;
     public filterName: string = "";
-    public filterCategory: string | null = null;
-    public filterLang: string | null = null;
+    public filterCategory: string | null = "any";
+    public filterLang: string | null = "any";
 
     constructor(protected dataService: DataService) {
         super(dataService);

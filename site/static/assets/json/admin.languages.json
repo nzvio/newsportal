@@ -29,7 +29,8 @@
             "workspace-actions": "Actions",
             "workspace-viewpicture": "View picture",
             "workspace-removepicture": "Remove picture",
-            "workspace-empty": "empty",
+            "workspace-empty": "[empty]",
+            "workspace-any": "[any]",
 
             "workspace-login-txt": "<p>VNE 4.0 welcomes you! Please log into system.</p><p>If you have any problems with this application, please contact VNE support team by <a href='mailto:7573497@gmail.com'>e-mail</a>.</p>",
             "workspace-logout-txt": "<p>Bye!</p>",            
@@ -150,7 +151,8 @@
             "workspace-actions": "Действия",
             "workspace-viewpicture": "Просмотреть изображение",
             "workspace-removepicture": "Удалить изображение",
-            "workspace-empty": "пусто",
+            "workspace-empty": "[пусто]",
+            "workspace-any": "[все]",
 
             "workspace-login-txt": "<p>Панель управления VNE 4.0 приветствует вас! Пожалуйста, войдите в систему.</p><p>Если у вас есть вопросы или пожелания по поводу данного приложения, вы можете связаться со <a href='mailto:7573497@gmail.com'>службой поддержки</a> VNE.</p>",
             "workspace-logout-txt": "<p>До свидания!</p>",            

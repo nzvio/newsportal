@@ -10,7 +10,7 @@
         <ng-container *ngIf="ready">
             <div class="data-tablewrap">
                 <table class="data-table">
-                    <tr>
+                    <tr class="no-selection">
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>
                         <th><label [class]="sortBy === 'title' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('title');">{{currentLang.phrases['workspace-usergroups-title']}}</label></th>
                         <th><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.phrases['workspace-usergroups-name']}}</label></th>

@@ -10,11 +10,30 @@
         <ng-container *ngIf="ready">            
             <div class="data-tablewrap">                
                 <table class="data-table">
-                    <tr class="no-border">
+                    <tr class="no-border no-selection">
                         <td>{{currentLang.phrases['workspace-articles-filter']}}:</td>
                         <td><datetime-picker [(value)]="filterDate" (valueChange)="rebuildList();" [langName]="currentLang.name" [canBeNull]="true" [withTime]="false"></datetime-picker></td>
+                        <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="filterName" (change)="rebuildList();"></div></td>
+                        <td>
+                            <div class="dt-inputwrap">
+                                <select [(ngModel)]="filterCategory" (change)="rebuildList();">
+                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>
+                                    <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                                    <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option> 
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="dt-inputwrap">
+                                <select [(ngModel)]="filterLang" (change)="rebuildList();">
+                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>
+                                    <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                                    <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option> 
+                                </select>
+                            </div>
+                        </td>
                     </tr>
-                    <tr>
+                    <tr class="no-selection">
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
                         <th><label [class]="sortBy === 'date' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('date');">{{currentLang.phrases['workspace-articles-date']}}</label></th>                        
                         <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.phrases['workspace-articles-name']}}</label></th>                        
@@ -31,7 +50,7 @@
                             <td>
                                 <div class="dt-inputwrap">
                                     <select [(ngModel)]="x.category" (change)="updateParam (x._id, 'category', x.category);">
-                                        <option [ngValue]="null"></option>                                        
+                                        <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>                                        
                                         <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                                        
                                     </select>
                                 </div>
@@ -39,7 +58,7 @@
                             <td>
                                 <div class="dt-inputwrap">
                                     <select [(ngModel)]="x.lang" (change)="updateParam (x._id, 'lang', x.lang);">
-                                        <option [ngValue]="null"></option>                                        
+                                        <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>                                        
                                         <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                                        
                                     </select>
                                 </div>

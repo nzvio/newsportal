@@ -16,7 +16,7 @@
             </div>
             <div class="data-tablewrap">                
                 <table class="data-table">
-                    <tr>
+                    <tr class="no-selection">
                         <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
                         <th class="wide">{{currentLang.phrases['workspace-pages-name']}}</th>
                         <th><label [class]="sortBy === 'pos' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('pos');">{{currentLang.phrases['workspace-pages-pos']}}</label></th>                        

@@ -52,7 +52,7 @@
         <div [class]="isRequired('parent') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-categories-parent']}}:</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.parent">
-                <option [ngValue]="null"></option>
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
                 <ng-container *ngFor="let c of cl">
                     <option *ngIf="c._id !== x._id" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>
                 </ng-container>                
