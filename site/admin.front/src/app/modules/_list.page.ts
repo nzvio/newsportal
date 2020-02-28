@@ -38,7 +38,7 @@ export abstract class ListPage<T extends Model> extends ModulePage {
             await this.repository.loadChunk();
             this.appService.monitorLog(`data reloaded, currentPart=${this.currentPart}, sortBy=${this.sortBy}, sortDir=${this.sortDir}`);
                     
-            if (this.currentPart > Math.ceil(this.fullLength / this.length) - 1) { // after deleting may be currentPart is out of possible diapason, then decrease and reload again            
+            if (this.currentPart > 0 && this.currentPart > Math.ceil(this.fullLength / this.length) - 1) { // after deleting or filtering may be currentPart is out of possible diapason, then decrease and reload again            
                 this.currentPart--;
                 this.rebuildList();
             } else {

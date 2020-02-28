@@ -24,7 +24,7 @@ export class ArticlesService extends APIService {
         let filterName: string = !this.isEmpty(dto.q) ? dto.filterName : "";
         let filterCategory: string = dto.filterCategory !== undefined ? dto.filterCategory : "any"; // can be null in DTO!
         let filterLang: string = dto.filterLang !== undefined ? dto.filterLang : "any"; // can be null in DTO!
-        let filter: Object = this.buildFilter(filterDate, filterName, filterCategory, filterLang);        
+        let filter: Object = this.buildFilter(filterDate, filterName, filterCategory, filterLang);          
 
         try {            
             let data: IArticle[] = await this.model.find(filter, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});            
