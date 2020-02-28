@@ -11,6 +11,7 @@ import { LangsModule } from './modules/langs/langs.module';
 import { PagesModule } from './modules/pages/pages.module';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { ArticlesModule } from './modules/articles/articles.module';
+import { DonorsModule } from './modules/donors/donors.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
@@ -22,6 +23,7 @@ const routes: Routes = [
 	{path: "pages", loadChildren: () => PagesModule}, 
 	{path: "catalogue/categories", loadChildren: () => CategoriesModule}, 
 	{path: "catalogue/articles", loadChildren: () => ArticlesModule}, 
+	{path: "parsing/donors", loadChildren: () => DonorsModule}, 
 	{path:"**", component: HomePage},
 ];
 

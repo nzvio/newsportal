@@ -1,0 +1,16 @@
+<div class="data-form">    
+    <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-name']}}:</div>
+    <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name"></div>
+
+    <div [class]="isRequired('encoding') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-encoding']}}:</div>
+    <div class="df-inputwrap"><input type="text" name="encoding" [(ngModel)]="x.encoding"></div>
+
+    <div [class]="isRequired('selector_content') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-selectorcontent']}}:</div>
+    <div class="df-inputwrap"><input type="text" name="selector_content" [(ngModel)]="x.selector_content"></div>
+
+    <div [class]="isRequired('selector_img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-selectorimg']}}:</div>
+    <div class="df-inputwrap"><input type="text" name="selector_img" [(ngModel)]="x.selector_img"></div>
+        
+    <div class="df-title"></div>
+    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>    
+</div>

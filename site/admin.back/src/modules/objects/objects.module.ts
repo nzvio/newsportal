@@ -11,6 +11,7 @@ import { LangSchema } from "../langs/schemas/lang.schema";
 import { PageSchema } from "../pages/schemas/page.schema";
 import { CategorySchema } from "../categories/schemas/category.schema";
 import { ArticleSchema } from "../articles/schemas/article.schema";
+import { DonorSchema } from "../donors/schemas/donor.schema";
 
 @Module({
 	controllers: [ObjectsController],
@@ -23,6 +24,7 @@ import { ArticleSchema } from "../articles/schemas/article.schema";
 			{name: 'Page', schema: PageSchema},
 			{name: 'Category', schema: CategorySchema},
 			{name: 'Article', schema: ArticleSchema},
+			{name: 'Donor', schema: DonorSchema},
 		]),	
 		JwtModule.register(jwtConstants),			
 	],

@@ -12,6 +12,7 @@ import { IPage } from "../pages/interfaces/page.interface";
 import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
 import { ICategory } from "../categories/interfaces/category.interface";
 import { IArticle } from "../articles/interfaces/article.interface";
+import { IDonor } from "../donors/interfaces/donor.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
@@ -22,6 +23,7 @@ export class ObjectsService extends APIService {
         @InjectModel("Page") private readonly modelPage: Model<IPage>,
         @InjectModel("Category") private readonly modelCategory: Model<ICategory>,
         @InjectModel("Article") private readonly modelArticle: Model<IArticle>,
+        @InjectModel("Donor") private readonly modelDonor: Model<IDonor>,
     ) {
         super();
     }

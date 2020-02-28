@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 	public currentUrl: URL = new URL();
 	public sub1Active: boolean = false;	
 	public sub2Active: boolean = false;	
+	public sub3Active: boolean = false;	
 	
 	constructor(
 		private appService: AppService,
@@ -47,6 +48,7 @@ export class AppComponent implements OnInit {
 				setTimeout(() => {
 					this.sub1Active = this.currentUrl.parts[0] === "catalogue";
 					this.sub2Active = this.currentUrl.parts[0] === "users";					
+					this.sub3Active = this.currentUrl.parts[0] === "parsing";					
 					window.scrollTo(0, 0);
 				}, 1);
 			});

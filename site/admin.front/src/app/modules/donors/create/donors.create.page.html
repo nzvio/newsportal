@@ -1,0 +1,22 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.phrases['workspace-donors-h1']}} - {{currentLang.phrases['workspace-create']}}</h1>
+        <div class="content-dash">
+            <div class="cd-btn back" [title]="currentLang.phrases['workspace-back']" [routerLink]="homeUrl"><span></span></div>
+            <div class="cd-btn save" [title]="currentLang.phrases['workspace-save']" (click)="create();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <form (submit)="create();">
+                <the-donor [currentLang]="currentLang" [x]="x" [requiredFields]="requiredFields"></the-donor>
+            </form>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="2"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>

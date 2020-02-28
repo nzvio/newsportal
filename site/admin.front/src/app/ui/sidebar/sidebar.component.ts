@@ -16,6 +16,8 @@ export class SidebarComponent {
 	@Output() sub1ActiveChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	@Input() sub2Active: boolean = false;
 	@Output() sub2ActiveChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
+	@Input() sub3Active: boolean = false;
+	@Output() sub3ActiveChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 
 	@Input() currentLang: AdmLang;
 	@Input() active: boolean = false;		
 	@Output() activeChange: EventEmitter<boolean> = new EventEmitter<boolean> (); 

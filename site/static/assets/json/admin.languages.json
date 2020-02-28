@@ -19,6 +19,9 @@
             "sidebar-module-catalogue": "Catalogue",
             "sidebar-submodule-categories": "Categories",
             "sidebar-submodule-articles": "Articles",
+            "sidebar-module-parsing": "Parsing",
+            "sidebar-submodule-donors": "Donors",
+            "sidebar-submodule-targets": "Targets",
 
             "workspace-create": "Create",
             "workspace-deleteselected": "Delete selected",
@@ -118,7 +121,13 @@
             "workspace-articles-lang": "Language",
             "workspace-articles-main": "Main",
             "workspace-articles-seo": "SEO",
-            "workspace-articles-filter": "Filter"
+            "workspace-articles-filter": "Filter",
+
+            "workspace-donors-h1": "Donors",
+            "workspace-donors-name": "Name",
+            "workspace-donors-encoding": "Encoding",
+            "workspace-donors-selectorcontent": "Content selector",
+            "workspace-donors-selectorimg": "Image selector"
         }
     },
     {
@@ -141,6 +150,9 @@
             "sidebar-module-catalogue": "Каталог",
             "sidebar-submodule-categories": "Категории",
             "sidebar-submodule-articles": "Статьи",
+            "sidebar-module-parsing": "Парсинг",
+            "sidebar-submodule-donors": "Доноры",
+            "sidebar-submodule-targets": "Цели",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -240,7 +252,13 @@
             "workspace-articles-lang": "Язык",
             "workspace-articles-main": "Основное",
             "workspace-articles-seo": "SEO",
-            "workspace-articles-filter": "Фильтр"
+            "workspace-articles-filter": "Фильтр",
+
+            "workspace-donors-h1": "Доноры",
+            "workspace-donors-name": "Имя",
+            "workspace-donors-encoding": "Кодировка",
+            "workspace-donors-selectorcontent": "Селектор контента",
+            "workspace-donors-selectorimg": "Селектор изображения"
         }
     }
 ]
