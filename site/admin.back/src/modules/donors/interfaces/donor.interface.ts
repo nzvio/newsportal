@@ -6,4 +6,5 @@ export interface IDonor extends Document {
     readonly encoding: string;
     readonly selector_content: string;
     readonly selector_img: string;
+    readonly defended: boolean;
 }

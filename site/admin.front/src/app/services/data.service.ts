@@ -16,6 +16,7 @@ import { Category } from '../model/category.model';
 import { Article } from '../model/article.model';
 import { ArticlesGetchunkDTO } from '../model/articles.getchunk.dto';
 import { Donor } from '../model/donor.model';
+import { Target } from '../model/target.model';
 
 @Injectable()
 export class DataService {
@@ -88,6 +89,13 @@ export class DataService {
     public donorsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "donors/deletebulk", _ids, true);}
     public donorsCreate(x: Donor): Observable<IAnswer<void>> {return this.sendRequest("POST", "donors/create", x, true);}
     public donorsUpdate(x: Donor): Observable<IAnswer<void>> {return this.sendRequest("POST", "donors/update", x, true);}
+
+    public targetsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Target[]>> {return this.sendRequest("POST", "targets/chunk", {from, q, sortBy, sortDir}, true);}
+    public targetsOne(_id: string): Observable<IAnswer<Target>> {return this.sendRequest("GET", `targets/one/${_id}`, null, true);}
+    public targetsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `targets/delete/${_id}`, null, true);}
+    public targetsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "targets/deletebulk", _ids, true);}
+    public targetsCreate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/create", x, true);}
+    public targetsUpdate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/update", x, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

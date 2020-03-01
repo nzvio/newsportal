@@ -127,7 +127,16 @@
             "workspace-donors-name": "Name",
             "workspace-donors-encoding": "Encoding",
             "workspace-donors-selectorcontent": "Content selector",
-            "workspace-donors-selectorimg": "Image selector"
+            "workspace-donors-selectorimg": "Image selector",
+
+            "workspace-targets-h1": "Targets",            
+            "workspace-targets-donor": "Donor",
+            "workspace-targets-rss": "RSS",
+            "workspace-targets-category": "Category",
+            "workspace-targets-lang": "Language",
+            "workspace-targets-active": "Active",
+            "workspace-targets-params": "Parameters",
+            "workspace-targets-exec": "Execution"
         }
     },
     {
@@ -258,7 +267,16 @@
             "workspace-donors-name": "Имя",
             "workspace-donors-encoding": "Кодировка",
             "workspace-donors-selectorcontent": "Селектор контента",
-            "workspace-donors-selectorimg": "Селектор изображения"
+            "workspace-donors-selectorimg": "Селектор изображения",
+
+            "workspace-targets-h1": "Цели",
+            "workspace-targets-donor": "Донор",
+            "workspace-targets-rss": "RSS",            
+            "workspace-targets-category": "Категория",
+            "workspace-targets-lang": "Язык",
+            "workspace-targets-active": "Вкл.",
+            "workspace-targets-params": "Параметры",
+            "workspace-targets-exec": "Выполнение"
         }
     }
 ]

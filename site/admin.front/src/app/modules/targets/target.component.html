@@ -1,0 +1,45 @@
+<div class="data-tabs">
+    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-targets-params']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-targets-exec']}}</div>
+</div>
+
+<ng-container *ngIf="tab === 1">
+    <div class="data-form padded">  
+        <div [class]="isRequired('donor') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-donor']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.donor">
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                <option *ngFor="let d of dl" [value]="d._id" [innerHTML]="d.name"></option>                
+            </select>
+        </div>
+        
+        <div [class]="isRequired('rss') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-rss']}}:</div>
+        <div class="df-inputwrap"><input type="text" name="rss" [(ngModel)]="x.rss"></div>
+        
+        <div [class]="isRequired('category') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-category']}} ({{selectedLang.name}}):</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.category">
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                
+            </select>
+        </div>
+
+        <div [class]="isRequired('lang') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-lang']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.lang">
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                
+            </select>
+        </div>
+        
+        <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-active']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>   
+
+        <div class="df-title"></div>
+        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
+    </div>    
+</ng-container>
+
+<ng-container *ngIf="tab === 2">
+    
+</ng-container>

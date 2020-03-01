@@ -6,6 +6,7 @@ export class Donor extends Model {
     public encoding: string;
     public selector_content: string;
     public selector_img: string;
+    public defended: boolean;
 
     public init(): Donor {
         this.encoding = "utf-8";

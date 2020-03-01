@@ -19,6 +19,11 @@ export const DonorSchema = new mongoose.Schema ({
     selector_img: {
         type: String,
         trim: true,
+    },
+    defended: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
        

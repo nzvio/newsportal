@@ -15,6 +15,7 @@ import { SlugService } from './slug.service';
 import { CategoryRepository } from './repositories/category.repository';
 import { ArticleRepository } from './repositories/article.repository';
 import { DonorRepository } from './repositories/donor.repository';
+import { TargetRepository } from './repositories/target.repository';
 
 @NgModule({
     declarations: [],
@@ -35,6 +36,7 @@ import { DonorRepository } from './repositories/donor.repository';
 		CategoryRepository,
 		ArticleRepository,
 		DonorRepository,
+		TargetRepository,
 	],
 })
 export class ServicesModule { }

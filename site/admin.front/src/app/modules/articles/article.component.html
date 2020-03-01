@@ -52,7 +52,7 @@
         <div class="df-inputwrap"><input type="text" name="source" [(ngModel)]="x.source"></div>
 
         <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-active']}}:</div>
-        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active" [disabled]="x.defended"></checkbox-slider></div>   
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>   
 
         <div class="df-title"></div>
         <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
