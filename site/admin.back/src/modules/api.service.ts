@@ -16,4 +16,12 @@ export abstract class APIService {
 
         return candidate;
     }
+
+    protected twoDigits(n: number): string {
+        return (n < 10) ? `0${n}` : `${n}`;
+    }
+
+    protected formatDate(date: Date): string {
+        return `${this.twoDigits(date.getDate())}.${this.twoDigits(date.getMonth()+1)}.${date.getFullYear()} ${this.twoDigits(date.getHours())}:${this.twoDigits(date.getMinutes())}:${this.twoDigits(date.getSeconds())}`;
+    }
 }

@@ -12,15 +12,18 @@ import { IArticle } from "../articles/interfaces/article.interface";
 import { IDonor } from "../donors/interfaces/donor.interface";
 import { SlugService } from "../../services/slug.service";
 import { IImagable } from "../../interfaces/imagable.interface";
+import { APIService } from "../api.service";
 
 @Injectable()
-export class TargetsExecutorService {
+export class TargetsExecutorService extends APIService {
     constructor(
         @InjectModel("Target") private readonly targetModel: Model<ITarget>,
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         private readonly httpService: HttpService,
         private readonly slugService: SlugService,
-    ) {}
+    ) {
+        super();
+    }
 
     public async executeOne(_id: string, socket: Socket | Server | null = null): Promise<void> {
         try {
@@ -139,11 +142,13 @@ export class TargetsExecutorService {
     }
 
     private monitorLog(socket: Socket | Server | null, event: string, msg: string, isError: boolean = false) {        
+        let date: string = this.formatDate(new Date());
+
         if (socket) {
             if (!isError) {
-                socket.emit(event, {statusCode: 200, data: msg});
+                socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});
             } else {
-                socket.emit(event, {statusCode: 500, error: msg});
+                socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`});
             }
         } else {
             console.log(msg);
