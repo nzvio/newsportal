@@ -34,14 +34,10 @@ export class SocketService {
         this.appService.monitorLog("socket disconnected");
     }
 
-    public emit<X, Y>(eventName: string, message: X): Observable<IAnswer<Y>> {
-        return new Observable<IAnswer<Y>>(observer => {            
-            this.socket.emit(eventName, message, (res: IAnswer<Y>) => {
-                if (res.statusCode === 200) {
-                    observer.next(res);
-                } else {
-                    observer.error(res.error);
-                }
+    public emit<T1, T2>(eventName: string, message: T1): Observable<IAnswer<T2>> {
+        return new Observable<IAnswer<T2>>(observer => {            
+            this.socket.emit(eventName, message, (res: IAnswer<T2>) => {                
+                observer.next(res);                
                 observer.complete();
             });
         });
@@ -51,11 +47,7 @@ export class SocketService {
         return new Observable<IAnswer<T>>(observer => {
             this.socket.off(eventName);
             this.socket.on(eventName, (res: IAnswer<T>) => {
-                if (res.statusCode === 200) {
-                    observer.next(res);
-                } else {
-                    observer.error(res.error);
-                }
+                observer.next(res);
             });
         });
     }

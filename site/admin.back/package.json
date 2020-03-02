@@ -28,11 +28,13 @@
     "@nestjs/platform-socket.io": "^6.11.8",
     "@nestjs/websockets": "^6.11.8",
     "bcrypt": "^4.0.0",
+    "cheerio": "^1.0.0-rc.3",
     "mongoose": "^5.9.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
-    "sharp": "^0.24.1"
+    "sharp": "^0.24.1",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@nestjs/cli": "^6.13.2",

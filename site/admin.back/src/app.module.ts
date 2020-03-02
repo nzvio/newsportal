@@ -18,7 +18,7 @@ const pw: string = process.env.MONGODBPW;
 
 @Module({
 	imports: [
-		MongooseModule.forRoot(`mongodb://root:${pw}@localhost:27017/newsportal?authSource=admin`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}),
+		MongooseModule.forRoot(`mongodb://root:${pw}@localhost:27017/newsportal?authSource=admin`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}),		
 		
 		AuthModule,
 		ObjectsModule,

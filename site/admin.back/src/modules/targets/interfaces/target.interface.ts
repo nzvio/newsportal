@@ -1,8 +1,9 @@
 import { Document } from "mongoose";
+import { IDonor } from "src/modules/donors/interfaces/donor.interface";
 
 export interface ITarget extends Document {
     readonly _id: string;    
-    readonly donor: string;
+    readonly donor: string | IDonor;
     readonly rss: string;
     readonly category: string;
     readonly lang: string;

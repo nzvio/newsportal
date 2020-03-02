@@ -11,7 +11,7 @@ import { TargetUpdateDTO } from "./dto/target.update.dto";
 
 @Injectable()
 export class TargetsService extends APIService {
-    constructor (@InjectModel("Target") private readonly model: Model<ITarget>) {
+    constructor (@InjectModel("Target") protected readonly model: Model<ITarget>) {
         super();
     }    
 
