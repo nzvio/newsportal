@@ -136,7 +136,8 @@
             "workspace-targets-lang": "Language",
             "workspace-targets-active": "Active",
             "workspace-targets-params": "Parameters",
-            "workspace-targets-exec": "Execution"
+            "workspace-targets-exec": "Execution",
+            "workspace-targets-start": "Start"
         }
     },
     {
@@ -276,7 +277,8 @@
             "workspace-targets-lang": "Язык",
             "workspace-targets-active": "Вкл.",
             "workspace-targets-params": "Параметры",
-            "workspace-targets-exec": "Выполнение"
+            "workspace-targets-exec": "Выполнение",
+            "workspace-targets-start": "Выполнить"
         }
     }
 ]

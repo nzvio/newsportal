@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, HostListener } from '@angular/core';
 
 import { URL } from '../../model/url';
-import { AppService } from 'src/app/services/app.service';
-import { AdmLang } from 'src/app/model/admlang.model';
+import { AppService } from '../../services/app.service';
+import { AdmLang } from '../../model/admlang.model';
 
 @Component({
 	selector: 'the-header',

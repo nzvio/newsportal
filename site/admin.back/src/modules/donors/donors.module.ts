@@ -13,7 +13,6 @@ import { jwtConstants } from "../auth/auth.constants";
         JwtModule.register(jwtConstants),
     ],
     controllers: [DonorsController],
-    providers: [DonorsService],
-    exports: [DonorsService],
+    providers: [DonorsService],    
 })
 export class DonorsModule {}

@@ -6,6 +6,7 @@ import { TargetSchema } from "./schemas/target.schema";
 import { TargetsService } from "./targets.service";
 import { TargetsController } from "./targets.controller";
 import { jwtConstants } from "../auth/auth.constants";
+import { TargetsExecutor } from "./targets.executor";
 
 @Module({
     imports: [
@@ -13,7 +14,7 @@ import { jwtConstants } from "../auth/auth.constants";
         JwtModule.register(jwtConstants),
     ],
     controllers: [TargetsController],
-    providers: [TargetsService],
-    exports: [TargetsService],
+    providers: [TargetsService, TargetsExecutor],
+    exports: [TargetsExecutor],
 })
 export class TargetsModule {}

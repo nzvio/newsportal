@@ -1,10 +1,10 @@
-<div class="data-tabs">
+<div class="data-tabs" *ngIf="canExecute">
     <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-targets-params']}}</div>
-    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-targets-exec']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2; initMonitor();">{{currentLang.phrases['workspace-targets-exec']}}</div>
 </div>
 
 <ng-container *ngIf="tab === 1">
-    <div class="data-form padded">  
+    <div [class]="canExecute ? 'data-form padded' : 'data-form'">  
         <div [class]="isRequired('donor') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-targets-donor']}}:</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.donor">
@@ -41,5 +41,8 @@
 </ng-container>
 
 <ng-container *ngIf="tab === 2">
-    
+    <div class="data-console padded">
+        <div class="dc-out" [innerHTML]="log" #monitor></div>
+        <button type="button" (click)="execute();" [disabled]="executing">{{currentLang.phrases['workspace-targets-start']}}</button>
+    </div>    
 </ng-container>

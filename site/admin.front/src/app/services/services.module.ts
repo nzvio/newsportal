@@ -16,6 +16,7 @@ import { CategoryRepository } from './repositories/category.repository';
 import { ArticleRepository } from './repositories/article.repository';
 import { DonorRepository } from './repositories/donor.repository';
 import { TargetRepository } from './repositories/target.repository';
+import { SocketService } from './socket.service';
 
 @NgModule({
     declarations: [],
@@ -29,6 +30,7 @@ import { TargetRepository } from './repositories/target.repository';
 		AuthGuard,
 		UploadService,
 		SlugService,
+		SocketService,
 		UsergroupRepository,
 		UserRepository,
 		LangRepository,

@@ -12,6 +12,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { DonorsModule } from './modules/donors/donors.module';
 import { TargetsModule } from './modules/targets/targets.module';
+import { AppGateway } from './app.gateway';
 
 const pw: string = process.env.MONGODBPW;
 
@@ -30,6 +31,7 @@ const pw: string = process.env.MONGODBPW;
 		ArticlesModule,
 		DonorsModule,
 		TargetsModule,
-	],	
+	],
+	providers: [AppGateway],
 })
 export class AppModule {}
