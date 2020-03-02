@@ -12,6 +12,7 @@ import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Category } from '../../../model/category.model';
 import { Donor } from '../../../model/donor.model';
 import { Lang } from '../../../model/lang.model';
+import { ArticleRepository } from 'src/app/services/repositories/article.repository';
 
 @Component({
 	selector: 'targets-edit-page',
@@ -27,7 +28,8 @@ export class TargetsEditPage extends ObjectPage<Target> implements OnInit {
 		protected targetRepository: TargetRepository,
 		private donorRepository: DonorRepository,
         private categoryRepository: CategoryRepository,
-        private langRepository: LangRepository,
+		private langRepository: LangRepository,
+		private articleRepository: ArticleRepository,
         protected appService: AppService,
 		protected router: Router,
 		private route: ActivatedRoute,		
@@ -50,6 +52,7 @@ export class TargetsEditPage extends ObjectPage<Target> implements OnInit {
 
 				if (this.ll.length) {
 					this.appService.monitorLog("[targets edit] page loaded");
+					this.articleRepository.invalidateChunk(); // may be articles will be uploaded, so reset repo just in case
 					this.ready = true;
 				} else {
 					this.appService.monitorLog("no languages found", true);

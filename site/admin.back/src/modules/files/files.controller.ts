@@ -6,7 +6,7 @@ import { IAnswer } from '../../interfaces/answer.interface';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from "fs";
-import { IImageInfo } from './interfaces/imageinfo.interface';
+import { IImagable } from '../../interfaces/imagable.interface';
 
 @Controller('api/admin/files')
 export class FilesController 
@@ -38,7 +38,7 @@ export class FilesController
         })
     }))
     @UseGuards(AuthGuard)
-    public uploadImg(@UploadedFile() file): Promise<IAnswer<IImageInfo>> {
+    public uploadImg(@UploadedFile() file): Promise<IAnswer<IImagable>> {
         return this.filesService.uploadImg (file);
     }
 
@@ -59,7 +59,7 @@ export class FilesController
         })
     }))
     @UseGuards(AuthGuard)
-    public uploadImgWithCopy(@UploadedFile() file, @Param("width") width: string): Promise<IAnswer<IImageInfo>> {        
+    public uploadImgWithCopy(@UploadedFile() file, @Param("width") width: string): Promise<IAnswer<IImagable>> {        
         return this.filesService.uploadImg (file, width);
     }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as sharp from 'sharp';
 
 import { IAnswer } from "../../interfaces/answer.interface";
-import { IImageInfo } from "./interfaces/imageinfo.interface";
+import { IImagable } from 'src/interfaces/imagable.interface';
 
 @Injectable()
 export class FilesService 
@@ -11,7 +11,7 @@ export class FilesService
         return {statusCode: 415, data: "Method not ready, dir will be here in future"};
     }
 
-    public async uploadImg (file, width: string | null = null): Promise<IAnswer<IImageInfo>>
+    public async uploadImg (file, width: string | null = null): Promise<IAnswer<IImagable>>
     {
         console.log("img saved to " + file.filename);  
         const subdir = (new Date ()).getFullYear () + "-" + ((new Date ()).getMonth () + 1);

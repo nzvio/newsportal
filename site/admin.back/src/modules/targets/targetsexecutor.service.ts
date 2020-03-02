@@ -4,12 +4,14 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as xml2js from "xml2js";
 import * as cheerio from "cheerio";
-//import * as httpRequest from "request";
+import * as fs from "fs";
+import * as sharp from 'sharp';
 
 import { ITarget } from "./interfaces/target.interface";
 import { IArticle } from "../articles/interfaces/article.interface";
 import { IDonor } from "../donors/interfaces/donor.interface";
-import { SlugService } from "src/services/slug.service";
+import { SlugService } from "../../services/slug.service";
+import { IImagable } from "../../interfaces/imagable.interface";
 
 @Injectable()
 export class TargetsExecutorService {
@@ -38,7 +40,7 @@ export class TargetsExecutorService {
             }
                 
             this.monitorLog(socket, "targetExecuting", `getting RSS XML...`);
-            const xml: string = await this.doRequest(target.rss);
+            const xml: string = await this.requestPage(target.rss);
             
             if (!xml) {
                 this.monitorLog(socket, "targetExecuted", `no XML received`, true);                
@@ -47,10 +49,10 @@ export class TargetsExecutorService {
 
             this.monitorLog(socket, "targetExecuting", `RSS XML received`);
             this.monitorLog(socket, "targetExecuting", `Parsing XML...`);
-            const xmlParser: any = new xml2js.Parser();
-            const xmlObj = await xmlParser.parseStringPromise(xml);
+            const xmlParser: xml2js.Parser = new xml2js.Parser();
+            const xmlObj: any = await xmlParser.parseStringPromise(xml);
             this.monitorLog(socket, "targetExecuting", `XML parsed`);
-            const items: Object[] = xmlObj['rss']['channel'][0]['item'];
+            const items: any[] = xmlObj['rss']['channel'][0]['item'];
 
             if (!items.length) {
                 this.monitorLog(socket, "targetExecuted", `no items in XML`, true);                
@@ -65,20 +67,20 @@ export class TargetsExecutorService {
                 article.date = new Date(item['pubDate']);
                 article.source = String(item['link']).trim();
                 this.monitorLog(socket, "targetExecuting", `finding article: ${article.name}...`);
-                let res: IArticle | null = await this.articleModel.findOne({name: article.name});                
+                const res: IArticle | null = await this.articleModel.findOne({name: article.name});                
 
                 if (res) {
                     this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, true);
                 } else {
                     this.monitorLog(socket, "targetExecuting", `article is new, requesting link ${article.source}...`);
-                    let html: string = await this.doRequest(article.source);
+                    const html: string = await this.requestPage(article.source);
                     
                     if (!html) {
                         this.monitorLog(socket, "targetExecuting", `no HTML received`, true);
                     } else {
                         this.monitorLog(socket, "targetExecuting", `HTML received, parsing...`);
                         let $ = cheerio.load(html);
-                        let textElements: any[] = $((target.donor as IDonor).selector_content);
+                        const textElements: Cheerio = $((target.donor as IDonor).selector_content);
                     
                         if (!textElements.length) {
                             this.monitorLog(socket, "targetExecuting", `selector not found`, true);
@@ -90,11 +92,33 @@ export class TargetsExecutorService {
                                 article.content += `<p>${$(textElements[i]).html()}</p>`;
                             }
 
+                            article.contentshort = String($(textElements[0]).text()).substr(0, 300);
+
                             if (!article.content) {
                                 this.monitorLog(socket, "targetExecuting", `content not found`, true);
-                            } else {
-                                // TODO: build contentshort
-                                // TODO: get image
+                            } else if (!article.contentshort) {
+                                this.monitorLog(socket, "targetExecuting", `contentshort not found`, true);
+                            } else {                                
+                                this.monitorLog(socket, "targetExecuting", `content built, searching image in HTML...`);
+                                const imgElements: Cheerio = $((target.donor as IDonor).selector_img);
+
+                                if (!imgElements.length) {
+                                    this.monitorLog(socket, "targetExecuting", `image element not found`, true);
+                                } else {
+                                    let imgSrc: string = $(imgElements[0]).attr('src');
+                                    
+                                    if (imgSrc.indexOf("http:") === -1 && imgSrc.indexOf("https:") === -1) { // src without host
+                                        const urlParts: string[] = article.source.split("/");
+                                        const imgHost: string = urlParts[0] + "//" + urlParts[2] + "/";
+                                        imgSrc = imgHost + imgSrc;
+                                    }
+
+                                    this.monitorLog(socket, "targetExecuting", `image found, getting ${imgSrc}...`);
+                                    const images: IImagable = await this.requestImage(imgSrc);
+                                    article.img = images.img;
+                                    article.img_s = images.img_s;
+                                    this.monitorLog(socket, "targetExecuting", `image saved to ${article.img}, copy saved to ${article.img_s}`);
+                                }
 
 
                                 article.category = target.category;
@@ -126,7 +150,7 @@ export class TargetsExecutorService {
         }        
     }
 
-    private doRequest(url: string): Promise<string> {
+    private requestPage(url: string): Promise<string> {
         return new Promise((resolve, reject) => {
             this.httpService.get(url).subscribe(res => {
                 if (res.status === 200) {
@@ -138,5 +162,30 @@ export class TargetsExecutorService {
                 reject(err);
             });
         });
-    }     
+    } 
+    
+    private requestImage(url: string): Promise<IImagable> {
+        return new Promise(async (resolve, reject) => {
+            const date: Date = new Date();
+            const fileExtension: string = url.split(".").pop() || "";
+            const imgFileName: string = date.getTime().toString();
+            const imgsFileName: string = imgFileName + "_s";
+            const imgFileFullName: string = `${imgFileName}.${fileExtension}`;
+            const imgsFileFullName: string = `${imgsFileName}.${fileExtension}`;
+            const folder: string = `${date.getFullYear()}-${date.getMonth()+1}`;
+            const fullFolder: string = `../static/assets/images/articles/${folder}`;            
+            !fs.existsSync (fullFolder) ? fs.mkdirSync (fullFolder) : null;            
+            const writer: fs.WriteStream = fs.createWriteStream(`${fullFolder}/${imgFileFullName}`);            
+            const response: any = await this.httpService.axiosRef({url, method: 'GET', responseType: 'stream'});
+            response.data.pipe(writer);
+            
+            writer.on('finish', async () => {
+                await sharp(`${fullFolder}/${imgFileFullName}`).resize(200).toFile(`${fullFolder}/${imgsFileFullName}`);
+                const res: IImagable = {img: `${folder}/${imgFileFullName}`, img_s: `${folder}/${imgsFileFullName}`};
+                resolve(res);
+            });
+            
+            writer.on('error', reject);            
+        });
+    }
 }
