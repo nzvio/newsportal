@@ -27,7 +27,8 @@ export class ArticlesService extends APIService {
         let filter: Object = this.buildFilter(filterDate, filterName, filterCategory, filterLang);          
 
         try {            
-            let data: IArticle[] = await this.model.find(filter, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});            
+            const projection: Object = {content: 0, contentshort: 0, h1: 0, title: 0, keywords: 0, description: 0, img: 0, img_s:0, slug: 0, source: 0};
+            let data: IArticle[] = await this.model.find(filter, projection, {skip: from, limit: q, sort: {[sortBy]: sortDir}});            
             let fullLength: number = await this.model.countDocuments(filter);
             return {statusCode: 200, data, fullLength};
         } catch (err) {

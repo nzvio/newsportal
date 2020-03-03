@@ -10,7 +10,8 @@ import { LoadingtableComponent } from './loading-table/loading-table.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { ImageviewerComponent } from './imageviewer/imageviewer.component';
 import { CheckboxsliderComponent } from './checkbox-slider/checkboxslider.component';
-import { DatetimePicker } from './datetime-picker/datetime-picker.component';
+import { DatetimePickerComponent } from './datetime-picker/datetime-picker.component';
+import { AnswerMonitorComponent } from './answer-monitor/answermonitor.component';
 
 @NgModule({
     imports: [             
@@ -26,7 +27,8 @@ import { DatetimePicker } from './datetime-picker/datetime-picker.component';
         ProgressbarComponent,
         ImageviewerComponent,
         CheckboxsliderComponent,
-        DatetimePicker,
+        DatetimePickerComponent,
+        AnswerMonitorComponent,
     ],
     exports: [
         HeaderComponent, 
@@ -36,7 +38,8 @@ import { DatetimePicker } from './datetime-picker/datetime-picker.component';
         ProgressbarComponent,
         ImageviewerComponent,
         CheckboxsliderComponent,
-        DatetimePicker,
+        DatetimePickerComponent,
+        AnswerMonitorComponent,
     ],
     providers: []
 })

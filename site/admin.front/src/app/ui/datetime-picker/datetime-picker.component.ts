@@ -9,7 +9,7 @@ import { dtpLangs } from './datetime-picker.constants';
     templateUrl: "./datetime-picker.component.html",
     styleUrls: ["./datetime-picker.component.scss"],
 })
-export class DatetimePicker implements OnInit {
+export class DatetimePickerComponent implements OnInit {
     @Input() value: Date = new Date();
     @Input() langName: string = "en";
     @Input() canBeNull: boolean = false;

@@ -6,6 +6,8 @@ html {
         // common
         * {box-sizing: border-box; outline: none;}        
         .error {color: #f00;}
+        .warning {color: #ff0;}
+        .done {color: #0f0;}
         a, a:visited {color: #fff;}
         input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="password"] {
             background: none; border:1px $color-transparent-dark solid; height: 30px; color: $color-transparent; padding: 0 5px; transition: border-color 0.3s ease 0s;
@@ -238,8 +240,7 @@ html {
                     }
                     // console like
                     .data-console {
-                        &.padded {padding-top: 30px;}
-                        .dc-out {background: #000; color: #ccc; margin-bottom: 15px; height: 400px; overflow-y: scroll; overflow-x: hidden; border:1px $color-transparent-dark solid;}                        
+                        &.padded {padding-top: 30px;}                        
                     }
                 }
             }

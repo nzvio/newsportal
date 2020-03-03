@@ -31,7 +31,7 @@ export class TargetsExecutorService extends APIService {
             const targets: ITarget[] = await this.targetModel.find({active: true}).populate("donor");
 
             if (!targets.length) {
-                this.monitorLog(socket, "targetExecuted", `targets not found`, true);     
+                this.monitorLog(socket, "targetExecuted", `targets not found`, "error");     
             } else {
                 this.monitorLog(socket, "targetExecuting", `targets found`);
 
@@ -39,10 +39,10 @@ export class TargetsExecutorService extends APIService {
                     await this.executeTarget(target, socket);  
                 }
 
-                this.monitorLog(socket, "targetExecuted", `----- job finished -----`);
+                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done");
             }
         } catch (err) {
-            this.monitorLog(socket, "targetExecuted", err.toString(), true);            
+            this.monitorLog(socket, "targetExecuted", err.toString(), "error");            
         }    
     }
 
@@ -52,14 +52,14 @@ export class TargetsExecutorService extends APIService {
             const target: ITarget = await this.targetModel.findById(_id).populate("donor");
     
             if (!target) {
-                this.monitorLog(socket, "targetExecuted", `target not found`, true);                                
+                this.monitorLog(socket, "targetExecuted", `target not found`, "error");                                
             } else {
                 this.monitorLog(socket, "targetExecuting", `target found`);
                 await this.executeTarget(target, socket);    
-                this.monitorLog(socket, "targetExecuted", `----- job finished -----`);            
+                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done");            
             }            
         } catch (err) {
-            this.monitorLog(socket, "targetExecuted", err.toString(), true);            
+            this.monitorLog(socket, "targetExecuted", err.toString(), "error");            
         }        
     }
 
@@ -67,7 +67,7 @@ export class TargetsExecutorService extends APIService {
         this.monitorLog(socket, "targetExecuting", `----- executing target ${target._id} -----`);
 
         if (!target.rss) {
-            this.monitorLog(socket, "targetExecuted", `no rss in target`, true);                
+            this.monitorLog(socket, "targetExecuted", `no rss in target`, "error");                
             return;
         }
             
@@ -75,7 +75,7 @@ export class TargetsExecutorService extends APIService {
         const xml: string = await this.requestPage(target.rss);
         
         if (!xml) {
-            this.monitorLog(socket, "targetExecuted", `no XML received`, true);                
+            this.monitorLog(socket, "targetExecuted", `no XML received`, "error");                
             return;
         }
 
@@ -87,7 +87,7 @@ export class TargetsExecutorService extends APIService {
         const items: any[] = xmlObj['rss']['channel'][0]['item'];
 
         if (!items.length) {
-            this.monitorLog(socket, "targetExecuted", `no items in XML`, true);                
+            this.monitorLog(socket, "targetExecuted", `no items in XML`, "error");                
             return;
         }
 
@@ -102,20 +102,20 @@ export class TargetsExecutorService extends APIService {
             const res: IArticle | null = await this.articleModel.findOne({name: article.name});                
 
             if (res) {
-                this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, true);
+                this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, "warning");
             } else {
                 this.monitorLog(socket, "targetExecuting", `article is new, loading URL ${article.source}...`);
                 const html: string = await this.requestPage(article.source);
                 
                 if (!html) {
-                    this.monitorLog(socket, "targetExecuting", `no HTML received`, true);
+                    this.monitorLog(socket, "targetExecuting", `no HTML received`, "error");
                 } else {
                     this.monitorLog(socket, "targetExecuting", `HTML received, parsing...`);
                     let $ = cheerio.load(html);
                     const textElements: Cheerio = $((target.donor as IDonor).selector_content);
                 
                     if (!textElements.length) {
-                        this.monitorLog(socket, "targetExecuting", `selector not found`, true);
+                        this.monitorLog(socket, "targetExecuting", `selector not found`, "error");
                     } else {
                         this.monitorLog(socket, "targetExecuting", `building article content...`);
                         article.content = "";                            
@@ -127,15 +127,15 @@ export class TargetsExecutorService extends APIService {
                         article.contentshort = String($(textElements[0]).text()).substr(0, 300);
 
                         if (!article.content) {
-                            this.monitorLog(socket, "targetExecuting", `content not found`, true);
+                            this.monitorLog(socket, "targetExecuting", `content not found`, "error");
                         } else if (!article.contentshort) {
-                            this.monitorLog(socket, "targetExecuting", `contentshort not found`, true);
+                            this.monitorLog(socket, "targetExecuting", `contentshort not found`, "error");
                         } else {                                
                             this.monitorLog(socket, "targetExecuting", `content built, searching image in HTML...`);
                             const imgElements: Cheerio = $((target.donor as IDonor).selector_img);
 
                             if (!imgElements.length) {
-                                this.monitorLog(socket, "targetExecuting", `image element not found`, true);
+                                this.monitorLog(socket, "targetExecuting", `image element not found`, "warning");
                             } else {
                                 let imgSrc: string = $(imgElements[0]).attr('src');
                                 
@@ -167,15 +167,24 @@ export class TargetsExecutorService extends APIService {
         this.monitorLog(socket, "targetExecuting", `target executed successfully`);        
     }
 
-    private monitorLog(socket: Socket | Server | null, event: string, msg: string, isError: boolean = false) {        
+    private monitorLog(socket: Socket | Server | null, event: string, msg: string, status: string = "info") {        
         let date: string = this.formatDate(new Date());
 
         if (socket) {
-            if (!isError) {
-                socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});
-            } else {
-                socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`});
-            }
+            switch (status) {
+                case "info":
+                    socket.emit(event, {statusCode: 102, data: `${date} - ${msg}`});    
+                    break;
+                case "warning":
+                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});    
+                    break;
+                case "done":
+                    socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});    
+                    break;
+                case "error":
+                    socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`});    
+                    break;
+            }            
         } else {
             console.log(msg);
         }        

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 import { TargetRepository } from '../../../services/repositories/target.repository';
 import { AppService } from '../../../services/app.service';
@@ -23,11 +24,10 @@ export class TargetsListPage extends ListPage<Target> implements OnInit, OnDestr
     public homeUrl: string = "/parsing/targets";
     // local
     public selectedLang: Lang | null = null;
-    public tab: number = 1;
-    public log: string = "";
+    public tab: number = 1;    
     public executing: boolean = false;
-    @ViewChild("monitor", {static: false}) monitorRef: ElementRef;
-    private monitor: HTMLElement | null = null;
+    public logAnswer: BehaviorSubject<IAnswer<string>> = new BehaviorSubject(null); // monitor
+    public resetMonitor: BehaviorSubject<boolean> = new BehaviorSubject(false); // monitor
 
     constructor(
         protected admlangRepository: AdmLangRepository,
@@ -74,33 +74,17 @@ export class TargetsListPage extends ListPage<Target> implements OnInit, OnDestr
 
         this.socketService.on<string>("targetExecuting").subscribe(res => {
             this.executing = true;
-            this.monitorLog(res);
+            this.logAnswer.next(res);
         }, err => console.log(err));
 
         this.socketService.on<string>("targetExecuted").subscribe(res => {
             this.executing = false;
-            this.monitorLog(res);
+            this.logAnswer.next(res);
         }, err => console.log(err));
-    }
-    
-    public initMonitor(): void {
-        if (!this.monitor) {
-            setTimeout(() => {
-                this.monitor = this.monitorRef.nativeElement;
-            }, 1);
-        }
-    }
-
-    private monitorLog(res: IAnswer<string>): void {
-        this.log += res.statusCode === 200 ? `> ${res.data}<br>` : `> <span class='error'>${res.error}</span><br>`;
-        
-        if (this.monitor) {
-            setTimeout(() => {this.monitor.scrollTop = this.monitor.scrollHeight}, 1);            
-        }        
-    }
+    }    
 
     public execute(): void {        
-        this.log = "";
+        this.resetMonitor.next(true);
         this.socketService.emit<null, string>("executeAllTargets").subscribe(
             res => this.appService.monitorLog(res.data),
             err => console.log(err));

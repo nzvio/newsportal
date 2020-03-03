@@ -1,6 +1,6 @@
 <div class="data-tabs" *ngIf="canExecute">    
     <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-targets-params']}}</div>
-    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2; initMonitor();">{{currentLang.phrases['workspace-targets-exec']}}</div>
+    <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-targets-exec']}}</div>
 </div>
 
 <ng-container *ngIf="tab === 1">
@@ -42,7 +42,7 @@
 
 <ng-container *ngIf="tab === 2">
     <div class="data-console padded">
-        <div class="dc-out" [innerHTML]="log" #monitor></div>
+        <answer-monitor [inputAnswer]="logAnswer" [reset]="resetMonitor"></answer-monitor>
         <button type="button" (click)="execute();" [disabled]="executing">{{currentLang.phrases['workspace-targets-start']}}</button>
     </div>    
 </ng-container>
