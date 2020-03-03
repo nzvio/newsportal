@@ -53,7 +53,7 @@ html {
                             margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; 
                             &:hover {background-color: $color-bg-light;}
                             &.disabled {
-                                cursor: inherit; color: $color-transparent-disabled;
+                                cursor: inherit; color: $color-transparent-disabled; pointer-events: none;
                                 &:hover {background-color: inherit;}                                
                             }
                             span {
@@ -65,6 +65,7 @@ html {
                             &.delete {span::before {content: "\f05e";}}
                             &.save {span::before {content: "\f7c2";}}
                             &.back {span::before {content: "\f060";}}
+                            &.exectarget {span::before {content: "\f05b";}}
                         }
                     }
                 }
@@ -99,7 +100,7 @@ html {
                                     margin-left: 5px; cursor: pointer; transition: all 0.3s ease 0s; text-align: center; 
                                     &:hover {background-color: $color-bg-light;}
                                     &.disabled {
-                                        cursor: inherit; color: $color-transparent-disabled;
+                                        cursor: inherit; color: $color-transparent-disabled; pointer-events: none;
                                         &:hover {background-color: inherit;}                                
                                     }
                                     span {
@@ -110,7 +111,7 @@ html {
                                     &.create {span::before {content: "\f067";}}
                                     &.delete {span::before {content: "\f05e";}}
                                     &.save {span::before {content: "\f7c2";}}
-                                    &.back {span::before {content: "\f060";}}
+                                    &.back {span::before {content: "\f060";}}                                    
                                 }
                             }
                         }                                 

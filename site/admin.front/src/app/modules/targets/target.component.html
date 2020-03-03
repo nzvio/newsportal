@@ -1,4 +1,4 @@
-<div class="data-tabs" *ngIf="canExecute">
+<div class="data-tabs" *ngIf="canExecute">    
     <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-targets-params']}}</div>
     <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2; initMonitor();">{{currentLang.phrases['workspace-targets-exec']}}</div>
 </div>

@@ -3,71 +3,65 @@
         <h1>{{currentLang.phrases['workspace-targets-h1']}} ({{fullLength}})</h1>
         <div class="content-dash">
             <div class="cd-btn create" [title]="currentLang.phrases['workspace-create']" [routerLink]="homeUrl + '/create'"><span></span></div>
-            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.phrases['workspace-deleteselected']" (click)="deleteBulk();"><span></span></div>
+            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.phrases['workspace-deleteselected']" (click)="deleteBulk(); tab = 1;"><span></span></div>            
         </div>
     </div>    
     <div class="data">
-        <ng-container *ngIf="ready">
-            <div class="data-tablewrap">
-                <table class="data-table">
-                    <tr class="no-selection">
-                        <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
-                        <th><label [class]="sortBy === 'donor' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('donor');">{{currentLang.phrases['workspace-targets-donor']}}</label></th>
-                        <th><label [class]="sortBy === 'rss' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('rss');">{{currentLang.phrases['workspace-targets-rss']}}</label></th>
-                        <th><label [class]="sortBy === 'category' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('category');">{{currentLang.phrases['workspace-targets-category']}} ({{selectedLang.name}})</label></th>
-                        <th><label [class]="sortBy === 'lang' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('lang');">{{currentLang.phrases['workspace-targets-lang']}}</label></th>
-                        <th>{{currentLang.phrases['workspace-targets-active']}}</th>
-                        <th>{{currentLang.phrases['workspace-actions']}}</th>
-                    </tr>   
-                    <ng-container *ngIf="xl.length">
-                        <tr *ngFor="let x of xl">
-                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
-                            <td>
-                                <div class="dt-inputwrap">
-                                    <select [(ngModel)]="x.donor" (change)="updateParam (x._id, 'donor', x.donor);">
-                                        <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>                                        
-                                        <option *ngFor="let d of dl" [value]="d._id" [innerHTML]="d.name"></option>                                        
-                                    </select>
-                                </div>
-                            </td>
-                            <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.rss" (change)="updateParam (x._id, 'rss', x.rss);"></div></td>
-                            <td>
-                                <div class="dt-inputwrap">
-                                    <select [(ngModel)]="x.category" (change)="updateParam (x._id, 'category', x.category);">
-                                        <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>                                        
-                                        <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option>                                        
-                                    </select>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="dt-inputwrap">
-                                    <select [(ngModel)]="x.lang" (change)="updateParam (x._id, 'lang', x.lang);">
-                                        <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>                                        
-                                        <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                                        
-                                    </select>
-                                </div>
-                            </td>
-                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);"></checkbox-slider></div></td>
-                            <td>
-                                <div class="dt-actions">
-                                    <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="homeUrl + '/edit/'+x._id"><span></span></div>
-                                    <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
-                                </div>
-                            </td>
-                        </tr>                            
-                    </ng-container>
-                    <ng-container *ngIf="!xl.length">
-                        <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
-                    </ng-container>
-                </table>
-            </div>            
-            <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>
+        <!-- tabs -->
+        <div class="data-tabs">
+            <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-targets-list']}}</div>
+            <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2; initMonitor();">{{currentLang.phrases['workspace-targets-exec']}}</div>
+        </div>
+        <!-- tab 1 -->
+        <ng-container *ngIf="tab === 1">
+            <ng-container *ngIf="ready">            
+                <div class="data-tablewrap padded">
+                    <table class="data-table">
+                        <tr class="no-selection">
+                            <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
+                            <th><label [class]="sortBy === 'donor' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('donor');">{{currentLang.phrases['workspace-targets-donor']}}</label></th>
+                            <th><label [class]="sortBy === 'rss' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('rss');">{{currentLang.phrases['workspace-targets-rss']}}</label></th>
+                            <th><label [class]="sortBy === 'category' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('category');">{{currentLang.phrases['workspace-targets-category']}} ({{selectedLang.name}})</label></th>
+                            <th><label [class]="sortBy === 'lang' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('lang');">{{currentLang.phrases['workspace-targets-lang']}}</label></th>
+                            <th>{{currentLang.phrases['workspace-targets-active']}}</th>
+                            <th>{{currentLang.phrases['workspace-actions']}}</th>
+                        </tr>   
+                        <ng-container *ngIf="xl.length">
+                            <tr *ngFor="let x of xl">
+                                <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
+                                <td><div class="dt-inputwrap"><select [(ngModel)]="x.donor" (change)="updateParam (x._id, 'donor', x.donor);"><option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option><option *ngFor="let d of dl" [value]="d._id" [innerHTML]="d.name"></option></select></div></td>
+                                <td><div class="dt-inputwrap"><input type="text" [(ngModel)]="x.rss" (change)="updateParam (x._id, 'rss', x.rss);"></div></td>
+                                <td><div class="dt-inputwrap"><select [(ngModel)]="x.category" (change)="updateParam (x._id, 'category', x.category);"><option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option><option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option></select></div></td>
+                                <td><div class="dt-inputwrap"><select [(ngModel)]="x.lang" (change)="updateParam (x._id, 'lang', x.lang);"><option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option><option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option></select></div></td>
+                                <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);"></checkbox-slider></div></td>
+                                <td>
+                                    <div class="dt-actions">
+                                        <div class="dt-btn edit" [title]="currentLang.phrases['workspace-edit']" [routerLink]="homeUrl + '/edit/'+x._id"><span></span></div>
+                                        <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                    </div>
+                                </td>
+                            </tr>                            
+                        </ng-container>
+                        <ng-container *ngIf="!xl.length">
+                            <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+                        </ng-container>
+                    </table>
+                </div>            
+                <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>
+            </ng-container>
+            <ng-container  *ngIf="!ready">
+                <loading-table [columns]="4"></loading-table>
+            </ng-container>
+            <ng-container *ngIf="reloading">
+                <div class="reloading"><span></span></div>
+            </ng-container>              
         </ng-container>
-        <ng-container  *ngIf="!ready">
-            <loading-table [columns]="4"></loading-table>
+        <!-- tab 2 -->
+        <ng-container *ngIf="tab === 2">
+            <div class="data-console padded">
+                <div class="dc-out" [innerHTML]="log" #monitor></div>
+                <button type="button" [disabled]="executing" (click)="execute();">{{currentLang.phrases['workspace-targets-start']}}</button>
+            </div>
         </ng-container>
-        <ng-container *ngIf="reloading">
-            <div class="reloading"><span></span></div>
-        </ng-container>        
     </div>    
 </div>

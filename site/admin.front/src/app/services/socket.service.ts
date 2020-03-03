@@ -34,7 +34,7 @@ export class SocketService {
         this.appService.monitorLog("socket disconnected");
     }
 
-    public emit<T1, T2>(eventName: string, message: T1): Observable<IAnswer<T2>> {
+    public emit<T1, T2>(eventName: string, message: T1 = null): Observable<IAnswer<T2>> {
         return new Observable<IAnswer<T2>>(observer => {            
             this.socket.emit(eventName, message, (res: IAnswer<T2>) => {                
                 observer.next(res);                

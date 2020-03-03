@@ -6,8 +6,7 @@ import { DataService } from '../data.service';
 
 @Injectable()
 export class TargetRepository extends Repository<Target> {
-    public schema: string = "Target";
-    public fullSortBy: string = "name";
+    public schema: string = "Target";    
 
     constructor(protected dataService: DataService) {
         super(dataService);

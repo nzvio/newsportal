@@ -13,8 +13,13 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     public msgExecuteTarget(client: Socket, msg: string): IAnswer<string> {        
         let _id: string = msg;
         this.targetsExecutor.executeOne(_id, this.server); // execute and translate log to all clients ("server" socket is used, not the "client" socket!)
-
         return {statusCode: 200, data: "target execution started"};
+    }
+
+    @SubscribeMessage('executeAllTargets')
+    public msgExecuteAllTargets(client: Socket): IAnswer<string> {                
+        this.targetsExecutor.executeAll(this.server); // execute and translate log to all clients ("server" socket is used, not the "client" socket!)
+        return {statusCode: 200, data: "targets execution started"};
     }
 
     public afterInit(server: Server) {

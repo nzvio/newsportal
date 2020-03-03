@@ -16,7 +16,7 @@ export class TargetsService extends APIService {
     }    
 
     public async chunk(dto: GetchunkDTO): Promise<IAnswer<ITarget[]>> {
-        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "name";
+        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "donor";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
         let from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         let q: number = !this.isEmpty(dto.q) ? dto.q : 10;

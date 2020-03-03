@@ -137,7 +137,8 @@
             "workspace-targets-active": "Active",
             "workspace-targets-params": "Parameters",
             "workspace-targets-exec": "Execution",
-            "workspace-targets-start": "Start"
+            "workspace-targets-start": "Execute",
+            "workspace-targets-list": "List"
         }
     },
     {
@@ -146,7 +147,7 @@
         "dir": "ltr",
         "phrases": {
             "header-logout": "Выйти",
-            "header-options": "Настройки панели",
+            "header-options": "Параметры системы",
 
             "sidebar-email": "e-mail",
             "sidebar-password": "пароль",
@@ -193,7 +194,7 @@
             "workspace-usergroups-title": "Название",
             "workspace-usergroups-name": "Системное имя",
 
-            "workspace-options-h1": "Настройки панели",
+            "workspace-options-h1": "Параметры системы",
             "workspace-options-lang": "Язык",
 
             "workspace-langs-h1": "Языки",
@@ -278,7 +279,8 @@
             "workspace-targets-active": "Вкл.",
             "workspace-targets-params": "Параметры",
             "workspace-targets-exec": "Выполнение",
-            "workspace-targets-start": "Выполнить"
+            "workspace-targets-start": "Выполнить",
+            "workspace-targets-list": "Список"
         }
     }
 ]
