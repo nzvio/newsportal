@@ -1,6 +1,8 @@
-Backend requires environment variables:
- 
+1) Backend requires environment variables:
 export NEWSPORTALAPIKEY=...
 export MONGODBPW=...
-
 In Kubuntu 19 they are in /home/[user]/.profile
+
+2) Backend requires CORS options, for example:
+app.enableCors({origin: /\.sc\.vio\.net\.ua$/});
+where "origin" is parameter for "Access-Control-Allow-Origin" header.
