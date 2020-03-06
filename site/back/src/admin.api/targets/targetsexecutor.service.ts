@@ -13,12 +13,14 @@ import { IDonor } from "../../interfaces/model/donor.interface";
 import { SlugService } from "../../services/slug.service";
 import { IImagable } from "../../interfaces/imagable.interface";
 import { AdminAPIService } from "../_admin.api.service";
+import { IParseerror } from "../../interfaces/model/parseerror.interface";
 
 @Injectable()
 export class TargetsExecutorService extends AdminAPIService {
     constructor(
         @InjectModel("Target") private readonly targetModel: Model<ITarget>,
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
+        @InjectModel("Parseerror") private readonly errorModel: Model<IParseerror>,
         private readonly httpService: HttpService,
         private readonly slugService: SlugService,
     ) {
@@ -27,97 +29,97 @@ export class TargetsExecutorService extends AdminAPIService {
 
     public async executeAll(socket: Socket | Server | null = null): Promise<void> {
         try {
-            this.monitorLog(socket, "targetExecuting", `finding active targets...`);
+            this.monitorLog(socket, "targetExecuting", `finding active targets...`, "info", null);
             const targets: ITarget[] = await this.targetModel.find({active: true}).populate("donor");
 
             if (!targets.length) {
-                this.monitorLog(socket, "targetExecuted", `targets not found`, "error");     
+                this.monitorLog(socket, "targetExecuted", `targets not found`, "error", null);     
             } else {
-                this.monitorLog(socket, "targetExecuting", `targets found`);
+                this.monitorLog(socket, "targetExecuting", `targets found`, "info", null);
 
                 for (let target of targets) {
                     await this.executeTarget(target, socket);  
                 }
 
-                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done");
+                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done", null);
             }
         } catch (err) {
-            this.monitorLog(socket, "targetExecuted", err.toString(), "error");            
+            this.monitorLog(socket, "targetExecuted", err.toString(), "error", null);            
         }    
     }
 
     public async executeOne(_id: string, socket: Socket | Server | null = null): Promise<void> {
         try {
-            this.monitorLog(socket, "targetExecuting", `finding target by _id=${_id}...`);
+            this.monitorLog(socket, "targetExecuting", `finding target by _id=${_id}...`, "info", null);
             const target: ITarget = await this.targetModel.findById(_id).populate("donor");
     
             if (!target) {
-                this.monitorLog(socket, "targetExecuted", `target not found`, "error");                                
+                this.monitorLog(socket, "targetExecuted", `target not found`, "error", _id);
             } else {
-                this.monitorLog(socket, "targetExecuting", `target found`);
+                this.monitorLog(socket, "targetExecuting", `target found`, "info", null);
                 await this.executeTarget(target, socket);    
-                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done");            
+                this.monitorLog(socket, "targetExecuted", `----- job finished -----`, "done", null);            
             }            
         } catch (err) {
-            this.monitorLog(socket, "targetExecuted", err.toString(), "error");            
+            this.monitorLog(socket, "targetExecuted", err.toString(), "error", _id);            
         }        
     }
 
     private async executeTarget(target: ITarget, socket: Socket | Server | null = null): Promise<void> {
-        this.monitorLog(socket, "targetExecuting", `----- executing target ${target._id} -----`);
+        this.monitorLog(socket, "targetExecuting", `----- executing target ${target._id} -----`, "info", null);
 
         if (!target.rss) {
-            this.monitorLog(socket, "targetExecuted", `no rss in target`, "error");                
+            this.monitorLog(socket, "targetExecuted", `no rss in target`, "error", target._id);                
             return;
         }
             
-        this.monitorLog(socket, "targetExecuting", `loading RSS XML...`);
+        this.monitorLog(socket, "targetExecuting", `loading RSS XML...`, "info", null);
         const xml: string = await this.requestPage(target.rss);
         
         if (!xml) {
-            this.monitorLog(socket, "targetExecuted", `no XML received`, "error");                
+            this.monitorLog(socket, "targetExecuted", `no XML received`, "error", target._id);                
             return;
         }
 
-        this.monitorLog(socket, "targetExecuting", `RSS XML received`);
-        this.monitorLog(socket, "targetExecuting", `parsing XML...`);
+        this.monitorLog(socket, "targetExecuting", `RSS XML received`, "info", null);
+        this.monitorLog(socket, "targetExecuting", `parsing XML...`, "info", null);
         const xmlParser: xml2js.Parser = new xml2js.Parser();
         const xmlObj: any = await xmlParser.parseStringPromise(xml);
-        this.monitorLog(socket, "targetExecuting", `XML parsed`);
+        this.monitorLog(socket, "targetExecuting", `XML parsed`, "info", null);
         const items: any[] = xmlObj['rss']['channel'][0]['item'];
 
         if (!items.length) {
-            this.monitorLog(socket, "targetExecuted", `no items in XML`, "error");                
+            this.monitorLog(socket, "targetExecuted", `no items in XML`, "error", target._id);                
             return;
         }
 
-        this.monitorLog(socket, "targetExecuting", `${items.length} items found in XML`);
+        this.monitorLog(socket, "targetExecuting", `${items.length} items found in XML`, "info", null);
         
         for (let item of items) {
             let article: IArticle = new this.articleModel();
             article.name = String(item['title']).trim();
             article.date = new Date(item['pubDate']);
             article.source = String(item['link']).trim();
-            this.monitorLog(socket, "targetExecuting", `finding article: ${article.name}...`);
+            this.monitorLog(socket, "targetExecuting", `finding article: ${article.name}...`, "info", null);
             const res: IArticle | null = await this.articleModel.findOne({name: article.name});                
 
             if (res) {
-                this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, "warning");
+                this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, "warning", target._id);
             } else {
-                this.monitorLog(socket, "targetExecuting", `article is new, loading URL ${article.source}...`);
+                this.monitorLog(socket, "targetExecuting", `article is new, loading URL ${article.source}...`, "info", null);
                 const html: string = await this.requestPage(article.source);
                 
                 if (!html) {
-                    this.monitorLog(socket, "targetExecuting", `no HTML received`, "error");
+                    this.monitorLog(socket, "targetExecuting", `no HTML received`, "error", target._id);
                 } else {
-                    this.monitorLog(socket, "targetExecuting", `HTML received, parsing...`);
+                    this.monitorLog(socket, "targetExecuting", `HTML received, parsing...`, "info", null);
                     let $ = cheerio.load(html);
                     const textElements: Cheerio = $((target.donor as IDonor).selector_content);
                 
                     if (!textElements.length) {
-                        this.monitorLog(socket, "targetExecuting", `selector not found`, "error");
+                        this.monitorLog(socket, "targetExecuting", `selector not found`, "error", target._id);
                     } else {
-                        this.monitorLog(socket, "targetExecuting", `building article content...`);
+                        this.monitorLog(socket, "targetExecuting", `building article content...`, "info", null);
                         article.content = "";                            
 
                         for (let i: number = 0; i < textElements.length; i++) {
@@ -127,15 +129,15 @@ export class TargetsExecutorService extends AdminAPIService {
                         article.contentshort = String($(textElements[0]).text()).substr(0, 300);
 
                         if (!article.content) {
-                            this.monitorLog(socket, "targetExecuting", `content not found`, "error");
+                            this.monitorLog(socket, "targetExecuting", `content not found`, "error", target._id);
                         } else if (!article.contentshort) {
-                            this.monitorLog(socket, "targetExecuting", `contentshort not found`, "error");
+                            this.monitorLog(socket, "targetExecuting", `contentshort not found`, "error", target._id);
                         } else {                                
-                            this.monitorLog(socket, "targetExecuting", `content built, searching image in HTML...`);
+                            this.monitorLog(socket, "targetExecuting", `content built, searching image in HTML...`, "info", null);
                             const imgElements: Cheerio = $((target.donor as IDonor).selector_img);
 
                             if (!imgElements.length) {
-                                this.monitorLog(socket, "targetExecuting", `image element not found`, "warning");
+                                this.monitorLog(socket, "targetExecuting", `image element not found`, "warning", target._id);
                             } else {
                                 let imgSrc: string = $(imgElements[0]).attr('src');
                                 
@@ -145,11 +147,11 @@ export class TargetsExecutorService extends AdminAPIService {
                                     imgSrc = imgHost + imgSrc;
                                 }
 
-                                this.monitorLog(socket, "targetExecuting", `image found, loading ${imgSrc}...`);
+                                this.monitorLog(socket, "targetExecuting", `image found, loading ${imgSrc}...`, "info", null);
                                 const images: IImagable = await this.requestImage(imgSrc);
                                 article.img = images.img;
                                 article.img_s = images.img_s;
-                                this.monitorLog(socket, "targetExecuting", `image saved to ${article.img}, copy saved to ${article.img_s}`);
+                                this.monitorLog(socket, "targetExecuting", `image saved to ${article.img}, copy saved to ${article.img_s}`, "info", null);
                             }
 
 
@@ -157,17 +159,17 @@ export class TargetsExecutorService extends AdminAPIService {
                             article.lang = target.lang;
                             article.slug = this.slugService.buildSlug(article.name);
                             await article.save();
-                            this.monitorLog(socket, "targetExecuting", `article saved`);
+                            this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
                         }
                     }
                 }
             }
         }
 
-        this.monitorLog(socket, "targetExecuting", `target executed successfully`);        
+        this.monitorLog(socket, "targetExecuting", `target executed successfully`, "info", null);        
     }
 
-    private monitorLog(socket: Socket | Server | null, event: string, msg: string, status: string = "info") {        
+    private monitorLog(socket: Socket | Server | null, event: string, msg: string, status: string, targetId: string | null) {        
         let date: string = this.formatDate(new Date());
 
         if (socket) {
@@ -176,13 +178,17 @@ export class TargetsExecutorService extends AdminAPIService {
                     socket.emit(event, {statusCode: 102, data: `${date} - ${msg}`});    
                     break;
                 case "warning":
-                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});    
+                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});                     
                     break;
                 case "done":
                     socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});    
                     break;
                 case "error":
-                    socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`});    
+                    socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`}); 
+                    let error: IParseerror = new this.errorModel();
+                    targetId ? error.target = targetId : null;
+                    error.message = msg;
+                    error.save();   
                     break;
             }            
         } else {
