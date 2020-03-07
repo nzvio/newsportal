@@ -17,6 +17,7 @@ import { ArticleRepository } from './repositories/article.repository';
 import { DonorRepository } from './repositories/donor.repository';
 import { TargetRepository } from './repositories/target.repository';
 import { SocketService } from './socket.service';
+import { ParseerrorRepository } from './repositories/parseerror.repository';
 
 @NgModule({
     declarations: [],
@@ -39,6 +40,7 @@ import { SocketService } from './socket.service';
 		ArticleRepository,
 		DonorRepository,
 		TargetRepository,
+		ParseerrorRepository,
 	],
 })
 export class ServicesModule { }

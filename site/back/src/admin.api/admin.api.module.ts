@@ -12,6 +12,7 @@ import { ArticlesModule } from "./articles/articles.module";
 import { DonorsModule } from "./donors/donors.module";
 import { TargetsModule } from "./targets/targets.module";
 import { AdminAPIGateway } from "./admin.api.gateway";
+import { ParseerrorsModule } from "./parseerrors/parseerrors.module";
 
 @Module({
     imports: [
@@ -26,6 +27,7 @@ import { AdminAPIGateway } from "./admin.api.gateway";
 		ArticlesModule,
 		DonorsModule,
 		TargetsModule,
+		ParseerrorsModule,
     ],
     providers: [
 		AdminAPIGateway,

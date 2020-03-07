@@ -1,8 +1,9 @@
 import { Model } from './model';
+import { Donor } from './donor.model';
 
 export class Target extends Model {
     public _id: string;    
-    public donor: string;
+    public donor: string | Donor;
     public rss: string;
     public category: string;
     public lang: string;

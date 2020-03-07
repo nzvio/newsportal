@@ -22,6 +22,7 @@
             "sidebar-module-parsing": "Parsing",
             "sidebar-submodule-donors": "Donors",
             "sidebar-submodule-targets": "Targets",
+            "sidebar-submodule-parseerrors": "Errors",
 
             "workspace-create": "Create",
             "workspace-deleteselected": "Delete selected",
@@ -138,7 +139,12 @@
             "workspace-targets-params": "Parameters",
             "workspace-targets-exec": "Execution",
             "workspace-targets-start": "Execute",
-            "workspace-targets-list": "List"
+            "workspace-targets-list": "List",
+
+            "workspace-parseerrors-h1": "Parsing errors",
+            "workspace-parseerrors-date": "Date (UTC)",
+            "workspace-parseerrors-donor": "Donor",
+            "workspace-parseerrors-message": "Message"
         }
     },
     {
@@ -164,6 +170,7 @@
             "sidebar-module-parsing": "Парсинг",
             "sidebar-submodule-donors": "Доноры",
             "sidebar-submodule-targets": "Цели",
+            "sidebar-submodule-parseerrors": "Ошибки",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -280,7 +287,12 @@
             "workspace-targets-params": "Параметры",
             "workspace-targets-exec": "Выполнение",
             "workspace-targets-start": "Выполнить",
-            "workspace-targets-list": "Список"
+            "workspace-targets-list": "Список",
+
+            "workspace-parseerrors-h1": "Ошибки парсинга",
+            "workspace-parseerrors-date": "Дата (UTC)",
+            "workspace-parseerrors-donor": "Донор",
+            "workspace-parseerrors-message": "Сообщение"
         }
     }
 ]

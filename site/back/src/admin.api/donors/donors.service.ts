@@ -37,7 +37,7 @@ export class DonorsService extends AdminAPIService {
         let q: number = !this.isEmpty(dto.q) ? dto.q : 10;
 
         try {
-            let data: IDonor[] = await this.model.find({}, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});
+            let data: IDonor[] = await this.model.find({}, {encoding: 0, selector_content: 0, selector_img: 0}, {skip: from, limit: q, sort: {[sortBy]: sortDir}});
             let fullLength: number = await this.model.countDocuments();
             return {statusCode: 200, data, fullLength};
         } catch (err) {

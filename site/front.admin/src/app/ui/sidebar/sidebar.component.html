@@ -37,6 +37,7 @@
                 <div [class]="sub3Active ? 'nav-sub active' : 'nav-sub'">
                     <div [class]="currentUrl.parts[1] === 'donors' ? 'nav-item active' : 'nav-item'"><a routerLink="/parsing/donors"><span>{{currentLang.phrases['sidebar-submodule-donors']}}</span></a></div>
                     <div [class]="currentUrl.parts[1] === 'targets' ? 'nav-item active' : 'nav-item'"><a routerLink="/parsing/targets"><span>{{currentLang.phrases['sidebar-submodule-targets']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'parseerrors' ? 'nav-item active' : 'nav-item'"><a routerLink="/parsing/parseerrors"><span>{{currentLang.phrases['sidebar-submodule-parseerrors']}}</span></a></div>
                 </div>
                 
                 <div [class]="currentUrl.parts[0] === 'pages' ? 'nav-item active' : 'nav-item'"><a routerLink="/pages"><span class="nav-pages">{{currentLang.phrases['sidebar-module-pages']}}</span></a></div>

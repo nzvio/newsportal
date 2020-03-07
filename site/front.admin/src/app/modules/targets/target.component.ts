@@ -9,6 +9,7 @@ import { SocketService } from '../../services/socket.service';
 import { IAnswer } from '../../model/answer.interface';
 import { AppService } from 'src/app/services/app.service';
 import { BehaviorSubject } from 'rxjs';
+import { ParseerrorRepository } from 'src/app/services/repositories/parseerror.repository';
 
 @Component({
     selector: "the-target",
@@ -29,6 +30,7 @@ export class TargetComponent extends ObjectComponent implements OnInit, OnDestro
     constructor(
         private socketService: SocketService,  
         private appService: AppService,      
+        private parseerrorRepository: ParseerrorRepository,
     ) {
         super();        
     }
@@ -48,6 +50,7 @@ export class TargetComponent extends ObjectComponent implements OnInit, OnDestro
         this.socketService.on<string>("targetExecuted").subscribe(res => {
             this.executing = false;
             this.logAnswer.next(res);
+            this.parseerrorRepository.invalidateAll();
         }, err => console.log(err));
     }    
 

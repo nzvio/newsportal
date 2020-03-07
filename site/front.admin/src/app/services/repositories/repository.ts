@@ -61,10 +61,11 @@ export abstract class Repository<T> {
         });        
     }    
 
-    public abstract loadChunk(): Promise<void>;
-    public abstract loadOne(_id: string): Promise<T>;    
-    public abstract delete(_id: string): Promise<void>;
-    public abstract deleteBulk(_ids: string[]): Promise<void>;
-    public abstract create(x: T): Promise<void>;
-    public abstract update(x: T): Promise<void>;
+    // optional methods (they are abstract in fact, but not marked as abstract)
+    public loadChunk?(): Promise<void>;
+    public loadOne?(_id: string): Promise<T>;    
+    public delete?(_id: string): Promise<void>;
+    public deleteBulk?(_ids: string[]): Promise<void>;
+    public create?(x: T): Promise<void>;
+    public update?(x: T): Promise<void>;
 }

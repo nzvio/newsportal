@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.phrases['workspace-parseerrors-h1']}} ({{fullLength}})</h1>
+        <div class="content-dash">           
+            <div [class]="canDeleteBulk ? 'cd-btn delete' : 'cd-btn delete disabled'" [title]="currentLang.phrases['workspace-deleteselected']" (click)="deleteBulk();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <div class="data-tablewrap">
+                <table class="data-table">
+                    <tr class="no-selection">
+                        <th><input type="checkbox" [(ngModel)]="allSelected" (ngModelChange)="onSelectAll();"></th>                        
+                        <th><label [class]="sortBy === 'date' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('date');">{{currentLang.phrases['workspace-parseerrors-date']}}</label></th>
+                        <th>{{currentLang.phrases['workspace-parseerrors-donor']}}</th>
+                        <th>{{currentLang.phrases['workspace-parseerrors-message']}}</th>
+                        <th>{{currentLang.phrases['workspace-actions']}}</th>
+                    </tr>   
+                    <ng-container *ngIf="xl.length">
+                        <tr *ngFor="let x of xl">
+                            <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
+                            <td>{{x.formatedDate}}</td>
+                            <td>{{x.target.donor.name}}</td>
+                            <td>{{x.message}}</td>
+                            <td>
+                                <div class="dt-actions">                                    
+                                    <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" *ngIf="!x.defended" (click)="delete(x._id);"><span></span></div>
+                                </div>
+                            </td>
+                        </tr>                            
+                    </ng-container>
+                    <ng-container *ngIf="!xl.length">
+                        <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+                    </ng-container>
+                </table>
+            </div>            
+            <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="currentPart = $event; rebuildList ();"></pagination>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="4"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>

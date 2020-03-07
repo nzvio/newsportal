@@ -13,6 +13,7 @@ import { CategoriesModule } from './modules/categories/categories.module';
 import { ArticlesModule } from './modules/articles/articles.module';
 import { DonorsModule } from './modules/donors/donors.module';
 import { TargetsModule } from './modules/targets/targets.module';
+import { ParseerrorsModule } from './modules/parseerrors/parseerrors.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
@@ -26,6 +27,7 @@ const routes: Routes = [
 	{path: "catalogue/articles", loadChildren: () => ArticlesModule}, 
 	{path: "parsing/donors", loadChildren: () => DonorsModule}, 
 	{path: "parsing/targets", loadChildren: () => TargetsModule}, 
+	{path: "parsing/parseerrors", loadChildren: () => ParseerrorsModule}, 
 	{path:"**", component: HomePage},
 ];
 
