@@ -1,5 +1,7 @@
 <div id="wrap" #wrap (scroll)="onScroll($event);">
-	<the-header [stickyVisible]="stickyVisible" [indicatorWidth]="indicatorWidth"></the-header>
-	<router-outlet></router-outlet>	
-	<the-footer></the-footer>	
+	<ng-container *ngIf="langsReady">
+		<the-header [stickyVisible]="stickyVisible" [indicatorWidth]="indicatorWidth"></the-header>
+		<router-outlet></router-outlet>	
+		<the-footer></the-footer>	
+	</ng-container>	
 </div>

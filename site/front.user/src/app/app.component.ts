@@ -1,9 +1,12 @@
 import { Component, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AppService } from './services/app.service';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart, NavigationEnd, RouterEvent } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
-import { NavHistory } from './model/navhistory.class';
+import { NavHistory } from './model/navhistory';
 import { INavScroll } from './model/navscroll.interface';
+import { LangRepository } from './services/repositories/lang.repository';
+import { Lang } from './model/lang.model';
 
 @Component({
 	selector: 'app-root',
@@ -20,13 +23,16 @@ export class AppComponent implements AfterViewInit, OnInit {
 	constructor(
 		private appService: AppService,
 		private router: Router,		
+		private langRepository: LangRepository,
 	) {			
 	}
 
 	get wrapper(): HTMLElement {return this.appService.wrapper;}
 	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}
+	get langsReady(): boolean {return this.langRepository.current != null;}	
 
-	public ngOnInit(): void {		
+	public ngOnInit(): void {	
+		this.initLangs();	
 	}
 
 	public ngAfterViewInit(): void {
@@ -51,6 +57,31 @@ export class AppComponent implements AfterViewInit, OnInit {
 				this.wrapper.scrollTo(0, this.navHistory.needScrollTo);
 			}
 		});
+	}
+
+	private initLangs(): void {		
+		this.router.events
+			.pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
+			.subscribe(async (event: NavigationEnd) => {					
+				await this.langRepository.load();
+
+				if (this.langRepository.xl.length) {
+					let langName: string = event.url.split("/")[1]; 				
+				
+					if (langName) {
+						let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === langName) || null;
+						
+						if (currentLang) {
+							this.langRepository.current = currentLang;
+						} else {
+							this.langRepository.current = this.langRepository.xl[0];
+							this.router.navigateByUrl("/404");
+						}						 
+					} else {
+						this.langRepository.current = this.langRepository.xl[0];
+					}					
+				}					
+			});
 	}
 	
 	public onScroll(event: any): void {		

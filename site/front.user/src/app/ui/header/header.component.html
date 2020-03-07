@@ -15,8 +15,8 @@
         <div class="h-content">		
             <div id="h-middle-content">
                 <div id="h-logo" routerLink="/ru">
-                    <div id="h-logo-top"><span>Science</span><span>Club</span></div>
-                    <div id="h-logo-bottom">онлайн-журнал</div>
+                    <div id="h-logo-top"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
+                    <div id="h-logo-bottom">{{currentLang.s('sitename3')}}</div>
                 </div>
             </div>				
         </div>			
@@ -26,7 +26,7 @@
             <div class="h-menu">
                 <nav class="h-nav-bottom">
                     <ul>
-                        <li><a routerLink="/ru" class="active">Главная</a></li>
+                        <li><a routerLink="/ru" class="active">{{currentLang.s('home')}}</a></li>
                         <li><a routerLink="/ru/cat/space">Космос</a></li>
                         <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
                     </ul>

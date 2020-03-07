@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './repository';
+import { Repository } from './_repository';
 import { Parseerror } from '../../model/parseerror.model';
 import { DataService } from '../data.service';
 

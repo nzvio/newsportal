@@ -1,6 +1,9 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges, PLATFORM_ID, Inject } from '@angular/core';
-import { AppService } from 'src/app/services/app.service';
 import { isPlatformBrowser } from '@angular/common';
+
+import { AppService } from '../../services/app.service';
+import { LangRepository } from '../../services/repositories/lang.repository';
+import { Lang } from '../../model/lang.model';
 
 @Component({
     selector:"the-header", 
@@ -9,7 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class HeaderComponent implements AfterViewInit {    
     @Input() stickyVisible: boolean = false;
-    @Input() indicatorWidth: number = 0;
+    @Input() indicatorWidth: number = 0;    
     @ViewChild("sticky", {static: false}) sticky: ElementRef;  
     @ViewChild("scrollindicator", {static: false}) scrollindicator: ElementRef;  
     public mmActive: boolean = false;
@@ -17,10 +20,12 @@ export class HeaderComponent implements AfterViewInit {
     constructor(
         private appService: AppService,
         @Inject(PLATFORM_ID) private platformId: Object,  
+        private langRepository: LangRepository,        
     ) {        
     }
     
-    get wrapper(): HTMLElement {return this.appService.wrapper;}
+    get wrapper(): HTMLElement {return this.appService.wrapper;}        
+    get currentLang(): Lang {return this.langRepository.current;}
 
     public async ngAfterViewInit(): Promise<void> {
         if (isPlatformBrowser(this.platformId)) {

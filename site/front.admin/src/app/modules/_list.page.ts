@@ -1,5 +1,5 @@
 import { AppService } from '../services/app.service';
-import { Repository } from '../services/repositories/repository';
+import { Repository } from '../services/repositories/_repository';
 import { Model } from '../model/model';
 import { ModulePage } from './_module.page';
 import { AdmLangRepository } from '../services/repositories/admlang.repository';

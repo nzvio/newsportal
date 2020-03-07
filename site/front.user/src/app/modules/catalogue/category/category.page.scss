@@ -1,0 +1,96 @@
+@import "../../../var";
+
+#category {
+    article {
+        margin-bottom: 60px;
+        img {width:100%; height: auto; margin: 0 0 15px 0;}
+        .ca-details1 {
+            display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 10px;
+            .ca-cat {
+                @media (min-width:0) {margin-right: 10px;}
+                @media (min-width:640px) {margin-right: 20px;}     
+                background-color: $color-blue; padding: 5px; color: #fff; text-transform: uppercase; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; margin-bottom: 10px; white-space: nowrap;
+            }
+            .ca-date {
+                @media (min-width:0) {margin-right: 10px;}
+                @media (min-width:640px) {margin-right: 20px;}     
+                color: $color-grey-light; letter-spacing: 1px; white-space: nowrap; font-size: 12px; margin-bottom: 10px;
+                &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+            }
+            .ca-comments {
+                @media (min-width:0) {margin-right: 10px;}
+                @media (min-width:640px) {margin-right: 20px;}
+                font-size: 12px; color: $color-grey-light; white-space: nowrap; margin-bottom: 10px; 
+                &::before {font-family: "ionicons"; content: "\f11a"; font-size: 16px; display: inline-block; margin-right: 5px;}
+            }
+            .ca-rating {
+                @media (min-width:0) {margin-right: 10px;}
+                @media (min-width:640px) {margin-right: 20px;}
+                display: flex; margin-bottom: 10px; align-items:center;
+                .car-stars {
+                    white-space: nowrap;
+                    span {
+                        display: inline-block; margin-right: 3px; line-height: 12px; color: $color-yellow; cursor: pointer;
+                        &:last-child {margin-right: 6px;}
+                        &::after {font-family: "ionicons"; content: "\f3ae"; font-size: 16px;}
+                        &.filled::after {content: "\f2fc";}
+                        &.halffilled::after {content: "\f3ad";}
+                        &:hover {
+                            color: $color-yellow-light;
+                            &::after {content: "\f2fc";}
+                        }
+                    }
+                }
+                .car-info {color: $color-grey-light; letter-spacing: 1px; white-space: nowrap; font-size: 12px; padding-top: 2px; }
+            }
+            .ca-views {
+                font-size: 12px; color: $color-grey-light; white-space: nowrap; margin-bottom: 10px;
+                &::before {font-family: "ionicons"; content: "\f133"; font-size: 16px; display: inline-block; margin-right: 5px;}
+            }
+        }
+        .ca-title {
+            font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; margin: 0 0 20px 0;
+            a, a:visited {color: #000; text-decoration: none;}
+            a:hover {color: $color-blue;}
+        }
+        .ca-details2 {
+            margin: 0 0 20px 0; display: flex; align-items: center;
+            .ca-socnets {
+                display: flex; margin-right: 15px; 
+                .ca-socnet {
+                    width:30px; height: 30px; border-radius: 15px; border:1px $color-grey-light solid; margin-right: 5px; cursor: pointer; color: $color-grey-light; text-align: center; font-size: 18px; line-height: 28px; transition: all 0.3s ease 0s;
+                    span::after {font-family: "ionicons";}
+                    &.fb {
+                        &:hover {border-color: #3b5998; color: #3b5998;}                            
+                        span::after {content: "\f231";}
+                    }    
+                    &.tw {
+                        &:hover {border-color: #1DA1F2; color: #1DA1F2;}                            
+                        span::after {content: "\f243";}
+                    }                        
+                }                    
+            }
+            .ca-author {
+                display: flex; align-items: center;
+                .ca-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-position: center top; background-size: cover; margin-right: 10px; cursor: pointer;}
+                .ca-author-name {
+                    font-size: 12px; letter-spacing: 1px;
+                    a, a:visited {text-decoration: none; color: $color-grey-light;}    
+                    a:hover {color: $color-blue;}
+                }                
+            }            
+        }
+        .ca-short {font-size: 12px; color: $color-grey-dark; line-height: 20px; margin-bottom: 20px;}
+        .ca-tags {
+            color: $color-grey-light; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; text-transform: uppercase; margin-bottom: 20px; 
+            .ca-tag {
+                cursor: pointer; transition: color 0.3s ease 0s;
+                &:hover {color: $color-blue;}
+            }
+        }
+        .ca-more {
+            a, a:visited {display: inline-block; padding: 10px 30px; background-color: $color-blue; color: #fff; text-decoration: none; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 20px; text-transform: uppercase; transition: background-color 0.3s ease 0s;}
+            a:hover {background-color: $color-blue-dark;}
+        }
+    }
+}

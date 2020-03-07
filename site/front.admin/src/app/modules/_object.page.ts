@@ -1,4 +1,4 @@
-import { Repository } from '../services/repositories/repository';
+import { Repository } from '../services/repositories/_repository';
 import { AppService } from '../services/app.service';
 import { Router } from '@angular/router';
 import { Model } from '../model/model';

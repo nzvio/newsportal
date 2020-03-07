@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './repository';
+import { Repository } from './_repository';
 import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';

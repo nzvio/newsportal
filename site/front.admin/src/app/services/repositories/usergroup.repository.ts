@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './repository';
+import { Repository } from './_repository';
 import { Usergroup } from '../../model/usergroup.model';
 import { DataService } from '../data.service';
 
