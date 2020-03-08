@@ -4,8 +4,7 @@
             <div class="h-menu">
                 <nav class="h-nav-top">
                     <ul>
-                        <li><a routerLink="/ru/about">Карта сайта</a></li>
-                        <li><a routerLink="/ru/contacts">Контакты</a></li>
+                        <li *ngFor="let p of pages"><a routerLink="/{{currentLang.slug}}/{{p.slug}}" [innerHTML]="p.name[currentLang._id]" [class]="url[2] === p.slug ? 'active' : ''"></a></li>                        
                     </ul>
                 </nav>
             </div>				
@@ -14,7 +13,7 @@
     <div id="h-middle">
         <div class="h-content">		
             <div id="h-middle-content">
-                <div id="h-logo" routerLink="/ru">
+                <div id="h-logo" routerLink="/{{currentLang.slug}}">
                     <div id="h-logo-top"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
                     <div id="h-logo-bottom">{{currentLang.s('sitename3')}}</div>
                 </div>
@@ -26,20 +25,19 @@
             <div class="h-menu">
                 <nav class="h-nav-bottom">
                     <ul>
-                        <li><a routerLink="/ru" class="active">{{currentLang.s('home')}}</a></li>
-                        <li><a routerLink="/ru/cat/space">Космос</a></li>
-                        <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
+                        <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                        <li><a routerLink="/ru/catalogue/space">Космос</a></li>
+                        <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
                     </ul>
                 </nav>
                 <div class="h-dash">                    
                     <div class="h-langs">
                         <ul>
-                            <li><a routerLink="/ru" class="active">ru</a></li>
-                            <li><a routerLink="/en">en</a></li>
+                            <li *ngFor="let l of langs"><a [class]="l._id === currentLang._id ? 'active' : ''" [routerLink]="getLangLink(l.slug)">{{l.name}}</a></li>                            
                         </ul>
                     </div>
-                    <span class="h-btn h-btn-search" title="Поиск"></span>
-                    <span class="h-btn h-btn-login" title="Войти"></span>
+                    <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}"></span>
+                    <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
                 </div>
             </div>			
         </div>			
@@ -50,29 +48,28 @@
         <div class="h-menu">
             <nav class="h-nav-bottom">
                 <ul>
-                    <li><a routerLink="/ru" class="active">Главная</a></li>
-                    <li><a routerLink="/ru/cat/space">Космос</a></li>
-                    <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
+                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Космос</a></li>
+                    <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
                 </ul>
             </nav>
             <div class="h-dash">
                 <div class="h-langs">
                     <ul>
-                        <li><a routerLink="/ru" class="active">ru</a></li>
-                        <li><a routerLink="/en">en</a></li>
+                        <li *ngFor="let l of langs"><a [class]="l._id === currentLang._id ? 'active' : ''" [routerLink]="getLangLink(l.slug)">{{l.name}}</a></li>                            
                     </ul>
                 </div>
-                <span class="h-btn h-btn-search" title="Поиск"></span>
-                <span class="h-btn h-btn-login" title="Войти"></span>
+                <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}"></span>
+                <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
             </div>
         </div>			
     </div>			
 </header>
 <header id="mobile">
-    <div id="hm-logo"><span>Science</span><span>Club</span></div>
+    <div id="hm-logo" routerLink="/{{currentLang.slug}}"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
     <div id="hm-dash">
-        <div class="hm-btn hm-search" title="Поиск"><span></span></div>
-        <div class="hm-btn hm-login" title="Войти"><span></span></div>
+        <div class="hm-btn hm-search" title="{{currentLang.s('search')}}"><span></span></div>
+        <div class="hm-btn hm-login" title="{{currentLang.s('login')}}"><span></span></div>
     </div>    
 </header>
 <div id="mm-overlay" [class]="mmActive ? 'active' : ''" (click)="mmActive = false"></div>
@@ -80,27 +77,25 @@
     <div id="mm-content">
         <div id="mm-langs">
             <ul>
-                <li><a routerLink="/ru" class="active">ru</a></li>
-                <li><a routerLink="/en">en</a></li>
+                <li *ngFor="let l of langs"><a [class]="l._id === currentLang._id ? 'active' : ''" [routerLink]="getLangLink(l.slug)">{{l.name}}</a></li>                            
             </ul>
         </div>
         <div id="mm-menu">
             <nav>
                 <ul>
-                    <li><a routerLink="/" class="active">Главная</a></li>
-                    <li><a routerLink="/ru/cat/space">Космос</a></li>
-                    <li><a routerLink="/ru/cat/gadgets">Гаджеты</a></li>
-                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/cat/space">Еще пункт</a></li>                    
+                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Космос</a></li>
+                    <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
+                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>                    
                 </ul>
             </nav>
             <nav>
                 <ul>
-                    <li><a routerLink="/ru/about">Карта сайта</a></li>
-                    <li><a routerLink="/ru/contacts">Контакты</a></li>
+                    <li *ngFor="let p of pages"><a routerLink="/{{currentLang.slug}}/{{p.slug}}" [innerHTML]="p.name[currentLang._id]" [class]="url[2] === p.slug ? 'active' : ''"></a></li>                                            
                 </ul>
             </nav>            
         </div>        

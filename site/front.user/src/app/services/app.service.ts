@@ -1,8 +1,30 @@
-import { Injectable, ElementRef } from "@angular/core";
+import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
+import { isPlatformBrowser } from '@angular/common';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable()
 export class AppService {
     public wrapper: HTMLElement;
+    public url: string[] = [];
+
+    constructor(
+        @Inject(PLATFORM_ID) private platformId: Object,
+        private router: Router,
+        private titleService: Title,
+        private metaService: Meta,
+    ) {
+        this.initURLRoutine();
+    }
+
+    get isBrowser(): boolean {return isPlatformBrowser (this.platformId);} 
+
+    private initURLRoutine(): void {
+        this.router.events
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe((event: NavigationEnd) => {this.url = event.url.split("/")});
+    }
 
     public smoothScroll (from: number, to: number, duration: number, element: HTMLElement): void {		
 		let change: number = to - from;
@@ -30,5 +52,38 @@ export class AppService {
     
     public monitorLog(s: string, error: boolean = false): void {
         // TODO: show popup
+    }    
+
+    public setMeta(name: string, content: string): void {
+        this.metaService.removeTag (`name="${name}"`);
+        
+        if (content) {
+            this.metaService.addTag ({name: name, content: content});
+        }            
+    }
+
+    public setTitle (title: string) {
+        this.titleService.setTitle(this.decodeHTMLEntities(title));
+    }
+
+    public decodeHTMLEntities(text: string): string {
+        let entities = [
+            ['amp', '&'],
+            ['apos', '\''],
+            ['#x27', '\''],
+            ['#x2F', '/'],
+            ['#39', '\''],
+            ['#47', '/'],
+            ['lt', '<'],
+            ['gt', '>'],
+            ['nbsp', ' '],
+            ['quot', '"']
+        ];
+    
+        for (let i: number = 0, max: number = entities.length; i < max; ++i) {
+            text = text.replace(new RegExp('&'+entities[i][0]+';', 'g'), entities[i][1]);
+        }            
+    
+        return text;
     }
 }

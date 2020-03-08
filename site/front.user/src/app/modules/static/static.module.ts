@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StaticPage } from './static.page';
+import { CommonModule } from '@angular/common';
 
 let routes = RouterModule.forChild ([        
     {path:"", component: StaticPage},        
@@ -9,6 +10,7 @@ let routes = RouterModule.forChild ([
 @NgModule({
     imports: [
         RouterModule,
+        CommonModule,
         routes,
     ],
     declarations: [
@@ -19,5 +21,4 @@ let routes = RouterModule.forChild ([
     ],
     providers: []
 })
-export class StaticModule {    
-}
+export class StaticModule {}

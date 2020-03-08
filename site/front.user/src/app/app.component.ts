@@ -7,6 +7,7 @@ import { NavHistory } from './model/navhistory';
 import { INavScroll } from './model/navscroll.interface';
 import { LangRepository } from './services/repositories/lang.repository';
 import { Lang } from './model/lang.model';
+import { PageRepository } from './services/repositories/page.repository';
 
 @Component({
 	selector: 'app-root',
@@ -24,22 +25,28 @@ export class AppComponent implements AfterViewInit, OnInit {
 		private appService: AppService,
 		private router: Router,		
 		private langRepository: LangRepository,
+		private pageRepository: PageRepository,
 	) {			
 	}
 
 	get wrapper(): HTMLElement {return this.appService.wrapper;}
-	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}
+	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}	
+	get isBrowser(): boolean {return this.appService.isBrowser;}
 	get langsReady(): boolean {return this.langRepository.current != null;}	
+	get pagesReady(): boolean {return this.pageRepository.xl != null;}
 
 	public ngOnInit(): void {	
 		this.initLangs();	
+		this.pageRepository.load();
 	}
 
 	public ngAfterViewInit(): void {
-		setTimeout(() => {
-			this.wrapper = this.wrapElement.nativeElement as HTMLElement;						
-			this.initNavScrolling();		
-		}, 1);
+		if (this.isBrowser) {
+			setTimeout(() => {
+				this.wrapper = this.wrapElement.nativeElement as HTMLElement;						
+				this.initNavScrolling();		
+			}, 1);
+		}		
 	}
 
 	private initNavScrolling(): void {
@@ -82,9 +89,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 					}					
 				}					
 			});
-	}
+	}	
 	
-	public onScroll(event: any): void {		
+	public onScroll(event: any): void {				
 		this.stickyVisible = this.wrapper.scrollTop >= 170;	
 		this.indicatorWidth = Math.round(100 * this.wrapper.scrollTop / (this.wrapper.scrollHeight - this.wrapper.clientHeight));
 	}		

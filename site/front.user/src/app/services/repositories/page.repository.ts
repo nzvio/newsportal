@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './_repository';
-import { Lang } from '../../model/lang.model';
+import { Page } from '../../model/page.model';
 import { DataService } from '../data.service';
 
 @Injectable()
-export class LangRepository extends Repository<Lang> {        
-    public current: Lang | null = null;
-
+export class PageRepository extends Repository<Page> {
     constructor(protected dataService: DataService) {
         super();
         this.sortBy = "pos";
@@ -18,9 +16,9 @@ export class LangRepository extends Repository<Lang> {
             if (new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.langsAll(this.sortBy, this.sortDir).subscribe(res => {
+                this.dataService.pagesAll(this.sortBy, this.sortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xl = res.data.length ? res.data.map(d => new Lang().build(d)) : [];                        
+                        this.xl = res.data.length ? res.data.map(d => new Page().build(d)) : [];                           
                         this.loadedAt = new Date().getTime();
                         resolve();
                     } else {                        

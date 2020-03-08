@@ -1,9 +1,11 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Input, OnChanges, SimpleChanges, PLATFORM_ID, Inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
 import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/lang.model';
+import { PageRepository } from '../../services/repositories/page.repository';
+import { Page } from '../../model/page.model';
 
 @Component({
     selector:"the-header", 
@@ -18,17 +20,21 @@ export class HeaderComponent implements AfterViewInit {
     public mmActive: boolean = false;
 
     constructor(
-        private appService: AppService,
-        @Inject(PLATFORM_ID) private platformId: Object,  
-        private langRepository: LangRepository,        
-    ) {        
-    }
+        private appService: AppService,        
+        private langRepository: LangRepository,  
+        private pageRepository: PageRepository,
+        private router: Router,
+    ) {}
     
     get wrapper(): HTMLElement {return this.appService.wrapper;}        
+    get isBrowser(): boolean {return this.appService.isBrowser;}
     get currentLang(): Lang {return this.langRepository.current;}
+    get langs(): Lang[] {return this.langRepository.xl;}
+    get pages(): Page[] {return this.pageRepository.xl;}
+    get url(): string[] {return this.appService.url;}    
 
     public async ngAfterViewInit(): Promise<void> {
-        if (isPlatformBrowser(this.platformId)) {
+        if (this.isBrowser) {
             await this.waitForLayout();
             this.adjustLayout();
         }        
@@ -60,5 +66,16 @@ export class HeaderComponent implements AfterViewInit {
 
             check();
         });
+    }
+
+    public getLangLink(langSlug: string): string {
+        let link: string = `/${langSlug}`;        
+        let urlParts: string[] = this.router.url.split("/");
+
+        for (let i: number = 2; i < urlParts.length; i++) {
+            link += `/${urlParts[i]}`;
+        }
+
+        return link;
     }
 }

@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { NotfoundPage } from './notfound.page';
 
 @NgModule({
-    imports: [],
+    imports: [
+        RouterModule,
+    ],
     declarations: [
         NotfoundPage,
     ],
@@ -11,5 +14,4 @@ import { NotfoundPage } from './notfound.page';
         NotfoundPage,
     ],    
 })
-export class NotfoundModule {    
-}
+export class NotfoundModule {}

@@ -10,7 +10,7 @@ const routes: Routes = [
 	{path:"", component: HomePage},
 	{path:"404", component: NotfoundPage},
 	{path:":lang", component: HomePage},	
-	{path: ":lang/cat", loadChildren: () => CatalogueModule}, 
+	{path: ":lang/catalogue", loadChildren: () => CatalogueModule}, 
 	{path:":lang/:page", loadChildren: () => StaticModule},
 	{path:"**", redirectTo: "/404"},
 ];

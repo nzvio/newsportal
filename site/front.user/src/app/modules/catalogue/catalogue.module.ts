@@ -25,5 +25,4 @@ let routes = RouterModule.forChild ([
     ],
     providers: []
 })
-export class CatalogueModule {    
-}
+export class CatalogueModule {}
