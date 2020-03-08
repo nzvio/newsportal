@@ -11,12 +11,15 @@ export class ErrorService {
     ) {}
 
     public processResponse(res: any): boolean {        
-        if (res.statusCode === 403) {
-            (res.error) ? this.appService.monitorLog(res.error, true) : null;
-            this.router.navigateByUrl("/auth/logout");
-            return false;
-        } else {
+        if (res.statusCode === 200) {
             return true;
-        }        
+        }
+        
+        if (res.statusCode === 403) {                
+            this.router.navigateByUrl("/auth/logout");
+        }
+        
+        (res.error) ? this.appService.showNotification(res.error, "error") : null;
+        return false;
     }
 }

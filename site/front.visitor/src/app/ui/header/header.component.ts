@@ -6,15 +6,15 @@ import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/lang.model';
 import { PageRepository } from '../../services/repositories/page.repository';
 import { Page } from '../../model/page.model';
+import { CategoryRepository } from '../../services/repositories/category.repository';
+import { Category } from '../../model/category.model';
 
 @Component({
     selector:"the-header", 
     templateUrl: "./header.component.html",     
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit {    
-    @Input() stickyVisible: boolean = false;
-    @Input() indicatorWidth: number = 0;    
+export class HeaderComponent implements AfterViewInit {            
     @ViewChild("sticky", {static: false}) sticky: ElementRef;  
     @ViewChild("scrollindicator", {static: false}) scrollindicator: ElementRef;  
     public mmActive: boolean = false;
@@ -23,15 +23,19 @@ export class HeaderComponent implements AfterViewInit {
         private appService: AppService,        
         private langRepository: LangRepository,  
         private pageRepository: PageRepository,
+        private categoryRepository: CategoryRepository,
         private router: Router,
     ) {}
     
     get wrapper(): HTMLElement {return this.appService.wrapper;}        
     get isBrowser(): boolean {return this.appService.isBrowser;}
+    get url(): string[] {return this.appService.url;}   
+    get stickyVisible(): boolean {return this.appService.stickyVisible;} 
+    get indicatorWidth(): number {return this.appService.indicatorWidth;}    
     get currentLang(): Lang {return this.langRepository.current;}
     get langs(): Lang[] {return this.langRepository.xl;}
     get pages(): Page[] {return this.pageRepository.xl;}
-    get url(): string[] {return this.appService.url;}    
+    get categories(): Category[] {return this.categoryRepository.xl;}    
 
     public async ngAfterViewInit(): Promise<void> {
         if (this.isBrowser) {

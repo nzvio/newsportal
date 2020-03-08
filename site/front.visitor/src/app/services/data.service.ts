@@ -8,6 +8,7 @@ import { Lang } from '../model/lang.model';
 import { IAuthData } from '../model/authdata.interface';
 import { ErrorService } from './error.service';
 import { Page } from '../model/page.model';
+import { Category } from '../model/category.model';
 
 @Injectable()
 export class DataService {
@@ -21,6 +22,7 @@ export class DataService {
     
     public langsAll(sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", {sortBy, sortDir}, false);}
     public pagesAll(sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", {sortBy, sortDir}, false);}
+    public categoriesAll(sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", {sortBy, sortDir}, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

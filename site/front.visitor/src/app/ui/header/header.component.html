@@ -1,3 +1,4 @@
+<!-- main header -->
 <header id="main">
     <div id="h-top">
         <div class="h-content">
@@ -26,8 +27,7 @@
                 <nav class="h-nav-bottom">
                     <ul>
                         <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                        <li><a routerLink="/ru/catalogue/space">Космос</a></li>
-                        <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
+                        <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                     </ul>
                 </nav>
                 <div class="h-dash">                    
@@ -43,14 +43,15 @@
         </div>			
     </div>
 </header>
+
+<!-- sticky header -->
 <header id="sticky" #sticky [class]="stickyVisible ? 'visible' : ''">
     <div class="h-content">
         <div class="h-menu">
             <nav class="h-nav-bottom">
                 <ul>
                     <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Космос</a></li>
-                    <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
+                    <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>
             <div class="h-dash">
@@ -65,6 +66,8 @@
         </div>			
     </div>			
 </header>
+
+<!-- mobile header -->
 <header id="mobile">
     <div id="hm-logo" routerLink="/{{currentLang.slug}}"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
     <div id="hm-dash">
@@ -72,6 +75,8 @@
         <div class="hm-btn hm-login" title="{{currentLang.s('login')}}"><span></span></div>
     </div>    
 </header>
+
+<!-- mobile menu -->
 <div id="mm-overlay" [class]="mmActive ? 'active' : ''" (click)="mmActive = false"></div>
 <div id="mm" [class]="mmActive ? 'active' : ''">
     <div id="mm-content">
@@ -84,13 +89,7 @@
             <nav>
                 <ul>
                     <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Космос</a></li>
-                    <li><a routerLink="/ru/catalogue/gadgets">Гаджеты</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>
-                    <li><a routerLink="/ru/catalogue/space">Еще пункт</a></li>                    
+                    <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>
             <nav>
@@ -104,6 +103,8 @@
         <div id="mm-btn-glyph"></div>
     </div>
 </div>
+
+<!-- misc -->
 <div id="scrollindicator" #scrollindicator>
     <div id="si-scale" [style.width]="indicatorWidth+'%'"></div>
 </div>

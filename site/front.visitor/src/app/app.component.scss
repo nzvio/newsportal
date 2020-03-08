@@ -54,6 +54,13 @@ html {
                     a, a:visited {color: $color-blue;}
                     a:hover {color:#000;}
                 }
+            }
+            #notification {
+                @media (min-width:0) {left: 10px; font-size: 10px;}
+                @media (min-width:1000px) {left: 50px; font-size: 14px;}
+                position: fixed; z-index: 12; top: -30px; height: 30px; overflow: hidden; padding: 0 5px; color: #fff; background-color: $color-blue; transition: top 0.3s ease 0s; will-change: top; display: flex; align-items: center;
+                &.error {background-color: #f00;}
+                &.active {top: 0;}
             }            
         }
     }

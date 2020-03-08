@@ -1,13 +1,18 @@
 import { Injectable, Inject, PLATFORM_ID } from "@angular/core";
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
+import { INotification } from '../model/notification.interface';
 
 @Injectable()
 export class AppService {
     public wrapper: HTMLElement;
     public url: string[] = [];
+    public notification: INotification = {active: false, content: "", status: "info"};
+    public notificationTimer: number = null;
+    public stickyVisible: boolean = false;
+    public indicatorWidth: number = 0;
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
@@ -18,7 +23,8 @@ export class AppService {
         this.initURLRoutine();
     }
 
-    get isBrowser(): boolean {return isPlatformBrowser (this.platformId);} 
+    get isBrowser(): boolean {return isPlatformBrowser(this.platformId);} 
+    get isServer(): boolean {return isPlatformServer(this.platformId);}
 
     private initURLRoutine(): void {
         this.router.events
@@ -49,10 +55,20 @@ export class AppService {
         t--;
         return -c/2 * (t*(t-2) - 1) + b;
     }
-    
-    public monitorLog(s: string, error: boolean = false): void {
-        // TODO: show popup
-    }    
+
+    public showNotification (content: string, status: string = "info"): void {
+        if (this.notificationTimer) {
+            clearTimeout (this.notificationTimer);
+        }
+
+        this.notification.content = content;
+        this.notification.status = status;
+        this.notification.active = true;
+        this.notificationTimer = window.setTimeout (() => {
+            this.notification.active = false;
+            this.notificationTimer = null;
+        }, 2000);
+    }     
 
     public setMeta(name: string, content: string): void {
         this.metaService.removeTag (`name="${name}"`);

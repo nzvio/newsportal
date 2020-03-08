@@ -8,6 +8,8 @@ import { INavScroll } from './model/navscroll.interface';
 import { LangRepository } from './services/repositories/lang.repository';
 import { Lang } from './model/lang.model';
 import { PageRepository } from './services/repositories/page.repository';
+import { CategoryRepository } from './services/repositories/category.repository';
+import { INotification } from './model/notification.interface';
 
 @Component({
 	selector: 'app-root',
@@ -15,9 +17,7 @@ import { PageRepository } from './services/repositories/page.repository';
 	styleUrls: ['./app.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements AfterViewInit, OnInit {		
-	public stickyVisible: boolean = false;
-	public indicatorWidth: number = 0;
+export class AppComponent implements AfterViewInit, OnInit {				
 	@ViewChild("wrap", {static: false}) wrapElement: ElementRef;
 	private navHistory: NavHistory = new NavHistory();
 
@@ -26,22 +26,29 @@ export class AppComponent implements AfterViewInit, OnInit {
 		private router: Router,		
 		private langRepository: LangRepository,
 		private pageRepository: PageRepository,
+		private categoryRepository: CategoryRepository,
 	) {			
 	}
 
 	get wrapper(): HTMLElement {return this.appService.wrapper;}
-	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}	
-	get isBrowser(): boolean {return this.appService.isBrowser;}
+	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}		
 	get langsReady(): boolean {return this.langRepository.current != null;}	
 	get pagesReady(): boolean {return this.pageRepository.xl != null;}
+	get categoriesReady(): boolean {return this.categoryRepository.xl != null;}
+	get notification(): INotification {return this.appService.notification;}
+	get stickyVisible(): boolean {return this.appService.stickyVisible;}
+	set stickyVisible(v: boolean) {this.appService.stickyVisible = v;}
+	get indicatorWidth(): number {return this.appService.indicatorWidth;}
+	set indicatorWidth(v: number) {this.appService.indicatorWidth = v;}
 
 	public ngOnInit(): void {	
 		this.initLangs();	
 		this.pageRepository.load();
+		this.categoryRepository.load();		
 	}
 
 	public ngAfterViewInit(): void {
-		if (this.isBrowser) {
+		if (this.appService.isBrowser) {
 			setTimeout(() => {
 				this.wrapper = this.wrapElement.nativeElement as HTMLElement;						
 				this.initNavScrolling();		
@@ -66,30 +73,33 @@ export class AppComponent implements AfterViewInit, OnInit {
 		});
 	}
 
-	private initLangs(): void {		
-		this.router.events
-			.pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
-			.subscribe(async (event: NavigationEnd) => {					
-				await this.langRepository.load();
+	private async initLangs(): Promise<void> {		
+		await this.langRepository.load();		
 
-				if (this.langRepository.xl.length) {
-					let langName: string = event.url.split("/")[1]; 				
-				
-					if (langName) {
-						let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === langName) || null;
-						
-						if (currentLang) {
-							this.langRepository.current = currentLang;
-						} else {
-							this.langRepository.current = this.langRepository.xl[0];
-							this.router.navigateByUrl("/404");
-						}						 
-					} else {
-						this.langRepository.current = this.langRepository.xl[0];
-					}					
-				}					
-			});
-	}	
+		if (this.langRepository.xl.length) {			
+			this.buildCurrentLang(this.router.url.split("/")[1]);
+			this.router.events
+				.pipe(filter((event: RouterEvent) => event instanceof NavigationStart))
+				.subscribe((event: NavigationStart) => {									
+					this.buildCurrentLang(event.url.split("/")[1]);
+				});
+		}		
+	}
+	
+	private buildCurrentLang(langName: string): void {
+		if (langName) {
+			let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === langName) || null;
+			
+			if (currentLang) {
+				this.langRepository.current = currentLang;
+			} else {
+				this.langRepository.current = this.langRepository.xl[0];
+				this.router.navigateByUrl("/404");
+			}						 
+		} else {
+			this.langRepository.current = this.langRepository.xl[0];
+		}
+	}
 	
 	public onScroll(event: any): void {				
 		this.stickyVisible = this.wrapper.scrollTop >= 170;	
