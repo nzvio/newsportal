@@ -38,7 +38,13 @@
                         <th><label [class]="sortBy === 'date' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('date');">{{currentLang.phrases['workspace-articles-date']}}</label></th>                        
                         <th class="wide"><label [class]="sortBy === 'name' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('name');">{{currentLang.phrases['workspace-articles-name']}}</label></th>                        
                         <th><label [class]="sortBy === 'category' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('category');">{{currentLang.phrases['workspace-articles-category']}} ({{selectedLang.name}})</label></th>                        
-                        <th><label [class]="sortBy === 'lang' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('lang');">{{currentLang.phrases['workspace-articles-lang']}}</label></th>                        
+                        <th><label [class]="sortBy === 'lang' ? (sortDir === 1 ? 'sorted-forward' : 'sorted-backward') : 'sortable'" (click)="changeSorting('lang');">{{currentLang.phrases['workspace-articles-lang']}}</label></th>                                                
+                        <!--
+                        <th>{{currentLang.phrases['workspace-articles-top']}}</th>
+                        <th>{{currentLang.phrases['workspace-articles-main']}}</th>
+                        <th>{{currentLang.phrases['workspace-articles-popular']}}</th>
+                        <th>{{currentLang.phrases['workspace-articles-recommended']}}</th>                                                
+                        -->
                         <th>{{currentLang.phrases['workspace-articles-active']}}</th>
                         <th>{{currentLang.phrases['workspace-actions']}}</th>
                     </tr>   
@@ -62,7 +68,13 @@
                                         <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                                        
                                     </select>
                                 </div>
-                            </td>
+                            </td>                            
+                            <!--
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.top" (valueChange)="updateParam (x._id, 'top', x.top);"></checkbox-slider></div></td>
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.main" (valueChange)="updateParam (x._id, 'main', x.main);"></checkbox-slider></div></td>
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.popular" (valueChange)="updateParam (x._id, 'popular', x.popular);"></checkbox-slider></div></td>
+                            <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.recommended" (valueChange)="updateParam (x._id, 'recommended', x.recommended);"></checkbox-slider></div></td>                            
+                            -->
                             <td><div class="dt-inputwrap"><checkbox-slider [(value)]="x.active" (valueChange)="updateParam (x._id, 'active', x.active);"></checkbox-slider></div></td>
                             <td>
                                 <div class="dt-actions">

@@ -1,4 +1,5 @@
 import { Model } from './model';
+import { Category } from './category.model';
 
 export class Article extends Model {
     public _id: string;
@@ -19,22 +20,9 @@ export class Article extends Model {
     public main: boolean;
     public popular: boolean;
     public recommended: boolean;
-    public category: string;
+    public category: string | Category;
     public lang: string;
     public defended: boolean;
 
-    get formatedDate(): string {return `${this.twoDigits(this.date.getUTCDate())}.${this.twoDigits(this.date.getUTCMonth()+1)}.${this.date.getUTCFullYear()} ${this.twoDigits(this.date.getUTCHours())}:${this.twoDigits(this.date.getUTCMinutes())}`;}
-
-    public init(): Article {
-        this.date = new Date();
-        this.active = true;
-        this.top = false;
-        this.main = false;
-        this.popular = false;
-        this.recommended = false;
-        this.category = null;
-        this.lang = null;
-        
-        return this;
-    }
+    get formatedDate(): string {return `${this.twoDigits(this.date.getUTCDate())}.${this.twoDigits(this.date.getUTCMonth()+1)}.${this.date.getUTCFullYear()} ${this.twoDigits(this.date.getUTCHours())}:${this.twoDigits(this.date.getUTCMinutes())}`;}    
 }

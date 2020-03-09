@@ -14,4 +14,8 @@ export class ArticleCreateDTO {
     public readonly active: boolean;
     public readonly category: string;
     public readonly lang: string;
+    public readonly top: boolean;
+    public readonly main: boolean;
+    public readonly popular: boolean;
+    public readonly recommended: boolean;
 }

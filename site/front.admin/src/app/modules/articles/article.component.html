@@ -1,5 +1,5 @@
 <div class="data-tabs">
-    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-articles-main']}}</div>
+    <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-articles-mainparams']}}</div>
     <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-articles-seo']}}</div>
 </div>
 
@@ -49,8 +49,20 @@
         </div>
 
         <div [class]="isRequired('source') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-source']}}:</div>
-        <div class="df-inputwrap"><input type="text" name="source" [(ngModel)]="x.source"></div>
+        <div class="df-inputwrap"><input type="text" name="source" [(ngModel)]="x.source"></div>        
+        
+        <div [class]="isRequired('top') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-top']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.top"></checkbox-slider></div>
 
+        <div [class]="isRequired('main') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-main']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.main"></checkbox-slider></div>
+
+        <div [class]="isRequired('popular') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-popular']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.popular"></checkbox-slider></div>
+
+        <div [class]="isRequired('recommended') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-recommended']}}:</div>
+        <div class="df-inputwrap"><checkbox-slider [(value)]="x.recommended"></checkbox-slider></div>        
+        
         <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-active']}}:</div>
         <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>   
 

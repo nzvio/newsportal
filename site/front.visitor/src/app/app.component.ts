@@ -43,8 +43,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	public ngOnInit(): void {	
 		this.initLangs();	
-		this.pageRepository.load();
-		this.categoryRepository.load();		
+		this.pageRepository.load().catch(err => {this.appService.showNotification(err.message, "error")});
+		this.categoryRepository.load().catch(err => {this.appService.showNotification(err.message, "error")});
 	}
 
 	public ngAfterViewInit(): void {

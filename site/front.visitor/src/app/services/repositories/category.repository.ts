@@ -13,7 +13,7 @@ export class CategoryRepository extends Repository<Category> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (new Date().getTime() - this.loadedAt < this.ttl) {
+            if (this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
                 this.dataService.categoriesAll(this.sortBy, this.sortDir).subscribe(res => {

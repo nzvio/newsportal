@@ -11,4 +11,9 @@ export abstract class Repository<T> {
     public invalidate(): void {        
         this.loadedAt = 0;
     }
+
+    public reset(): void {
+        this.loadedAt = 0;
+        this.xl = null;
+    }
 }

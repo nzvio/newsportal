@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HomegalLoaderComponent } from './loaders/homegal-loader/homegal-loader.component';
 
 @NgModule({
     imports: [
@@ -15,11 +16,13 @@ import { CommonModule } from '@angular/common';
         HeaderComponent,
         FooterComponent,
         SidebarComponent,
+        HomegalLoaderComponent,
     ],
     exports: [
         HeaderComponent,
         FooterComponent,
         SidebarComponent,
+        HomegalLoaderComponent,
     ],
     providers: []
 })

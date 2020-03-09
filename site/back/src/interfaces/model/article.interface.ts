@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { ICategory } from "./category.interface";
 
 export interface IArticle extends Document {
     readonly _id: string;
@@ -15,7 +16,11 @@ export interface IArticle extends Document {
     slug: string;
     source: string;
     active: boolean;
-    category: string;
+    top: boolean;
+    main: boolean;
+    popular: boolean;
+    recommended: boolean;
+    category: string | ICategory;
     lang: string;
     defended: boolean;
 }

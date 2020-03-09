@@ -13,7 +13,7 @@ export class PageRepository extends Repository<Page> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (new Date().getTime() - this.loadedAt < this.ttl) {
+            if (this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
                 this.dataService.pagesAll(this.sortBy, this.sortDir).subscribe(res => {

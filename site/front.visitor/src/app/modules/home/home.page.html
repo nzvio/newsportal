@@ -1,71 +1,21 @@
-<div class="home-gal">
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>
-    <article [style.background-image]="'url(/assets/images/test1.jpg)'">
-        <div class="hg-layer1"></div>
-        <div class="hg-layer2">
-            <div class="hgi-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="hgi-info">
-                <div class="hgi-date">8 февраля 2020, 20:15</div>
-                <div class="hgi-comments">954</div>            
-            </div>
-            <div class="hgi-cat"><a href="#">Космос</a></div>
-        </div>        
-    </article>         
-</div>
+<ng-container *ngIf="topReady">
+    <div class="home-gal">    
+        <article *ngFor="let a of articlesTop" [style.background-image]="'url(/assets/images/articles/'+a.img+')'">
+            <div class="hg-layer1"></div>
+            <div class="hg-layer2">
+                <div class="hgi-title"><a href="#" [innerHTML]="a.name"></a></div>
+                <div class="hgi-info">
+                    <div class="hgi-date">8 февраля 2020, 20:15</div>
+                    <div class="hgi-comments">954</div>            
+                    </div>
+                <div class="hgi-cat"><a href="#" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+            </div>        
+        </article>               
+    </div>    
+</ng-container>
+<ng-container *ngIf="!topReady">
+    <homegal-loader [n]="6"></homegal-loader>
+</ng-container>    
 
 <div class="wrap2">
     <main>

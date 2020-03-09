@@ -6,6 +6,7 @@ import { DataService } from './data.service';
 import { LangRepository } from './repositories/lang.repository';
 import { PageRepository } from './repositories/page.repository';
 import { CategoryRepository } from './repositories/category.repository';
+import { ArticleTopRepository } from './repositories/article.top.repository';
 
 @NgModule({
     imports: [                
@@ -20,6 +21,7 @@ import { CategoryRepository } from './repositories/category.repository';
         LangRepository,
         PageRepository,
         CategoryRepository,
+        ArticleTopRepository,
     ],
 })
 export class ServicesModule {    

@@ -36,8 +36,29 @@ export const ArticleSchema = new mongoose.Schema ({
         required: true,
         default: true,
     },    
+    top: {
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    main: {
+        type: Boolean,
+        required: true,
+        default: false,
+    }, 
+    popuplar: {
+        type: Boolean,
+        required: true,
+        default: false,
+    }, 
+    recommended: {
+        type: Boolean,
+        required: true,
+        default: false,
+    }, 
     category: {
-        type: ObjectId
+        type: ObjectId,
+        ref: "Category"
     },
     lang: {
         type: ObjectId

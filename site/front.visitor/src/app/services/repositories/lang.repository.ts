@@ -15,7 +15,7 @@ export class LangRepository extends Repository<Lang> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (new Date().getTime() - this.loadedAt < this.ttl) {
+            if (this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
                 this.dataService.langsAll(this.sortBy, this.sortDir).subscribe(res => {
