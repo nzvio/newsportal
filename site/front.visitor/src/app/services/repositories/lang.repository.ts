@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './_repository';
 import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
+import { SimpleRepository } from './_simple.repository';
 
 @Injectable()
-export class LangRepository extends Repository<Lang> {        
+export class LangRepository extends SimpleRepository<Lang> {        
     public current: Lang | null = null;
 
     constructor(protected dataService: DataService) {
@@ -15,7 +15,7 @@ export class LangRepository extends Repository<Lang> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
+            if (new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
                 this.dataService.langsAll(this.sortBy, this.sortDir).subscribe(res => {

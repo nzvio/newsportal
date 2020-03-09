@@ -11,6 +11,8 @@ import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Lang } from '../../../model/lang.model';
 import { Article } from '../../../model/article.model';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
+import { CommentRepository } from '../../../services/repositories/comment.repository';
+import { Comment } from '../../../model/comment.model';
 
 @Component({
 	selector: 'articles-edit-page',
@@ -28,6 +30,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 		protected articleRepository: ArticleRepository,
 		private langRepository: LangRepository,
 		private categoryRepository: CategoryRepository,
+		private commentRepository: CommentRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,
@@ -38,6 +41,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 
 	get ll(): Lang[] {return this.langRepository.xlFull;}	
 	get cl(): Category[] {return this.categoryRepository.xlFull;}	
+	get comments(): Comment[] {return this.commentRepository.xlFull;}
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(async p => {			
@@ -46,6 +50,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 				this.x = await this.articleRepository.loadOne(p["_id"]);				
 				await this.categoryRepository.loadFull();								
 				await this.langRepository.loadFull();
+				await this.commentRepository.loadFullByArticle(this.x._id);
 
 				if (this.ll.length) {
 					this.appService.monitorLog("[articles edit] page loaded");
@@ -58,4 +63,35 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 			}			
 		});
 	}	
+
+	public async deleteComment(_id: string): Promise<boolean> {
+		if (confirm("Are you sure?")) {
+            this.appService.monitorLog(`deleting object: id=${_id}`);
+
+            try {
+                await this.commentRepository.delete(_id);
+                this.commentRepository.invalidateAll();
+				await this.commentRepository.loadFullByArticle(this.x._id);
+				this.appService.monitorLog("ok");                
+                return true;
+            } catch (err) {
+                this.appService.monitorLog(`error: ${err}`, true);
+                return false;
+            }
+        }        
+
+        return false;
+	}
+
+	public async updateComment(comment: Comment): Promise<boolean> {
+		try {			
+			this.appService.monitorLog(`updating object: _id=${comment._id}`);
+			await this.commentRepository.update(comment);			
+            this.appService.monitorLog("ok");            
+            return true;
+		} catch (err) {
+            this.appService.monitorLog(`error: ${err}`, true);
+            return  false;
+		}
+	}
 }

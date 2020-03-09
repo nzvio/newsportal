@@ -1,13 +1,13 @@
 <ng-container *ngIf="topReady">
     <div class="home-gal">    
-        <article *ngFor="let a of articlesTop" [style.background-image]="'url(/assets/images/articles/'+a.img+')'">
+        <article *ngFor="let a of articlesTop" [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'">
             <div class="hg-layer1"></div>
             <div class="hg-layer2">
                 <div class="hgi-title"><a href="#" [innerHTML]="a.name"></a></div>
                 <div class="hgi-info">
-                    <div class="hgi-date">8 февраля 2020, 20:15</div>
-                    <div class="hgi-comments">954</div>            
-                    </div>
+                    <div class="hgi-date">{{a.formatedDate(currentLang)}}</div>
+                    <div class="hgi-comments">{{a.__commentsq}}</div>
+                </div>
                 <div class="hgi-cat"><a href="#" [innerHTML]="a.category.name[currentLang._id]"></a></div>
             </div>        
         </article>               
@@ -19,7 +19,7 @@
 
 <div class="wrap2">
     <main>
-        <h1>Главные новости</h1>
+        <h1>{{currentLang.s('home-mainnews')}}</h1>
         <div class="home-digest">
             <div class="hd-menu">
                 <ul>

@@ -17,10 +17,14 @@
                     [requiredFields]="requiredFields"
                     [progressImg]="progressImg" 
                     [canBuildSlug]="false"
+                    [canEditComments]="true"
                     (uploadImg)="uploadImg($event);" 
                     (deleteImg)="deleteImg();"
                     (uploadImgTiny)="uploadImgTiny($event);"
                     [folder]="folder"
+                    [comments]="comments"
+                    (deleteComment)="deleteComment($event)"
+                    (updateComment)="updateComment($event)"
                 ></the-article>
             </form>
         </ng-container>

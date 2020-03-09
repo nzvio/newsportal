@@ -1,6 +1,7 @@
 <div class="data-tabs">
     <div [class]="tab === 1 ? 'data-tab active' : 'data-tab'" (click)="tab = 1;">{{currentLang.phrases['workspace-articles-mainparams']}}</div>
     <div [class]="tab === 2 ? 'data-tab active' : 'data-tab'" (click)="tab = 2;">{{currentLang.phrases['workspace-articles-seo']}}</div>
+    <div [class]="tab === 3 ? 'data-tab active' : 'data-tab'" (click)="tab = 3;" *ngIf="canEditComments">{{currentLang.phrases['workspace-articles-comments']}}</div>
 </div>
 
 <ng-container *ngIf="tab === 1">
@@ -92,4 +93,39 @@
         <div class="df-title"></div>
         <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
     </div>
+</ng-container>
+
+<ng-container *ngIf="tab === 3">
+    <div class="data-tablewrap compact padded">
+        <table class="data-table">
+            <tr class="no-selection">            
+                <th>{{currentLang.phrases['workspace-articles-date']}}</th>
+                <th>{{currentLang.phrases['workspace-articles-author']}}</th>
+                <th>{{currentLang.phrases['workspace-articles-content']}}</th>
+                <th>{{currentLang.phrases['workspace-articles-likes']}}</th>
+                <th>{{currentLang.phrases['workspace-articles-dislikes']}}</th>
+                <th>{{currentLang.phrases['workspace-articles-active']}}</th>                
+                <th>{{currentLang.phrases['workspace-actions']}}</th>
+            </tr>   
+            <ng-container *ngIf="comments.length">
+                <tr *ngFor="let c of comments">
+                    <td>{{c.formatedDate}}</td>
+                    <td>{{c.user.name}}</td>
+                    <td><textarea [(ngModel)]="c.content" (change)="onUpdateComment(c);"></textarea></td>
+                    <td>{{c.likes}}</td>
+                    <td>{{c.dislikes}}</td>
+                    <td><div class="dt-inputwrap"><checkbox-slider [(value)]="c.active" (valueChange)="onUpdateComment(c);"></checkbox-slider></div></td>
+                    <td>
+                        <div class="dt-actions">                    
+                            <div class="dt-btn delete" [title]="currentLang.phrases['workspace-delete']" (click)="onDeleteComment(c._id);"><span></span></div>
+                        </div>
+                    </td>
+                </tr>                            
+            </ng-container>
+            <ng-container *ngIf="!comments.length">
+                <tr><td>{{currentLang.phrases['workspace-empty']}}</td></tr>
+            </ng-container>        
+        </table>
+    </div>
+    <button type="submit">{{currentLang.phrases['workspace-save']}}</button>
 </ng-container>

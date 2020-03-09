@@ -23,7 +23,7 @@ export class HomePage implements OnInit {
 	) {}
 
 	get currentLang(): Lang {return this.langRepository.current;}	
-	get articlesTop(): Article[] {return this.articleTopRepository.xl;}
+	get articlesTop(): Article[] {return this.articleTopRepository.lists.find(list => list.langId === this.currentLang._id).xl;}
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(p => {

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './_repository';
 import { Category } from '../../model/category.model';
 import { DataService } from '../data.service';
+import { SimpleRepository } from './_simple.repository';
 
 @Injectable()
-export class CategoryRepository extends Repository<Category> {
+export class CategoryRepository extends SimpleRepository<Category> {
     constructor(protected dataService: DataService) {
         super();
         this.sortBy = "pos";
@@ -13,7 +13,7 @@ export class CategoryRepository extends Repository<Category> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
+            if (new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
                 this.dataService.categoriesAll(this.sortBy, this.sortDir).subscribe(res => {

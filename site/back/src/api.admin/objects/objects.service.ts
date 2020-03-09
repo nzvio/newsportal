@@ -4,16 +4,17 @@ import { Model } from "mongoose";
 
 import { APIService } from "../../services/_api.service";
 import { UpdateParamDTO } from "./dto/updateparam.dto";
+import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { IUsergroup } from "../../interfaces/model/usergroup.interface";
 import { IUser } from "../../interfaces/model/user.interface";
 import { ILang } from "../../interfaces/model/lang.interface";
 import { IPage } from "../../interfaces/model/page.interface";
-import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
 import { ICategory } from "../../interfaces/model/category.interface";
 import { IArticle } from "../../interfaces/model/article.interface";
 import { IDonor } from "../../interfaces/model/donor.interface";
 import { ITarget } from "../../interfaces/model/target.interface";
+import { IComment } from "../../interfaces/model/comment.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
@@ -26,6 +27,7 @@ export class ObjectsService extends APIService {
         @InjectModel("Article") private readonly modelArticle: Model<IArticle>,
         @InjectModel("Donor") private readonly modelDonor: Model<IDonor>,
         @InjectModel("Target") private readonly modelTarget: Model<ITarget>,
+        @InjectModel("Comment") private readonly modelComment: Model<IComment>,
     ) {
         super();
     }

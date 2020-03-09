@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { Repository } from './_repository';
 import { DataService } from '../data.service';
 import { Article } from '../../model/article.model';
 import { ArticlesGetchunkDTO } from '../../model/articles.getchunk.dto';
+import { IArticlesByLang } from "../../model/articlesbylang.interface";
+import { AdvancedRepository } from './_advanced.repository';
 
 @Injectable()
-export class ArticleTopRepository extends Repository<Article> {
-    private langId: string = "";
-    
+export class ArticleTopRepository extends AdvancedRepository<IArticlesByLang> {    
     constructor(protected dataService: DataService) {
         super(); 
         this.sortBy = "date";
@@ -17,15 +16,24 @@ export class ArticleTopRepository extends Repository<Article> {
     
     public load(langId: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (this.langId === langId && this.xl && new Date().getTime() - this.loadedAt < this.ttl) {
+            let list: IArticlesByLang | null = this.lists.find(list => list.langId === langId) || null;
+            
+            if (list && new Date().getTime() - list.loadedAt < this.ttl) {                
                 resolve();
-            } else {
-                this.langId = langId;
-                let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: this.langId, sortBy: this.sortBy, sortDir: this.sortDir};
+            } else {                
+                let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: langId, sortBy: this.sortBy, sortDir: this.sortDir};
                 this.dataService.articlesTop(dto).subscribe(res => {                    
                     if (res.statusCode === 200) {
-                        this.xl = res.data.length ? res.data.map(d => new Article().build(d)) : [];                           
-                        this.loadedAt = new Date().getTime();                        
+                        let xl: Article[] = res.data.length ? res.data.map(d => new Article().build(d)) : [];                           
+                        let loadedAt: number = new Date().getTime();
+                        
+                        if (list) {
+                            list.xl = xl;
+                            list.loadedAt = loadedAt;
+                        } else {
+                            this.lists.push({langId, xl, loadedAt});
+                        }                        
+                        
                         resolve();
                     } else {                        
                         reject(res.error);

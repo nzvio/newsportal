@@ -1,11 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
+import * as mongoose from 'mongoose';
 
 import { APIService } from "../../services/_api.service";
 import { IArticle } from "../../interfaces/model/article.interface";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
+import { ArticleDTO } from "./dto/article.dto";
 
 @Injectable()
 export class ArticlesService extends APIService {
@@ -13,19 +15,24 @@ export class ArticlesService extends APIService {
         super();
     }
 
-    public async top(dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
+    public async top(dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
         let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 6;
-        const filterLang: string = dto.filterLang !== undefined ? dto.filterLang : "any";         
-        let filter: any = this.buildFilter(null, null, "any", filterLang);
-        filter.active = true;
-        filter.top = true;        
-        const projection: Object = {content: 0, contentshort: 0, h1: 0, title: 0, keywords: 0, description: 0, img_s: 0};
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1}; 
 
         try {            
-            let data: IArticle[] = await this.model.find(filter, projection, {skip: from, limit: q, sort: {[sortBy]: sortDir}}).populate("category");            
+            let data: ArticleDTO[] = await this.model.aggregate([
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, top: true}},
+                {$skip: from},
+                {$limit: q},
+                {$sort: {[sortBy]: sortDir}},                
+                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},
+                {$project: {...projection, "__commentsq": {$size: "$comments"}}},                
+            ]);            
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.top: ${String(err)}`;
@@ -67,30 +74,5 @@ export class ArticlesService extends APIService {
             return {statusCode: 500, error: errTxt};
         }
     }    
-    */
-
-    private buildFilter(filterDate: string | null, filterName: string, filterCategory: string, filterLang: string): Object {
-        let request: any = {};
-
-        if (filterCategory != "any") {
-            request.category = filterCategory;
-        }
-
-        if (filterLang != "any") {
-            request.lang = filterLang;
-        }
-
-        if (filterName) {
-            request.name = {$regex: '.*'+filterName+'.*', $options: "i"};
-        }
-
-        if (filterDate) {
-            let startDate: Date = new Date(filterDate);
-            let endDate: Date = new Date(filterDate);
-            endDate.setDate(endDate.getDate() + 1);
-            request.date = {"$gte": startDate, "$lt": endDate};
-        }
-
-        return request;
-    }
+    */    
 }

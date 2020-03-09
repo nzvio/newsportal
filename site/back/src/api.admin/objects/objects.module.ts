@@ -13,6 +13,7 @@ import { CategorySchema } from "../../schemas/category.schema";
 import { ArticleSchema } from "../../schemas/article.schema";
 import { DonorSchema } from "../../schemas/donor.schema";
 import { TargetSchema } from "../../schemas/target.schema";
+import { CommentSchema } from "../../schemas/comment.schema";
 
 @Module({
 	controllers: [ObjectsController],
@@ -27,6 +28,7 @@ import { TargetSchema } from "../../schemas/target.schema";
 			{name: 'Article', schema: ArticleSchema},
 			{name: 'Donor', schema: DonorSchema},
 			{name: 'Target', schema: TargetSchema},
+			{name: 'Comment', schema: CommentSchema},
 		]),	
 		JwtModule.register(jwtConstants),			
 	],

@@ -127,6 +127,10 @@
             "workspace-articles-main": "Main",
             "workspace-articles-popular": "Popular",
             "workspace-articles-recommended": "Recommended",
+            "workspace-articles-comments": "Comments",
+            "workspace-articles-author": "Author",
+            "workspace-articles-likes": "Likes",
+            "workspace-articles-dislikes": "Dislikes",
 
             "workspace-donors-h1": "Donors",
             "workspace-donors-name": "Name",
@@ -279,6 +283,10 @@
             "workspace-articles-main": "Главные",
             "workspace-articles-popular": "Популярные",
             "workspace-articles-recommended": "Рекомендуемые",
+            "workspace-articles-comments": "Комментарии",
+            "workspace-articles-author": "Автор",
+            "workspace-articles-likes": "Лайки",
+            "workspace-articles-dislikes": "Дизлайки",
 
             "workspace-donors-h1": "Доноры",
             "workspace-donors-name": "Имя",

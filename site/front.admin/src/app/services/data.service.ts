@@ -17,7 +17,8 @@ import { Article } from '../model/article.model';
 import { ArticlesGetchunkDTO } from '../model/articles.getchunk.dto';
 import { Donor } from '../model/donor.model';
 import { Target } from '../model/target.model';
-import { ParseError } from '@angular/compiler';
+import { Parseerror } from "../model/parseerror.model";
+import { Comment } from "../model/comment.model";
 
 @Injectable()
 export class DataService {
@@ -98,9 +99,13 @@ export class DataService {
     public targetsCreate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/create", x, true);}
     public targetsUpdate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/update", x, true);}
     
-    public parseerrorsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<ParseError[]>> {return this.sendRequest("POST", "parseerrors/chunk", {from, q, sortBy, sortDir}, true);}
+    public parseerrorsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Parseerror[]>> {return this.sendRequest("POST", "parseerrors/chunk", {from, q, sortBy, sortDir}, true);}
     public parseerrorsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `parseerrors/delete/${_id}`, null, true);}
     public parseerrorsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "parseerrors/deletebulk", _ids, true);}    
+
+    public commentsAllByArticle(articleId: string, sortBy: string, sortDir: number): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/allbyarticle", {sortBy, sortDir, articleId}, true);}
+    public commentsUpdate(x: Comment): Observable<IAnswer<void>> {return this.sendRequest("POST", "comments/update", x, true);}
+    public commentsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `comments/delete/${_id}`, null, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

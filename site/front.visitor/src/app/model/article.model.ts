@@ -1,5 +1,6 @@
 import { Model } from './model';
 import { Category } from './category.model';
+import { Lang } from './lang.model';
 
 export class Article extends Model {
     public _id: string;
@@ -23,6 +24,9 @@ export class Article extends Model {
     public category: string | Category;
     public lang: string;
     public defended: boolean;
+    public __commentsq: number;
 
-    get formatedDate(): string {return `${this.twoDigits(this.date.getUTCDate())}.${this.twoDigits(this.date.getUTCMonth()+1)}.${this.date.getUTCFullYear()} ${this.twoDigits(this.date.getUTCHours())}:${this.twoDigits(this.date.getUTCMinutes())}`;}    
+    public formatedDate(lang: Lang): string {
+        return `${this.date.getDate()} ${lang.s('month-'+(this.date.getMonth()+1))} ${this.date.getFullYear()}, ${this.date.getHours()}:${this.twoDigits(this.date.getMinutes())}`;
+    }
 }

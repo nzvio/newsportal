@@ -1,5 +1,5 @@
-export abstract class Repository<T> {    
-    public xl: T[] | null = null; // objects list
+export abstract class SimpleRepository<T> {    
+    public xl: T[] = []; // objects list
     public currentPart: number = 0; // current paging state for fragment
     public sortBy: string = "_id"; // current sort by
     public sortDir: number = 1; // current sort direction
@@ -10,10 +10,5 @@ export abstract class Repository<T> {
 
     public invalidate(): void {        
         this.loadedAt = 0;
-    }
-
-    public reset(): void {
-        this.loadedAt = 0;
-        this.xl = null;
-    }
+    }    
 }

@@ -13,6 +13,7 @@ import { DonorsModule } from "./donors/donors.module";
 import { TargetsModule } from "./targets/targets.module";
 import { AdminAPIGateway } from "./admin.api.gateway";
 import { ParseerrorsModule } from "./parseerrors/parseerrors.module";
+import { CommentsModule } from "./comments/comments.module";
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import { ParseerrorsModule } from "./parseerrors/parseerrors.module";
 		DonorsModule,
 		TargetsModule,
 		ParseerrorsModule,
+		CommentsModule,
     ],
     providers: [
 		AdminAPIGateway,
