@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../data.service';
 import { Article } from '../../model/article.model';
 import { ArticlesGetchunkDTO } from '../../model/articles.getchunk.dto';
-import { IArticlesByLang } from "../../model/articlesbylang.interface";
-import { AdvancedRepository } from './_advanced.repository';
+import { SimpleRepository } from './_simple.repository';
 
 @Injectable()
-export class ArticleTopRepository extends AdvancedRepository<IArticlesByLang> {    
+export class ArticleTopRepository extends SimpleRepository<Article> {    
     constructor(protected dataService: DataService) {
         super(); 
         this.sortBy = "date";
@@ -15,33 +14,18 @@ export class ArticleTopRepository extends AdvancedRepository<IArticlesByLang> {
     }
     
     public load(langId: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            let list: IArticlesByLang | null = this.lists.find(list => list.langId === langId) || null;
-            
-            if (list && new Date().getTime() - list.loadedAt < this.ttl) {                
-                resolve();
-            } else {                
-                let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: langId, sortBy: this.sortBy, sortDir: this.sortDir};
-                this.dataService.articlesTop(dto).subscribe(res => {                    
-                    if (res.statusCode === 200) {
-                        let xl: Article[] = res.data.length ? res.data.map(d => new Article().build(d)) : [];                           
-                        let loadedAt: number = new Date().getTime();
-                        
-                        if (list) {
-                            list.xl = xl;
-                            list.loadedAt = loadedAt;
-                        } else {
-                            this.lists.push({langId, xl, loadedAt});
-                        }                        
-                        
-                        resolve();
-                    } else {                        
-                        reject(res.error);
-                    }
-                }, err => {
-                    reject(err.message);
-                });
-            }            
+        return new Promise((resolve, reject) => {            
+            let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: langId, sortBy: this.sortBy, sortDir: this.sortDir};
+            this.dataService.articlesTop(dto).subscribe(res => {                    
+                if (res.statusCode === 200) {
+                    this.xl = res.data.length ? res.data.map(d => new Article().build(d)) : [];
+                    resolve();
+                } else {                        
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
         });
     }    
 }

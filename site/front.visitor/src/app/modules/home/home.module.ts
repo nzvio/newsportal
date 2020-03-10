@@ -9,8 +9,12 @@ import { UIModule } from '../../ui/ui.module';
         CommonModule,
         UIModule,
     ],
-    declarations: [HomePage],
-    exports: [HomePage],
+    declarations: [
+        HomePage, 
+    ],
+    exports: [
+        HomePage,
+    ],
     providers: []
 })
 export class HomeModule {    

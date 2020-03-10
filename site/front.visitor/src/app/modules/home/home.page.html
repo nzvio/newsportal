@@ -1,21 +1,29 @@
-<ng-container *ngIf="topReady">
-    <div class="home-gal">    
-        <article *ngFor="let a of articlesTop" [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'">
-            <div class="hg-layer1"></div>
-            <div class="hg-layer2">
-                <div class="hgi-title"><a href="#" [innerHTML]="a.name"></a></div>
-                <div class="hgi-info">
-                    <div class="hgi-date">{{a.formatedDate(currentLang)}}</div>
-                    <div class="hgi-comments">{{a.__commentsq}}</div>
-                </div>
-                <div class="hgi-cat"><a href="#" [innerHTML]="a.category.name[currentLang._id]"></a></div>
-            </div>        
-        </article>               
-    </div>    
-</ng-container>
-<ng-container *ngIf="!topReady">
-    <homegal-loader [n]="6"></homegal-loader>
-</ng-container>    
+<div class="home-gal">    
+    <div class="home-gal-content">
+        <ng-container *ngIf="topReady">
+            <article *ngFor="let a of articlesTop" [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'">
+                <div class="hg-layer1"></div>
+                <div class="hg-layer2">
+                    <div class="hgi-title"><a href="#" [innerHTML]="a.name"></a></div>
+                    <div class="hgi-info">
+                        <div class="hgi-date">{{a.formatedDate(currentLang)}}</div>
+                        <div class="hgi-comments">{{a.__commentsq}}</div>
+                    </div>
+                    <div class="hgi-cat"><a href="#" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+                </div>        
+            </article>               
+        </ng-container>
+    </div>        
+    <div class="loading" [class.active]="!topReady">
+        <div class="home-gal-loading">
+            <article><label></label><label></label><label></label></article>
+            <article><label></label><label></label><label></label></article>
+            <article><label></label><label></label><label></label></article>
+        </div>        
+    </div>
+</div>    
+
+
 
 <div class="wrap2">
     <main>

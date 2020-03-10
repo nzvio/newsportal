@@ -20,6 +20,9 @@ import { INotification } from './model/notification.interface';
 export class AppComponent implements AfterViewInit, OnInit {				
 	@ViewChild("wrap", {static: false}) wrapElement: ElementRef;
 	private navHistory: NavHistory = new NavHistory();
+	public langsReady: boolean = false;
+	public pagesReady: boolean = false;
+	public categoriesReady: boolean = false;
 
 	constructor(
 		private appService: AppService,
@@ -32,9 +35,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	get wrapper(): HTMLElement {return this.appService.wrapper;}
 	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}		
-	get langsReady(): boolean {return this.langRepository.current != null;}	
-	get pagesReady(): boolean {return this.pageRepository.xl != null;}
-	get categoriesReady(): boolean {return this.categoryRepository.xl != null;}
 	get notification(): INotification {return this.appService.notification;}
 	get stickyVisible(): boolean {return this.appService.stickyVisible;}
 	set stickyVisible(v: boolean) {this.appService.stickyVisible = v;}
@@ -43,8 +43,14 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 	public ngOnInit(): void {	
 		this.initLangs();	
-		this.pageRepository.load().catch(err => {this.appService.showNotification(err.message, "error")});
-		this.categoryRepository.load().catch(err => {this.appService.showNotification(err.message, "error")});
+		this.pageRepository
+			.load()
+			.then(() => {this.pagesReady = true;})
+			.catch(err => {this.appService.showNotification(err.message, "error")});
+		this.categoryRepository
+			.load()
+			.then(() => {this.categoriesReady = true;})
+			.catch(err => {this.appService.showNotification(err.message, "error")});
 	}
 
 	public ngAfterViewInit(): void {
@@ -78,6 +84,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 
 		if (this.langRepository.xl.length) {			
 			this.buildCurrentLang(this.router.url.split("/")[1]);
+			this.langsReady = true;
 			this.router.events
 				.pipe(filter((event: RouterEvent) => event instanceof NavigationStart))
 				.subscribe((event: NavigationStart) => {									
