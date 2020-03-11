@@ -57,11 +57,15 @@ export class AppComponent implements AfterViewInit, OnInit {
 		if (this.appService.isBrowser) {
 			setTimeout(() => {
 				this.wrapper = this.wrapElement.nativeElement as HTMLElement;						
-				this.initNavScrolling();		
+				this.router.events
+					.pipe(filter(event => event instanceof NavigationEnd))
+					.subscribe(event => {setTimeout(() => {this.wrapper.scrollTo(0,0)}, 1);});
 			}, 1);
 		}		
 	}
 
+	/*
+	!!! we can use "Navigation history" when content is not reloading after every route activation !!!
 	private initNavScrolling(): void {
 		this.router.events.subscribe(event => {
 			if (event instanceof NavigationStart) {					
@@ -80,6 +84,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 			}
 		});
 	}
+	*/
 
 	private async initLangs(): Promise<void> {		
 		await this.langRepository.load();		

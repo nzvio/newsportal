@@ -9,7 +9,7 @@ html {
         a {transition: color 0.3s ease 0s;}
         .red {color: #f00;}        
         #wrap {
-            height: 100%; width: 100%; overflow-y: scroll; overflow-x: hidden; position: relative; color: $color-main;                      
+            height: 100%; width: 100%; overflow-y: scroll; overflow-x: hidden; position: relative; color: $color-main; overflow-anchor: none; scroll-behavior: smooth;
             .wrap2 {
                 @media (min-width:0) {display: block;}
                 @media (min-width:1000px) {display: flex;}

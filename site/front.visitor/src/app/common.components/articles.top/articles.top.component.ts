@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import { Component, Input, OnChanges, SimpleChanges, OnInit } from "@angular/core";
 
 import { ArticleTopRepository } from '../../services/repositories/article.top.repository';
 import { Article } from 'src/app/model/article.model';
@@ -10,30 +10,31 @@ import { Lang } from 'src/app/model/lang.model';
     templateUrl: "./articles.top.component.html",
     styleUrls: ["./articles.top.component.scss"]
 })
-export class ArticlesTopComponent implements OnChanges {
+export class ArticlesTopComponent implements OnChanges, OnInit {
     @Input() currentLang: Lang;
-    public ready: boolean = false; 
-    public articles: Article[] = [];   
+    public ready: boolean = false;     
 
     constructor(
         private articleTopRepository: ArticleTopRepository,
         private appService: AppService,
     ) {}    
 
-    public async ngOnChanges(changes: SimpleChanges): Promise<void> {
-        if (changes.currentLang) {            
+    get articles(): Article[] {return this.articleTopRepository.xl;}
+
+    public async ngOnInit(): Promise<void> {        
+        await this.articleTopRepository.load(this.currentLang._id);                
+        this.ready = true; 
+    }
+
+    public async ngOnChanges(changes: SimpleChanges): Promise<void> {        
+        if (changes.currentLang && changes.currentLang.previousValue) { // not first time
             try {
                 this.ready = false;
-                await this.articleTopRepository.load(this.currentLang._id);
-                this.buildArticles();
-                this.ready = true; 
+                await this.articleTopRepository.load(this.currentLang._id);   
+                this.ready = true;
             } catch (err) {
                 this.appService.showNotification(err, "error");
             }            
         }
-    }
-
-    private buildArticles(): void {
-        this.articles = this.articleTopRepository.lists.find(list => list.langId === this.currentLang._id).xl;
-    }
+    }    
 }

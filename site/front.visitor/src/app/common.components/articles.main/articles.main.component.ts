@@ -43,7 +43,7 @@ export class ArticlesMainComponent implements OnChanges, OnInit {
                 this.ready = false;
                 await this.articleMainRepository.load(this.currentLang._id);
                 this.buildArticles();
-                this.ready = true; 
+                this.ready = true;
             } catch (err) {
                 this.appService.showNotification(err, "error");
             }            
@@ -51,6 +51,6 @@ export class ArticlesMainComponent implements OnChanges, OnInit {
     }
 
     public buildArticles(): void {
-        this.articles = this.articleMainRepository.lists.find(list => list.langId === this.currentLang._id).xl.filter(a => (a.category as Category)._id === this.currentCategoryId);
+        this.articles = this.articleMainRepository.xl.filter(a => (a.category as Category)._id === this.currentCategoryId);
     }
 }
