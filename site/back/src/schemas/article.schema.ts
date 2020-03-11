@@ -46,7 +46,7 @@ export const ArticleSchema = new mongoose.Schema ({
         required: true,
         default: false,
     }, 
-    popuplar: {
+    popular: {
         type: Boolean,
         required: true,
         default: false,

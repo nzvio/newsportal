@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ArticlesTopComponent } from './articles.top/articles.top.component';
 import { ArticlesMainComponent } from './articles.main/articles.main.component';
+import { ArticlesPopularComponent } from './articles.popular/articles.popular.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { ArticlesMainComponent } from './articles.main/articles.main.component';
         SidebarComponent,  
         ArticlesTopComponent,      
         ArticlesMainComponent,
+        ArticlesPopularComponent,
     ],
     exports: [
         HeaderComponent,
@@ -26,6 +28,7 @@ import { ArticlesMainComponent } from './articles.main/articles.main.component';
         SidebarComponent,        
         ArticlesTopComponent,      
         ArticlesMainComponent,
+        ArticlesPopularComponent,
     ],
     providers: []
 })

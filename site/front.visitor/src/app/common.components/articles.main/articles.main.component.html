@@ -5,12 +5,11 @@
                 <span [class.active]="c._id === currentCategoryId" (click)="currentCategoryId = c._id; buildArticles();" [innerHTML]="c.name[currentLang._id]"></span>
             </li>
         </ul>
-    </div>
-    
+    </div>    
     <div class="ma-items">
         <ng-container *ngIf="ready">
             <article *ngFor="let a of articles">
-                <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'">                
+                <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}">                
                     <div class="maa-cat"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
                 </figure>
                 <div class="maa-date">{{a.formatedDate(currentLang)}}</div>

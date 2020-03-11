@@ -21,7 +21,7 @@ export class Article extends Model {
     public main: boolean;
     public popular: boolean;
     public recommended: boolean;
-    public category: string | Category;
+    public category: Category;
     public lang: string;
     public defended: boolean;
     public __commentsq: number;

@@ -21,4 +21,10 @@ export class ArticlesController {
     public main(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
         return this.articlesService.main(dto);
     }
+
+    // get popular articles
+    @Post("popular")
+    public popular(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
+        return this.articlesService.popular(dto);
+    }
 }

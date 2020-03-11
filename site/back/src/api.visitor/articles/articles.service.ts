@@ -24,7 +24,7 @@ export class ArticlesService extends APIService {
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 6;
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1}; 
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1};         
 
         try {            
             let data: ArticleDTO[] = await this.articleModel.aggregate([
@@ -50,7 +50,8 @@ export class ArticlesService extends APIService {
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 6;
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1};         
+        const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1};                 
 
         try {
             let categories: ICategory[] = await this.categoryModel.find({$or: [{parent: null}, {parent: {$exists: false}}], active: 1});
@@ -60,8 +61,9 @@ export class ArticlesService extends APIService {
 
                 for (let category of categories) {
                     const filter: Object = {lang: dto.filterLang, active: true, main: true, category: category._id};
+                    
                     const categoryArticles: IArticle[] = await this.articleModel
-                        .find(filter, projection, {skip: from, limit: q, sort: {[sortBy]: sortDir}})
+                        .find(filter, projection, options)
                         .populate("category");
                     data = data.concat(categoryArticles);
                 }
@@ -72,6 +74,27 @@ export class ArticlesService extends APIService {
             }
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.main: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async popular(dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
+        const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
+        const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
+        const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
+        const q: number = !this.isEmpty(dto.q) ? dto.q : 4;
+        const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, contentshort: 1}; 
+        const filter: Object = {lang: dto.filterLang, active: true, popular: true};
+        
+        try {            
+            const data: IArticle[] = await this.articleModel
+                .find(filter, projection, options)
+                .populate("category");
+            return {statusCode: 200, data};
+        } catch (err) {
+            let errTxt: string = `Error in ArticlesService.popular: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

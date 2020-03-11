@@ -8,6 +8,7 @@ import { PageRepository } from './repositories/page.repository';
 import { CategoryRepository } from './repositories/category.repository';
 import { ArticleTopRepository } from './repositories/article.top.repository';
 import { ArticleMainRepository } from './repositories/article.main.repository';
+import { ArticlePopularRepository } from './repositories/article.popular.repository';
 
 @NgModule({
     imports: [                
@@ -24,6 +25,7 @@ import { ArticleMainRepository } from './repositories/article.main.repository';
         CategoryRepository,
         ArticleTopRepository,
         ArticleMainRepository,
+        ArticlePopularRepository,
     ],
 })
 export class ServicesModule {    

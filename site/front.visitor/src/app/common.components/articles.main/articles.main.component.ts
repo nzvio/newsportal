@@ -1,11 +1,11 @@
 import { Component, Input, OnChanges, SimpleChanges, OnInit } from "@angular/core";
 
-import { Article } from 'src/app/model/article.model';
-import { AppService } from 'src/app/services/app.service';
-import { Lang } from 'src/app/model/lang.model';
+import { Article } from '../../model/article.model';
+import { AppService } from '../../services/app.service';
+import { Lang } from '../../model/lang.model';
 import { ArticleMainRepository } from '../../services/repositories/article.main.repository';
 import { CategoryRepository } from '../../services/repositories/category.repository';
-import { Category } from 'src/app/model/category.model';
+import { Category } from '../../model/category.model';
 
 @Component({
     selector: "articles-main",

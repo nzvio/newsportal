@@ -27,6 +27,7 @@ export class DataService {
     public categoriesAll(sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", {sortBy, sortDir}, false);}
     public articlesTop(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/top", dto, false);}
     public articlesMain(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/main", dto, false);}
+    public articlesPopular(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/popular", dto, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

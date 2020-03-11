@@ -5,32 +5,8 @@
         <h1>{{currentLang.s('home-mainnews')}}</h1>
         <articles-main [currentLang]="currentLang"></articles-main>
 
-        <div class="h1">Популярные публикации</div>
-        <div class="home-pop">
-            <div class="hp-left">
-                <figure [style.background-image]="'url(/assets/images/test1.jpg)'">
-                    <div class="hpl-overlay"></div>
-                    <div class="hpl-cat"><a href="#">Космос</a></div>
-                </figure>
-                <div class="hpl-date">8 февраля 2020, 12:40</div>
-                <div class="hpl-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-                <div class="hpl-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-            </div>
-            <div class="hp-right">
-                <article>
-                    <div class="hpr-date">8 февраля 2020, 12:40</div>
-                    <div class="hpr-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-                </article>                
-                <article>
-                    <div class="hpr-date">8 февраля 2020, 12:40</div>
-                    <div class="hpr-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-                </article>                
-                <article>
-                    <div class="hpr-date">8 февраля 2020, 12:40</div>
-                    <div class="hpr-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-                </article>                
-            </div>
-        </div>
+        <div class="h1">{{currentLang.s('home-popular')}}</div>
+        <articles-popular [currentLang]="currentLang"></articles-popular>
 
         <div class="h1">Последние публикации</div>
         <div class="lastarticles">            

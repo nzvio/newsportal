@@ -56,7 +56,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 	public ngAfterViewInit(): void {
 		if (this.appService.isBrowser) {
 			setTimeout(() => {
-				this.wrapper = this.wrapElement.nativeElement as HTMLElement;						
+				this.wrapper = this.wrapElement.nativeElement as HTMLElement;	
+				// this.initNavScrolling();					
 				this.router.events
 					.pipe(filter(event => event instanceof NavigationEnd))
 					.subscribe(event => {setTimeout(() => {this.wrapper.scrollTo(0,0)}, 1);});
