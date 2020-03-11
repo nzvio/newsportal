@@ -7,7 +7,7 @@ import { AdvancedRepository } from './_advanced.repository';
 import { IArticlesByLang } from "../../model/articlesbylang.interface";
 
 @Injectable()
-export class ArticleTopRepository extends AdvancedRepository<IArticlesByLang> {    
+export class ArticleMainRepository extends AdvancedRepository<IArticlesByLang> {    
     constructor(protected dataService: DataService) {
         super(); 
         this.sortBy = "date";
@@ -22,7 +22,7 @@ export class ArticleTopRepository extends AdvancedRepository<IArticlesByLang> {
                 resolve();
             } else {                
                 let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: langId, sortBy: this.sortBy, sortDir: this.sortDir};
-                this.dataService.articlesTop(dto).subscribe(res => {                    
+                this.dataService.articlesMain(dto).subscribe(res => {                    
                     if (res.statusCode === 200) {
                         let xl: Article[] = res.data.length ? res.data.map(d => new Article().build(d)) : [];                           
                         let loadedAt: number = new Date().getTime();

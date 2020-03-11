@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { HomePage } from './modules/home/home.page';
+import { HomePage } from './section.components/home/home.page';
 import { AuthGuard } from './services/auth.guard';
-import { AuthModule } from './modules/auth/auth.module';
-import { UsergroupsModule } from './modules/usergroups/usergroups.module';
-import { UsersModule } from './modules/users/users.module';
-import { OptionsModule } from './modules/options/options.module';
-import { LangsModule } from './modules/langs/langs.module';
-import { PagesModule } from './modules/pages/pages.module';
-import { CategoriesModule } from './modules/categories/categories.module';
-import { ArticlesModule } from './modules/articles/articles.module';
-import { DonorsModule } from './modules/donors/donors.module';
-import { TargetsModule } from './modules/targets/targets.module';
-import { ParseerrorsModule } from './modules/parseerrors/parseerrors.module';
+import { AuthModule } from './section.components/auth/auth.module';
+import { UsergroupsModule } from './section.components/usergroups/usergroups.module';
+import { UsersModule } from './section.components/users/users.module';
+import { OptionsModule } from './section.components/options/options.module';
+import { LangsModule } from './section.components/langs/langs.module';
+import { PagesModule } from './section.components/pages/pages.module';
+import { CategoriesModule } from './section.components/categories/categories.module';
+import { ArticlesModule } from './section.components/articles/articles.module';
+import { DonorsModule } from './section.components/donors/donors.module';
+import { TargetsModule } from './section.components/targets/targets.module';
+import { ParseerrorsModule } from './section.components/parseerrors/parseerrors.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},

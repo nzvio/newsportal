@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './modules/home/home.module';
-import { UIModule } from './ui/ui.module';
+import { HomeModule } from './section.components/home/home.module';
 import { ServicesModule } from './services/services.module';
-import { NotfoundModule } from './modules/notfound/notfound.module';
+import { NotfoundModule } from './section.components/notfound/notfound.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CacheModule } from './cache/cache.module';
+import { CCModule } from './common.components/cc.module';
 
 @NgModule({
 	declarations: [
@@ -20,7 +20,7 @@ import { CacheModule } from './cache/cache.module';
 		HttpClientModule,
 		
 		CacheModule,
-		UIModule,
+		CCModule,
 		ServicesModule,
 		HomeModule,
 		NotfoundModule,

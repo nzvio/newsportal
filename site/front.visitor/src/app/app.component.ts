@@ -74,7 +74,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 					this.navHistory.needScrollTo = 0;
 				}					
 			} else if (event instanceof NavigationEnd) {					
-				this.wrapper.scrollTo(0, this.navHistory.needScrollTo);
+				setTimeout(() => {
+					this.wrapper.scrollTo(0, this.navHistory.needScrollTo);
+				}, 1);				
 			}
 		});
 	}
@@ -109,7 +111,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	public onScroll(event: any): void {				
-		this.stickyVisible = this.wrapper.scrollTop >= 170;	
-		this.indicatorWidth = Math.round(100 * this.wrapper.scrollTop / (this.wrapper.scrollHeight - this.wrapper.clientHeight));
+		if (this.wrapper) {
+			this.stickyVisible = this.wrapper.scrollTop >= 170;	
+			this.indicatorWidth = Math.round(100 * this.wrapper.scrollTop / (this.wrapper.scrollHeight - this.wrapper.clientHeight));
+		}		
 	}		
 }
