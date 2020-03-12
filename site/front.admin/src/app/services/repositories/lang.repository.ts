@@ -25,8 +25,7 @@ export class LangRepository extends Repository<Lang> {
             } else {
                 this.dataService.langsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlFull = res.data.length ? res.data.map(d => new Lang().build(d)) : [];
-                        this.fullLength = this.xlFull.length;
+                        this.xlFull = res.data.length ? res.data.map(d => new Lang().build(d)) : [];                        
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        

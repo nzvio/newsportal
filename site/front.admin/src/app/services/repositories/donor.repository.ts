@@ -20,8 +20,7 @@ export class DonorRepository extends Repository<Donor> {
             } else {
                 this.dataService.donorsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlFull = res.data.length ? res.data.map(d => new Donor().build(d)) : [];
-                        this.fullLength = this.xlFull.length;
+                        this.xlFull = res.data.length ? res.data.map(d => new Donor().build(d)) : [];                        
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        

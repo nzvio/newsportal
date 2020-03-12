@@ -19,8 +19,7 @@ export class TargetRepository extends Repository<Target> {
             } else {                
                 this.dataService.targetsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlChunk = res.data.length ? res.data.map(d => new Target().build(d)) : [];
-                        this.fullLength = res.fullLength;
+                        this.xlChunk = res.data.length ? res.data.map(d => new Target().build(d)) : [];                        
                         this.chunkLoadedAt = new Date().getTime();                    
                         resolve();
                     } else {                        

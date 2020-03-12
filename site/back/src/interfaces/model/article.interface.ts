@@ -1,5 +1,6 @@
 import { Document } from "mongoose";
 import { ICategory } from "./category.interface";
+import { IUser } from "./user.interface";
 
 export interface IArticle extends Document {
     readonly _id: string;
@@ -22,5 +23,7 @@ export interface IArticle extends Document {
     recommended: boolean;
     category: string | ICategory;
     lang: string;
+    user: string | IUser;
+    viewsq: number;
     defended: boolean;
 }

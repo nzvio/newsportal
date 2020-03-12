@@ -15,6 +15,7 @@ import { Lang } from '../../../model/lang.model';
 import { SocketService } from 'src/app/services/socket.service';
 import { IAnswer } from 'src/app/model/answer.interface';
 import { ParseerrorRepository } from 'src/app/services/repositories/parseerror.repository';
+import { ArticleRepository } from 'src/app/services/repositories/article.repository';
 
 @Component({
 	selector: 'targets-list-page',
@@ -37,6 +38,7 @@ export class TargetsListPage extends ListPage<Target> implements OnInit, OnDestr
         private categoryRepository: CategoryRepository,
         private langRepository: LangRepository,
         private parseerrorRepository: ParseerrorRepository,
+        private articleRepository: ArticleRepository,
         protected appService: AppService,        
         private socketService: SocketService,
     ) {      
@@ -83,6 +85,7 @@ export class TargetsListPage extends ListPage<Target> implements OnInit, OnDestr
             this.executing = false;
             this.logAnswer.next(res);
             this.parseerrorRepository.invalidateAll();
+            this.articleRepository.invalidateAll();
         }, err => console.log(err));
     }    
 

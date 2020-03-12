@@ -1,6 +1,7 @@
 import { Model } from './model';
 import { Category } from './category.model';
 import { Lang } from './lang.model';
+import { User } from './user.model';
 
 export class Article extends Model {
     public _id: string;
@@ -25,6 +26,8 @@ export class Article extends Model {
     public lang: string;
     public defended: boolean;
     public __commentsq: number;
+    public user: User;
+    public viewsq: number;
 
     public formatedDate(lang: Lang): string {
         return `${this.date.getDate()} ${lang.s('month-'+(this.date.getMonth()+1))} ${this.date.getFullYear()}, ${this.date.getHours()}:${this.twoDigits(this.date.getMinutes())}`;

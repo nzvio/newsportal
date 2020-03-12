@@ -17,8 +17,7 @@
                         <td>
                             <div class="dt-inputwrap">
                                 <select [(ngModel)]="filterCategory" (change)="rebuildList();">
-                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>
-                                    <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>                                    
                                     <option *ngFor="let c of cl" [value]="c._id" [innerHTML]="c.__shift+c.name[selectedLang._id]"></option> 
                                 </select>
                             </div>
@@ -26,8 +25,7 @@
                         <td>
                             <div class="dt-inputwrap">
                                 <select [(ngModel)]="filterLang" (change)="rebuildList();">
-                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>
-                                    <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                                    <option value="any">{{currentLang.phrases['workspace-any']}}</option>                                    
                                     <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option> 
                                 </select>
                             </div>

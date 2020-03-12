@@ -21,6 +21,8 @@ export class Article extends Model {
     public recommended: boolean;
     public category: string;
     public lang: string;
+    public user: string;
+    public viewsq: number;
     public defended: boolean;    
 
     get formatedDate(): string {return `${this.twoDigits(this.date.getUTCDate())}.${this.twoDigits(this.date.getUTCMonth()+1)}.${this.date.getUTCFullYear()} ${this.twoDigits(this.date.getUTCHours())}:${this.twoDigits(this.date.getUTCMinutes())}`;}
@@ -34,6 +36,7 @@ export class Article extends Model {
         this.recommended = false;
         this.category = null;
         this.lang = null;
+        this.user = null;        
         
         return this;
     }

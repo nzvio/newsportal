@@ -27,4 +27,10 @@ export class ArticlesController {
     public popular(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
         return this.articlesService.popular(dto);
     }
+
+    // get fragment
+    @Post("chunk")
+    public chunk(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
+        return this.articlesService.chunk(dto);
+    }
 }

@@ -7,10 +7,10 @@ import { IHTMLInputEvent } from '../model/htmlinputevent.interface';
 import { HttpEventType } from '@angular/common/http';
 import { IAnswer } from '../model/answer.interface';
 import { IImagable } from '../model/imagable.interface';
-import { ModulePage } from './_module.page';
+import { SectionPage } from './_section.page';
 import { AdmLangRepository } from '../services/repositories/admlang.repository';
 
-export abstract class ObjectPage<T extends Model> extends ModulePage {
+export abstract class ObjectPage<T extends Model> extends SectionPage {
     public ready: boolean = false;
     public reloading: boolean = false;      
     public progressImg: number = 0;

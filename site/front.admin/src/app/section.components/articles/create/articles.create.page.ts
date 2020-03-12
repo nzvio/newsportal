@@ -11,6 +11,8 @@ import { AppService } from '../../../services/app.service';
 import { UploadService } from '../../../services/upload.service';
 import { Lang } from '../../../model/lang.model';
 import { Category } from '../../../model/category.model';
+import { UserRepository } from '../../../services/repositories/user.repository';
+import { User } from '../../../model/user.model';
 
 @Component({
 	selector: 'articles-create-page',
@@ -20,14 +22,15 @@ export class ArticlesCreatePage extends ObjectPage<Article> implements OnInit {
 	public x: Article | null = null;
 	public homeUrl: string = "/catalogue/articles";
 	public folder: string = "articles";
-	public requiredFields: string[] = ["slug", "name"];
+	public requiredFields: string[] = ["slug", "name", "user", "category", "lang"];
 	public imgCopyWidth: number = 200;
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,
         protected articleRepository: ArticleRepository,
         private langRepository: LangRepository,
-        private categoryRepository: CategoryRepository,
+		private categoryRepository: CategoryRepository,
+		private userRepository: UserRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,		
@@ -37,12 +40,14 @@ export class ArticlesCreatePage extends ObjectPage<Article> implements OnInit {
     
     get ll(): Lang[] {return this.langRepository.xlFull;}	
 	get cl(): Category[] {return this.categoryRepository.xlFull;}	
+	get ul(): User[] {return this.userRepository.xlFull;}
 
 	public async ngOnInit(): Promise<void> {
 		try {
 			this.x = new Article().init();        
 			await this.categoryRepository.loadFull();	
 			await this.langRepository.loadFull();
+			await this.userRepository.loadFull();
 	
 			if (this.ll.length) {
 				this.appService.monitorLog("[articles create] page loaded");

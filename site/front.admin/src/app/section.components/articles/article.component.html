@@ -41,6 +41,14 @@
             </select>
         </div>
 
+        <div [class]="isRequired('user') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-author']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.user">
+                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
+                <option *ngFor="let u of ul" [value]="u._id" [innerHTML]="u.name"></option>                
+            </select>
+        </div>
+
         <div [class]="isRequired('lang') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-lang']}}:</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.lang">

@@ -114,7 +114,7 @@ export class PagesService extends APIService {
         try {            
             dto.slug = await this.checkSlug(this.model, dto.slug, dto._id, 0);
             let _id: string = dto._id;
-            await this.model.updateOne ({_id: _id}, dto);
+            await this.model.updateOne ({_id: _id}, dto, {runValidators: true});
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in PagesService.update: ${String(err)}`;

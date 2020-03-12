@@ -45,7 +45,8 @@ export class DataService {
     public usergroupsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "usergroups/deletebulk", _ids, true);}
     public usergroupsCreate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/create", x, true);}
     public usergroupsUpdate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/update", x, true);}
-
+    
+    public usersAll(sortBy: string, sortDir: number): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/all", {sortBy, sortDir}, true);}
     public usersChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/chunk", {from, q, sortBy, sortDir}, true);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, true);}
     public usersDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `users/delete/${_id}`, null, true);}

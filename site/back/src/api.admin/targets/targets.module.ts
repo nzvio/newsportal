@@ -10,6 +10,7 @@ import { TargetsExecutorService } from "./targetsexecutor.service";
 import { ArticleSchema } from "../../schemas/article.schema";
 import { ServicesModule } from "../../services/services.module";
 import { ParseerrorSchema } from "../../schemas/parseerror.schema";
+import { UserSchema } from "../../schemas/user.schema";
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { ParseerrorSchema } from "../../schemas/parseerror.schema";
             {name: 'Target', schema: TargetSchema},
             {name: 'Article', schema: ArticleSchema},
             {name: 'Parseerror', schema: ParseerrorSchema},
+            {name: 'User', schema: UserSchema},
         ]),        
         JwtModule.register(jwtConstants),
         HttpModule.register({timeout: 5000}),

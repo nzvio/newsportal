@@ -7,10 +7,18 @@ import { IAnswer } from "../../interfaces/answer.interface";
 import { IUser } from "../../interfaces/model/user.interface";
 import { UserCreateDTO } from "./dto/user.create.dto";
 import { UserUpdateDTO } from "./dto/user.update.dto";
+import { GetallDTO } from "../../dto/getall.dto";
 
 @Controller('api/admin/users')
 export class UsersController {
     constructor (private usersService: UsersService) {}
+
+    // get all
+    @UseGuards(AuthGuard)
+    @Post("all")
+    public all(@Body() dto: GetallDTO): Promise<IAnswer<IUser[]>> {
+        return this.usersService.all(dto);
+    }
 
     // get fragment
     @UseGuards(AuthGuard)

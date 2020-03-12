@@ -26,8 +26,7 @@ export class CommentRepository extends Repository<Comment> {
                     .commentsAllByArticle(this.articleId, this.fullSortBy, this.fullSortDir)
                     .subscribe(res => {
                         if (res.statusCode === 200) {
-                            this.xlFull = res.data.length ? res.data.map(d => new Comment().build(d)) : [];
-                            this.fullLength = this.xlFull.length;
+                            this.xlFull = res.data.length ? res.data.map(d => new Comment().build(d)) : [];                            
                             this.fullLoadedAt = new Date().getTime();
                             resolve();
                         } else {

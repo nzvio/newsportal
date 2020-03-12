@@ -4,7 +4,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 export const TargetSchema = new mongoose.Schema ({            
     donor: {
         type: ObjectId,
-        ref: "Donor"
+        ref: "Donor",
+        required: true
     },
     rss: {
         type: String,
@@ -12,11 +13,13 @@ export const TargetSchema = new mongoose.Schema ({
     },
     category: {
         type: ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     },
     lang: {
         type: ObjectId,
-        ref: "Lang"
+        ref: "Lang",
+        required: true
     },    
     active: {
         type: Boolean,

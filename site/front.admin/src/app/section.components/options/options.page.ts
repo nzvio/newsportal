@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModulePage } from '../_module.page';
+import { SectionPage } from '../_section.page';
 import { AdmLangRepository } from '../../services/repositories/admlang.repository';
 import { AdmLang } from 'src/app/model/admlang.model';
 import { AppService } from 'src/app/services/app.service';
@@ -8,7 +8,7 @@ import { AppService } from 'src/app/services/app.service';
 	selector: 'options-page',
 	templateUrl: './options.page.html',	
 })
-export class OptionsPage extends ModulePage implements OnInit {	
+export class OptionsPage extends SectionPage implements OnInit {	
     public ready: boolean = false;
     public selectedLang: string = "";
 

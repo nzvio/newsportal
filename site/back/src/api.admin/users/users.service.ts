@@ -9,6 +9,7 @@ import { GetchunkDTO } from "../../dto/getchunk.dto";
 import { IAnswer } from "../../interfaces/answer.interface";
 import { UserCreateDTO } from "./dto/user.create.dto";
 import { UserUpdateDTO } from "./dto/user.update.dto";
+import { GetallDTO } from "../../dto/getall.dto";
 
 @Injectable()
 export class UsersService extends APIService {
@@ -16,6 +17,20 @@ export class UsersService extends APIService {
         super();
     }
 
+    public async all(dto: GetallDTO): Promise<IAnswer<IUser[]>> {
+        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "name";
+        let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
+
+        try {
+            let data: IUser[] = await this.model.find ({}, {name: 1}, {sort: {[sortBy]: sortDir}}); // load only titles
+            return {statusCode: 200, data};
+        } catch (err) {
+            let errTxt: string = `Error in UsersService.all: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+    
     public async chunk(dto: GetchunkDTO): Promise<IAnswer<IUser[]>> {
         let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "name";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
@@ -93,7 +108,7 @@ export class UsersService extends APIService {
                 delete dto.password; // if we got empty or null password, then it will not change in DB
             }
 
-            await this.model.updateOne ({_id: _id}, dto);
+            await this.model.updateOne ({_id: _id}, dto, {runValidators: true});
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsersService.update: ${String(err)}`;

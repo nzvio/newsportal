@@ -27,8 +27,8 @@ export class ArticlesPopularComponent implements OnChanges {
         if (changes.currentLang) {
             try {
                 this.ready = false;
-                await this.articlePopularRepository.load(this.currentLang._id);  
-                console.log(this.articles);              
+                this.articlePopularRepository.filterLang = this.currentLang._id;            
+                await this.articlePopularRepository.load();                  
                 this.ready = this.buildArticles();
             } catch (err) {
                 this.appService.showNotification(err, "error");

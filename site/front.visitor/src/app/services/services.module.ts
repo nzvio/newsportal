@@ -9,6 +9,7 @@ import { CategoryRepository } from './repositories/category.repository';
 import { ArticleTopRepository } from './repositories/article.top.repository';
 import { ArticleMainRepository } from './repositories/article.main.repository';
 import { ArticlePopularRepository } from './repositories/article.popular.repository';
+import { ArticleRepository } from './repositories/article.repository';
 
 @NgModule({
     imports: [                
@@ -23,6 +24,7 @@ import { ArticlePopularRepository } from './repositories/article.popular.reposit
         LangRepository,
         PageRepository,
         CategoryRepository,
+        ArticleRepository,
         ArticleTopRepository,
         ArticleMainRepository,
         ArticlePopularRepository,

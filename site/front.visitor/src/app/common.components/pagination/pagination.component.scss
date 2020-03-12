@@ -1,0 +1,20 @@
+@import "../../_var";
+
+.pagination {
+    display: flex; justify-content: center; margin-bottom: 30px;
+    ul {
+        margin: 0; padding: 0; list-style: none; display: flex;
+        li {
+            margin: 0 10px; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 24px; cursor: pointer; transition: color 0.3s ease 0s; color: $color-main;
+            &:hover {color: $color-blue;}
+            &.skip {
+                cursor: inherit;
+                &:hover {color: $color-main;}
+            }
+            &.back::before {font-family: "ionicons"; content: "\f124"; font-size: 14px; vertical-align: middle;}
+            &.forward::after {font-family: "ionicons"; content: "\f125"; font-size: 14px; vertical-align: middle;}                
+            &.disabled {cursor: inherit; color: $color-grey-superlight;}
+            &.active {color: $color-blue; cursor: inherit;}
+        }
+    }
+}

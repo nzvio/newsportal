@@ -10,6 +10,7 @@ import { IAnswer } from '../../model/answer.interface';
 import { AppService } from 'src/app/services/app.service';
 import { BehaviorSubject } from 'rxjs';
 import { ParseerrorRepository } from 'src/app/services/repositories/parseerror.repository';
+import { ArticleRepository } from 'src/app/services/repositories/article.repository';
 
 @Component({
     selector: "the-target",
@@ -31,6 +32,7 @@ export class TargetComponent extends ObjectComponent implements OnInit, OnDestro
         private socketService: SocketService,  
         private appService: AppService,      
         private parseerrorRepository: ParseerrorRepository,
+        private articleRepository: ArticleRepository,
     ) {
         super();        
     }
@@ -51,6 +53,7 @@ export class TargetComponent extends ObjectComponent implements OnInit, OnDestro
             this.executing = false;
             this.logAnswer.next(res);
             this.parseerrorRepository.invalidateAll();
+            this.articleRepository.invalidateAll();
         }, err => console.log(err));
     }    
 

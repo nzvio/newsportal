@@ -25,7 +25,8 @@ export class ArticlesTopComponent implements OnChanges {
         if (changes.currentLang) {
             try {
                 this.ready = false;
-                await this.articleTopRepository.load(this.currentLang._id);   
+                this.articleTopRepository.filterLang = this.currentLang._id;
+                await this.articleTopRepository.load();   
                 this.ready = true;
             } catch (err) {
                 this.appService.showNotification(err, "error");

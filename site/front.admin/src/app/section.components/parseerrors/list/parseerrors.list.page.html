@@ -20,7 +20,7 @@
                         <tr *ngFor="let x of xl">
                             <td><input type="checkbox" *ngIf="!x.defended" [(ngModel)]="x.__selected" (ngModelChange)="onSelect();"></td>
                             <td>{{x.formatedDate}}</td>
-                            <td>{{x.target.donor.name}}</td>
+                            <td>{{x.target ? x.target.donor.name : currentLang.phrases['workspace-empty']}}</td>
                             <td>{{x.message}}</td>
                             <td>
                                 <div class="dt-actions">                                    

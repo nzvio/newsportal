@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ModulePage } from '../_module.page';
+import { SectionPage } from '../_section.page';
 import { AdmLangRepository } from '../../services/repositories/admlang.repository';
-import { AppService } from 'src/app/services/app.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
 	selector: 'home-page',
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss'],	
 })
-export class HomePage extends ModulePage implements OnInit {	
+export class HomePage extends SectionPage implements OnInit {	
     public ready: boolean = false;
 
     constructor(

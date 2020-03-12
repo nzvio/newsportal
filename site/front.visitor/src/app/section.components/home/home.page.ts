@@ -7,8 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'home-page',
-	templateUrl: './home.page.html',
-	styleUrls: ['./home.page.scss']
+	templateUrl: './home.page.html',	
 })
 export class HomePage implements OnInit {
 	constructor(

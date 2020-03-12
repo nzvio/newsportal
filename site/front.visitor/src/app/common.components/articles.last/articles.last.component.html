@@ -1,0 +1,43 @@
+<div class="lastarticles">            
+    <ng-container *ngIf="ready">
+        <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="setCurrentPart($event);"></pagination>
+        <div class="la-content">
+            <article *ngFor="let a of articles">
+                <div class="la-imgwrap">
+                    <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'"></figure>
+                </div>                
+                <div class="la-main">
+                    <div class="la-top">
+                        <div class="la-cat"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+                        <div class="la-date">{{a.formatedDate(currentLang)}}</div>
+                        <div class="la-comments">{{a.__commentsq}}</div>
+                        <div class="la-views">{{a.viewsq}}</div>
+                    </div>
+                    <div class="la-title"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                    <div class="la-bottom">
+                        <div class="la-socnets">
+                            <div class="la-socnet fb"><span></span></div>
+                            <div class="la-socnet tw"><span></span></div>
+                        </div>
+                        <div class="la-author">
+                            <div class="la-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'"></div>
+                            <div class="la-author-name"><a href="#" [innerHTML]="a.user.name"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div class="reloading" [class.active]="reloading"><span></span></div>         
+        </div>        
+        <pagination [fullLength]="fullLength" [length]="length" [current]="currentPart" (currentChanged)="setCurrentPart($event);"></pagination>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        <div class="la-content">
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+            <article class="loading"><div class="la-imgwrap"><figure></figure></div><div class="la-main"><label></label><label></label><label></label></div></article>
+        </div>        
+    </ng-container>       
+</div>

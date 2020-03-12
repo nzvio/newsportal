@@ -7,11 +7,32 @@ import { DataService } from '../data.service';
 @Injectable()
 export class UserRepository extends Repository<User> {
     public schema: string = "User";
+    public fullSortBy: string = "name";
 
     constructor(protected dataService: DataService) {
         super(dataService);
     } 
     
+    public loadFull(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
+                resolve();
+            } else {
+                this.dataService.usersAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                    if (res.statusCode === 200) {
+                        this.xlFull = res.data.length ? res.data.map(d => new User().build(d)) : [];                        
+                        this.fullLoadedAt = new Date().getTime();
+                        resolve();
+                    } else {                        
+                        reject(res.error);
+                    }
+                }, err => {
+                    reject(err.message);
+                });
+            }            
+        });
+    }
+
     public loadChunk(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {

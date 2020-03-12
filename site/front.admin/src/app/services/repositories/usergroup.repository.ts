@@ -20,8 +20,7 @@ export class UsergroupRepository extends Repository<Usergroup> {
             } else {
                 this.dataService.usergroupsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
-                        this.xlFull = res.data.length ? res.data.map(d => new Usergroup().build(d)) : [];
-                        this.fullLength = this.xlFull.length;
+                        this.xlFull = res.data.length ? res.data.map(d => new Usergroup().build(d)) : [];                        
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        

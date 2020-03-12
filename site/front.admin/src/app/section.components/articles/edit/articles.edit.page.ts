@@ -13,6 +13,8 @@ import { Article } from '../../../model/article.model';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
 import { CommentRepository } from '../../../services/repositories/comment.repository';
 import { Comment } from '../../../model/comment.model';
+import { UserRepository } from '../../../services/repositories/user.repository';
+import { User } from '../../../model/user.model';
 
 @Component({
 	selector: 'articles-edit-page',
@@ -22,7 +24,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 	public x: Article | null = null;
 	public homeUrl: string = "/catalogue/articles";
 	public folder: string = "articles";
-	public requiredFields: string[] = ["slug", "name"];
+	public requiredFields: string[] = ["slug", "name", "user", "category", "lang"];
 	public imgCopyWidth: number = 200;	
 	
 	constructor(
@@ -31,6 +33,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 		private langRepository: LangRepository,
 		private categoryRepository: CategoryRepository,
 		private commentRepository: CommentRepository,
+		private userRepository: UserRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,
@@ -40,7 +43,8 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 	}
 
 	get ll(): Lang[] {return this.langRepository.xlFull;}	
-	get cl(): Category[] {return this.categoryRepository.xlFull;}	
+	get cl(): Category[] {return this.categoryRepository.xlFull;}
+	get ul(): User[] {return this.userRepository.xlFull;}	
 	get comments(): Comment[] {return this.commentRepository.xlFull;}
 
 	public ngOnInit(): void {
@@ -51,6 +55,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 				await this.categoryRepository.loadFull();								
 				await this.langRepository.loadFull();
 				await this.commentRepository.loadFullByArticle(this.x._id);
+				await this.userRepository.loadFull();
 
 				if (this.ll.length) {
 					this.appService.monitorLog("[articles edit] page loaded");

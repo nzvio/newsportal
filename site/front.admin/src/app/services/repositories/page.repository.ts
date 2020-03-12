@@ -26,8 +26,7 @@ export class PageRepository extends Repository<Page> {
                 this.dataService.pagesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : []
-                        this.xlFull = this.appService.tree2list(xl) as Page[];
-                        this.fullLength = this.xlFull.length;
+                        this.xlFull = this.appService.tree2list(xl) as Page[];                        
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        

@@ -29,7 +29,8 @@ export class ArticlesMainComponent implements OnChanges, OnInit {
     public async ngOnInit(): Promise<void> {
         try {                
             this.currentCategoryId = this.categories[0]._id;
-            await this.articleMainRepository.load(this.currentLang._id);
+            this.articleMainRepository.filterLang = this.currentLang._id;
+            await this.articleMainRepository.load();
             this.buildArticles();
             this.ready = true; 
         } catch (err) {
@@ -41,7 +42,8 @@ export class ArticlesMainComponent implements OnChanges, OnInit {
         if (changes.currentLang && changes.currentLang.previousValue) { // not first time!           
             try {
                 this.ready = false;
-                await this.articleMainRepository.load(this.currentLang._id);
+                this.articleMainRepository.filterLang = this.currentLang._id;
+                await this.articleMainRepository.load();
                 this.buildArticles();
                 this.ready = true;
             } catch (err) {

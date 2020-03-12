@@ -1,0 +1,7 @@
+<div class="pagination" *ngIf="parts.length > 1">    
+    <ul>
+        <li class="back" [class.disabled]="current === 0" (click)="back();"><span></span></li>
+        <li *ngFor="let p of parts" (click)="setCurrent (p);" [class]="(p==-1 || p==-2) ? 'skip' : (p == current ? 'active' : '')">{{(p==-1 || p==-2) ? "..." : p+1}}</li>
+        <li class="forward" [class.disabled]="current === parts.length - 1" (click)="forward();"><span></span></li>
+    </ul>    
+</div>

@@ -26,8 +26,7 @@ export class CategoryRepository extends Repository<Category> {
                 this.dataService.categoriesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
-                        this.xlFull = this.appService.tree2list(xl) as Category[];
-                        this.fullLength = this.xlFull.length;
+                        this.xlFull = this.appService.tree2list(xl) as Category[];                        
                         this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        

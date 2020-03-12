@@ -58,10 +58,22 @@ export const ArticleSchema = new mongoose.Schema ({
     }, 
     category: {
         type: ObjectId,
-        ref: "Category"
+        ref: "Category",
+        required: true
     },
     lang: {
-        type: ObjectId
+        type: ObjectId,
+        required: true
+    },
+    user: {
+        type: ObjectId,
+        ref: "User",
+        required: true
+    },
+    viewsq: {
+        type: Number,
+        required: true,
+        default: 0
     },
     defended: {
         type: Boolean,

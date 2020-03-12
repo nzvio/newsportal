@@ -22,6 +22,7 @@ export class TargetsCreatePage extends ObjectPage<Target> implements OnInit {
 	public x: Target | null = null;
 	public homeUrl: string = "/parsing/targets";
 	public folder: string | null = null;	
+	public requiredFields: string[] = ["donor", "category", "lang"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,

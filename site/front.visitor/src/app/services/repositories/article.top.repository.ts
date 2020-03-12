@@ -7,15 +7,17 @@ import { SimpleRepository } from './_simple.repository';
 
 @Injectable()
 export class ArticleTopRepository extends SimpleRepository<Article> {    
+    public filterLang: string = "";
+
     constructor(protected dataService: DataService) {
         super(); 
         this.sortBy = "date";
         this.sortDir = -1;
     }
     
-    public load(langId: string): Promise<void> {
+    public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: langId, sortBy: this.sortBy, sortDir: this.sortDir};
+            let dto: ArticlesGetchunkDTO = {from: 0, q: 6, filterLang: this.filterLang, sortBy: this.sortBy, sortDir: this.sortDir};
             this.dataService.articlesTop(dto).subscribe(res => {                    
                 if (res.statusCode === 200) {
                     this.xl = res.data.length ? res.data.map(d => new Article().build(d)) : [];                    

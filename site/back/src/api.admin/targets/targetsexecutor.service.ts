@@ -14,6 +14,7 @@ import { SlugService } from "../../services/slug.service";
 import { IImagable } from "../../interfaces/imagable.interface";
 import { APIService } from "../../services/_api.service";
 import { IParseerror } from "../../interfaces/model/parseerror.interface";
+import { IUser } from "../../interfaces/model/user.interface";
 
 @Injectable()
 export class TargetsExecutorService extends APIService {
@@ -21,6 +22,7 @@ export class TargetsExecutorService extends APIService {
         @InjectModel("Target") private readonly targetModel: Model<ITarget>,
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         @InjectModel("Parseerror") private readonly errorModel: Model<IParseerror>,
+        @InjectModel("User") private readonly userModel: Model<IUser>,
         private readonly httpService: HttpService,
         private readonly slugService: SlugService,
     ) {
@@ -158,6 +160,8 @@ export class TargetsExecutorService extends APIService {
                             article.category = target.category;
                             article.lang = target.lang;
                             article.slug = this.slugService.buildSlug(article.name);
+                            const user: IUser = await this.userModel.findOne({defended: true});
+                            article.user = user._id;
                             await article.save();
                             this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
                         }

@@ -61,7 +61,13 @@ html {
                 position: fixed; z-index: 12; top: -30px; height: 30px; overflow: hidden; padding: 0 5px; color: #fff; background-color: $color-blue; transition: top 0.3s ease 0s; will-change: top; display: flex; align-items: center;
                 &.error {background-color: #f00;}
                 &.active {top: 0;}
-            }              
+            }    
+            // reloading overlay 
+            .reloading {
+                position: absolute; left: 0; top: 0; background-color: rgba(255,255,255,0.9); width:0; height: 0; overflow: hidden; opacity: 0; z-index: 2; padding: 30px; will-change: opacity; transition: opacity 0.3s ease 0s, width 0s linear 0.3s, height 0s linear 0.3s; display: flex; justify-content: center; align-items: center;
+                span::before {font-family: "ionicons"; font-size: 70px; color: $color-blue; content: "\f268";}
+                &.active {width:100%; height: 100%; opacity: 1; transition: opacity 0.1s ease 0s, width 0s linear 0s, height 0s linear 0s;}
+            }            
         }
     }
 }

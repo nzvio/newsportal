@@ -6,6 +6,7 @@ import { Lang } from '../../model/lang.model';
 import { SlugService } from '../../services/slug.service';
 import { Article } from '../../model/article.model';
 import { Comment } from '../../model/comment.model';
+import { User } from '../../model/user.model';
 
 @Component({
     selector: "the-article",
@@ -15,6 +16,7 @@ export class ArticleComponent extends ObjectComponent implements OnInit {
     @Input() x: Article;   
     @Input() ll: Lang[]; 
     @Input() cl: Category[];    
+    @Input() ul: User[];
     @Input() canBuildSlug: boolean = false;
     @Input() canEditComments: boolean = false;
     @Input() comments: Comment[] = [];

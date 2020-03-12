@@ -95,7 +95,7 @@ export class UsergroupsService extends APIService {
     public async update(dto: UsergroupUpdateDTO): Promise<IAnswer<void>> {
         try {
             let _id: string = dto._id;
-            await this.model.updateOne ({_id: _id}, dto);
+            await this.model.updateOne ({_id: _id}, dto, {runValidators: true});
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsergroupsService.update: ${String(err)}`;
