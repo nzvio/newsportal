@@ -9,11 +9,11 @@
     <div class="ma-items">
         <ng-container *ngIf="ready">
             <article *ngFor="let a of articles">
-                <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}">                
-                    <div class="maa-cat"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+                <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">                
+                    <div class="maa-cat"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
                 </figure>
                 <div class="maa-date">{{a.formatedDate(currentLang)}}</div>
-                <div class="maa-title"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                <div class="maa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
             </article>                                                
         </ng-container>
         <ng-container *ngIf="!ready">

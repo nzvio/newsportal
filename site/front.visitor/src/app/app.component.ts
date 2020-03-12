@@ -4,7 +4,6 @@ import { Router, NavigationStart, NavigationEnd, RouterEvent } from '@angular/ro
 import { filter } from 'rxjs/operators';
 
 import { NavHistory } from './model/navhistory';
-import { INavScroll } from './model/navscroll.interface';
 import { LangRepository } from './services/repositories/lang.repository';
 import { Lang } from './model/lang.model';
 import { PageRepository } from './services/repositories/page.repository';
@@ -106,13 +105,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 			let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === langName) || null;
 			
 			if (currentLang) {
-				this.langRepository.current = currentLang;
+				this.langRepository.current.next(currentLang);
 			} else {
-				this.langRepository.current = this.langRepository.xl[0];
+				this.langRepository.current.next(this.langRepository.xl[0]);
 				this.router.navigateByUrl("/404");
 			}						 
 		} else {
-			this.langRepository.current = this.langRepository.xl[0];
+			this.langRepository.current.next(this.langRepository.xl[0]);
 		}
 	}
 	

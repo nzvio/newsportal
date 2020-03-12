@@ -10,6 +10,7 @@ import { ArticlesMainComponent } from './articles.main/articles.main.component';
 import { ArticlesPopularComponent } from './articles.popular/articles.popular.component';
 import { ArticlesLastComponent } from './articles.last/articles.last.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { ArticlesRecommendedComponent } from './articles.recommended/articles.recommended.component';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { PaginationComponent } from './pagination/pagination.component';
         ArticlesMainComponent,
         ArticlesPopularComponent,
         ArticlesLastComponent,
+        ArticlesRecommendedComponent,
     ],
     exports: [
         HeaderComponent,
@@ -35,6 +37,7 @@ import { PaginationComponent } from './pagination/pagination.component';
         ArticlesMainComponent,
         ArticlesPopularComponent,
         ArticlesLastComponent,
+        ArticlesRecommendedComponent,
     ],
     providers: []
 })

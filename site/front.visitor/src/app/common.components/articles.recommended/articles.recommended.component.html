@@ -1,0 +1,16 @@
+<div class="aside-recommended">
+    <ng-container *ngIf="ready">
+        <article *ngFor="let a of articles">
+            <figure [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">
+                <div class="ar-cat"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+            </figure>                
+            <div class="ar-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+            <div class="ar-date">{{a.formatedDate(currentLang)}}</div>
+        </article>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        <article class="loading"><figure></figure><label></label><label></label></article>
+        <article class="loading"><figure></figure><label></label><label></label></article>
+        <article class="loading"><figure></figure><label></label><label></label></article>
+    </ng-container>    
+</div>

@@ -1,15 +1,15 @@
-<articles-top [currentLang]="currentLang"></articles-top>
+<articles-top></articles-top>
 
 <div class="wrap2">
     <main>
         <h1>{{currentLang.s('home-mainnews')}}</h1>
-        <articles-main [currentLang]="currentLang"></articles-main>
+        <articles-main></articles-main>
 
         <div class="h1">{{currentLang.s('home-popular')}}</div>
-        <articles-popular [currentLang]="currentLang"></articles-popular>
+        <articles-popular></articles-popular>
 
         <div class="h1">{{currentLang.s('home-last')}}</div>
-        <articles-last [currentLang]="currentLang"></articles-last>
+        <articles-last></articles-last>
     </main>
     <aside>
         <the-sidebar></the-sidebar>

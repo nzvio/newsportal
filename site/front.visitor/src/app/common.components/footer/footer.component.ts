@@ -18,7 +18,7 @@ export class FooterComponent {
         private pageRepository: PageRepository,
     ) {}
 
-    get currentLang(): Lang {return this.langRepository.current;}
+    get currentLang(): Lang {return this.langRepository.current.value;}
     get pages(): Page[] {return this.pageRepository.xl;}
     get url(): string[] {return this.appService.url;}    
 }

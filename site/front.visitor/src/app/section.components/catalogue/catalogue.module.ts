@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { CategoryPage } from './category/category.page';
-import { ArticlePage } from './article/article.page';
 import { CCModule } from '../../common.components/cc.module';
+import { CatalogueCategoryPage } from './category/catalogue.category.page';
+import { CatalogueArticlePage } from './article/catalogue.article.page';
+import { CatalogueUserPage } from './user/catalogue.user.page';
 
 let routes = RouterModule.forChild ([        
-    {path:":cat", component: CategoryPage},
-    {path:":cat/:article", component: ArticlePage},
+    {path:"category/:cat", component: CatalogueCategoryPage},
+    {path:"category/:cat/:article", component: CatalogueArticlePage},
+    {path:"user/:user", component: CatalogueUserPage},
 ]);
 
 @NgModule({
@@ -16,13 +18,14 @@ let routes = RouterModule.forChild ([
         routes,
     ],
     declarations: [
-        CategoryPage,
-        ArticlePage,
+        CatalogueCategoryPage,
+        CatalogueArticlePage,
+        CatalogueUserPage,
     ],
     exports: [
-        CategoryPage,
-        ArticlePage,
-    ],
-    providers: []
+        CatalogueCategoryPage,
+        CatalogueArticlePage,
+        CatalogueUserPage,
+    ],    
 })
 export class CatalogueModule {}

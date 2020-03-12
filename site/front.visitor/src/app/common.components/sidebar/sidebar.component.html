@@ -1,12 +1,13 @@
 
-    <h2>Мы в соцсетях</h2>
+    <h2>{{currentLang.s('sidebar-soc')}}</h2>
     <div class="aside-soc">
         <ul>
             <li class="fb"><a href="#"><span></span></a></li>
             <li class="tw"><a href="#"><span></span></a></li>
         </ul>
     </div>
-    <h2>Последние комментарии</h2>
+
+    <h2>{{currentLang.s('sidebar-comments')}}</h2>
     <div class="aside-comments">
         <div class="aside-comment">
             <div class="ac-left">
@@ -39,7 +40,8 @@
             </div>
         </div>                   
     </div>
-    <h2>Поиск по тегам</h2>
+
+    <h2>{{currentLang.s('sidebar-tags')}}</h2>
     <div class="aside-tags">
         <div class="aside-tag">гаджет</div>
         <div class="aside-tag">iphone</div>
@@ -49,27 +51,6 @@
         <div class="aside-tag">google</div>
         <div class="aside-tag">microsoft</div>
     </div>
-    <h2>Рекомендуем</h2>
-    <div class="aside-recommended">
-        <article>
-            <figure [style.background-image]="'url(/assets/images/test1.jpg)'">                    
-                <div class="ar-cat"><a href="#">Космос</a></div>
-            </figure>                
-            <div class="ar-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="ar-date">8 февраля 2020, 12:40</div>
-        </article>
-        <article>
-            <figure [style.background-image]="'url(/assets/images/test1.jpg)'">                    
-                <div class="ar-cat"><a href="#">Космос</a></div>
-            </figure>                
-            <div class="ar-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="ar-date">8 февраля 2020, 12:40</div>
-        </article>
-        <article>
-            <figure [style.background-image]="'url(/assets/images/test1.jpg)'">                    
-                <div class="ar-cat"><a href="#">Космос</a></div>
-            </figure>                
-            <div class="ar-title"><a href="#">Заголовок статьи длинный длинный очень длинный-предлинный заголовище</a></div>
-            <div class="ar-date">8 февраля 2020, 12:40</div>
-        </article>
-    </div>
+    
+    <h2>{{currentLang.s('sidebar-recommended')}}</h2>
+    <articles-recommended></articles-recommended>    

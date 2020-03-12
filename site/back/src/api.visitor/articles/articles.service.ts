@@ -100,12 +100,33 @@ export class ArticlesService extends APIService {
         }
     }
 
+    public async recommended(dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
+        const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
+        const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
+        const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
+        const q: number = !this.isEmpty(dto.q) ? dto.q : 3;
+        const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1}; 
+        const filter: Object = {lang: dto.filterLang, active: true, recommended: true};
+        
+        try {            
+            const data: IArticle[] = await this.articleModel
+                .find(filter, projection, options)
+                .populate("category");
+            return {statusCode: 200, data};
+        } catch (err) {
+            let errTxt: string = `Error in ArticlesService.recommended: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
     public async chunk(dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
         const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 10;        
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, user: 1, viewsq: 1, __commentsq: {$size: "$comments"}};               
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, user: 1, viewsq: 1, source: 1, __commentsq: {$size: "$comments"}};               
 
         try {            
             let data: ArticleDTO[] = await this.articleModel.aggregate([

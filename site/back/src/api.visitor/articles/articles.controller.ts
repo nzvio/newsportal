@@ -28,6 +28,12 @@ export class ArticlesController {
         return this.articlesService.popular(dto);
     }
 
+    // get recommended articles
+    @Post("recommended")
+    public recommended(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<IArticle[]>> {
+        return this.articlesService.recommended(dto);
+    }
+
     // get fragment
     @Post("chunk")
     public chunk(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {

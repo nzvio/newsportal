@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
 import { SimpleRepository } from './_simple.repository';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class LangRepository extends SimpleRepository<Lang> {        
-    public current: Lang | null = null;
+    public current: BehaviorSubject<Lang | null> = new BehaviorSubject(null);
 
     constructor(protected dataService: DataService) {
         super();

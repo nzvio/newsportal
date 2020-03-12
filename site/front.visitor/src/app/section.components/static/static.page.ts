@@ -23,7 +23,7 @@ export class StaticPage implements OnInit {
 		private appService: AppService,
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current;}
+	get currentLang(): Lang {return this.langRepository.current.value;}
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(p => {

@@ -16,7 +16,7 @@ export class HomePage implements OnInit {
 		private route: ActivatedRoute,
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current;}	
+	get currentLang(): Lang {return this.langRepository.current.value;}	
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(p => {

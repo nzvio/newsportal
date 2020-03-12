@@ -2,12 +2,12 @@
     <div class="pa-left">
         <ng-container *ngIf="ready">
             <article>
-                <figure [style.background-image]="leftArticle.img ? 'url(/assets/images/articles/'+leftArticle.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/{{leftArticle.category.slug}}/{{leftArticle.slug}}">
+                <figure [style.background-image]="leftArticle.img ? 'url(/assets/images/articles/'+leftArticle.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'" routerLink="/{{currentLang.slug}}/catalogue/category/{{leftArticle.category.slug}}/{{leftArticle.slug}}">
                     <div class="pal-overlay"></div>
-                    <div class="pal-cat"><a routerLink="/{{currentLang.slug}}/catalogue/{{leftArticle.category.slug}}" [innerHTML]="leftArticle.category.name[currentLang._id]"></a></div>
+                    <div class="pal-cat"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{leftArticle.category.slug}}" [innerHTML]="leftArticle.category.name[currentLang._id]"></a></div>
                 </figure>
                 <div class="pal-date">{{leftArticle.formatedDate(currentLang)}}</div>
-                <div class="pal-title"><a routerLink="/{{currentLang.slug}}/catalogue/{{leftArticle.category.slug}}/{{leftArticle.slug}}" [innerHTML]="leftArticle.name"></a></div>
+                <div class="pal-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{leftArticle.category.slug}}/{{leftArticle.slug}}" [innerHTML]="leftArticle.name"></a></div>
                 <div class="pal-short" [innerHTML]="leftArticle.contentshort"></div>
             </article>        
         </ng-container>        
@@ -19,7 +19,7 @@
         <ng-container *ngIf="ready">
             <article *ngFor="let a of rightArticles">
                 <div class="par-date">{{a.formatedDate(currentLang)}}</div>
-                <div class="par-title"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                <div class="par-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
             </article>
         </ng-container>
         <ng-container *ngIf="!ready">

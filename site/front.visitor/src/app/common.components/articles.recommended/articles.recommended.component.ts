@@ -1,36 +1,36 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 
-import { ArticleTopRepository } from '../../services/repositories/article.top.repository';
 import { Article } from '../../model/article.model';
 import { AppService } from '../../services/app.service';
 import { Lang } from '../../model/lang.model';
 import { Subscription } from 'rxjs';
 import { LangRepository } from '../../services/repositories/lang.repository';
+import { ArticleRecommendedRepository } from '../../services/repositories/article.recommended.repository';
 
 @Component({
-    selector: "articles-top",
-    templateUrl: "./articles.top.component.html",
-    styleUrls: ["./articles.top.component.scss"]
+    selector: "articles-recommended",
+    templateUrl: "./articles.recommended.component.html",
+    styleUrls: ["./articles.recommended.component.scss"]
 })
-export class ArticlesTopComponent implements OnInit, OnDestroy {    
+export class ArticlesRecommendedComponent implements OnInit, OnDestroy {    
     public ready: boolean = false;     
     private langSubscription: Subscription;
 
     constructor(
-        private articleTopRepository: ArticleTopRepository,
+        private articleRecommendedRepository: ArticleRecommendedRepository,
         private langRepository: LangRepository,
         private appService: AppService,
     ) {}    
 
-    get articles(): Article[] {return this.articleTopRepository.xl;}    
+    get articles(): Article[] {return this.articleRecommendedRepository.xl;}    
     get currentLang(): Lang {return this.langRepository.current.value;}
 
     public ngOnInit(): void {
         this.langSubscription = this.langRepository.current.subscribe(async lang => {
             try {
                 this.ready = false;
-                this.articleTopRepository.filterLang = lang._id;
-                await this.articleTopRepository.load();   
+                this.articleRecommendedRepository.filterLang = lang._id;
+                await this.articleRecommendedRepository.load();   
                 this.ready = true;
             } catch (err) {
                 this.appService.showNotification(err, "error");

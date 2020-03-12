@@ -3,17 +3,17 @@
         <ng-container *ngIf="ready">
             <article 
                 *ngFor="let a of articles" 
-                routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}" 
+                routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" 
                 [style.background-image]="a.img ? 'url(/assets/images/articles/'+a.img+')' : 'url(/assets/images/templates/visitor/default/noimage.jpg)'"
             >                
                 <div class="taa-layer1"></div>
                 <div class="taa-layer2">
-                    <div class="taa-title"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                    <div class="taa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
                     <div class="taa-info">
                         <div class="taa-date">{{a.formatedDate(currentLang)}}</div>
                         <div class="taa-comments">{{a.__commentsq}}</div>
                     </div>
-                    <div class="taa-cat"><a routerLink="/{{currentLang.slug}}/catalogue/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
+                    <div class="taa-cat"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}" [innerHTML]="a.category.name[currentLang._id]"></a></div>
                 </div>
             </article>                       
         </ng-container>
