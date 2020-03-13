@@ -1,0 +1,19 @@
+<div class="aside-comments">
+    <ng-container *ngIf="ready">
+        <div class="aside-comment" *ngFor="let c of comments">
+            <div class="ac-left">
+                <div class="ac-imgwrap" [style.background-image]="c.user.img_s ? 'url(/assets/images/users/'+c.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}"></div>
+            </div>                    
+            <div class="ac-right">
+                <div class="ac-author"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}" [innerHTML]="c.user.name"></a></div>
+                <div class="ac-text"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{c.article.category.slug}}/{{c.article.slug}}" [innerHTML]="c.content"></a></div>
+                <div class="ac-date">{{c.formatedDate(currentLang)}}</div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        <div class="aside-comment loading"><div class="ac-left"><div class="ac-imgwrap"></div></div><div class="ac-right"><label></label><label></label><label></label></div></div>
+        <div class="aside-comment loading"><div class="ac-left"><div class="ac-imgwrap"></div></div><div class="ac-right"><label></label><label></label><label></label></div></div>
+        <div class="aside-comment loading"><div class="ac-left"><div class="ac-imgwrap"></div></div><div class="ac-right"><label></label><label></label><label></label></div></div>
+    </ng-container>                  
+</div>

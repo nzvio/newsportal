@@ -11,6 +11,8 @@ import { Page } from '../model/page.model';
 import { Category } from '../model/category.model';
 import { ArticlesGetchunkDTO } from '../model/articles.getchunk.dto';
 import { Article } from '../model/article.model';
+import { CommentsGetchunkDTO } from '../model/comments.getchunk.dto';
+import { Comment } from '../model/comment.model';
 
 @Injectable()
 export class DataService {
@@ -30,6 +32,7 @@ export class DataService {
     public articlesPopular(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/popular", dto, false);}
     public articlesRecommended(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/recommended", dto, false);}
     public articlesChunk(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, false);}
+    public commentsChunk(dto: CommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

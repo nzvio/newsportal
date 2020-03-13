@@ -4,6 +4,7 @@ import { LangsModule } from "./langs/langs.module";
 import { PagesModule } from "./pages/pages.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { ArticlesModule } from "./articles/articles.module";
+import { CommentsModule } from "./comments/comments.module";
 
 @Module({
     imports: [
@@ -11,6 +12,7 @@ import { ArticlesModule } from "./articles/articles.module";
         PagesModule,
         CategoriesModule,
         ArticlesModule,
+        CommentsModule,
     ],
     providers: [
 		

@@ -9,11 +9,13 @@ export const CommentSchema = new mongoose.Schema ({
     },
     article: {
         type: ObjectId,
-        ref: "Article"
+        ref: "Article",
+        required: true
     },
     user: {
         type: ObjectId,
-        ref: "User"
+        ref: "User",
+        required: true
     },
     content: {
         type: String,

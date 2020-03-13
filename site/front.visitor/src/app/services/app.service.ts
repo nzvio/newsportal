@@ -57,17 +57,19 @@ export class AppService {
     }
 
     public showNotification (content: string, status: string = "info"): void {
-        if (this.notificationTimer) {
-            clearTimeout (this.notificationTimer);
-        }
-
-        this.notification.content = content;
-        this.notification.status = status;
-        this.notification.active = true;
-        this.notificationTimer = window.setTimeout (() => {
-            this.notification.active = false;
-            this.notificationTimer = null;
-        }, 2000);
+        if (this.isBrowser) {
+            if (this.notificationTimer) {
+                clearTimeout (this.notificationTimer);
+            }
+    
+            this.notification.content = content;
+            this.notification.status = status;
+            this.notification.active = true;
+            this.notificationTimer = window.setTimeout (() => {
+                this.notification.active = false;
+                this.notificationTimer = null;
+            }, 2000);
+        }        
     }     
 
     public setMeta(name: string, content: string): void {

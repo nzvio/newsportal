@@ -28,13 +28,14 @@ export class ArticlesService extends APIService {
 
         try {            
             let data: ArticleDTO[] = await this.articleModel.aggregate([
+                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},                
                 {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, top: true}},
                 {$skip: from},
                 {$limit: q},
                 {$sort: {[sortBy]: sortDir}},                
-                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
-                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
-                {$unwind: "$category"},
+                
                 {$project: projection},                
             ]);            
             return {statusCode: 200, data};
