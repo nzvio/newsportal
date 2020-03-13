@@ -4,11 +4,11 @@ import { Model } from "mongoose";
 import * as mongoose from 'mongoose';
 
 import { APIService } from "../../services/_api.service";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
-import { ICategory } from "../../interfaces/model/category.interface";
+import { ICategory } from "../../model/orm/interfaces/category.interface";
 
 @Injectable()
 export class ArticlesService extends APIService {

@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { LangSchema } from "../../schemas/lang.schema";
+import { LangSchema } from "../../model/orm/schemas/lang.schema";
 import { jwtConstants } from "../auth/auth.constants";
 import { LangsController } from "./langs.controller";
 import { LangsService } from "./langs.service";

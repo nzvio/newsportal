@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { TagSchema } from "../../schemas/tag.schema";
+import { TagSchema } from "../../model/orm/schemas/tag.schema";
 import { TagsService } from "./tags.service";
 import { TagsController } from "./tags.controller";
 import { jwtConstants } from "../auth/auth.constants";

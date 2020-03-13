@@ -1,9 +1,9 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { CommentsService } from "./comments.service";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { CommentsGetchunkDTO } from "./dto/comments.getchunk.dto";
-import { IComment } from "../../interfaces/model/comment.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
 
 @Controller('api/visitor/comments')
 export class CommentsController {

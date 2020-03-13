@@ -1,10 +1,10 @@
 import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/common";
 
 import { TagsService } from "./tags.service";
-import { ITag } from "../../interfaces/model/tag.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { ITag } from "../../model/orm/interfaces/tag.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { TagCreateDTO } from "./dto/tag.create.dto";
 import { TagUpdateDTO } from "./dto/tag.update.dto";

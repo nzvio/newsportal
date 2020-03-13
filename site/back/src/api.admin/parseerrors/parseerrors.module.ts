@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { ParseerrorSchema } from "../../schemas/parseerror.schema";
+import { ParseerrorSchema } from "../../model/orm/schemas/parseerror.schema";
 import { ParseerrorsService } from "./parseerrors.service";
 import { ParseerrorsController } from "./parseerrors.controller";
 import { jwtConstants } from "../auth/auth.constants";

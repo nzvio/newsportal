@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { ISluggable } from "../interfaces/sluggable.interface";
+import { ISluggable } from "../model/sluggable.interface";
 
 export abstract class APIService {
     protected isEmpty(v: any): boolean {

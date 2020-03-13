@@ -1,4 +1,4 @@
-import { IUser } from "./model/user.interface";
+import { IUser } from "./orm/interfaces/user.interface";
 
 export interface IAuthData {
     readonly user: IUser;

@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { UsergroupSchema } from "../../schemas/usergroup.schema";
+import { UsergroupSchema } from "../../model/orm/schemas/usergroup.schema";
 import { UsergroupsService } from "./usergroups.service";
 import { UsergroupsController } from "./usergroups.controller";
 import { jwtConstants } from "../auth/auth.constants";

@@ -3,8 +3,8 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { APIService } from "../../services/_api.service";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { ArticleCreateDTO } from "./dto/article.create.dto";
 import { ArticleUpdateDTO } from "./dto/article.update.dto";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";

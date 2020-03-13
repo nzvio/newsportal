@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { CommentSchema } from "../../schemas/comment.schema";
+import { CommentSchema } from "../../model/orm/schemas/comment.schema";
 import { CommentsService } from "./comments.service";
 import { CommentsController } from "./comments.controller";
 import { jwtConstants } from "../auth/auth.constants";

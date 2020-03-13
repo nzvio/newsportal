@@ -1,6 +1,6 @@
 import { SubscribeMessage, WebSocketGateway, OnGatewayInit, WebSocketServer, OnGatewayConnection, OnGatewayDisconnect } from '@nestjs/websockets';
 import { Socket, Server } from 'socket.io';
-import { IAnswer } from '../interfaces/answer.interface';
+import { IAnswer } from '../model/answer.interface';
 import { TargetsExecutorService } from './targets/targetsexecutor.service';
 
 @WebSocketGateway(3019, {path: "/socket/admin"})

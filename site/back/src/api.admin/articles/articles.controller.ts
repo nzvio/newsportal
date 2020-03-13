@@ -1,8 +1,8 @@
 import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/common";
 
 import { ArticlesService } from "./articles.service";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { AuthGuard } from "../auth/auth.guard";
 import { ArticleCreateDTO } from "./dto/article.create.dto";
 import { ArticleUpdateDTO } from "./dto/article.update.dto";

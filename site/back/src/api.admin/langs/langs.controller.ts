@@ -2,10 +2,10 @@ import { Controller, UseGuards, Post, Body, Get, Param, Delete } from "@nestjs/c
 
 import { LangsService } from "./langs.service";
 import { AuthGuard } from "../auth/auth.guard";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { ILang } from "../../interfaces/model/lang.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { ILang } from "../../model/orm/interfaces/lang.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { LangCreateDTO } from "./dto/lang.create.dto";
 import { LangUpdateDTO } from "./dto/lang.update.dto";
 

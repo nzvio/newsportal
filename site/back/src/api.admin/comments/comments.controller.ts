@@ -1,8 +1,8 @@
 import { Controller, Param, Post, Body, Delete, UseGuards } from "@nestjs/common";
 
 import { CommentsService } from "./comments.service";
-import { IComment } from "../../interfaces/model/comment.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { AuthGuard } from "../auth/auth.guard";
 import { CommentsGetallbyarticleDTO } from "./dto/comments.getallbyarticle.dto";
 import { CommentUpdateDTO } from "./dto/comment.update.dto";

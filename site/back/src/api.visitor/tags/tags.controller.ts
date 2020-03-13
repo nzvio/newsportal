@@ -1,8 +1,8 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { TagsService } from "./tags.service";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { ITag } from "../../interfaces/model/tag.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { ITag } from "../../model/orm/interfaces/tag.interface";
 import { TagsGetallDTO } from "./dto/tags.getall.dto";
 
 @Controller('api/visitor/tags')

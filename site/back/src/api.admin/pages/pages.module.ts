@@ -2,7 +2,7 @@ import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { PageSchema } from "../../schemas/page.schema";
+import { PageSchema } from "../../model/orm/schemas/page.schema";
 import { jwtConstants } from "../auth/auth.constants";
 import { PagesController } from "./pages.controller";
 import { PagesService } from "./pages.service";

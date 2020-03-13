@@ -3,10 +3,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { APIService } from "../../services/_api.service";
-import { IPage } from "../../interfaces/model/page.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { IPage } from "../../model/orm/interfaces/page.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { PageCreateDTO } from "./dto/page.create.dto";
 import { PageUpdateDTO } from "./dto/page.update.dto";
 import { PageDTO } from "./dto/page.dto";

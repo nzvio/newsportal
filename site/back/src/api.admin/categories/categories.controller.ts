@@ -2,11 +2,11 @@ import { Controller, UseGuards, Post, Body, Get, Param, Delete } from "@nestjs/c
 
 import { CategoriesService } from "./categories.service";
 import { AuthGuard } from "../auth/auth.guard";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { ICategory } from "../../interfaces/model/category.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { ICategory } from "../../model/orm/interfaces/category.interface";
 import { CategoryDTO } from "./dto/category.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { CategoryCreateDTO } from "./dto/category.create.dto";
 import { CategoryUpdateDTO } from "./dto/category.update.dto";
 

@@ -1,4 +1,4 @@
-import { ICategory } from "src/interfaces/model/category.interface";
+import { ICategory } from "../../../model/orm/interfaces/category.interface";
 
 // use it to return extended data object instead of standard IArticle
 export class ArticleDTO {

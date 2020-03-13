@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
-import { LangSchema } from "../../schemas/lang.schema";
+import { LangSchema } from "../../model/orm/schemas/lang.schema";
 import { LangsController } from "./langs.controller";
 import { LangsService } from "./langs.service";
 

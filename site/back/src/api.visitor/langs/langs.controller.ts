@@ -1,9 +1,9 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { LangsService } from "./langs.service";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { ILang } from "../../interfaces/model/lang.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { ILang } from "../../model/orm/interfaces/lang.interface";
 
 @Controller('api/visitor/langs')
 export class LangsController {

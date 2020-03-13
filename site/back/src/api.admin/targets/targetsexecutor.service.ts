@@ -7,14 +7,14 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as sharp from 'sharp';
 
-import { ITarget } from "../../interfaces/model/target.interface";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { IDonor } from "../../interfaces/model/donor.interface";
+import { ITarget } from "../../model/orm/interfaces/target.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IDonor } from "../../model/orm/interfaces/donor.interface";
 import { SlugService } from "../../services/slug.service";
-import { IImagable } from "../../interfaces/imagable.interface";
+import { IImagable } from "../../model/imagable.interface";
 import { APIService } from "../../services/_api.service";
-import { IParseerror } from "../../interfaces/model/parseerror.interface";
-import { IUser } from "../../interfaces/model/user.interface";
+import { IParseerror } from "../../model/orm/interfaces/parseerror.interface";
+import { IUser } from "../../model/orm/interfaces/user.interface";
 
 @Injectable()
 export class TargetsExecutorService extends APIService {

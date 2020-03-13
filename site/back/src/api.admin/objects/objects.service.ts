@@ -5,17 +5,18 @@ import { Model } from "mongoose";
 import { APIService } from "../../services/_api.service";
 import { UpdateParamDTO } from "./dto/updateparam.dto";
 import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IUsergroup } from "../../interfaces/model/usergroup.interface";
-import { IUser } from "../../interfaces/model/user.interface";
-import { ILang } from "../../interfaces/model/lang.interface";
-import { IPage } from "../../interfaces/model/page.interface";
-import { ICategory } from "../../interfaces/model/category.interface";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { IDonor } from "../../interfaces/model/donor.interface";
-import { ITarget } from "../../interfaces/model/target.interface";
-import { IComment } from "../../interfaces/model/comment.interface";
-import { ITag } from "../../interfaces/model/tag.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
+import { IUser } from "../../model/orm/interfaces/user.interface";
+import { ILang } from "../../model/orm/interfaces/lang.interface";
+import { IPage } from "../../model/orm/interfaces/page.interface";
+import { ICategory } from "../../model/orm/interfaces/category.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IDonor } from "../../model/orm/interfaces/donor.interface";
+import { ITarget } from "../../model/orm/interfaces/target.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
+import { ITag } from "../../model/orm/interfaces/tag.interface";
+import { ISetting } from "src/model/orm/interfaces/setting.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
@@ -30,6 +31,7 @@ export class ObjectsService extends APIService {
         @InjectModel("Target") private readonly modelTarget: Model<ITarget>,
         @InjectModel("Comment") private readonly modelComment: Model<IComment>,
         @InjectModel("Tag") private readonly modelTag: Model<ITag>,
+        @InjectModel("Setting") private readonly modelSetting: Model<ISetting>,
     ) {
         super();
     }

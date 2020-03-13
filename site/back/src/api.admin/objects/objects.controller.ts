@@ -2,7 +2,7 @@ import { Controller, Post, Body, UseGuards } from "@nestjs/common";
 
 import { ObjectsService } from "./objects.service";
 import { UpdateParamDTO } from "./dto/updateparam.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { AuthGuard } from "../auth/auth.guard";
 import { UpdateEgoisticParamDTO } from "./dto/updateegoisticparam.dto";
 

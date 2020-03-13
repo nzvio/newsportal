@@ -2,11 +2,11 @@ import { Controller, UseGuards, Post, Body, Get, Param, Delete } from "@nestjs/c
 
 import { PagesService } from "./pages.service";
 import { AuthGuard } from "../auth/auth.guard";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IPage } from "../../interfaces/model/page.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { IPage } from "../../model/orm/interfaces/page.interface";
 import { PageDTO } from "./dto/page.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { PageCreateDTO } from "./dto/page.create.dto";
 import { PageUpdateDTO } from "./dto/page.update.dto";
 

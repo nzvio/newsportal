@@ -1,10 +1,10 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { ArticlesService } from "./articles.service";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
-import { IArticle } from "../../interfaces/model/article.interface";
+import { IArticle } from "../../model/orm/interfaces/article.interface";
 
 @Controller('api/visitor/articles')
 export class ArticlesController {

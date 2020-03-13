@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 
-import { ArticleSchema } from "../../schemas/article.schema";
+import { ArticleSchema } from "../../model/orm/schemas/article.schema";
 import { ArticlesController } from "./articles.controller";
 import { ArticlesService } from "./articles.service";
-import { CategorySchema } from "../../schemas/category.schema";
+import { CategorySchema } from "../../model/orm/schemas/category.schema";
 
 @Module({
     imports: [

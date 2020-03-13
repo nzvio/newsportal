@@ -3,10 +3,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { APIService } from "../../services/_api.service";
-import { ILang } from "../../interfaces/model/lang.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { ILang } from "../../model/orm/interfaces/lang.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { LangCreateDTO } from "./dto/lang.create.dto";
 import { LangUpdateDTO } from "./dto/lang.update.dto";
 

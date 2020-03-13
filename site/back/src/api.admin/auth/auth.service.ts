@@ -6,10 +6,10 @@ import { APIService } from "../../services/_api.service";
 import { UsersService } from "../users/users.service";
 import { UsergroupsService } from "../usergroups/usergroups.service";
 import { LoginDTO } from "./dto/login.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IUser } from "../../interfaces/model/user.interface";
-import { IAuthData } from "../../interfaces/authdata.interface";
-import { IUsergroup } from "../../interfaces/model/usergroup.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { IUser } from "../../model/orm/interfaces/user.interface";
+import { IAuthData } from "../../model/authdata.interface";
+import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
 
 @Injectable()
 export class AuthService extends APIService {

@@ -3,12 +3,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as mongoose from 'mongoose';
 
-import { IComment } from "../../interfaces/model/comment.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
 import { APIService } from "../../services/_api.service";
 import { CommentsGetchunkDTO } from "./dto/comments.getchunk.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IArticle } from "../../interfaces/model/article.interface";
-import { ICategory } from "src/interfaces/model/category.interface";
+import { IAnswer } from "../../model/answer.interface";
 
 @Injectable()
 export class CommentsService extends APIService {

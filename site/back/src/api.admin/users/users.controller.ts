@@ -2,12 +2,12 @@ import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/c
 
 import { UsersService } from "./users.service";
 import { AuthGuard } from "../auth/auth.guard";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IUser } from "../../interfaces/model/user.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
+import { IAnswer } from "../../model/answer.interface";
+import { IUser } from "../../model/orm/interfaces/user.interface";
 import { UserCreateDTO } from "./dto/user.create.dto";
 import { UserUpdateDTO } from "./dto/user.update.dto";
-import { GetallDTO } from "../../dto/getall.dto";
+import { GetallDTO } from "../../model/dto/getall.dto";
 
 @Controller('api/admin/users')
 export class UsersController {

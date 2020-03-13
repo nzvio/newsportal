@@ -1,8 +1,8 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { PagesService } from "./pages.service";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
 import { PageDTO } from "./dto/page.dto";
 
 @Controller('api/visitor/pages')

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as sharp from 'sharp';
 
-import { IAnswer } from "../../interfaces/answer.interface";
-import { IImagable } from 'src/interfaces/imagable.interface';
+import { IAnswer } from "../../model/answer.interface";
+import { IImagable } from '../../model/imagable.interface';
 
 @Injectable()
 export class FilesService 

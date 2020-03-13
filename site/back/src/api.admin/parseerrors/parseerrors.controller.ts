@@ -1,9 +1,9 @@
 import { Controller, Post, Body, UseGuards, Delete, Param } from "@nestjs/common";
 
 import { ParseerrorsService } from "./parseerrors.service";
-import { IParseerror } from "../../interfaces/model/parseerror.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { IParseerror } from "../../model/orm/interfaces/parseerror.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 
 @Controller('api/admin/parseerrors')

@@ -2,15 +2,15 @@ import { Module, HttpModule } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { JwtModule } from "@nestjs/jwt";
 
-import { TargetSchema } from "../../schemas/target.schema";
+import { TargetSchema } from "../../model/orm/schemas/target.schema";
 import { TargetsService } from "./targets.service";
 import { TargetsController } from "./targets.controller";
 import { jwtConstants } from "../auth/auth.constants";
 import { TargetsExecutorService } from "./targetsexecutor.service";
-import { ArticleSchema } from "../../schemas/article.schema";
+import { ArticleSchema } from "../../model/orm/schemas/article.schema";
 import { ServicesModule } from "../../services/services.module";
-import { ParseerrorSchema } from "../../schemas/parseerror.schema";
-import { UserSchema } from "../../schemas/user.schema";
+import { ParseerrorSchema } from "../../model/orm/schemas/parseerror.schema";
+import { UserSchema } from "../../model/orm/schemas/user.schema";
 
 @Module({
     imports: [

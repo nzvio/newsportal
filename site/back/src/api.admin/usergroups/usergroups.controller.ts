@@ -1,10 +1,10 @@
 import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/common";
 
 import { UsergroupsService } from "./usergroups.service";
-import { IUsergroup } from "../../interfaces/model/usergroup.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { UsergroupCreateDTO } from "./dto/usergroup.create.dto";
 import { UsergroupUpdateDTO } from "./dto/usergroup.update.dto";

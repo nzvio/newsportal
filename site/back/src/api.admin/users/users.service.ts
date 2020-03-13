@@ -4,12 +4,12 @@ import { Model } from "mongoose";
 import * as bcrypt from "bcrypt";
 
 import { APIService } from "../../services/_api.service";
-import { IUser } from "../../interfaces/model/user.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IUser } from "../../model/orm/interfaces/user.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
+import { IAnswer } from "../../model/answer.interface";
 import { UserCreateDTO } from "./dto/user.create.dto";
 import { UserUpdateDTO } from "./dto/user.update.dto";
-import { GetallDTO } from "../../dto/getall.dto";
+import { GetallDTO } from "../../model/dto/getall.dto";
 
 @Injectable()
 export class UsersService extends APIService {

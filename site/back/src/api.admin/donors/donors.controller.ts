@@ -1,10 +1,10 @@
 import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/common";
 
 import { DonorsService } from "./donors.service";
-import { IDonor } from "../../interfaces/model/donor.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { IDonor } from "../../model/orm/interfaces/donor.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { DonorCreateDTO } from "./dto/donor.create.dto";
 import { DonorUpdateDTO } from "./dto/donor.update.dto";

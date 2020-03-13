@@ -3,9 +3,9 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
 import { APIService } from "../../services/_api.service";
-import { IPage } from "../../interfaces/model/page.interface";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IPage } from "../../model/orm/interfaces/page.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
 import { PageDTO } from "./dto/page.dto";
 
 @Injectable()

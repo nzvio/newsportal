@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { IComment } from "../../interfaces/model/comment.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
+import { IAnswer } from "../../model/answer.interface";
 import { APIService } from "../../services/_api.service";
 import { CommentsGetallbyarticleDTO } from "./dto/comments.getallbyarticle.dto";
 import { CommentUpdateDTO } from "./dto/comment.update.dto";

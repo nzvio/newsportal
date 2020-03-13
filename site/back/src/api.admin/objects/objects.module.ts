@@ -5,16 +5,17 @@ import { JwtModule } from "@nestjs/jwt";
 import { ObjectsController } from "./objects.controller";
 import { ObjectsService } from "./objects.service";
 import { jwtConstants } from "../auth/auth.constants";
-import { UsergroupSchema } from "../../schemas/usergroup.schema";
-import { UserSchema } from "../../schemas/user.schema";
-import { LangSchema } from "../../schemas/lang.schema";
-import { PageSchema } from "../../schemas/page.schema";
-import { CategorySchema } from "../../schemas/category.schema";
-import { ArticleSchema } from "../../schemas/article.schema";
-import { DonorSchema } from "../../schemas/donor.schema";
-import { TargetSchema } from "../../schemas/target.schema";
-import { CommentSchema } from "../../schemas/comment.schema";
-import { TagSchema } from "../../schemas/tag.schema";
+import { UsergroupSchema } from "../../model/orm/schemas/usergroup.schema";
+import { UserSchema } from "../../model/orm/schemas/user.schema";
+import { LangSchema } from "../../model/orm/schemas/lang.schema";
+import { PageSchema } from "../../model/orm/schemas/page.schema";
+import { CategorySchema } from "../../model/orm/schemas/category.schema";
+import { ArticleSchema } from "../../model/orm/schemas/article.schema";
+import { DonorSchema } from "../../model/orm/schemas/donor.schema";
+import { TargetSchema } from "../../model/orm/schemas/target.schema";
+import { CommentSchema } from "../../model/orm/schemas/comment.schema";
+import { TagSchema } from "../../model/orm/schemas/tag.schema";
+import { SettingSchema } from "../../model/orm/schemas/setting.schema";
 
 @Module({
 	controllers: [ObjectsController],
@@ -31,6 +32,7 @@ import { TagSchema } from "../../schemas/tag.schema";
 			{name: 'Target', schema: TargetSchema},
 			{name: 'Comment', schema: CommentSchema},
 			{name: 'Tag', schema: TagSchema},
+			{name: 'Setting', schema: SettingSchema},
 		]),	
 		JwtModule.register(jwtConstants),			
 	],

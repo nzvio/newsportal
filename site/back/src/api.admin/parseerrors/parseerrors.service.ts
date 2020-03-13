@@ -2,9 +2,9 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { IParseerror } from "../../interfaces/model/parseerror.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { IParseerror } from "../../model/orm/interfaces/parseerror.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { APIService } from "../../services/_api.service";
 
 @Injectable()

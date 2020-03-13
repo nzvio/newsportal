@@ -1,9 +1,9 @@
 import { Controller, Param, Post, Body, Delete, UseGuards, Get } from "@nestjs/common";
 
 import { TargetsService } from "./targets.service";
-import { ITarget } from "../../interfaces/model/target.interface";
-import { IAnswer } from "../../interfaces/answer.interface";
-import { GetchunkDTO } from "../../dto/getchunk.dto";
+import { ITarget } from "../../model/orm/interfaces/target.interface";
+import { IAnswer } from "../../model/answer.interface";
+import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { TargetCreateDTO } from "./dto/target.create.dto";
 import { TargetUpdateDTO } from "./dto/target.update.dto";

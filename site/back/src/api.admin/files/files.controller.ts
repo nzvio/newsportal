@@ -2,11 +2,11 @@ import { Controller, Post, UseGuards, Param, UseInterceptors, UploadedFile } fro
 import { FileInterceptor } from "@nestjs/platform-express";
 import { FilesService } from './files.service';
 import { AuthGuard } from '../auth/auth.guard';
-import { IAnswer } from '../../interfaces/answer.interface';
+import { IAnswer } from "../../model/answer.interface";
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from "fs";
-import { IImagable } from '../../interfaces/imagable.interface';
+import { IImagable } from "../../model/imagable.interface";
 
 @Controller('api/admin/files')
 export class FilesController 

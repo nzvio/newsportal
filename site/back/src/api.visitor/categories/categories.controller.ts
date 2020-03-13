@@ -1,8 +1,8 @@
 import { Controller, Post, Body } from "@nestjs/common";
 
 import { CategoriesService } from "./categories.service";
-import { GetallDTO } from "../../dto/getall.dto";
-import { IAnswer } from "../../interfaces/answer.interface";
+import { GetallDTO } from "../../model/dto/getall.dto";
+import { IAnswer } from "../../model/answer.interface";
 import { CategoryDTO } from "./dto/category.dto";
 
 @Controller('api/visitor/categories')
