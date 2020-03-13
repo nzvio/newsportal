@@ -37,7 +37,7 @@ export class CommentsService extends APIService {
                 {$sort: {[sortBy]: sortDir}}, 
                 {$project: projection}                
             ]);
-            const alldata: any = await this.commentModel.aggregate([
+            const allData: any = await this.commentModel.aggregate([
                 {$lookup: {from: "articles", localField: "article", foreignField: "_id", as: "article"}},                
                 {$lookup: {from: "categories", localField: "article.category", foreignField: "_id", as: "article.category"}},                    
                 {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}}, 
@@ -45,7 +45,7 @@ export class CommentsService extends APIService {
                 {$match: {active: true, "article.active": true, "article.category.active": true, "article.lang": mongoose.Types.ObjectId(dto.filterLang)}},                
                 {$count: "fullLength"}
             ]);            
-            const fullLength: number = alldata.length ? alldata[0]["fullLength"] : 0;            
+            const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;            
             return {statusCode: 200, data, fullLength};        
         } catch (err) {
             let errTxt: string = `Error in CommentsService.chunk: ${String(err)}`;

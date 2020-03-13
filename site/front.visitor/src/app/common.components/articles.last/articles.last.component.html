@@ -19,7 +19,7 @@
                             <div class="la-socnet fb" (click)="shareFb(a);"><span></span></div>
                             <div class="la-socnet tw" (click)="shareTw(a);"><span></span></div>
                         </div>
-                        <div class="la-author">
+                        <div class="la-author" *ngIf="a.user">
                             <div class="la-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
                             <div class="la-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
                         </div>

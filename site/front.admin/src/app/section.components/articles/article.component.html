@@ -118,7 +118,7 @@
             <ng-container *ngIf="comments.length">
                 <tr *ngFor="let c of comments">
                     <td>{{c.formatedDate}}</td>
-                    <td>{{c.user.name}}</td>
+                    <td>{{c.user ? c.user.name : currentLang.phrases['workspace-empty']}}</td>
                     <td><textarea [(ngModel)]="c.content" (change)="onUpdateComment(c);"></textarea></td>
                     <td>{{c.likes}}</td>
                     <td>{{c.dislikes}}</td>

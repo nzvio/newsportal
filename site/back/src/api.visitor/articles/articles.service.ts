@@ -24,18 +24,17 @@ export class ArticlesService extends APIService {
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 6;
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, __commentsq: {$size: "$comments"}};
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, "category.slug": 1, "category.name": 1, __commentsq: {$size: "$comments"}};
 
         try {            
-            let data: ArticleDTO[] = await this.articleModel.aggregate([
+            const data: ArticleDTO[] = await this.articleModel.aggregate([
                 {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
                 {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
                 {$unwind: "$category"},                
-                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, top: true}},
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, top: true, "category.active": true}},
                 {$skip: from},
                 {$limit: q},
-                {$sort: {[sortBy]: sortDir}},                
-                
+                {$sort: {[sortBy]: sortDir}},
                 {$project: projection},                
             ]);            
             return {statusCode: 200, data};
@@ -52,7 +51,7 @@ export class ArticlesService extends APIService {
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 6;
         const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1};                 
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, "category.slug": 1, "category.name": 1};                 
 
         try {
             let categories: ICategory[] = await this.categoryModel.find({$or: [{parent: null}, {parent: {$exists: false}}], active: 1});
@@ -61,8 +60,7 @@ export class ArticlesService extends APIService {
                 let data: IArticle[] = [];
 
                 for (let category of categories) {
-                    const filter: Object = {lang: dto.filterLang, active: true, main: true, category: category._id};
-                    
+                    const filter: Object = {lang: dto.filterLang, active: true, main: true, category: category._id};                    
                     const categoryArticles: IArticle[] = await this.articleModel
                         .find(filter, projection, options)
                         .populate("category");
@@ -84,15 +82,19 @@ export class ArticlesService extends APIService {
         const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
-        const q: number = !this.isEmpty(dto.q) ? dto.q : 4;
-        const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, contentshort: 1}; 
-        const filter: Object = {lang: dto.filterLang, active: true, popular: true};
+        const q: number = !this.isEmpty(dto.q) ? dto.q : 4;        
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, "category.name": 1, "category.slug": 1, contentshort: 1};         
         
         try {            
-            const data: IArticle[] = await this.articleModel
-                .find(filter, projection, options)
-                .populate("category");
+            const data: IArticle[] = await this.articleModel.aggregate([
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},                
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, popular: true, "category.active": true}},
+                {$skip: from},
+                {$limit: q},
+                {$sort: {[sortBy]: sortDir}},
+                {$project: projection},
+            ]);
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.popular: ${String(err)}`;
@@ -105,15 +107,19 @@ export class ArticlesService extends APIService {
         const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
-        const q: number = !this.isEmpty(dto.q) ? dto.q : 3;
-        const options: Object = {skip: from, limit: q, sort: {[sortBy]: sortDir}};
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1}; 
-        const filter: Object = {lang: dto.filterLang, active: true, recommended: true};
+        const q: number = !this.isEmpty(dto.q) ? dto.q : 3;        
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, "category.name": 1, "category.slug": 1};         
         
         try {            
-            const data: IArticle[] = await this.articleModel
-                .find(filter, projection, options)
-                .populate("category");
+            const data: IArticle[] = await this.articleModel.aggregate([
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},                
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, recommended: true, "category.active": true}},
+                {$skip: from},
+                {$limit: q},
+                {$sort: {[sortBy]: sortDir}},
+                {$project: projection},
+            ]);
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.recommended: ${String(err)}`;
@@ -127,22 +133,27 @@ export class ArticlesService extends APIService {
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 10;        
-        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, category: 1, user: 1, viewsq: 1, source: 1, __commentsq: {$size: "$comments"}};               
+        const projection: Object = {name: 1, slug: 1, img: 1, date: 1, "category.name": 1, "category.slug": 1, "user._id": 1, "user.name": 1, "user.img_s": 1, viewsq: 1, source: 1, __commentsq: {$size: "$comments"}};               
 
         try {            
-            let data: ArticleDTO[] = await this.articleModel.aggregate([
-                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true}},
+            const data: ArticleDTO[] = await this.articleModel.aggregate([
+                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},
+                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
+                {$unwind: {path: "$user", preserveNullAndEmptyArrays: false}}, // if user not exist, article can be displayed anyway
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, "category.active": true}},
                 {$skip: from},
                 {$limit: q},
                 {$sort: {[sortBy]: sortDir}},                
-                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
-                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
-                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},
-                {$unwind: "$category"},
-                {$unwind: "$user"},
                 {$project: projection},                
             ]);     
-            let fullLength: number = await this.articleModel.countDocuments({lang: dto.filterLang, active: true});
+            const allData: any = await this.articleModel.aggregate([
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$match: {lang: mongoose.Types.ObjectId(dto.filterLang), active: true, "category.active": true}},
+                {$count: "fullLength"}
+            ]);            
+            const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;  
             return {statusCode: 200, data, fullLength};        
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.chunk: ${String(err)}`;
