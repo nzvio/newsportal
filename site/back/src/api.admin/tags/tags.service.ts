@@ -21,7 +21,7 @@ export class TagsService extends APIService {
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
 
         try {
-            let data: ITag[] = await this.model.find ({}, {name: 1}, {sort: {[sortBy]: sortDir}}); // load only names
+            let data: ITag[] = await this.model.find ({}, null, {sort: {[sortBy]: sortDir}}); 
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in TagsService.all: ${String(err)}`;

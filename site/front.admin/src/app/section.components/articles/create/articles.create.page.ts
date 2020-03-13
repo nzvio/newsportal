@@ -13,6 +13,8 @@ import { Lang } from '../../../model/lang.model';
 import { Category } from '../../../model/category.model';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { User } from '../../../model/user.model';
+import { TagRepository } from '../../../services/repositories/tag.repository';
+import { Tag } from '../../../model/tag.model';
 
 @Component({
 	selector: 'articles-create-page',
@@ -31,6 +33,7 @@ export class ArticlesCreatePage extends ObjectPage<Article> implements OnInit {
         private langRepository: LangRepository,
 		private categoryRepository: CategoryRepository,
 		private userRepository: UserRepository,
+		private tagRepository: TagRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,		
@@ -41,6 +44,7 @@ export class ArticlesCreatePage extends ObjectPage<Article> implements OnInit {
     get ll(): Lang[] {return this.langRepository.xlFull;}	
 	get cl(): Category[] {return this.categoryRepository.xlFull;}	
 	get ul(): User[] {return this.userRepository.xlFull;}
+	get tl(): Tag[] {return this.tagRepository.xlFull;}
 
 	public async ngOnInit(): Promise<void> {
 		try {
@@ -48,6 +52,7 @@ export class ArticlesCreatePage extends ObjectPage<Article> implements OnInit {
 			await this.categoryRepository.loadFull();	
 			await this.langRepository.loadFull();
 			await this.userRepository.loadFull();
+			await this.tagRepository.loadFull();
 	
 			if (this.ll.length) {
 				this.appService.monitorLog("[articles create] page loaded");

@@ -57,6 +57,13 @@
             </select>
         </div>
 
+        <div [class]="isRequired('tags') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-tags']}}:</div>
+        <div class="df-inputwrap">
+            <select [(ngModel)]="x.tags" multiple>                
+                <option *ngFor="let t of tags" [value]="t._id" [innerHTML]="t.name"></option>                
+            </select>
+        </div>
+
         <div [class]="isRequired('source') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-source']}}:</div>
         <div class="df-inputwrap"><input type="text" name="source" [(ngModel)]="x.source"></div>        
         

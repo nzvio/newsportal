@@ -132,6 +132,7 @@
             "workspace-articles-author": "Author",
             "workspace-articles-likes": "Likes",
             "workspace-articles-dislikes": "Dislikes",
+            "workspace-articles-tags": "Tags",
 
             "workspace-donors-h1": "Donors",
             "workspace-donors-name": "Name",
@@ -294,6 +295,7 @@
             "workspace-articles-author": "Автор",
             "workspace-articles-likes": "Лайки",
             "workspace-articles-dislikes": "Дизлайки",
+            "workspace-articles-tags": "Теги",
 
             "workspace-donors-h1": "Доноры",
             "workspace-donors-name": "Имя",

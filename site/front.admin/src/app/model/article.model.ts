@@ -23,6 +23,7 @@ export class Article extends Model {
     public lang: string;
     public user: string;
     public viewsq: number;
+    public tags: string[];
     public defended: boolean;    
 
     get formatedDate(): string {return `${this.twoDigits(this.date.getUTCDate())}.${this.twoDigits(this.date.getUTCMonth()+1)}.${this.date.getUTCFullYear()} ${this.twoDigits(this.date.getUTCHours())}:${this.twoDigits(this.date.getUTCMinutes())}`;}

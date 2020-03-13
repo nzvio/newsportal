@@ -7,6 +7,7 @@ import { SlugService } from '../../services/slug.service';
 import { Article } from '../../model/article.model';
 import { Comment } from '../../model/comment.model';
 import { User } from '../../model/user.model';
+import { Tag } from '../../model/tag.model';
 
 @Component({
     selector: "the-article",
@@ -17,6 +18,7 @@ export class ArticleComponent extends ObjectComponent implements OnInit {
     @Input() ll: Lang[]; 
     @Input() cl: Category[];    
     @Input() ul: User[];
+    @Input() tl: Tag[];
     @Input() canBuildSlug: boolean = false;
     @Input() canEditComments: boolean = false;
     @Input() comments: Comment[] = [];
@@ -29,8 +31,11 @@ export class ArticleComponent extends ObjectComponent implements OnInit {
         super();
     }
 
+    get tags(): Tag[] {return (this.x.lang) ? this.tl.filter(t => t.lang === this.x.lang) : this.tl;}
+
     public ngOnInit(): void {
-        this.selectedLang = this.ll[0];        
+        this.selectedLang = this.ll[0];    
+        console.log(this.x);    
     }
     
     public buildSlug(name: string): void {

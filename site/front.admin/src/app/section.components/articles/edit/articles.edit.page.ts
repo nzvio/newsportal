@@ -15,6 +15,8 @@ import { CommentRepository } from '../../../services/repositories/comment.reposi
 import { Comment } from '../../../model/comment.model';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { User } from '../../../model/user.model';
+import { TagRepository } from 'src/app/services/repositories/tag.repository';
+import { Tag } from 'src/app/model/tag.model';
 
 @Component({
 	selector: 'articles-edit-page',
@@ -34,6 +36,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 		private categoryRepository: CategoryRepository,
 		private commentRepository: CommentRepository,
 		private userRepository: UserRepository,
+		private tagRepository: TagRepository,
 		protected appService: AppService,
 		protected uploadService: UploadService,
 		protected router: Router,
@@ -45,6 +48,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 	get ll(): Lang[] {return this.langRepository.xlFull;}	
 	get cl(): Category[] {return this.categoryRepository.xlFull;}
 	get ul(): User[] {return this.userRepository.xlFull;}	
+	get tl(): Tag[] {return this.tagRepository.xlFull;}
 	get comments(): Comment[] {return this.commentRepository.xlFull;}
 
 	public ngOnInit(): void {
@@ -56,6 +60,7 @@ export class ArticlesEditPage extends ObjectPage<Article> implements OnInit {
 				await this.langRepository.loadFull();
 				await this.commentRepository.loadFullByArticle(this.x._id);
 				await this.userRepository.loadFull();
+				await this.tagRepository.loadFull();
 
 				if (this.ll.length) {
 					this.appService.monitorLog("[articles edit] page loaded");

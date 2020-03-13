@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 import { ICategory } from "./category.interface";
 import { IUser } from "./user.interface";
+import { ITag } from "./tag.interface";
 
 export interface IArticle extends Document {
     readonly _id: string;
@@ -25,5 +26,6 @@ export interface IArticle extends Document {
     lang: string;
     user: string | IUser;
     viewsq: number;
+    tags: string[] | ITag[];
     defended: boolean;
 }

@@ -75,6 +75,12 @@ export const ArticleSchema = new mongoose.Schema ({
         required: true,
         default: 0
     },
+    tags: {
+        type: [{
+            type: ObjectId,
+            ref: "Tag"
+        }],        
+    },
     defended: {
         type: Boolean,
         required: true,

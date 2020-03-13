@@ -58,7 +58,7 @@ export const LangSchema = new mongoose.Schema ({
                 type: String, 
                 trim: true
             },
-            pos : {
+            pos: {
                 type: Number,
                 required: true,
                 default: 0
@@ -66,5 +66,4 @@ export const LangSchema = new mongoose.Schema ({
         }],
         required: true
     }
-}, 
-{minimize: false}); // use minimize=false to prevent "undefined" values instead of empty "phrases" parameter
+}, {minimize: false}); // use minimize=false to prevent "undefined" values instead of empty "phrases" parameter
