@@ -4,6 +4,7 @@ import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
 import { SimpleRepository } from './_simple.repository';
 import { BehaviorSubject } from 'rxjs';
+import { IGetallDTO } from 'src/app/model/dto/getall.dto';
 
 @Injectable()
 export class LangRepository extends SimpleRepository<Lang> {        
@@ -19,7 +20,8 @@ export class LangRepository extends SimpleRepository<Lang> {
             if (new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.langsAll(this.sortBy, this.sortDir).subscribe(res => {
+                const dto: IGetallDTO = {sortBy: this.sortBy, sortDir: this.sortDir};
+                this.dataService.langsAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xl = res.data.length ? res.data.map(d => new Lang().build(d)) : [];                        
                         this.loadedAt = new Date().getTime();

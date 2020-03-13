@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Repository } from './_repository';
 import { Parseerror } from '../../model/parseerror.model';
 import { DataService } from '../data.service';
+import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 
 @Injectable()
 export class ParseerrorRepository extends Repository<Parseerror> {
@@ -19,7 +20,13 @@ export class ParseerrorRepository extends Repository<Parseerror> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.parseerrorsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.parseerrorsChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {                        
                         this.xlChunk = res.data.length ? res.data.map(d => new Parseerror().build(d)) : [];
                         this.fullLength = res.fullLength;

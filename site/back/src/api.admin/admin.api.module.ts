@@ -14,6 +14,7 @@ import { TargetsModule } from "./targets/targets.module";
 import { AdminAPIGateway } from "./admin.api.gateway";
 import { ParseerrorsModule } from "./parseerrors/parseerrors.module";
 import { CommentsModule } from "./comments/comments.module";
+import { TagsModule } from "./tags/tags.module";
 
 @Module({
     imports: [
@@ -30,6 +31,7 @@ import { CommentsModule } from "./comments/comments.module";
 		TargetsModule,
 		ParseerrorsModule,
 		CommentsModule,
+		TagsModule,
     ],
     providers: [
 		AdminAPIGateway,

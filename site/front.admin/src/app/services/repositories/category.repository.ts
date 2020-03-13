@@ -4,6 +4,8 @@ import { Repository } from './_repository';
 import { Category } from '../../model/category.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';
+import { IGetallDTO } from '../../model/dto/getall.dto';
+import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 
 @Injectable()
 export class CategoryRepository extends Repository<Category> {
@@ -23,7 +25,11 @@ export class CategoryRepository extends Repository<Category> {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.categoriesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                const dto: IGetallDTO = {
+                    sortBy: this.fullSortBy,
+                    sortDir: this.fullSortDir,                    
+                };
+                this.dataService.categoriesAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
                         this.xlFull = this.appService.tree2list(xl) as Category[];                        
@@ -44,7 +50,13 @@ export class CategoryRepository extends Repository<Category> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.categoriesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.categoriesChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Category[] = res.data.length ? res.data.map(d => new Category().build(d)) : [];                        
                         this.xlChunk = this.appService.tree2list(xl) as Category[];

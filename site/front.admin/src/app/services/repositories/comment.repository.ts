@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Repository } from './_repository';
 import { Comment } from '../../model/comment.model';
 import { DataService } from '../data.service';
+import { ICommentsGetallDTO } from 'src/app/model/dto/comments.getall.dto';
 
 @Injectable()
 export class CommentRepository extends Repository<Comment> {
@@ -22,8 +23,13 @@ export class CommentRepository extends Repository<Comment> {
                 resolve();
             } else {
                 this.articleId = articleId;
+                const dto: ICommentsGetallDTO = {
+                    filterArticle: this.articleId,
+                    sortBy: this.fullSortBy,
+                    sortDir: this.fullSortDir,
+                };
                 this.dataService
-                    .commentsAllByArticle(this.articleId, this.fullSortBy, this.fullSortDir)
+                    .commentsAllByArticle(dto)
                     .subscribe(res => {
                         if (res.statusCode === 200) {
                             this.xlFull = res.data.length ? res.data.map(d => new Comment().build(d)) : [];                            

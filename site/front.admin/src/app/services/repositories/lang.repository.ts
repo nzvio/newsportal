@@ -4,6 +4,8 @@ import { Repository } from './_repository';
 import { Lang } from '../../model/lang.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';
+import { IGetallDTO } from '../../model/dto/getall.dto';
+import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 
 @Injectable()
 export class LangRepository extends Repository<Lang> {
@@ -23,7 +25,11 @@ export class LangRepository extends Repository<Lang> {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.langsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                const dto: IGetallDTO = {
+                    sortBy: this.fullSortBy,
+                    sortDir: this.fullSortDir,                    
+                };
+                this.dataService.langsAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlFull = res.data.length ? res.data.map(d => new Lang().build(d)) : [];                        
                         this.fullLoadedAt = new Date().getTime();
@@ -43,7 +49,13 @@ export class LangRepository extends Repository<Lang> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.langsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.langsChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlChunk = res.data.length ? res.data.map(d => new Lang().build(d)) : [];
                         this.fullLength = res.fullLength;

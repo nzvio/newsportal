@@ -19,7 +19,7 @@ export class CommentsService extends APIService {
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
 
         try {
-            let data: IComment[] = await this.model.find ({article: dto.articleId}, null, {sort: {[sortBy]: sortDir}}).populate("user");
+            let data: IComment[] = await this.model.find ({article: dto.filterArticle}, null, {sort: {[sortBy]: sortDir}}).populate("user");
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in CommentsService.allByArticle: ${String(err)}`;

@@ -31,6 +31,7 @@
                 <div [class]="sub1Active ? 'nav-sub active' : 'nav-sub'">
                     <div [class]="currentUrl.parts[1] === 'categories' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/categories"><span>{{currentLang.phrases['sidebar-submodule-categories']}}</span></a></div>
                     <div [class]="currentUrl.parts[1] === 'articles' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/articles"><span>{{currentLang.phrases['sidebar-submodule-articles']}}</span></a></div>
+                    <div [class]="currentUrl.parts[1] === 'tags' ? 'nav-item active' : 'nav-item'"><a routerLink="/catalogue/tags"><span>{{currentLang.phrases['sidebar-submodule-tags']}}</span></a></div>
                 </div>
 
                 <div [class]="currentUrl.parts[0] === 'parsing' ? 'nav-item active' : 'nav-item'"><a (click)="toggleSub(3);"><span class="nav-parsing">{{currentLang.phrases['sidebar-module-parsing']}}</span></a></div>

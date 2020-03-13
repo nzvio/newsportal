@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Repository } from './_repository';
 import { Target } from '../../model/target.model';
 import { DataService } from '../data.service';
+import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 
 @Injectable()
 export class TargetRepository extends Repository<Target> {
@@ -17,7 +18,13 @@ export class TargetRepository extends Repository<Target> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.targetsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.targetsChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlChunk = res.data.length ? res.data.map(d => new Target().build(d)) : [];                        
                         this.chunkLoadedAt = new Date().getTime();                    

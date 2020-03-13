@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
 import { Category } from '../../model/category.model';
 import { ObjectComponent } from '../_object.component';
@@ -9,8 +9,8 @@ import { SocketService } from '../../services/socket.service';
 import { IAnswer } from '../../model/answer.interface';
 import { AppService } from 'src/app/services/app.service';
 import { BehaviorSubject } from 'rxjs';
-import { ParseerrorRepository } from 'src/app/services/repositories/parseerror.repository';
-import { ArticleRepository } from 'src/app/services/repositories/article.repository';
+import { ParseerrorRepository } from '../../services/repositories/parseerror.repository';
+import { ArticleRepository } from '../../services/repositories/article.repository';
 
 @Component({
     selector: "the-target",

@@ -14,11 +14,15 @@ import { Lang } from '../model/lang.model';
 import { Page } from '../model/page.model';
 import { Category } from '../model/category.model';
 import { Article } from '../model/article.model';
-import { ArticlesGetchunkDTO } from '../model/articles.getchunk.dto';
+import { IArticlesGetchunkDTO } from '../model/dto/articles.getchunk.dto';
 import { Donor } from '../model/donor.model';
 import { Target } from '../model/target.model';
 import { Parseerror } from "../model/parseerror.model";
 import { Comment } from "../model/comment.model";
+import { IGetallDTO } from '../model/dto/getall.dto';
+import { IGetchunkDTO } from '../model/dto/getchunk.dto';
+import { ICommentsGetallDTO } from '../model/dto/comments.getall.dto';
+import { Tag } from '../model/tag.model';
 
 @Injectable()
 export class DataService {
@@ -38,75 +42,83 @@ export class DataService {
     public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
     public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}
 
-    public usergroupsAll(sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/all", {sortBy, sortDir}, true);}
-    public usergroupsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/chunk", {from, q, sortBy, sortDir}, true);}
+    public usergroupsAll(dto: IGetallDTO): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/all", dto, true);}
+    public usergroupsChunk(dto: IGetchunkDTO): Observable<IAnswer<Usergroup[]>> {return this.sendRequest("POST", "usergroups/chunk", dto, true);}
     public usergroupsOne(_id: string): Observable<IAnswer<Usergroup>> {return this.sendRequest("GET", `usergroups/one/${_id}`, null, true);}
     public usergroupsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `usergroups/delete/${_id}`, null, true);}
     public usergroupsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "usergroups/deletebulk", _ids, true);}
     public usergroupsCreate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/create", x, true);}
     public usergroupsUpdate(x: Usergroup): Observable<IAnswer<void>> {return this.sendRequest("POST", "usergroups/update", x, true);}
     
-    public usersAll(sortBy: string, sortDir: number): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/all", {sortBy, sortDir}, true);}
-    public usersChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/chunk", {from, q, sortBy, sortDir}, true);}
+    public usersAll(dto: IGetallDTO): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/all", dto, true);}
+    public usersChunk(dto: IGetchunkDTO): Observable<IAnswer<User[]>> {return this.sendRequest("POST", "users/chunk", dto, true);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, true);}
     public usersDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `users/delete/${_id}`, null, true);}
     public usersDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "users/deletebulk", _ids, true);}
     public usersCreate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/create", x, true);}
     public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/update", x, true);}    
 
-    public langsAll(sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", {sortBy, sortDir}, true);}
-    public langsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/chunk", {from, q, sortBy, sortDir}, true);}
+    public langsAll(dto: IGetallDTO): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", dto, true);}
+    public langsChunk(dto: IGetchunkDTO): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/chunk", dto, true);}
     public langsOne(_id: string): Observable<IAnswer<Lang>> {return this.sendRequest("GET", `langs/one/${_id}`, null, true);}
     public langsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `langs/delete/${_id}`, null, true);}
     public langsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "langs/deletebulk", _ids, true);}
     public langsCreate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/create", x, true);}
     public langsUpdate(x: Lang): Observable<IAnswer<void>> {return this.sendRequest("POST", "langs/update", x, true);}    
 
-    public pagesAll(sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", {sortBy, sortDir}, true);}
-    public pagesChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/chunk", {from, q, sortBy, sortDir}, true);}
+    public pagesAll(dto: IGetallDTO): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", dto, true);}
+    public pagesChunk(dto: IGetchunkDTO): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/chunk", dto, true);}
     public pagesOne(_id: string): Observable<IAnswer<Page>> {return this.sendRequest("GET", `pages/one/${_id}`, null, true);}
     public pagesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `pages/delete/${_id}`, null, true);}
     public pagesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "pages/deletebulk", _ids, true);}
     public pagesCreate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/create", x, true);}
     public pagesUpdate(x: Page): Observable<IAnswer<void>> {return this.sendRequest("POST", "pages/update", x, true);}  
 
-    public categoriesAll(sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", {sortBy, sortDir}, true);}
-    public categoriesChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/chunk", {from, q, sortBy, sortDir}, true);}
+    public categoriesAll(dto: IGetallDTO): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", dto, true);}
+    public categoriesChunk(dto: IGetchunkDTO): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/chunk", dto, true);}
     public categoriesOne(_id: string): Observable<IAnswer<Category>> {return this.sendRequest("GET", `categories/one/${_id}`, null, true);}
     public categoriesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `categories/delete/${_id}`, null, true);}
     public categoriesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "categories/deletebulk", _ids, true);}
     public categoriesCreate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/create", x, true);}
     public categoriesUpdate(x: Category): Observable<IAnswer<void>> {return this.sendRequest("POST", "categories/update", x, true);}    
 
-    public articlesChunk(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, true);}
+    public articlesChunk(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, true);}
     public articlesOne(_id: string): Observable<IAnswer<Article>> {return this.sendRequest("GET", `articles/one/${_id}`, null, true);}
     public articlesDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `articles/delete/${_id}`, null, true);}
     public articlesDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "articles/deletebulk", _ids, true);}
     public articlesCreate(x: Article): Observable<IAnswer<void>> {return this.sendRequest("POST", "articles/create", x, true);}
     public articlesUpdate(x: Article): Observable<IAnswer<void>> {return this.sendRequest("POST", "articles/update", x, true);}    
 
-    public donorsAll(sortBy: string, sortDir: number): Observable<IAnswer<Donor[]>> {return this.sendRequest("POST", "donors/all", {sortBy, sortDir}, true);}
-    public donorsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Donor[]>> {return this.sendRequest("POST", "donors/chunk", {from, q, sortBy, sortDir}, true);}
+    public donorsAll(dto: IGetallDTO): Observable<IAnswer<Donor[]>> {return this.sendRequest("POST", "donors/all", dto, true);}
+    public donorsChunk(dto: IGetchunkDTO): Observable<IAnswer<Donor[]>> {return this.sendRequest("POST", "donors/chunk", dto, true);}
     public donorsOne(_id: string): Observable<IAnswer<Donor>> {return this.sendRequest("GET", `donors/one/${_id}`, null, true);}
     public donorsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `donors/delete/${_id}`, null, true);}
     public donorsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "donors/deletebulk", _ids, true);}
     public donorsCreate(x: Donor): Observable<IAnswer<void>> {return this.sendRequest("POST", "donors/create", x, true);}
     public donorsUpdate(x: Donor): Observable<IAnswer<void>> {return this.sendRequest("POST", "donors/update", x, true);}
 
-    public targetsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Target[]>> {return this.sendRequest("POST", "targets/chunk", {from, q, sortBy, sortDir}, true);}
+    public targetsChunk(dto: IGetchunkDTO): Observable<IAnswer<Target[]>> {return this.sendRequest("POST", "targets/chunk", dto, true);}
     public targetsOne(_id: string): Observable<IAnswer<Target>> {return this.sendRequest("GET", `targets/one/${_id}`, null, true);}
     public targetsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `targets/delete/${_id}`, null, true);}
     public targetsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "targets/deletebulk", _ids, true);}
     public targetsCreate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/create", x, true);}
     public targetsUpdate(x: Target): Observable<IAnswer<void>> {return this.sendRequest("POST", "targets/update", x, true);}
     
-    public parseerrorsChunk(from: number, q: number, sortBy: string, sortDir: number): Observable<IAnswer<Parseerror[]>> {return this.sendRequest("POST", "parseerrors/chunk", {from, q, sortBy, sortDir}, true);}
+    public parseerrorsChunk(dto: IGetchunkDTO): Observable<IAnswer<Parseerror[]>> {return this.sendRequest("POST", "parseerrors/chunk", dto, true);}
     public parseerrorsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `parseerrors/delete/${_id}`, null, true);}
     public parseerrorsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "parseerrors/deletebulk", _ids, true);}    
 
-    public commentsAllByArticle(articleId: string, sortBy: string, sortDir: number): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/allbyarticle", {sortBy, sortDir, articleId}, true);}
+    public commentsAllByArticle(dto: ICommentsGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/allbyarticle", dto, true);}
     public commentsUpdate(x: Comment): Observable<IAnswer<void>> {return this.sendRequest("POST", "comments/update", x, true);}
     public commentsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `comments/delete/${_id}`, null, true);}
+
+    public tagsAll(dto: IGetallDTO): Observable<IAnswer<Tag[]>> {return this.sendRequest("POST", "tags/all", dto, true);}
+    public tagsChunk(dto: IGetchunkDTO): Observable<IAnswer<Tag[]>> {return this.sendRequest("POST", "tags/chunk", dto, true);}
+    public tagsOne(_id: string): Observable<IAnswer<Tag>> {return this.sendRequest("GET", `tags/one/${_id}`, null, true);}
+    public tagsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `tags/delete/${_id}`, null, true);}
+    public tagsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "tags/deletebulk", _ids, true);}
+    public tagsCreate(x: Tag): Observable<IAnswer<void>> {return this.sendRequest("POST", "tags/create", x, true);}
+    public tagsUpdate(x: Tag): Observable<IAnswer<void>> {return this.sendRequest("POST", "tags/update", x, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

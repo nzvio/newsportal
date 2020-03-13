@@ -9,10 +9,11 @@ import { IAuthData } from '../model/authdata.interface';
 import { ErrorService } from './error.service';
 import { Page } from '../model/page.model';
 import { Category } from '../model/category.model';
-import { ArticlesGetchunkDTO } from '../model/articles.getchunk.dto';
+import { IArticlesGetchunkDTO } from '../model/dto/articles.getchunk.dto';
 import { Article } from '../model/article.model';
-import { CommentsGetchunkDTO } from '../model/comments.getchunk.dto';
+import { ICommentsGetchunkDTO } from '../model/dto/comments.getchunk.dto';
 import { Comment } from '../model/comment.model';
+import { IGetallDTO } from '../model/dto/getall.dto';
 
 @Injectable()
 export class DataService {
@@ -24,15 +25,16 @@ export class DataService {
         private errorService: ErrorService,
     ) {}
     
-    public langsAll(sortBy: string, sortDir: number): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", {sortBy, sortDir}, false);}
-    public pagesAll(sortBy: string, sortDir: number): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", {sortBy, sortDir}, false);}
-    public categoriesAll(sortBy: string, sortDir: number): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", {sortBy, sortDir}, false);}
-    public articlesTop(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/top", dto, false);}
-    public articlesMain(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/main", dto, false);}
-    public articlesPopular(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/popular", dto, false);}
-    public articlesRecommended(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/recommended", dto, false);}
-    public articlesChunk(dto: ArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, false);}
-    public commentsChunk(dto: CommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
+    public langsAll(dto: IGetallDTO): Observable<IAnswer<Lang[]>> {return this.sendRequest("POST", "langs/all", dto, false);}
+    public pagesAll(dto: IGetallDTO): Observable<IAnswer<Page[]>> {return this.sendRequest("POST", "pages/all", dto, false);}
+    public categoriesAll(dto: IGetallDTO): Observable<IAnswer<Category[]>> {return this.sendRequest("POST", "categories/all", dto, false);}
+    public articlesTop(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/top", dto, false);}
+    public articlesMain(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/main", dto, false);}
+    public articlesPopular(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/popular", dto, false);}
+    public articlesRecommended(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/recommended", dto, false);}
+    public articlesChunk(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, false);}
+    public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
+    public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

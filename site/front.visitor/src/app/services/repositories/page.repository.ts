@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Page } from '../../model/page.model';
 import { DataService } from '../data.service';
 import { SimpleRepository } from './_simple.repository';
+import { IGetallDTO } from 'src/app/model/dto/getall.dto';
 
 @Injectable()
 export class PageRepository extends SimpleRepository<Page> {
@@ -16,7 +17,8 @@ export class PageRepository extends SimpleRepository<Page> {
             if (new Date().getTime() - this.loadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.pagesAll(this.sortBy, this.sortDir).subscribe(res => {
+                const dto: IGetallDTO = {sortBy: this.sortBy, sortDir: this.sortDir};
+                this.dataService.pagesAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xl = res.data.length ? res.data.map(d => new Page().build(d)) : [];                           
                         this.loadedAt = new Date().getTime();

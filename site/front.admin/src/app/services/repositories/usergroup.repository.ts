@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Repository } from './_repository';
 import { Usergroup } from '../../model/usergroup.model';
 import { DataService } from '../data.service';
+import { IGetallDTO } from "../../model/dto/getall.dto";
+import { IGetchunkDTO } from 'src/app/model/dto/getchunk.dto';
 
 @Injectable()
 export class UsergroupRepository extends Repository<Usergroup> {
@@ -18,7 +20,11 @@ export class UsergroupRepository extends Repository<Usergroup> {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.usergroupsAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                const dto: IGetallDTO = {
+                    sortBy: this.fullSortBy,
+                    sortDir: this.fullSortDir,                    
+                };
+                this.dataService.usergroupsAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlFull = res.data.length ? res.data.map(d => new Usergroup().build(d)) : [];                        
                         this.fullLoadedAt = new Date().getTime();
@@ -38,7 +44,13 @@ export class UsergroupRepository extends Repository<Usergroup> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.usergroupsChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.usergroupsChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlChunk = res.data.length ? res.data.map(d => new Usergroup().build(d)) : [];
                         this.fullLength = res.fullLength;

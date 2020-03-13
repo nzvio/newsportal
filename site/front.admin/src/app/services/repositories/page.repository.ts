@@ -4,6 +4,8 @@ import { Repository } from './_repository';
 import { Page } from '../../model/page.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';
+import { IGetallDTO } from '../../model/dto/getall.dto';
+import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 
 @Injectable()
 export class PageRepository extends Repository<Page> {
@@ -23,7 +25,11 @@ export class PageRepository extends Repository<Page> {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {
-                this.dataService.pagesAll(this.fullSortBy, this.fullSortDir).subscribe(res => {
+                const dto: IGetallDTO = {
+                    sortBy: this.fullSortBy,
+                    sortDir: this.fullSortDir,                    
+                };
+                this.dataService.pagesAll(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : []
                         this.xlFull = this.appService.tree2list(xl) as Page[];                        
@@ -44,7 +50,13 @@ export class PageRepository extends Repository<Page> {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
                 resolve();
             } else {                
-                this.dataService.pagesChunk(this.chunkCurrentPart * this.chunkLength, this.chunkLength, this.chunkSortBy, this.chunkSortDir).subscribe(res => {
+                const dto: IGetchunkDTO = {
+                    from: this.chunkCurrentPart * this.chunkLength,
+                    q: this.chunkLength,
+                    sortBy: this.chunkSortBy,
+                    sortDir: this.chunkSortDir,                    
+                };
+                this.dataService.pagesChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         let xl: Page[] = res.data.length ? res.data.map(d => new Page().build(d)) : [];
                         this.xlChunk = this.appService.tree2list(xl) as Page[];

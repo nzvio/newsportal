@@ -1,0 +1,27 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.phrases['workspace-tags-h1']}} - {{currentLang.phrases['workspace-edit']}}</h1>
+        <div class="content-dash">
+            <div class="cd-btn back" [title]="currentLang.phrases['workspace-back']" [routerLink]="homeUrl"><span></span></div>
+            <div class="cd-btn save" [title]="currentLang.phrases['workspace-save']" (click)="update();"><span></span></div>
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <form (submit)="update();">                                
+                <the-tag 
+                    [currentLang]="currentLang" 
+                    [x]="x"
+                    [ll]="ll"
+                    [requiredFields]="requiredFields"                       
+                ></the-tag>
+            </form>
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="2"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>

@@ -14,6 +14,7 @@ import { ArticlesModule } from './section.components/articles/articles.module';
 import { DonorsModule } from './section.components/donors/donors.module';
 import { TargetsModule } from './section.components/targets/targets.module';
 import { ParseerrorsModule } from './section.components/parseerrors/parseerrors.module';
+import { TagsModule } from './section.components/tags/tags.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
@@ -25,6 +26,7 @@ const routes: Routes = [
 	{path: "pages", loadChildren: () => PagesModule}, 
 	{path: "catalogue/categories", loadChildren: () => CategoriesModule}, 
 	{path: "catalogue/articles", loadChildren: () => ArticlesModule}, 
+	{path: "catalogue/tags", loadChildren: () => TagsModule}, 
 	{path: "parsing/donors", loadChildren: () => DonorsModule}, 
 	{path: "parsing/targets", loadChildren: () => TargetsModule}, 
 	{path: "parsing/parseerrors", loadChildren: () => ParseerrorsModule}, 

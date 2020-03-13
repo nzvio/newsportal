@@ -1,8 +1,10 @@
-export interface CommentsGetchunkDTO {
+export interface IArticlesGetchunkDTO {
     readonly from?: number;
     readonly q?: number;
     readonly sortBy?: string;
     readonly sortDir?: number;    
-    readonly filterArticle?: string;
+    readonly filterDate?: Date;
+    readonly filterName?: string;
+    readonly filterCategory?: string;
     readonly filterLang?: string;
 }

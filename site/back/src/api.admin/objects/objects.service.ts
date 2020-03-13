@@ -15,6 +15,7 @@ import { IArticle } from "../../interfaces/model/article.interface";
 import { IDonor } from "../../interfaces/model/donor.interface";
 import { ITarget } from "../../interfaces/model/target.interface";
 import { IComment } from "../../interfaces/model/comment.interface";
+import { ITag } from "../../interfaces/model/tag.interface";
 
 @Injectable()
 export class ObjectsService extends APIService {
@@ -28,6 +29,7 @@ export class ObjectsService extends APIService {
         @InjectModel("Donor") private readonly modelDonor: Model<IDonor>,
         @InjectModel("Target") private readonly modelTarget: Model<ITarget>,
         @InjectModel("Comment") private readonly modelComment: Model<IComment>,
+        @InjectModel("Tag") private readonly modelTag: Model<ITag>,
     ) {
         super();
     }

@@ -5,6 +5,7 @@ import { PagesModule } from "./pages/pages.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { ArticlesModule } from "./articles/articles.module";
 import { CommentsModule } from "./comments/comments.module";
+import { TagsModule } from "./tags/tags.module";
 
 @Module({
     imports: [
@@ -13,9 +14,7 @@ import { CommentsModule } from "./comments/comments.module";
         CategoriesModule,
         ArticlesModule,
         CommentsModule,
-    ],
-    providers: [
-		
-    ],
+        TagsModule,
+    ],    
 })
 export class VisitorAPIModule {}

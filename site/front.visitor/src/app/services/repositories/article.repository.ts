@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { SimpleRepository } from './_simple.repository';
 import { Article } from '../../model/article.model';
 import { DataService } from '../data.service';
-import { ArticlesGetchunkDTO } from '../../model/articles.getchunk.dto';
+import { IArticlesGetchunkDTO } from '../../model/dto/articles.getchunk.dto';
 
 @Injectable()
 export class ArticleRepository extends SimpleRepository<Article> {
@@ -17,7 +17,7 @@ export class ArticleRepository extends SimpleRepository<Article> {
 
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            let dto: ArticlesGetchunkDTO = {
+            let dto: IArticlesGetchunkDTO = {
                 from: this.currentPart * this.chunkLength,
                 q: this.chunkLength,
                 sortBy: this.sortBy,

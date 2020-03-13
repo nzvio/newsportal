@@ -1,4 +1,4 @@
-export interface ArticlesGetchunkDTO {
+export interface IArticlesGetchunkDTO {
     readonly from?: number;
     readonly q?: number;
     readonly sortBy?: string;

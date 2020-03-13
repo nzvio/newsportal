@@ -19,6 +19,7 @@
             "sidebar-module-catalogue": "Catalogue",
             "sidebar-submodule-categories": "Categories",
             "sidebar-submodule-articles": "Articles",
+            "sidebar-submodule-tags": "Tags",
             "sidebar-module-parsing": "Parsing",
             "sidebar-submodule-donors": "Donors",
             "sidebar-submodule-targets": "Targets",
@@ -152,7 +153,12 @@
             "workspace-parseerrors-h1": "Parsing errors",
             "workspace-parseerrors-date": "Date (UTC)",
             "workspace-parseerrors-donor": "Donor",
-            "workspace-parseerrors-message": "Message"
+            "workspace-parseerrors-message": "Message",
+
+            "workspace-tags-h1": "Tags",
+            "workspace-tags-name": "Name",
+            "workspace-tags-lang": "Language",
+            "workspace-tags-active": "Active"
         }
     },
     {
@@ -175,6 +181,7 @@
             "sidebar-module-catalogue": "Каталог",
             "sidebar-submodule-categories": "Категории",
             "sidebar-submodule-articles": "Статьи",
+            "sidebar-submodule-tags": "Теги",
             "sidebar-module-parsing": "Парсинг",
             "sidebar-submodule-donors": "Доноры",
             "sidebar-submodule-targets": "Цели",
@@ -308,7 +315,12 @@
             "workspace-parseerrors-h1": "Ошибки парсинга",
             "workspace-parseerrors-date": "Дата (UTC)",
             "workspace-parseerrors-donor": "Донор",
-            "workspace-parseerrors-message": "Сообщение"
+            "workspace-parseerrors-message": "Сообщение",
+
+            "workspace-tags-h1": "Теги",
+            "workspace-tags-name": "Имя",
+            "workspace-tags-lang": "Язык",
+            "workspace-tags-active": "Вкл."
         }
     }
 ]

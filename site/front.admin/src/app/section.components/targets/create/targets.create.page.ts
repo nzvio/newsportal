@@ -8,7 +8,6 @@ import { AdmLangRepository } from '../../../services/repositories/admlang.reposi
 import { TargetRepository } from '../../../services/repositories/target.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
-import { UploadService } from '../../../services/upload.service';
 import { Lang } from '../../../model/lang.model';
 import { Category } from '../../../model/category.model';
 import { DonorRepository } from '../../../services/repositories/donor.repository';
@@ -30,11 +29,10 @@ export class TargetsCreatePage extends ObjectPage<Target> implements OnInit {
 		private donorRepository: DonorRepository,
         private langRepository: LangRepository,
         private categoryRepository: CategoryRepository,
-		protected appService: AppService,
-		protected uploadService: UploadService,
+		protected appService: AppService,		
 		protected router: Router,		
 	) {
-		super(admlangRepository, targetRepository, appService, router, uploadService);
+		super(admlangRepository, targetRepository, appService, router);
     }
 	
 	get dl(): Donor[] {return this.donorRepository.xlFull;}

@@ -12,6 +12,7 @@ import { ArticlesLastComponent } from './articles.last/articles.last.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { ArticlesRecommendedComponent } from './articles.recommended/articles.recommended.component';
 import { CommentsLastComponent } from './comments.last/comments.last.component';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { CommentsLastComponent } from './comments.last/comments.last.component';
         ArticlesLastComponent,
         ArticlesRecommendedComponent,
         CommentsLastComponent,
+        TagsComponent,
     ],
     exports: [
         HeaderComponent,
@@ -41,6 +43,7 @@ import { CommentsLastComponent } from './comments.last/comments.last.component';
         ArticlesLastComponent,
         ArticlesRecommendedComponent,
         CommentsLastComponent,
+        TagsComponent,
     ],
     providers: []
 })
