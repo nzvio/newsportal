@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"newsportal.categories"},{"v":2,"unique":true,"key":{"slug":1},"name":"slug_1","ns":"newsportal.categories","background":true}],"uuid":"c8da9171e4874caca6c6ddcd00d818af"}

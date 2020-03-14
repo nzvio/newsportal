@@ -7,7 +7,6 @@ import { ArticleRepository } from '../../../services/repositories/article.reposi
 import { AppService } from '../../../services/app.service';
 import { Article } from '../../../model/orm/article.model';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { SettingRepository } from 'src/app/services/repositories/setting.repository';
 
 @Component({
     selector: "articles-last",
@@ -21,8 +20,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
 
     constructor(
         private articleRepository: ArticleRepository,
-        private langRepository: LangRepository,
-        private settingRepository: SettingRepository,
+        private langRepository: LangRepository,        
         private appService: AppService,
     ) {}  
 
@@ -31,9 +29,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
     get length(): number {return this.articleRepository.chunkLength;}
     get currentPart(): number {return this.articleRepository.currentPart;}
     get currentLang(): Lang {return this.langRepository.current.value;}
-    get protocol(): string {return this.settingRepository.param("protocol");}
-    get host(): string {return this.settingRepository.param("host");}
-
+    
     public ngOnInit(): void {
         this.langSubscription = this.langRepository.current.subscribe(async lang => {
             try {
@@ -65,13 +61,13 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
         }        
     }
 
-    public shareFb(article: Article): void {        
-        let fbParam: Object = {method: 'share', href: `${this.protocol}://${this.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`};
+    public shareFb(article: Article): void {                        
+        let fbParam: Object = {method: 'share', href: `${window.location.protocol}//${window.location.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`};
         FB.ui (fbParam, response => {console.log (response)});
     }
 
     public shareTw (article: Article): void {        
-		let url: string = `${this.protocol}://${this.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`;
+		let url: string = `${window.location.protocol}//${window.location.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`;
 		let text: string = article.name+" ("+article.source+")";
 		window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text));		
 	}
