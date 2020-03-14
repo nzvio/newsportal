@@ -15,6 +15,7 @@ import { IImagable } from "../../model/imagable.interface";
 import { APIService } from "../../services/_api.service";
 import { IParseerror } from "../../model/orm/interfaces/parseerror.interface";
 import { IUser } from "../../model/orm/interfaces/user.interface";
+import { ITag } from "../../model/orm/interfaces/tag.interface";
 
 @Injectable()
 export class TargetsExecutorService extends APIService {
@@ -23,6 +24,7 @@ export class TargetsExecutorService extends APIService {
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         @InjectModel("Parseerror") private readonly errorModel: Model<IParseerror>,
         @InjectModel("User") private readonly userModel: Model<IUser>,
+        @InjectModel("Tag") private readonly tagModel: Model<ITag>,
         private readonly httpService: HttpService,
         private readonly slugService: SlugService,
     ) {
@@ -162,6 +164,7 @@ export class TargetsExecutorService extends APIService {
                             article.slug = this.slugService.buildSlug(article.name);
                             const user: IUser = await this.userModel.findOne({defended: true});
                             article.user = user._id;
+                            await this.buildTags(article);
                             await article.save();
                             this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
                         }
@@ -237,5 +240,16 @@ export class TargetsExecutorService extends APIService {
             
             writer.on('error', reject);            
         });
+    }
+
+    private async buildTags(article: IArticle): Promise<void> {
+        let articleTags: string[] = [];
+        const tags: ITag[] = await this.tagModel.find({lang: article.lang});
+
+        for (let tag of tags) {
+            article.name.toLowerCase().includes(tag.name.toLowerCase()) ? articleTags.push(tag._id) : null;
+        }
+
+        articleTags.length ? article.tags = articleTags : null;
     }
 }

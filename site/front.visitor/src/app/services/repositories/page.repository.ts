@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Page } from '../../model/page.model';
+import { Page } from '../../model/orm/page.model';
 import { DataService } from '../data.service';
 import { SimpleRepository } from './_simple.repository';
 import { IGetallDTO } from 'src/app/model/dto/getall.dto';

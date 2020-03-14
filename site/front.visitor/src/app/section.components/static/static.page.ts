@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PageRepository } from '../../services/repositories/page.repository';
-import { Page } from '../../model/page.model';
+import { Page } from '../../model/orm/page.model';
 import { AppService } from '../../services/app.service';
 import { LangRepository } from '../../services/repositories/lang.repository';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 
 @Component({
 	selector: 'static-page',

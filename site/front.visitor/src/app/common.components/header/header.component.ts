@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
 import { LangRepository } from '../../services/repositories/lang.repository';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { PageRepository } from '../../services/repositories/page.repository';
-import { Page } from '../../model/page.model';
+import { Page } from '../../model/orm/page.model';
 import { CategoryRepository } from '../../services/repositories/category.repository';
-import { Category } from '../../model/category.model';
+import { Category } from '../../model/orm/category.model';
 
 @Component({
     selector:"the-header", 

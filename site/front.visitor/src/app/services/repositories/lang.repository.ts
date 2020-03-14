@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { DataService } from '../data.service';
 import { SimpleRepository } from './_simple.repository';
 import { BehaviorSubject } from 'rxjs';

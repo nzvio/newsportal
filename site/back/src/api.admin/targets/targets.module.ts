@@ -11,6 +11,7 @@ import { ArticleSchema } from "../../model/orm/schemas/article.schema";
 import { ServicesModule } from "../../services/services.module";
 import { ParseerrorSchema } from "../../model/orm/schemas/parseerror.schema";
 import { UserSchema } from "../../model/orm/schemas/user.schema";
+import { TagSchema } from "../../model/orm/schemas/tag.schema";
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { UserSchema } from "../../model/orm/schemas/user.schema";
             {name: 'Article', schema: ArticleSchema},
             {name: 'Parseerror', schema: ParseerrorSchema},
             {name: 'User', schema: UserSchema},
+            {name: 'Tag', schema: TagSchema},
         ]),        
         JwtModule.register(jwtConstants),
         HttpModule.register({timeout: 5000}),

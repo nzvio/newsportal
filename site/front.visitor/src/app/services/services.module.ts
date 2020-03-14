@@ -13,6 +13,7 @@ import { ArticleRepository } from './repositories/article.repository';
 import { ArticleRecommendedRepository } from './repositories/article.recommended.repository';
 import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
+import { SettingRepository } from './repositories/setting.repository';
 
 @NgModule({
     imports: [                
@@ -34,6 +35,7 @@ import { TagRepository } from './repositories/tag.repository';
         ArticleRecommendedRepository,
         CommentRepository,
         TagRepository,
+        SettingRepository,
     ],
 })
 export class ServicesModule {    

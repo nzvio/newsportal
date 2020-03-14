@@ -4,16 +4,17 @@ import { HttpClient, HttpHeaders, HttpEvent } from "@angular/common/http";
 import { filter } from 'rxjs/operators';
 
 import { IAnswer } from '../model/answer.interface';
-import { Lang } from '../model/lang.model';
+import { Lang } from '../model/orm/lang.model';
 import { IAuthData } from '../model/authdata.interface';
 import { ErrorService } from './error.service';
-import { Page } from '../model/page.model';
-import { Category } from '../model/category.model';
+import { Page } from '../model/orm/page.model';
+import { Category } from '../model/orm/category.model';
 import { IArticlesGetchunkDTO } from '../model/dto/articles.getchunk.dto';
-import { Article } from '../model/article.model';
+import { Article } from '../model/orm/article.model';
 import { ICommentsGetchunkDTO } from '../model/dto/comments.getchunk.dto';
-import { Comment } from '../model/comment.model';
+import { Comment } from '../model/orm/comment.model';
 import { IGetallDTO } from '../model/dto/getall.dto';
+import { Setting } from '../model/orm/setting.model';
 
 @Injectable()
 export class DataService {
@@ -35,6 +36,7 @@ export class DataService {
     public articlesChunk(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, false);}
     public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
+    public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

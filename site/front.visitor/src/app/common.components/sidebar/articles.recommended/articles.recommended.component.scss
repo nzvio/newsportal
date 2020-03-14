@@ -1,0 +1,34 @@
+@import "../../../var";
+
+.aside-recommended {
+    margin: 0 0 80px 0;
+    article {
+        margin: 0 0 30px 0;
+        figure {
+            padding-bottom: 75%; background-size: cover; background-position: center top; margin: 0 0 10px 0; cursor: pointer; position: relative;
+            .ar-cat {
+                position: absolute; left: 10px; top: 10px;
+                a, a:visited {color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; display: inline-block; background-color: $color-blue; padding: 5px; transition: background-color 0.3s ease 0s;}
+                a:hover {background-color: $color-blue-dark;}
+            }
+        }
+        .ar-title {
+            font-family: "teko", Arial, Helvetica, sans-serif; font-size: 20px; margin: 0 0 10px 0;
+            a, a:visited {
+                color: #000; text-decoration: none;
+                &:hover {color: $color-blue;}
+            }
+        }
+        .ar-date {
+            font-size: 12px; color: $color-grey-light; letter-spacing: 1px; margin: 0 0 10px 0;
+            &::before {font-family: "ionicons"; content: "\f2d1"; font-size: 16px; display: inline-block; margin-right: 5px;}
+        }
+        &.loading {
+            figure {background-color: #f9f9f9; animation-name: loading-blink; animation-duration: 2s; animation-iteration-count: infinite;}
+            label {
+                display: block; height: 20px; margin-bottom: 10px; background: #f9f9f9; animation-name: loading-blink; animation-duration: 2s; animation-iteration-count: infinite;
+                &:nth-child(3) {width:60%;}
+            }
+        }
+    }
+}

@@ -5,10 +5,11 @@ import { filter } from 'rxjs/operators';
 
 import { NavHistory } from './model/navhistory';
 import { LangRepository } from './services/repositories/lang.repository';
-import { Lang } from './model/lang.model';
+import { Lang } from './model/orm/lang.model';
 import { PageRepository } from './services/repositories/page.repository';
 import { CategoryRepository } from './services/repositories/category.repository';
 import { INotification } from './model/notification.interface';
+import { SettingRepository } from './services/repositories/setting.repository';
 
 @Component({
 	selector: 'app-root',
@@ -18,10 +19,11 @@ import { INotification } from './model/notification.interface';
 })
 export class AppComponent implements AfterViewInit, OnInit {				
 	@ViewChild("wrap", {static: false}) wrapElement: ElementRef;
-	private navHistory: NavHistory = new NavHistory();
+	//private navHistory: NavHistory = new NavHistory();
 	public langsReady: boolean = false;
 	public pagesReady: boolean = false;
 	public categoriesReady: boolean = false;
+	public settingsReady: boolean = false;
 
 	constructor(
 		private appService: AppService,
@@ -29,6 +31,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 		private langRepository: LangRepository,
 		private pageRepository: PageRepository,
 		private categoryRepository: CategoryRepository,
+		private settingRepository: SettingRepository,
 	) {			
 	}
 
@@ -41,7 +44,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	set indicatorWidth(v: number) {this.appService.indicatorWidth = v;}
 
 	public ngOnInit(): void {	
-		this.initLangs();	
+		this.initLangs();
 		this.pageRepository
 			.load()
 			.then(() => {this.pagesReady = true;})
@@ -49,6 +52,10 @@ export class AppComponent implements AfterViewInit, OnInit {
 		this.categoryRepository
 			.load()
 			.then(() => {this.categoriesReady = true;})
+			.catch(err => {this.appService.showNotification(err.message, "error")});
+		this.settingRepository
+			.load()
+			.then(() => {this.settingsReady = true;})
 			.catch(err => {this.appService.showNotification(err.message, "error")});
 	}
 

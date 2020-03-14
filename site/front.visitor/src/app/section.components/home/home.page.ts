@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../../services/app.service';
 import { LangRepository } from '../../services/repositories/lang.repository';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
