@@ -34,8 +34,7 @@ export class ArticleComponent extends ObjectComponent implements OnInit {
     get tags(): Tag[] {return (this.x.lang) ? this.tl.filter(t => t.lang === this.x.lang) : this.tl;}
 
     public ngOnInit(): void {
-        this.selectedLang = this.ll[0];    
-        console.log(this.x);    
+        this.selectedLang = this.ll[0];            
     }
     
     public buildSlug(name: string): void {
