@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { TargetRepository } from '../../../services/repositories/target.repository';
 import { AppService } from '../../../services/app.service';
-import { Target } from '../../../model/target.model';
+import { Target } from '../../../model/orm/target.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { DonorRepository } from '../../../services/repositories/donor.repository';
 import { CategoryRepository } from '../../../services/repositories/category.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { Category } from '../../../model/category.model';
-import { Donor } from '../../../model/donor.model';
-import { Lang } from '../../../model/lang.model';
+import { Category } from '../../../model/orm/category.model';
+import { Donor } from '../../../model/orm/donor.model';
+import { Lang } from '../../../model/orm/lang.model';
 import { ArticleRepository } from 'src/app/services/repositories/article.repository';
 
 @Component({

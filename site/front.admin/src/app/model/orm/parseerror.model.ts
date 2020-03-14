@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 import { Target } from './target.model';
 
 export class Parseerror extends Model {

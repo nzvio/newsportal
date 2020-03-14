@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 import { Donor } from './donor.model';
 
 export class Target extends Model {

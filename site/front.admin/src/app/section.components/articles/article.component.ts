@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Category } from '../../model/category.model';
+import { Category } from '../../model/orm/category.model';
 import { ObjectComponent } from '../_object.component';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { SlugService } from '../../services/slug.service';
-import { Article } from '../../model/article.model';
-import { Comment } from '../../model/comment.model';
-import { User } from '../../model/user.model';
-import { Tag } from '../../model/tag.model';
+import { Article } from '../../model/orm/article.model';
+import { Comment } from '../../model/orm/comment.model';
+import { User } from '../../model/orm/user.model';
+import { Tag } from '../../model/orm/tag.model';
 
 @Component({
     selector: "the-article",

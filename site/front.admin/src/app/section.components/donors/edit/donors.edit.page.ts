@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { DonorRepository } from '../../../services/repositories/donor.repository';
 import { AppService } from '../../../services/app.service';
-import { Donor } from '../../../model/donor.model';
+import { Donor } from '../../../model/orm/donor.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

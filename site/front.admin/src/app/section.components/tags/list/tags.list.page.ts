@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { TagRepository } from '../../../services/repositories/tag.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
-import { Tag } from '../../../model/tag.model';
+import { Tag } from '../../../model/orm/tag.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'tags-list-page',

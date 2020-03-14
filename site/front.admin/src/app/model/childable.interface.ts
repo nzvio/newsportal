@@ -1,5 +1,5 @@
-import { Category } from './category.model';
-import { Page } from './page.model';
+import { Category } from './orm/category.model';
+import { Page } from './orm/page.model';
 
 export interface Childable {
     __children: Category[] | Page[];     

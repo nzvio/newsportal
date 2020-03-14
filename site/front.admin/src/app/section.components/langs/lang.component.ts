@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { ObjectComponent } from '../_object.component';
-import { Lang } from '../../model/lang.model';
-import { Phrase } from '../../model/phrase';
+import { Lang } from '../../model/orm/lang.model';
+import { Phrase } from '../../model/orm/phrase';
 import { AppService } from '../../services/app.service';
 
 @Component({

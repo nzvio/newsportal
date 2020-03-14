@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 import { Article } from './article.model';
 import { User } from './user.model';
 

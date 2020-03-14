@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { ObjectPage } from '../../_object.page';
-import { Page } from '../../../model/page.model';
+import { Page } from '../../../model/orm/page.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { PageRepository } from '../../../services/repositories/page.repository';
 import { AppService } from '../../../services/app.service';
 import { UploadService } from '../../../services/upload.service';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'pages-create-page',

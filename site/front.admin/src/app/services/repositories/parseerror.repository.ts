@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './_repository';
-import { Parseerror } from '../../model/parseerror.model';
+import { Parseerror } from '../../model/orm/parseerror.model';
 import { DataService } from '../data.service';
 import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 

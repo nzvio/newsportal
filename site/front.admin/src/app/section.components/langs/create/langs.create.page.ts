@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ObjectPage } from '../../_object.page';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';

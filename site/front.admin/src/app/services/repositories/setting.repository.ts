@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './_repository';
-import { Setting } from '../../model/setting.model';
+import { Setting } from '../../model/orm/setting.model';
 import { DataService } from '../data.service';
 import { IGetchunkDTO } from '../../model/dto/getchunk.dto';
 

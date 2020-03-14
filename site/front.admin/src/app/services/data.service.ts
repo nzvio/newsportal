@@ -5,25 +5,25 @@ import { filter } from 'rxjs/operators';
 
 import { IAnswer } from '../model/answer.interface';
 import { IImagable } from '../model/imagable.interface';
-import { Usergroup } from '../model/usergroup.model';
+import { Usergroup } from '../model/orm/usergroup.model';
 import { IAuthData } from "../model/authdata.interface";
-import { User } from '../model/user.model';
+import { User } from '../model/orm/user.model';
 import { ErrorService } from './error.service';
 import { AdmLang } from '../model/admlang.model';
-import { Lang } from '../model/lang.model';
-import { Page } from '../model/page.model';
-import { Category } from '../model/category.model';
-import { Article } from '../model/article.model';
+import { Lang } from '../model/orm/lang.model';
+import { Page } from '../model/orm/page.model';
+import { Category } from '../model/orm/category.model';
+import { Article } from '../model/orm/article.model';
 import { IArticlesGetchunkDTO } from '../model/dto/articles.getchunk.dto';
-import { Donor } from '../model/donor.model';
-import { Target } from '../model/target.model';
-import { Parseerror } from "../model/parseerror.model";
-import { Comment } from "../model/comment.model";
+import { Donor } from '../model/orm/donor.model';
+import { Target } from '../model/orm/target.model';
+import { Parseerror } from "../model/orm/parseerror.model";
+import { Comment } from "../model/orm/comment.model";
 import { IGetallDTO } from '../model/dto/getall.dto';
 import { IGetchunkDTO } from '../model/dto/getchunk.dto';
 import { ICommentsGetallDTO } from '../model/dto/comments.getall.dto';
-import { Tag } from '../model/tag.model';
-import { Setting } from '../model/setting.model';
+import { Tag } from '../model/orm/tag.model';
+import { Setting } from '../model/orm/setting.model';
 
 @Injectable()
 export class DataService {

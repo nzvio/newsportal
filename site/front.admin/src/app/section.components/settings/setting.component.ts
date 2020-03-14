@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Setting } from '../../model/setting.model';
+import { Setting } from '../../model/orm/setting.model';
 import { ObjectComponent } from '../_object.component';
 
 @Component({

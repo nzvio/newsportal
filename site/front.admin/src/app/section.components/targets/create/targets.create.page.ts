@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CategoryRepository } from '../../../services/repositories/category.repository';
-import { Target } from '../../../model/target.model';
+import { Target } from '../../../model/orm/target.model';
 import { ObjectPage } from '../../_object.page';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { TargetRepository } from '../../../services/repositories/target.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
-import { Lang } from '../../../model/lang.model';
-import { Category } from '../../../model/category.model';
+import { Lang } from '../../../model/orm/lang.model';
+import { Category } from '../../../model/orm/category.model';
 import { DonorRepository } from '../../../services/repositories/donor.repository';
-import { Donor } from '../../../model/donor.model';
+import { Donor } from '../../../model/orm/donor.model';
 
 @Component({
 	selector: 'targets-create-page',

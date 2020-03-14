@@ -4,9 +4,9 @@ import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { PageRepository } from '../../../services/repositories/page.repository';
-import { Page } from '../../../model/page.model';
+import { Page } from '../../../model/orm/page.model';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'pages-list-page',

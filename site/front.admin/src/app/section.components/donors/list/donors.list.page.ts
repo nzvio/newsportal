@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DonorRepository } from '../../../services/repositories/donor.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
-import { Donor } from 'src/app/model/donor.model';
+import { Donor } from '../../../model/orm/donor.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

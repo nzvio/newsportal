@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { URL } from '../../model/url';
-import { User } from '../../model/user.model';
+import { User } from '../../model/orm/user.model';
 import { AuthService } from '../../services/auth.service';
 import { AppService } from '../../services/app.service';
 import { AdmLang } from 'src/app/model/admlang.model';

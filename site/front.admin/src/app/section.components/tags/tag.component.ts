@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { ObjectComponent } from '../_object.component';
-import { Lang } from '../../model/lang.model';
-import { Tag } from '../../model/tag.model';
+import { Lang } from '../../model/orm/lang.model';
+import { Tag } from '../../model/orm/tag.model';
 
 @Component({
     selector: "the-tag",

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 
-import { Category } from '../../model/category.model';
+import { Category } from '../../model/orm/category.model';
 import { ObjectComponent } from '../_object.component';
-import { Lang } from '../../model/lang.model';
-import { Target } from '../../model/target.model';
-import { Donor } from '../../model/donor.model';
+import { Lang } from '../../model/orm/lang.model';
+import { Target } from '../../model/orm/target.model';
+import { Donor } from '../../model/orm/donor.model';
 import { SocketService } from '../../services/socket.service';
 import { IAnswer } from '../../model/answer.interface';
 import { AppService } from 'src/app/services/app.service';

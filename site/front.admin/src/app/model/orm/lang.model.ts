@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 import { Phrase } from './phrase';
 
 export class Lang extends Model {

@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { TagRepository } from '../../../services/repositories/tag.repository';
 import { AppService } from '../../../services/app.service';
-import { Tag } from '../../../model/tag.model';
+import { Tag } from '../../../model/orm/tag.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'tags-edit-page',

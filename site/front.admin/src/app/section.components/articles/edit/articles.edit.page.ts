@@ -4,19 +4,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { CategoryRepository } from '../../../services/repositories/category.repository';
 import { AppService } from '../../../services/app.service';
-import { Category } from '../../../model/category.model';
+import { Category } from '../../../model/orm/category.model';
 import { UploadService } from '../../../services/upload.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
-import { Lang } from '../../../model/lang.model';
-import { Article } from '../../../model/article.model';
+import { Lang } from '../../../model/orm/lang.model';
+import { Article } from '../../../model/orm/article.model';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
 import { CommentRepository } from '../../../services/repositories/comment.repository';
-import { Comment } from '../../../model/comment.model';
+import { Comment } from '../../../model/orm/comment.model';
 import { UserRepository } from '../../../services/repositories/user.repository';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/orm/user.model';
 import { TagRepository } from 'src/app/services/repositories/tag.repository';
-import { Tag } from 'src/app/model/tag.model';
+import { Tag } from '../../../model/orm/tag.model';
 
 @Component({
 	selector: 'articles-edit-page',

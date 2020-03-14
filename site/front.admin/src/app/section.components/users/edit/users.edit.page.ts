@@ -4,10 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { AppService } from '../../../services/app.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/orm/user.model';
 import { UploadService } from '../../../services/upload.service';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
-import { Usergroup } from '../../../model/usergroup.model';
+import { Usergroup } from '../../../model/orm/usergroup.model';
 import { AuthService } from '../../../services/auth.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 

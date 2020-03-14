@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { User } from '../../model/user.model';
-import { Usergroup } from '../../model/usergroup.model';
+import { User } from '../../model/orm/user.model';
+import { Usergroup } from '../../model/orm/usergroup.model';
 import { ObjectComponent } from '../_object.component';
 
 @Component({

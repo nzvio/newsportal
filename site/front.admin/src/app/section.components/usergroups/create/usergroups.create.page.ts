@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { AppService } from '../../../services/app.service';
-import { Usergroup } from '../../../model/usergroup.model';
+import { Usergroup } from '../../../model/orm/usergroup.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

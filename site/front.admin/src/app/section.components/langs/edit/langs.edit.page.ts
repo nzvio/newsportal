@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 import { UploadService } from '../../../services/upload.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './_repository';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { DataService } from '../data.service';
 import { AppService } from '../app.service';
 import { IGetallDTO } from '../../model/dto/getall.dto';

@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { PageRepository } from '../../../services/repositories/page.repository';
 import { AppService } from '../../../services/app.service';
-import { Page } from '../../../model/page.model';
+import { Page } from '../../../model/orm/page.model';
 import { UploadService } from '../../../services/upload.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { LangRepository } from 'src/app/services/repositories/lang.repository';
-import { Lang } from 'src/app/model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'pages-edit-page',

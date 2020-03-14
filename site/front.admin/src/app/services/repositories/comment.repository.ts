@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 
 import { Repository } from './_repository';
-import { Comment } from '../../model/comment.model';
+import { Comment } from '../../model/orm/comment.model';
 import { DataService } from '../data.service';
 import { ICommentsGetallDTO } from 'src/app/model/dto/comments.getall.dto';
 

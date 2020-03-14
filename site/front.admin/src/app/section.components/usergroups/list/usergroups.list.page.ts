@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
-import { Usergroup } from 'src/app/model/usergroup.model';
+import { Usergroup } from '../../../model/orm/usergroup.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

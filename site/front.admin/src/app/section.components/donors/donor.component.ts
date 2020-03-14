@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Donor } from '../../model/donor.model';
+import { Donor } from '../../model/orm/donor.model';
 import { ObjectComponent } from '../_object.component';
 
 @Component({

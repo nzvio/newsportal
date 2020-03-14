@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Tag } from '../../../model/tag.model';
+import { Tag } from '../../../model/orm/tag.model';
 import { ObjectPage } from '../../_object.page';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { TagRepository } from '../../../services/repositories/tag.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
-import { Lang } from '../../../model/lang.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
 	selector: 'tags-create-page',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Repository } from './_repository';
-import { Usergroup } from '../../model/usergroup.model';
+import { Usergroup } from '../../model/orm/usergroup.model';
 import { DataService } from '../data.service';
 import { IGetallDTO } from "../../model/dto/getall.dto";
 import { IGetchunkDTO } from 'src/app/model/dto/getchunk.dto';

@@ -4,9 +4,9 @@ import { UserRepository } from '../../../services/repositories/user.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
-import { Usergroup } from '../../../model/usergroup.model';
+import { Usergroup } from '../../../model/orm/usergroup.model';
 import { AuthService } from '../../../services/auth.service';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/orm/user.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

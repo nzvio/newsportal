@@ -2,7 +2,7 @@ import { Input, Output, EventEmitter } from '@angular/core';
 
 import { IHTMLInputEvent } from '../model/htmlinputevent.interface';
 import { AdmLang } from '../model/admlang.model';
-import { Lang } from '../model/lang.model';
+import { Lang } from '../model/orm/lang.model';
 
 export abstract class ObjectComponent {
     @Input() currentLang: AdmLang;

@@ -1,6 +1,6 @@
-import { Model } from './model';
+import { Model } from '../model';
 
-export class Page extends Model {
+export class Category extends Model {
     public _id: string;
     public name: Object;
     public h1: Object;
@@ -16,12 +16,12 @@ export class Page extends Model {
     public active: boolean;
     public pos: number;
     public defended: boolean;
-    public __children: Page[]; // from API but not from DB
+    public __children: Category[]; // from API but not from DB
     
     public __shift: string = ""; // not from API
     public __level: number = 0; // not from API
 
-    public init(): Page {
+    public init(): Category {
         this.name = {};
         this.h1 = {};
         this.contentshort = {};

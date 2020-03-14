@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CategoryRepository } from '../../../services/repositories/category.repository';
-import { Article } from '../../../model/article.model';
+import { Article } from '../../../model/orm/article.model';
 import { ObjectPage } from '../../_object.page';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
 import { UploadService } from '../../../services/upload.service';
-import { Lang } from '../../../model/lang.model';
-import { Category } from '../../../model/category.model';
+import { Lang } from '../../../model/orm/lang.model';
+import { Category } from '../../../model/orm/category.model';
 import { UserRepository } from '../../../services/repositories/user.repository';
-import { User } from '../../../model/user.model';
+import { User } from '../../../model/orm/user.model';
 import { TagRepository } from '../../../services/repositories/tag.repository';
-import { Tag } from '../../../model/tag.model';
+import { Tag } from '../../../model/orm/tag.model';
 
 @Component({
 	selector: 'articles-create-page',

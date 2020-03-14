@@ -1,4 +1,4 @@
-import { Model } from './model';
+import { Model } from '../model';
 
 export class Setting extends Model {
     public _id: string;

@@ -3,7 +3,7 @@ import { IAuthData } from '../model/authdata.interface';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
 import { DataService } from './data.service';
-import { User } from '../model/user.model';
+import { User } from '../model/orm/user.model';
 
 @Injectable()
 export class AuthService {

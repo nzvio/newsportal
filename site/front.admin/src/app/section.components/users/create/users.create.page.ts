@@ -5,8 +5,8 @@ import { ObjectPage } from '../../_object.page';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { UsergroupRepository } from '../../../services/repositories/usergroup.repository';
 import { AppService } from '../../../services/app.service';
-import { Usergroup } from '../../../model/usergroup.model';
-import { User } from '../../../model/user.model';
+import { Usergroup } from '../../../model/orm/usergroup.model';
+import { User } from '../../../model/orm/user.model';
 import { UploadService } from '../../../services/upload.service';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 

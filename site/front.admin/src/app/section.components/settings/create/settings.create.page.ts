@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ObjectPage } from '../../_object.page';
 import { SettingRepository } from '../../../services/repositories/setting.repository';
 import { AppService } from '../../../services/app.service';
-import { Setting } from '../../../model/setting.model';
+import { Setting } from '../../../model/orm/setting.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Page } from '../../model/page.model';
+import { Page } from '../../model/orm/page.model';
 import { ObjectComponent } from '../_object.component';
-import { Lang } from '../../model/lang.model';
+import { Lang } from '../../model/orm/lang.model';
 import { SlugService } from '../../services/slug.service';
 
 @Component({

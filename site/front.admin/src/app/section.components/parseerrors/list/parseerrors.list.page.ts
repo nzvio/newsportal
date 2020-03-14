@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParseerrorRepository } from '../../../services/repositories/parseerror.repository';
 import { AppService } from '../../../services/app.service';
 import { ListPage } from '../../_list.page';
-import { Parseerror } from 'src/app/model/parseerror.model';
+import { Parseerror } from '../../../model/orm/parseerror.model';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 
 @Component({

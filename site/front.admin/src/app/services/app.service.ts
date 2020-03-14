@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 
-import { Page } from '../model/page.model';
 import { Childable } from '../model/childable.interface';
 
 @Injectable()

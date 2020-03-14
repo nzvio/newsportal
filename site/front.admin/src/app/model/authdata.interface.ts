@@ -1,4 +1,4 @@
-import { User } from './user.model';
+import { User } from './orm/user.model';
 
 export interface IAuthData {    
     token: string;    
