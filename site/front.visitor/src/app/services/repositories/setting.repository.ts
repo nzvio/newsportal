@@ -31,7 +31,7 @@ export class SettingRepository extends SimpleRepository<Setting> {
     }
     
     public param(p: string): string | null {
-        let x: Setting | null = this.xl.find(x => x.p === p) || null; 
+        let x: Setting | null = this.xl.find(x => x.p === p) || null;
         return x ? x.v : null;
     }
 }
