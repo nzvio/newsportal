@@ -24,6 +24,7 @@
             "sidebar-submodule-donors": "Donors",
             "sidebar-submodule-targets": "Targets",
             "sidebar-submodule-parseerrors": "Errors",
+            "sidebar-module-settings": "Settings",
 
             "workspace-create": "Create",
             "workspace-deleteselected": "Delete selected",
@@ -159,7 +160,13 @@
             "workspace-tags-h1": "Tags",
             "workspace-tags-name": "Name",
             "workspace-tags-lang": "Language",
-            "workspace-tags-active": "Active"
+            "workspace-tags-active": "Active",
+
+            "workspace-settings-h1": "Settings",
+            "workspace-settings-p": "Parameter",
+            "workspace-settings-v": "Value",
+            "workspace-settings-c": "Comment",
+            "workspace-settings-pos": "Position"
         }
     },
     {
@@ -187,6 +194,7 @@
             "sidebar-submodule-donors": "Доноры",
             "sidebar-submodule-targets": "Цели",
             "sidebar-submodule-parseerrors": "Ошибки",
+            "sidebar-module-settings": "Настройки",
 
             "workspace-create": "Создать",
             "workspace-deleteselected": "Удалить выбранное",
@@ -322,7 +330,13 @@
             "workspace-tags-h1": "Теги",
             "workspace-tags-name": "Имя",
             "workspace-tags-lang": "Язык",
-            "workspace-tags-active": "Вкл."
+            "workspace-tags-active": "Вкл.",
+
+            "workspace-settings-h1": "Настройки",
+            "workspace-settings-p": "Параметр",
+            "workspace-settings-v": "Значение",
+            "workspace-settings-c": "Комментарий",
+            "workspace-settings-pos": "Позиция"
         }
     }
 ]

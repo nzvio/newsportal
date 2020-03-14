@@ -23,6 +23,7 @@ import { IGetallDTO } from '../model/dto/getall.dto';
 import { IGetchunkDTO } from '../model/dto/getchunk.dto';
 import { ICommentsGetallDTO } from '../model/dto/comments.getall.dto';
 import { Tag } from '../model/tag.model';
+import { Setting } from '../model/setting.model';
 
 @Injectable()
 export class DataService {
@@ -119,6 +120,11 @@ export class DataService {
     public tagsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "tags/deletebulk", _ids, true);}
     public tagsCreate(x: Tag): Observable<IAnswer<void>> {return this.sendRequest("POST", "tags/create", x, true);}
     public tagsUpdate(x: Tag): Observable<IAnswer<void>> {return this.sendRequest("POST", "tags/update", x, true);}
+
+    public settingsChunk(dto: IGetchunkDTO): Observable<IAnswer<Setting[]>> {return this.sendRequest("POST", "settings/chunk", dto, true);}
+    public settingsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `settings/delete/${_id}`, null, true);}
+    public settingsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "settings/deletebulk", _ids, true);}    
+    public settingsCreate(x: Setting): Observable<IAnswer<void>> {return this.sendRequest("POST", "settings/create", x, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

@@ -15,6 +15,7 @@ import { DonorsModule } from './section.components/donors/donors.module';
 import { TargetsModule } from './section.components/targets/targets.module';
 import { ParseerrorsModule } from './section.components/parseerrors/parseerrors.module';
 import { TagsModule } from './section.components/tags/tags.module';
+import { SettingsModule } from './section.components/settings/settings.module';
 
 const routes: Routes = [
 	{path:"", component: HomePage, pathMatch: "full", canActivate: [AuthGuard]},
@@ -30,6 +31,7 @@ const routes: Routes = [
 	{path: "parsing/donors", loadChildren: () => DonorsModule}, 
 	{path: "parsing/targets", loadChildren: () => TargetsModule}, 
 	{path: "parsing/parseerrors", loadChildren: () => ParseerrorsModule}, 
+	{path: "settings", loadChildren: () => SettingsModule}, 
 	{path:"**", component: HomePage},
 ];
 

@@ -20,6 +20,7 @@ import { SocketService } from './socket.service';
 import { ParseerrorRepository } from './repositories/parseerror.repository';
 import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
+import { SettingRepository } from './repositories/setting.repository';
 
 @NgModule({
     declarations: [],
@@ -45,6 +46,7 @@ import { TagRepository } from './repositories/tag.repository';
 		ParseerrorRepository,
 		CommentRepository,
 		TagRepository,
+		SettingRepository,
 	],
 })
 export class ServicesModule { }
