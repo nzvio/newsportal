@@ -1,222 +1,57 @@
 <div class="wrap2 padded">
     <main>
-        <div id="breadcrumbs">
-            <span><a routerLink="/ru">Главная</a></span>
-            <span>Космос</span>
-        </div>
-        <h1>Рубрика: Космос</h1>
-        <div id="cataloguelist">
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
+        <ng-container *ngIf="categoryReady">
+            <div id="breadcrumbs">
+                <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+                <span [innerHTML]="category.name[currentLang._id]"></span>
+            </div>
+            <h1 [innerHTML]="category.h1[currentLang._id] || category.name[currentLang._id]"></h1>
+        </ng-container>        
+        
+        <div id="cataloguelist">            
+            <ng-container *ngIf="articlesReady">
+                <article *ngFor="let a of articles">
+                    <a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a>
+                    <div class="ca-details1">
+                        <div class="ca-cat" [innerHTML]="category.name[currentLang._id]"></div>
+                        <div class="ca-date">{{a.formatedDate(currentLang)}}</div>
+                        <div class="ca-comments">{{a.__commentsq}}</div>
+                        <div class="ca-rating">
+                            <div class="car-stars">
+                                <span [class.filled]="a.formatedRating >= 1"></span>
+                                <span [class.filled]="a.formatedRating >= 2"></span>
+                                <span [class.filled]="a.formatedRating >= 3"></span>
+                                <span [class.filled]="a.formatedRating >= 4"></span>
+                                <span [class.filled]="a.formatedRating === 5"></span>
+                            </div>
+                            <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('category-votes')}})</div>
                         </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
+                        <div class="ca-views">{{a.viewsq}}</div>
                     </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
-                    </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
+                    <div class="ca-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                    <div class="ca-details2">
+                        <div class="ca-socnets">
+                            <div class="ca-socnet fb"><span></span></div>
+                            <div class="ca-socnet tw"><span></span></div>
                         </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
-                    </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
-                    </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
+                        <div class="ca-author" *ngIf="a.user">
+                            <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
+                            <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
                         </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
                     </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
+                    <div class="ca-short" [innerHTML]="a.contentshort+'...'"></div>
+                    <div class="ca-tags">
+                        <span class="ca-tag" *ngFor="let t of a.tags" [innerHTML]="t.name"></span>                        
                     </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
-                        </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
-                    </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
-                    </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
-                        </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
-                    </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
-                    </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>
-            <article>
-                <a routerLink="/ru/catalogue/category/space/some-article"><img src="/assets/images/test1.jpg"></a>
-                <div class="ca-details1">
-                    <div class="ca-cat">Космос</div>
-                    <div class="ca-date">8 февраля 2020, 23:20</div>
-                    <div class="ca-comments">720</div>
-                    <div class="ca-rating">
-                        <div class="car-stars">
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span class="filled"></span>
-                            <span></span>
-                        </div>
-                        <div class="car-info">4.33 (5 гол.)</div>
-                    </div>
-                    <div class="ca-views">501</div>
-                </div>
-                <div class="ca-title"><a routerLink="/ru/catalogue/category/space/some-article">Длинное название статьи, публикации, материала</a></div>
-                <div class="ca-details2">
-                    <div class="ca-socnets">
-                        <div class="ca-socnet fb"><span></span></div>
-                        <div class="ca-socnet tw"><span></span></div>
-                    </div>
-                    <div class="ca-author">
-                        <div class="ca-author-ava" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                        <div class="ca-author-name"><a href="#">Admin</a></div>
-                    </div>
-                </div>
-                <div class="ca-short">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                <div class="ca-tags">
-                    <span class="ca-tag">Iphone</span><span>, </span><span class="ca-tag">События</span><span>, </span><span class="ca-tag">Tesla</span>
-                </div>
-                <div class="ca-more"><a routerLink="/ru/catalogue/category/space/some-article">Подробнее</a></div>
-            </article>            
-        </div>
+                    <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}">{{currentLang.s('category-more')}}</a></div>
+                </article>
+            </ng-container>            
+            <ng-container *ngIf="!articlesReady || loadingMore">
+                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
+                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
+                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
+            </ng-container>                
+        </div>        
     </main>
     <aside>
         <the-sidebar></the-sidebar>

@@ -39,4 +39,10 @@ export class ArticlesController {
     public chunk(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
         return this.articlesService.chunk(dto);
     }
+
+    // get fragment from category
+    @Post("chunkbycategory")
+    public chunkByCategory(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
+        return this.articlesService.chunkByCategory(dto);
+    }
 }

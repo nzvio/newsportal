@@ -14,6 +14,7 @@ import { ArticleRecommendedRepository } from './repositories/article.recommended
 import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
 import { SettingRepository } from './repositories/setting.repository';
+import { ArticleByCategoryRepository } from './repositories/article.bycategory.repository';
 
 @NgModule({
     imports: [                
@@ -33,6 +34,7 @@ import { SettingRepository } from './repositories/setting.repository';
         ArticleMainRepository,
         ArticlePopularRepository,
         ArticleRecommendedRepository,
+        ArticleByCategoryRepository,
         CommentRepository,
         TagRepository,
         SettingRepository,

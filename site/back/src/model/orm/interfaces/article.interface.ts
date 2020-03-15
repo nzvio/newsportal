@@ -24,8 +24,10 @@ export interface IArticle extends Document {
     recommended: boolean;
     category: string | ICategory;
     lang: string;
-    user: string | IUser;
-    viewsq: number;
+    user: string | IUser;    
     tags: string[] | ITag[];
+    viewsq: number;
+    rating: number;
+    votesq: number;
     defended: boolean;
 }

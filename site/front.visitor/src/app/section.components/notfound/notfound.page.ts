@@ -1,7 +1,7 @@
 import { Component, Optional, Inject, OnInit } from '@angular/core';
 import { RESPONSE } from '@nguniversal/express-engine/tokens';
 
-import { AppService } from 'src/app/services/app.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
 	selector: 'notfound-page',

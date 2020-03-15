@@ -68,7 +68,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
 
     public shareTw (article: Article): void {        
 		let url: string = `${window.location.protocol}//${window.location.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`;
-		let text: string = article.name+" ("+article.source+")";
+		let text: string = article.name;
 		window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text));		
 	}
 }

@@ -69,17 +69,27 @@ export const ArticleSchema = new mongoose.Schema ({
         type: ObjectId,
         ref: "User",
         required: true
+    },    
+    tags: {
+        type: [{
+            type: ObjectId,
+            ref: "Tag"
+        }],        
     },
     viewsq: {
         type: Number,
         required: true,
         default: 0
     },
-    tags: {
-        type: [{
-            type: ObjectId,
-            ref: "Tag"
-        }],        
+    rating: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    votesq: {
+        type: Number,
+        required: true,
+        default: 0
     },
     defended: {
         type: Boolean,

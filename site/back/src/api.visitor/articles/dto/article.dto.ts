@@ -1,4 +1,6 @@
 import { ICategory } from "../../../model/orm/interfaces/category.interface";
+import { IUser } from "../../../model/orm/interfaces/user.interface";
+import { ITag } from "../../../model/orm/interfaces/tag.interface";
 
 // use it to return extended data object instead of standard IArticle
 export class ArticleDTO {
@@ -22,6 +24,12 @@ export class ArticleDTO {
     public readonly recommended: boolean;
     public readonly category: string | ICategory;
     public readonly lang: string;
+    public readonly user: string | IUser;    
+    public readonly tags: string[] | ITag[];
+    public readonly viewsq: number;
+    public readonly rating: number;
+    public readonly votesq: number;
     public readonly defended: boolean;
     public readonly __commentsq: number;
+    public readonly __created_at: number;
 }
