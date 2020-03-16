@@ -13,8 +13,14 @@ export const ArticleSchema = new mongoose.Schema ({
         trim: true,
         required: true
     },
-    contentshort: String,
-    content: String,
+    contentshort: {
+        type: String,
+        trim: true
+    },
+    content: {
+        type: String,
+        trim: true
+    },
     h1: String,
     title: String,
     keywords: String,

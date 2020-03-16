@@ -10,6 +10,9 @@
 
     <div [class]="isRequired('selector_img') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-selectorimg']}}:</div>
     <div class="df-inputwrap"><input type="text" name="selector_img" [(ngModel)]="x.selector_img"></div>
+
+    <div [class]="isRequired('img_attr') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-donors-imgattr']}}:</div>
+    <div class="df-inputwrap"><input type="text" name="img_attr" [(ngModel)]="x.img_attr"></div>
         
     <div class="df-title"></div>
     <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>    

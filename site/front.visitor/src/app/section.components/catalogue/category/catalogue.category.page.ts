@@ -31,6 +31,7 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 
 	get currentLang(): Lang {return this.langRepository.current.value;}
 	get articles(): Article[] {return this.articleByCategoryRepository.xl;}
+	get scrolledToBottom(): boolean {return this.appService.wrapper.scrollTop + this.appService.wrapper.offsetHeight > this.appService.wrapper.scrollHeight - 400;}	
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(async p => {
@@ -49,11 +50,12 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 				this.categoryReady = true;
 				this.articleByCategoryRepository.xl = [];
 				this.articleByCategoryRepository.currentPart = 0;
+				this.articleByCategoryRepository.loadedAt = 0;
 				this.articleByCategoryRepository.filterCategory = this.category._id;
 				this.articleByCategoryRepository.filterLang = this.currentLang._id;
 
 				try {
-					await this.articleByCategoryRepository.load();
+					await this.articleByCategoryRepository.load();					
 					this.articlesReady = true;
 				} catch (err) {
 					this.appService.showNotification(err, "error");
@@ -73,7 +75,16 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 		this.appService.wrapper.removeEventListener("scroll", this.onScroll);
 	}
 
-	private onScroll(): void {
-		
+	private async onScroll(): Promise<void> {
+		if (this.articlesReady && !this.loadingMore && this.scrolledToBottom && !this.articleByCategoryRepository.exhausted) {
+			try {
+				this.loadingMore = true;
+				this.articleByCategoryRepository.currentPart++;
+				await this.articleByCategoryRepository.load();
+				this.loadingMore = false;
+			} catch (err) {
+				this.appService.showNotification(err, "error");
+			}			
+		}
 	}
 }

@@ -111,7 +111,7 @@ export class TargetsExecutorService extends APIService {
                 this.monitorLog(socket, "targetExecuting", `article already exists, skipping`, "warning", target._id);
             } else {
                 this.monitorLog(socket, "targetExecuting", `article is new, loading URL ${article.source}...`, "info", null);
-                const html: string = await this.requestPage(article.source);
+                const html: string = await this.requestPage(article.source);                
                 
                 if (!html) {
                     this.monitorLog(socket, "targetExecuting", `no HTML received`, "error", target._id);
@@ -143,7 +143,7 @@ export class TargetsExecutorService extends APIService {
                             if (!imgElements.length) {
                                 this.monitorLog(socket, "targetExecuting", `image element not found`, "warning", target._id);
                             } else {
-                                let imgSrc: string = $(imgElements[0]).attr('src');
+                                let imgSrc: string = $(imgElements[0]).attr((target.donor as IDonor).img_attr);
                                 
                                 if (imgSrc.indexOf("http:") === -1 && imgSrc.indexOf("https:") === -1) { // src without host
                                     const urlParts: string[] = article.source.split("/");
@@ -165,6 +165,10 @@ export class TargetsExecutorService extends APIService {
                             const user: IUser = await this.userModel.findOne({defended: true});
                             article.user = user._id;
                             await this.buildTags(article);
+                            article.top = !!Math.round(Math.random());
+                            article.main = !!Math.round(Math.random());
+                            article.popular = !!Math.round(Math.random());
+                            article.recommended = !!Math.round(Math.random());
                             await article.save();
                             this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
                         }
@@ -178,6 +182,7 @@ export class TargetsExecutorService extends APIService {
 
     private monitorLog(socket: Socket | Server | null, event: string, msg: string, status: string, targetId: string | null) {        
         let date: string = this.formatDate(new Date());
+        let error: IParseerror;
 
         if (socket) {
             switch (status) {
@@ -185,14 +190,18 @@ export class TargetsExecutorService extends APIService {
                     socket.emit(event, {statusCode: 102, data: `${date} - ${msg}`});    
                     break;
                 case "warning":
-                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});                     
+                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});  
+                    error = new this.errorModel();
+                    targetId ? error.target = targetId : null;
+                    error.message = msg;
+                    error.save();                      
                     break;
                 case "done":
                     socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});    
                     break;
                 case "error":
                     socket.emit(event, {statusCode: 500, error: `${date} - ${msg}`}); 
-                    let error: IParseerror = new this.errorModel();
+                    error = new this.errorModel();
                     targetId ? error.target = targetId : null;
                     error.message = msg;
                     error.save();   
@@ -228,8 +237,8 @@ export class TargetsExecutorService extends APIService {
             const folder: string = `${date.getFullYear()}-${date.getMonth()+1}`;
             const fullFolder: string = `../static/assets/images/articles/${folder}`;            
             !fs.existsSync (fullFolder) ? fs.mkdirSync (fullFolder) : null;            
-            const writer: fs.WriteStream = fs.createWriteStream(`${fullFolder}/${imgFileFullName}`);            
-            const response: any = await this.httpService.axiosRef({url, method: 'GET', responseType: 'stream'});
+            const writer: fs.WriteStream = fs.createWriteStream(`${fullFolder}/${imgFileFullName}`);                        
+            const response: any = await this.httpService.axiosRef({url: encodeURI(url), method: 'GET', responseType: 'stream'});
             response.data.pipe(writer);
             
             writer.on('finish', async () => {

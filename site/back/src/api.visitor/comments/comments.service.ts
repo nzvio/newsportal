@@ -19,7 +19,8 @@ export class CommentsService extends APIService {
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 10;   
-        const projection: Object = {date: 1, "user._id": 1, "user.name": 1, "user.img_s": 1, content: 1, "article.slug": 1, "article.category.slug": 1};
+        const projection: any = {date: 1, "user._id": 1, "user.name": 1, "user.img_s": 1, content: 1, "article.slug": 1, "article.category.slug": 1};
+        const filter: any = {active: true, "article.active": true, "article.category.active": true, "article.lang": mongoose.Types.ObjectId(dto.filterLang)};
 
         try {            
             const data: IComment[] = await this.commentModel.aggregate([
@@ -29,10 +30,10 @@ export class CommentsService extends APIService {
                 {$unwind: "$article.category"},
                 {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
                 {$unwind: "$user"},                
-                {$match: {active: true, "article.active": true, "article.category.active": true, "article.lang": mongoose.Types.ObjectId(dto.filterLang)}},                
-                {$skip: from},
-                {$limit: q},
+                {$match: filter},                
                 {$sort: {[sortBy]: sortDir}}, 
+                {$skip: from},
+                {$limit: q},                
                 {$project: projection}                
             ]);
             const allData: any = await this.commentModel.aggregate([
@@ -40,7 +41,7 @@ export class CommentsService extends APIService {
                 {$lookup: {from: "categories", localField: "article.category", foreignField: "_id", as: "article.category"}},                    
                 {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}}, 
                 {$unwind: "$user"}, // to preserve not existing, because this operation uses "preserveNullAndEmptyArrays" by default
-                {$match: {active: true, "article.active": true, "article.category.active": true, "article.lang": mongoose.Types.ObjectId(dto.filterLang)}},                
+                {$match: filter},
                 {$count: "fullLength"}
             ]);            
             const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;            

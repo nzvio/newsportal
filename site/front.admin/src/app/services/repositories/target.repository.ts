@@ -27,7 +27,8 @@ export class TargetRepository extends Repository<Target> {
                 this.dataService.targetsChunk(dto).subscribe(res => {
                     if (res.statusCode === 200) {
                         this.xlChunk = res.data.length ? res.data.map(d => new Target().build(d)) : [];                        
-                        this.chunkLoadedAt = new Date().getTime();                    
+                        this.fullLength = res.fullLength;                  
+                        this.chunkLoadedAt = new Date().getTime();                          
                         resolve();
                     } else {                        
                         reject(res.error);

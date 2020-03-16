@@ -20,6 +20,12 @@ export const DonorSchema = new mongoose.Schema ({
         type: String,
         trim: true,
     },
+    img_attr: {
+        type: String,
+        trim: true,
+        required: true,
+        default: "src"
+    },
     defended: {
         type: Boolean,
         required: true,

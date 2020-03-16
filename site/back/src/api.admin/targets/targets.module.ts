@@ -23,7 +23,7 @@ import { TagSchema } from "../../model/orm/schemas/tag.schema";
             {name: 'Tag', schema: TagSchema},
         ]),        
         JwtModule.register(jwtConstants),
-        HttpModule.register({timeout: 5000}),
+        HttpModule.register({timeout: 10000}),
         ServicesModule,
     ],
     controllers: [TargetsController],

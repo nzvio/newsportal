@@ -8,6 +8,7 @@ import { IArticlesGetchunkDTO } from '../../model/dto/articles.getchunk.dto';
 export class ArticleByCategoryRepository extends SimpleRepository<Article> {
     public filterLang: string = "";
     public filterCategory: string = "";
+    public exhausted: boolean = false;
 
     constructor(protected dataService: DataService) {
         super(); 
@@ -25,12 +26,17 @@ export class ArticleByCategoryRepository extends SimpleRepository<Article> {
                 sortDir: this.sortDir,                
                 filterLang: this.filterLang,
                 filterCategory: this.filterCategory,
+                filterLoadedAt: this.loadedAt,
             };
             this.dataService.articlesChunkByCategory(dto).subscribe(res => {
                 if (res.statusCode === 200) {
                     const data: Article[] =  res.data.length ? res.data.map(d => new Article().build(d)) : [];                      
                     this.xl = [...this.xl, ...data];
-                    this.fullLength = res.fullLength;                 
+                    this.fullLength = res.fullLength;                                     
+                    this.exhausted = this.currentPart + 1 === Math.ceil(this.fullLength / this.chunkLength);
+                    // time of first load, will be used in "infinite scroll" on "loading more"
+                    // articles, that created after first load, will not be displayed
+                    !this.loadedAt ? this.loadedAt = new Date().getTime() : null; 
                     resolve();
                 } else {                        
                     reject(res.error);

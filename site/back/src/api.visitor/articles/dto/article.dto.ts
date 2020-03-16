@@ -30,6 +30,5 @@ export class ArticleDTO {
     public readonly rating: number;
     public readonly votesq: number;
     public readonly defended: boolean;
-    public readonly __commentsq: number;
-    public readonly __created_at: number;
+    public readonly __commentsq: number;    
 }

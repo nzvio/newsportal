@@ -140,6 +140,7 @@
             "workspace-donors-encoding": "Encoding",
             "workspace-donors-selectorcontent": "Content selector",
             "workspace-donors-selectorimg": "Image selector",
+            "workspace-donors-imgattr": "Image source attribute",
 
             "workspace-targets-h1": "Targets",            
             "workspace-targets-donor": "Donor",
@@ -310,6 +311,7 @@
             "workspace-donors-encoding": "Кодировка",
             "workspace-donors-selectorcontent": "Селектор контента",
             "workspace-donors-selectorimg": "Селектор изображения",
+            "workspace-donors-imgattr": "Атрибут адреса изображения",
 
             "workspace-targets-h1": "Цели",
             "workspace-targets-donor": "Донор",

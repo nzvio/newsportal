@@ -1,1 +1,3 @@
-<div class="answer-monitor" [innerHTML]="log" #monitor></div>
+<div class="answer-monitor" #monitor>
+    <span *ngFor="let l of log" [innerHTML]="l"></span>
+</div>

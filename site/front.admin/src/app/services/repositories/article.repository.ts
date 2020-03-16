@@ -9,7 +9,7 @@ import { IArticlesGetchunkDTO } from '../../model/dto/articles.getchunk.dto';
 export class ArticleRepository extends Repository<Article> {
     // inherited
     public schema: string = "Article";    
-    public chunkSortBy: string = "date"; 
+    public chunkSortBy: string = "_id"; 
     public chunkSortDir: number = -1; 
     // local
     public filterDate: Date | null = null;

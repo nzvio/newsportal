@@ -23,7 +23,7 @@ export class TargetsService extends APIService {
 
         try {
             let data: ITarget[] = await this.model.find({}, null, {skip: from, limit: q, sort: {[sortBy]: sortDir}});
-            let fullLength: number = await this.model.countDocuments();
+            let fullLength: number = await this.model.countDocuments();            
             return {statusCode: 200, data, fullLength};
         } catch (err) {
             let errTxt: string = `Error in TargetsService.chunk: ${String(err)}`;

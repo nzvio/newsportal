@@ -6,5 +6,6 @@ export class ArticlesGetchunkDTO {
     public readonly filterDate?: string | null;
     public readonly filterName?: string;
     public readonly filterCategory?: string | null;
-    public readonly filterLang?: string | null;    
+    public readonly filterLang?: string | null; 
+    public readonly filterLoadedAt?: number;   
 }

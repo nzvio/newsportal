@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AnswerMonitorComponent implements AfterViewInit, OnInit {
     @Input() inputAnswer: BehaviorSubject<IAnswer<string>>;
     @Input() reset: BehaviorSubject<boolean>;
-    public log: string = "";
+    public log: string[] = [];
     @ViewChild("monitor", {static: false}) monitorRef: ElementRef;
     private monitor: HTMLElement | null = null;
 
@@ -21,24 +21,28 @@ export class AnswerMonitorComponent implements AfterViewInit, OnInit {
     }
     
     public ngOnInit(): void {
-        this.reset.subscribe(reset => reset ? this.log = "" : null);
+        this.reset.subscribe(reset => reset ? this.log = [] : null);
         this.inputAnswer.subscribe(answer => answer ? this.buildLog(answer) : null);
     }
 
     private buildLog(answer: IAnswer<string>): void {
         switch (answer.statusCode) {
             case 200:
-                this.log += `> <span class='done'>${answer.data}</span><br>`;
+                this.log.push(`> <span class='done'>${answer.data}</span><br>`);
                 break;
             case 500:
-                this.log += `> <span class='error'>${answer.error}</span><br>`;
+                this.log.push(`> <span class='error'>${answer.error}</span><br>`);
                 break;
             case 199:
-                this.log += `> <span class='warning'>${answer.error}</span><br>`;
+                this.log.push(`> <span class='warning'>${answer.error}</span><br>`);
                 break;
             default:
-                this.log += `> ${answer.data}<br>`;
+                this.log.push(`> ${answer.data}<br>`);
                 break;
+        }
+
+        if (this.log.length === 100) {
+            this.log.splice(0, 1);
         }
 
         if (this.monitor) {

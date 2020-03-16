@@ -15,7 +15,7 @@ export class DonorsEditPage extends ObjectPage<Donor> implements OnInit {
 	public x: Donor | null = null;
 	public homeUrl: string = "/parsing/donors";
 	public folder: string | null = null;
-	public requiredFields: string[] = ["name"];
+	public requiredFields: string[] = ["name", "img_attr"];
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,
