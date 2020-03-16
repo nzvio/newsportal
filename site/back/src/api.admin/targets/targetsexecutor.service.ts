@@ -127,10 +127,13 @@ export class TargetsExecutorService extends APIService {
                         article.content = "";                            
 
                         for (let i: number = 0; i < textElements.length; i++) {
-                            article.content += `<p>${$(textElements[i]).html()}</p>`;
-                        }
-
-                        article.contentshort = String($(textElements[0]).text()).substr(0, 300);
+                            const text: string = $(textElements[i]).text();
+                            
+                            if (text) {
+                                article.content += `<p>${text}</p>`;
+                                !article.contentshort ? article.contentshort = text : null;                               
+                            }                            
+                        }                        
 
                         if (!article.content) {
                             this.monitorLog(socket, "targetExecuting", `content not found`, "error", target._id);
@@ -141,14 +144,20 @@ export class TargetsExecutorService extends APIService {
                             const imgElements: Cheerio = $((target.donor as IDonor).selector_img);
 
                             if (!imgElements.length) {
-                                this.monitorLog(socket, "targetExecuting", `image element not found`, "warning", target._id);
+                                this.monitorLog(socket, "targetExecuting", `image element not found`, "error", target._id);
                             } else {
                                 let imgSrc: string = $(imgElements[0]).attr((target.donor as IDonor).img_attr);
                                 
                                 if (imgSrc.indexOf("http:") === -1 && imgSrc.indexOf("https:") === -1) { // src without host
                                     const urlParts: string[] = article.source.split("/");
-                                    const imgHost: string = urlParts[0] + "//" + urlParts[2] + "/";
-                                    imgSrc = imgHost + imgSrc;
+                                    
+                                    if (imgSrc.indexOf("//") === -1) {
+                                        const imgHost: string = urlParts[0] + "//" + urlParts[2] + "/";
+                                        imgSrc.charAt(0) === "/" ? imgSrc = imgSrc.substr(1) : null; // if src = "/addr" then convert it to "addr"
+                                        imgSrc = imgHost + imgSrc;
+                                    } else {
+                                        imgSrc = urlParts[0] + imgSrc;
+                                    }                                    
                                 }
 
                                 this.monitorLog(socket, "targetExecuting", `image found, loading ${imgSrc}...`, "info", null);
@@ -156,21 +165,20 @@ export class TargetsExecutorService extends APIService {
                                 article.img = images.img;
                                 article.img_s = images.img_s;
                                 this.monitorLog(socket, "targetExecuting", `image saved to ${article.img}, copy saved to ${article.img_s}`, "info", null);
-                            }
 
-
-                            article.category = target.category;
-                            article.lang = target.lang;
-                            article.slug = this.slugService.buildSlug(article.name);
-                            const user: IUser = await this.userModel.findOne({defended: true});
-                            article.user = user._id;
-                            await this.buildTags(article);
-                            article.top = !!Math.round(Math.random());
-                            article.main = !!Math.round(Math.random());
-                            article.popular = !!Math.round(Math.random());
-                            article.recommended = !!Math.round(Math.random());
-                            await article.save();
-                            this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
+                                article.category = target.category;
+                                article.lang = target.lang;
+                                article.slug = this.slugService.buildSlug(article.name);
+                                const user: IUser = await this.userModel.findOne({defended: true});
+                                article.user = user._id;
+                                await this.buildTags(article);
+                                article.top = !!Math.round(Math.random());
+                                article.main = !!Math.round(Math.random());
+                                article.popular = !!Math.round(Math.random());
+                                article.recommended = !!Math.round(Math.random());
+                                await article.save();
+                                this.monitorLog(socket, "targetExecuting", `article saved`, "info", null);
+                            }                            
                         }
                     }
                 }
@@ -190,11 +198,7 @@ export class TargetsExecutorService extends APIService {
                     socket.emit(event, {statusCode: 102, data: `${date} - ${msg}`});    
                     break;
                 case "warning":
-                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});  
-                    error = new this.errorModel();
-                    targetId ? error.target = targetId : null;
-                    error.message = msg;
-                    error.save();                      
+                    socket.emit(event, {statusCode: 199, error: `${date} - ${msg}`});                                    
                     break;
                 case "done":
                     socket.emit(event, {statusCode: 200, data: `${date} - ${msg}`});    
@@ -229,7 +233,8 @@ export class TargetsExecutorService extends APIService {
     private requestImage(url: string): Promise<IImagable> {
         return new Promise(async (resolve, reject) => {
             const date: Date = new Date();
-            const fileExtension: string = url.split(".").pop() || "";
+            const urlWithoutQuery: string = url.split("?")[0];
+            const fileExtension: string = urlWithoutQuery.split(".").pop() || "";
             const imgFileName: string = date.getTime().toString();
             const imgsFileName: string = imgFileName + "_s";
             const imgFileFullName: string = `${imgFileName}.${fileExtension}`;

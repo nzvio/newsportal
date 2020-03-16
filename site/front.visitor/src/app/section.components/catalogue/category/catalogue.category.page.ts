@@ -65,14 +65,18 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	public ngAfterViewInit(): void {
-		setTimeout(() => {
-			this.onScroll = this.onScroll.bind (this); 
-			this.appService.wrapper.addEventListener("scroll", this.onScroll);
-		}, 1);		
+		if (this.appService.isBrowser) {
+			setTimeout(() => {
+				this.onScroll = this.onScroll.bind (this); 
+				this.appService.wrapper.addEventListener("scroll", this.onScroll);
+			}, 1);		
+		}		
 	}
 
 	public ngOnDestroy(): void {
-		this.appService.wrapper.removeEventListener("scroll", this.onScroll);
+		if (this.appService.isBrowser) {
+			this.appService.wrapper.removeEventListener("scroll", this.onScroll);
+		}
 	}
 
 	private async onScroll(): Promise<void> {

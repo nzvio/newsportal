@@ -27,7 +27,7 @@
                 <nav class="h-nav-bottom">
                     <ul>
                         <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                        <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
+                        <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                     </ul>
                 </nav>
                 <div class="h-dash">                    
@@ -51,7 +51,7 @@
             <nav class="h-nav-bottom">
                 <ul>
                     <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                    <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
+                    <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>
             <div class="h-dash">
@@ -89,7 +89,7 @@
             <nav>
                 <ul>
                     <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
-                    <li *ngFor="let c of categories"><a [class.active]="url[3] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
+                    <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>
             <nav>
