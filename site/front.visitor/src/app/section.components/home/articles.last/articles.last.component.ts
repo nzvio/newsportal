@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-declare var FB: any;
 
 import { Lang } from '../../../model/orm/lang.model';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
@@ -62,13 +61,10 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
     }
 
     public shareFb(article: Article): void {                        
-        let fbParam: Object = {method: 'share', href: `${window.location.protocol}//${window.location.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`};
-        FB.ui (fbParam, response => {console.log (response)});
+        this.appService.shareFb(this.currentLang, article);        
     }
 
     public shareTw (article: Article): void {        
-		let url: string = `${window.location.protocol}//${window.location.host}/${this.currentLang.slug}/catalogue/category/${article.category.slug}/${article.slug}`;
-		let text: string = article.name;
-		window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text));		
+        this.appService.shareTw(this.currentLang, article);		
 	}
 }

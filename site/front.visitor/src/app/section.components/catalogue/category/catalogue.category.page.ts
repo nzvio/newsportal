@@ -11,8 +11,7 @@ import { Article } from '../../../model/orm/article.model';
 
 @Component({
 	selector: 'catalogue-category-page',
-	templateUrl: './catalogue.category.page.html',
-	styleUrls: ['../catalogue.list.scss']
+	templateUrl: './catalogue.category.page.html',	
 })
 export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {		
 	public category: Category | null = null;
@@ -90,5 +89,5 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 				this.appService.showNotification(err, "error");
 			}			
 		}
-	}
+	}	
 }

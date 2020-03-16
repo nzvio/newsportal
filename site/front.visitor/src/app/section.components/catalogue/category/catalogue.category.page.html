@@ -5,53 +5,9 @@
                 <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
                 <span [innerHTML]="category.name[currentLang._id]"></span>
             </div>
-            <h1 [innerHTML]="category.h1[currentLang._id] || category.name[currentLang._id]"></h1>
+            <h1><span [innerHTML]="currentLang.s('category')"></span>: <span [innerHTML]="category.h1[currentLang._id] || category.name[currentLang._id]"></span></h1>
         </ng-container>        
-        
-        <div id="cataloguelist">            
-            <ng-container *ngIf="articlesReady">
-                <article *ngFor="let a of articles">
-                    <a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a>
-                    <div class="ca-details1">
-                        <div class="ca-cat" [innerHTML]="category.name[currentLang._id]"></div>
-                        <div class="ca-date">{{a.formatedDate(currentLang)}}</div>
-                        <div class="ca-comments">{{a.__commentsq}}</div>
-                        <div class="ca-rating">
-                            <div class="car-stars">
-                                <span [class.filled]="a.formatedRating >= 1"></span>
-                                <span [class.filled]="a.formatedRating >= 2"></span>
-                                <span [class.filled]="a.formatedRating >= 3"></span>
-                                <span [class.filled]="a.formatedRating >= 4"></span>
-                                <span [class.filled]="a.formatedRating === 5"></span>
-                            </div>
-                            <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('category-votes')}})</div>
-                        </div>
-                        <div class="ca-views">{{a.viewsq}}</div>
-                    </div>
-                    <div class="ca-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
-                    <div class="ca-details2">
-                        <div class="ca-socnets">
-                            <div class="ca-socnet fb"><span></span></div>
-                            <div class="ca-socnet tw"><span></span></div>
-                        </div>
-                        <div class="ca-author" *ngIf="a.user">
-                            <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
-                            <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
-                        </div>
-                    </div>
-                    <div class="ca-short" [innerHTML]="a.contentshort+'...'"></div>
-                    <div class="ca-tags">
-                        <span class="ca-tag" *ngFor="let t of a.tags" [innerHTML]="t.name"></span>                        
-                    </div>
-                    <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}">{{currentLang.s('category-more')}}</a></div>
-                </article>
-            </ng-container>            
-            <ng-container *ngIf="!articlesReady || loadingMore">
-                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
-                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
-                <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
-            </ng-container>                
-        </div>        
+        <articles-list [articles]="articles" [articlesReady]="articlesReady" [loadingMore]="loadingMore"></articles-list>                
     </main>
     <aside>
         <the-sidebar></the-sidebar>

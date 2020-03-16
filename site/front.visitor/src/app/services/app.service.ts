@@ -3,7 +3,11 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
+declare var FB: any;
+
 import { INotification } from '../model/notification.interface';
+import { Article } from '../model/orm/article.model';
+import { Lang } from '../model/orm/lang.model';
 
 @Injectable()
 export class AppService {
@@ -104,4 +108,19 @@ export class AppService {
     
         return text;
     }
+
+    public shareFb(lang: Lang, article: Article): void {                        
+        if (this.isBrowser && FB) {
+            let fbParam: Object = {method: 'share', href: `${window.location.protocol}//${window.location.host}/${lang.slug}/catalogue/category/${article.category.slug}/${article.slug}`};
+            FB.ui (fbParam, response => {console.log (response)});
+        }        
+    }
+
+    public shareTw (lang: Lang, article: Article): void {        
+        if (this.isBrowser) {
+            let url: string = `${window.location.protocol}//${window.location.host}/${lang.slug}/catalogue/category/${article.category.slug}/${article.slug}`;
+            let text: string = article.name;
+            window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text));		
+        }        
+	}
 }
