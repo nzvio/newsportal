@@ -21,8 +21,8 @@
             <div class="ca-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
             <div class="ca-details2">
                 <div class="ca-socnets">
-                    <div class="ca-socnet fb"><span></span></div>
-                    <div class="ca-socnet tw"><span></span></div>
+                    <div class="ca-socnet fb" (click)="shareFb(a);"><span></span></div>
+                    <div class="ca-socnet tw" (click)="shareTw(a);"><span></span></div>
                 </div>
                 <div class="ca-author" *ngIf="a.user">
                     <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
