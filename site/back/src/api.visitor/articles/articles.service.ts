@@ -179,20 +179,19 @@ export class ArticlesService extends APIService {
         try {
             const data: ArticleDTO[] = await this.articleModel.aggregate([
                 {$addFields: {created_at: {$toDate: "$_id"}}},
+                {$match: filter},
                 {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
                 {$addFields: {__commentsq: {$size: "$comments"}}},
                 {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
                 {$unwind: {path: "$user", preserveNullAndEmptyArrays: false}}, // if user not exist, article will still be displayed
-                {$lookup: {from: "tags", localField: "tags", foreignField: "_id", as: "tags"}}, // unwind not needed for array field
-                {$match: filter},
-                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}}, // join categories after filter, because filter uses article.category as category._id
+                {$lookup: {from: "tags", localField: "tags", foreignField: "_id", as: "tags"}}, // unwind not needed for array field                
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}}, // notice: join categories must be after filter, because filter uses article.category as category._id
                 {$unwind: "$category"},                
                 {$sort: {[sortBy]: sortDir}},                
                 {$skip: from},
                 {$limit: q},                
                 {$project: projection},
-            ]);
-            console.log(data);
+            ]);            
             const allData: any = await this.articleModel.aggregate([
                 {$addFields: {created_at: {$toDate: "$_id"}}},
                 {$match: filter},

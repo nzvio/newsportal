@@ -7,6 +7,7 @@ import { ArticlesModule } from "./articles/articles.module";
 import { CommentsModule } from "./comments/comments.module";
 import { TagsModule } from "./tags/tags.module";
 import { SettingsModule } from "./settings/settings.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { SettingsModule } from "./settings/settings.module";
         CommentsModule,
         TagsModule,
         SettingsModule,
+        UsersModule,
     ],    
 })
 export class VisitorAPIModule {}

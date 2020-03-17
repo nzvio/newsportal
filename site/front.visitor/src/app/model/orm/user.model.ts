@@ -9,5 +9,8 @@ export class User extends Model {
     public img_s: string;
     public active: boolean;
     public usergroup: string;
-    public defended: boolean;    
+    public defended: boolean;   
+    public __articlesq: number;
+    public __commentsq: number; 
+    public __loadedat: number;
 }

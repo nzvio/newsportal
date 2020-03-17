@@ -18,6 +18,10 @@ export class ErrorService {
         if (res.statusCode === 403) {                
             this.router.navigateByUrl("/auth/logout");
         }
+
+        if (res.statusCode === 404) {                
+            this.router.navigateByUrl("/404");
+        }
         
         (res.error) ? this.appService.showNotification(res.error, "error") : null;
         return false;

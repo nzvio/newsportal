@@ -15,6 +15,7 @@ import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
 import { SettingRepository } from './repositories/setting.repository';
 import { ArticleByCategoryRepository } from './repositories/article.bycategory.repository';
+import { UserRepository } from './repositories/user.repository';
 
 @NgModule({
     imports: [                
@@ -38,6 +39,7 @@ import { ArticleByCategoryRepository } from './repositories/article.bycategory.r
         CommentRepository,
         TagRepository,
         SettingRepository,
+        UserRepository,
     ],
 })
 export class ServicesModule {    

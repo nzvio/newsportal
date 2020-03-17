@@ -15,6 +15,7 @@ import { ICommentsGetchunkDTO } from '../model/dto/comments.getchunk.dto';
 import { Comment } from '../model/orm/comment.model';
 import { IGetallDTO } from '../model/dto/getall.dto';
 import { Setting } from '../model/orm/setting.model';
+import { User } from '../model/orm/user.model';
 
 @Injectable()
 export class DataService {
@@ -38,6 +39,7 @@ export class DataService {
     public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
+    public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

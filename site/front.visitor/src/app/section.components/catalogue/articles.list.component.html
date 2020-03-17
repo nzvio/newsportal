@@ -14,7 +14,7 @@
                         <span [class.filled]="a.formatedRating >= 4"></span>
                         <span [class.filled]="a.formatedRating === 5"></span>
                     </div>
-                    <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('category-votes')}})</div>
+                    <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('votes')}})</div>
                 </div>
                 <div class="ca-views">{{a.viewsq}}</div>
             </div>
@@ -33,7 +33,7 @@
             <div class="ca-tags">
                 <span class="ca-tag" *ngFor="let t of a.tags" [innerHTML]="t.name"></span>                        
             </div>
-            <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">{{currentLang.s('category-more')}}</a></div>
+            <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">{{currentLang.s('more')}}</a></div>
         </article>
     </ng-container>            
     <ng-container *ngIf="!articlesReady || loadingMore">
