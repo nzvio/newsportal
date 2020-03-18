@@ -3,6 +3,7 @@ import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Title, Meta } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 declare var FB: any;
 
 import { INotification } from '../model/notification.interface';
@@ -17,6 +18,8 @@ export class AppService {
     public notificationTimer: number = null;
     public stickyVisible: boolean = false;
     public indicatorWidth: number = 0;
+    public searchActive: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    public searchKeyword: BehaviorSubject<string> = new BehaviorSubject("");
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,
@@ -33,7 +36,7 @@ export class AppService {
     private initURLRoutine(): void {
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe((event: NavigationEnd) => {this.url = event.url.split("/")});
+            .subscribe((event: NavigationEnd) => {this.url = event.url.split("/");});
     }
 
     public smoothScroll (from: number, to: number, duration: number, element: HTMLElement): void {		

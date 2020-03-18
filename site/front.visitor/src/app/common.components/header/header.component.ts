@@ -35,7 +35,7 @@ export class HeaderComponent implements AfterViewInit {
     get currentLang(): Lang {return this.langRepository.current.value;}
     get langs(): Lang[] {return this.langRepository.xl;}
     get pages(): Page[] {return this.pageRepository.xl;}
-    get categories(): Category[] {return this.categoryRepository.xl;}    
+    get categories(): Category[] {return this.categoryRepository.xl;}     
 
     public async ngAfterViewInit(): Promise<void> {
         if (this.isBrowser) {
@@ -81,5 +81,9 @@ export class HeaderComponent implements AfterViewInit {
         }
 
         return link;
+    }
+
+    public activateSearch(): void {
+        this.appService.searchActive.next(true);
     }
 }

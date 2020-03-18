@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from "@angular/forms";
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -9,11 +10,13 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { ArticlesRecommendedComponent } from './sidebar/articles.recommended/articles.recommended.component';
 import { CommentsLastComponent } from './sidebar/comments.last/comments.last.component';
 import { TagsComponent } from './sidebar/tags/tags.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
     imports: [
         RouterModule,
         CommonModule,
+        FormsModule,
     ],
     declarations: [
         HeaderComponent,
@@ -23,6 +26,7 @@ import { TagsComponent } from './sidebar/tags/tags.component';
         ArticlesRecommendedComponent,
         CommentsLastComponent,
         TagsComponent,
+        SearchComponent,
     ],
     exports: [
         HeaderComponent,
@@ -32,8 +36,8 @@ import { TagsComponent } from './sidebar/tags/tags.component';
         ArticlesRecommendedComponent,
         CommentsLastComponent,
         TagsComponent,
-    ],
-    providers: []
+        SearchComponent,
+    ],    
 })
 export class CCModule {    
 }

@@ -3,9 +3,10 @@ export class ArticlesGetchunkDTO {
     public readonly q?: number;
     public readonly sortBy?: string;
     public readonly sortDir?: number;    
-    public readonly filterDate?: string | null;
+    public readonly filterDate?: string;
     public readonly filterName?: string;
-    public readonly filterCategory?: string | null;
-    public readonly filterLang?: string | null; 
+    public readonly filterCategory?: string;
+    public readonly filterLang?: string; 
     public readonly filterLoadedAt?: number;   
+    public readonly filterUser?: string;
 }

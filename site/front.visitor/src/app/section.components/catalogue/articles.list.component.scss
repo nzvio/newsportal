@@ -9,7 +9,8 @@
             .ca-cat {
                 @media (min-width:0) {margin-right: 10px;}
                 @media (min-width:640px) {margin-right: 20px;}     
-                background-color: $color-blue; padding: 5px; color: #fff; text-transform: uppercase; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; margin-bottom: 10px; white-space: nowrap;
+                background-color: $color-blue; color: #fff; text-transform: uppercase; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: 3px; margin-bottom: 10px; white-space: nowrap;
+                span, a, a:visited {color: #fff; text-decoration: none; display: inline-block; padding: 5px;}
             }
             .ca-date {
                 @media (min-width:0) {margin-right: 10px;}

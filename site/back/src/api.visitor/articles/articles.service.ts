@@ -141,16 +141,16 @@ export class ArticlesService extends APIService {
 
         try {            
             const data: ArticleDTO[] = await this.articleModel.aggregate([
-                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
-                {$addFields: {__commentsq: {$size: "$comments"}}},
                 {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
                 {$unwind: "$category"},
-                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
-                {$unwind: {path: "$user", preserveNullAndEmptyArrays: false}}, // if user not exist, article will still be displayed
                 {$match: filter},
                 {$sort: {[sortBy]: sortDir}},                
                 {$skip: from},
                 {$limit: q},                
+                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
+                {$addFields: {__commentsq: {$size: "$comments"}}},                
+                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
+                {$unwind: {path: "$user", preserveNullAndEmptyArrays: false}}, // if user not exist, article will still be displayed                
                 {$project: projection},                
             ]);     
             const allData: any = await this.articleModel.aggregate([
@@ -167,13 +167,15 @@ export class ArticlesService extends APIService {
         }
     }
 
-    public async chunkByCategory(dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
+    public async chunkByCategoryOrUser(dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
         const sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "date";
         const sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : -1;
         const from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         const q: number = !this.isEmpty(dto.q) ? dto.q : 10;        
         const projection: any = {name: 1, slug: 1, img: 1, date: 1, contentshort: 1, "category.slug": 1, "category.name": 1, "user._id": 1, "user.name": 1, "user.img_s": 1, viewsq: 1, rating: 1, votesq: 1, tags: 1, __commentsq: 1};               
-        let filter: any = {lang: mongoose.Types.ObjectId(dto.filterLang), category: mongoose.Types.ObjectId(dto.filterCategory), active: true};
+        let filter: any = {lang: mongoose.Types.ObjectId(dto.filterLang), active: true};
+        dto.filterCategory ? filter.category = mongoose.Types.ObjectId(dto.filterCategory) : null; // filter by category
+        dto.filterUser ? filter.user = mongoose.Types.ObjectId(dto.filterUser) : null; // filter by user
         dto.filterLoadedAt ? filter.created_at = {$lt: new Date(dto.filterLoadedAt)} : null; // dont include articles that arrived after first chunk loading        
 
         try {
@@ -200,7 +202,7 @@ export class ArticlesService extends APIService {
             const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;              
             return {statusCode: 200, data, fullLength};
         } catch (err) {
-            let errTxt: string = `Error in ArticlesService.chunkByCategory: ${String(err)}`;
+            let errTxt: string = `Error in ArticlesService.chunkBy: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

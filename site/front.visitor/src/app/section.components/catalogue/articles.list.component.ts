@@ -14,6 +14,8 @@ export class ArticlesListComponent {
     @Input() articlesReady: boolean = false;
     @Input() loadingMore: boolean = false;
     @Input() articles: Article[] = [];
+    @Input() displayUser: boolean = true;
+    @Input() categoryAsLink: boolean = false;
 
     constructor(
         private appService: AppService,

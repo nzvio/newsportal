@@ -1,4 +1,5 @@
 import { Model } from '../model';
+import { Lang } from './lang.model';
 
 export class User extends Model {    
     public _id: string;
@@ -12,5 +13,11 @@ export class User extends Model {
     public defended: boolean;   
     public __articlesq: number;
     public __commentsq: number; 
+    public __createdat: string;
     public __loadedat: number;
+
+    public formatedCreatedAt(lang: Lang): string {
+        const date: Date = new Date(this.__createdat);
+        return `${date.getDate()} ${lang.s('month-'+(date.getMonth()+1))} ${date.getFullYear()}, ${date.getHours()}:${this.twoDigits(date.getMinutes())}`;
+    }
 }

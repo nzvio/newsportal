@@ -7,7 +7,7 @@
             </div>
             <h1><span [innerHTML]="currentLang.s('catalogue-category')"></span>: <span [innerHTML]="category.h1[currentLang._id] || category.name[currentLang._id]"></span></h1>
         </ng-container>        
-        <articles-list [articles]="articles" [articlesReady]="articlesReady" [loadingMore]="loadingMore"></articles-list>                
+        <articles-list [articles]="articles" [articlesReady]="articlesReady" [loadingMore]="loadingMore" [displayUser]="true" [categoryAsLink]="false"></articles-list>                
     </main>
     <aside>
         <the-sidebar></the-sidebar>

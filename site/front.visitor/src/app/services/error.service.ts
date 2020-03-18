@@ -7,23 +7,24 @@ import { AppService } from './app.service';
 export class ErrorService {
     constructor(
         private router: Router,
-        private appService: AppService,
+        private appService: AppService,        
     ) {}
 
-    public processResponse(res: any): boolean {        
+    public processResponse(res: any): boolean {
         if (res.statusCode === 200) {
             return true;
         }
+
+        (res.error) ? setTimeout(() => {this.appService.showNotification(res.error, "error");}, 1000) : null;
         
         if (res.statusCode === 403) {                
             this.router.navigateByUrl("/auth/logout");
         }
 
         if (res.statusCode === 404) {                
-            this.router.navigateByUrl("/404");
-        }
+            this.router.navigateByUrl("/404");            
+        }        
         
-        (res.error) ? this.appService.showNotification(res.error, "error") : null;
         return false;
     }
 }

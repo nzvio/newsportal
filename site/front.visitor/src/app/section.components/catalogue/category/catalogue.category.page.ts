@@ -73,7 +73,7 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	public ngOnDestroy(): void {
-		if (this.appService.isBrowser) {
+		if (this.appService.isBrowser && this.appService.wrapper) {
 			this.appService.wrapper.removeEventListener("scroll", this.onScroll);
 		}
 	}

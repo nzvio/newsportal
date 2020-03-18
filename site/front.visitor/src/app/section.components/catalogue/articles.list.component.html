@@ -3,7 +3,10 @@
         <article *ngFor="let a of articles">
             <a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a>
             <div class="ca-details1">
-                <div class="ca-cat" [innerHTML]="a.category.name[currentLang._id]"></div>
+                <div class="ca-cat">
+                    <span *ngIf="!categoryAsLink" [innerHTML]="a.category.name[currentLang._id]"></span>
+                    <a *ngIf="categoryAsLink" [innerHTML]="a.category.name[currentLang._id]" routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}"></a>
+                </div>
                 <div class="ca-date">{{a.formatedDate(currentLang)}}</div>
                 <div class="ca-comments">{{a.__commentsq}}</div>
                 <div class="ca-rating">
@@ -24,8 +27,8 @@
                     <div class="ca-socnet fb" (click)="shareFb(a);"><span></span></div>
                     <div class="ca-socnet tw" (click)="shareTw(a);"><span></span></div>
                 </div>
-                <div class="ca-author" *ngIf="a.user">
-                    <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(../../assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
+                <div class="ca-author" *ngIf="displayUser && a.user">
+                    <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(/assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
                     <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
                 </div>
             </div>

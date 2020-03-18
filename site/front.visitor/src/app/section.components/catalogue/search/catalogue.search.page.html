@@ -1,0 +1,16 @@
+<div class="wrap2 padded">
+    <main>        
+        <div id="breadcrumbs">
+            <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+            <span [innerHTML]="currentLang.s('search')"></span>
+        </div>
+        <h1><span [innerHTML]="currentLang.s('search')"></span>: <span [innerHTML]="searchKeyword"></span></h1>
+        
+        
+
+        
+    </main>
+    <aside>
+        <the-sidebar></the-sidebar>
+    </aside>  
+</div>

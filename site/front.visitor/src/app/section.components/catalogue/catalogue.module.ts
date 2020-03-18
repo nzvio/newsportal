@@ -7,11 +7,13 @@ import { ArticlesListComponent } from "./articles.list.component";
 import { CatalogueCategoryPage } from './category/catalogue.category.page';
 import { CatalogueArticlePage } from './article/catalogue.article.page';
 import { CatalogueUserPage } from './user/catalogue.user.page';
+import { CatalogueSearchPage } from './search/catalogue.search.page';
 
 let routes = RouterModule.forChild ([        
-    {path:"category/:category", component: CatalogueCategoryPage},
-    {path:"category/:category/:article", component: CatalogueArticlePage},
-    {path:"user/:user", component: CatalogueUserPage},
+    {path: "category/:category", component: CatalogueCategoryPage},
+    {path: "category/:category/:article", component: CatalogueArticlePage},
+    {path: "user/:user", component: CatalogueUserPage},
+    {path: "search", component: CatalogueSearchPage, pathMatch: "full"}
 ]);
 
 @NgModule({
@@ -25,11 +27,13 @@ let routes = RouterModule.forChild ([
         CatalogueCategoryPage,
         CatalogueArticlePage,
         CatalogueUserPage,
+        CatalogueSearchPage,
     ],
     exports: [
         CatalogueCategoryPage,
         CatalogueArticlePage,
         CatalogueUserPage,
+        CatalogueSearchPage,
     ],    
 })
 export class CatalogueModule {}

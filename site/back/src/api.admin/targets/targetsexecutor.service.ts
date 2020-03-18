@@ -232,27 +232,35 @@ export class TargetsExecutorService extends APIService {
     
     private requestImage(url: string): Promise<IImagable> {
         return new Promise(async (resolve, reject) => {
-            const date: Date = new Date();
-            const urlWithoutQuery: string = url.split("?")[0];
-            const fileExtension: string = urlWithoutQuery.split(".").pop() || "";
-            const imgFileName: string = date.getTime().toString();
-            const imgsFileName: string = imgFileName + "_s";
-            const imgFileFullName: string = `${imgFileName}.${fileExtension}`;
-            const imgsFileFullName: string = `${imgsFileName}.${fileExtension}`;
-            const folder: string = `${date.getFullYear()}-${date.getMonth()+1}`;
-            const fullFolder: string = `../static/assets/images/articles/${folder}`;            
-            !fs.existsSync (fullFolder) ? fs.mkdirSync (fullFolder) : null;            
-            const writer: fs.WriteStream = fs.createWriteStream(`${fullFolder}/${imgFileFullName}`);                        
-            const response: any = await this.httpService.axiosRef({url: encodeURI(url), method: 'GET', responseType: 'stream'});
-            response.data.pipe(writer);
-            
-            writer.on('finish', async () => {
-                await sharp(`${fullFolder}/${imgFileFullName}`).resize(200).toFile(`${fullFolder}/${imgsFileFullName}`);
-                const res: IImagable = {img: `${folder}/${imgFileFullName}`, img_s: `${folder}/${imgsFileFullName}`};
-                resolve(res);
-            });
-            
-            writer.on('error', reject);            
+            try {
+                const date: Date = new Date();
+                const urlWithoutQuery: string = url.split("?")[0];
+                const fileExtension: string = urlWithoutQuery.split(".").pop() || "";
+                const imgFileName: string = date.getTime().toString();
+                const imgsFileName: string = imgFileName + "_s";
+                const imgFileFullName: string = `${imgFileName}.${fileExtension}`;
+                const imgsFileFullName: string = `${imgsFileName}.${fileExtension}`;
+                const folder: string = `${date.getFullYear()}-${date.getMonth()+1}`;
+                const fullFolder: string = `../static/assets/images/articles/${folder}`;            
+                !fs.existsSync (fullFolder) ? fs.mkdirSync (fullFolder) : null;            
+                const writer: fs.WriteStream = fs.createWriteStream(`${fullFolder}/${imgFileFullName}`);                        
+                const response: any = await this.httpService.axiosRef({url: encodeURI(url), method: 'GET', responseType: 'stream'});
+                response.data.pipe(writer);
+                
+                writer.on('finish', async () => {
+                    try {
+                        await sharp(`${fullFolder}/${imgFileFullName}`).resize(200).toFile(`${fullFolder}/${imgsFileFullName}`);
+                        const res: IImagable = {img: `${folder}/${imgFileFullName}`, img_s: `${folder}/${imgsFileFullName}`};
+                        resolve(res);
+                    } catch (err) {
+                        reject(err);
+                    }                    
+                });
+                
+                writer.on('error', reject);            
+            } catch (err) {
+                reject(err);
+            }            
         });
     }
 

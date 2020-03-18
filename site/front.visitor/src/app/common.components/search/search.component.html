@@ -1,0 +1,3 @@
+<div id="search-container" [class.active]="active" (click)="onClick($event)">
+    <input #searchinput [(ngModel)]="search" id="search-input" [placeholder]="currentLang.s('search')+'...'" (keyup)="onKeyup($event);">
+</div>

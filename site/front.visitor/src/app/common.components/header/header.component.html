@@ -26,7 +26,7 @@
             <div class="h-menu">
                 <nav class="h-nav-bottom">
                     <ul>
-                        <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                        <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3 && url[1] != '404'">{{currentLang.s('home')}}</a></li>
                         <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                     </ul>
                 </nav>
@@ -36,7 +36,7 @@
                             <li *ngFor="let l of langs"><a [class]="l._id === currentLang._id ? 'active' : ''" [routerLink]="getLangLink(l.slug)">{{l.name}}</a></li>                            
                         </ul>
                     </div>
-                    <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}"></span>
+                    <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
                     <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
                 </div>
             </div>			
@@ -50,7 +50,7 @@
         <div class="h-menu">
             <nav class="h-nav-bottom">
                 <ul>
-                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3 && url[1] != '404'">{{currentLang.s('home')}}</a></li>
                     <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>
@@ -60,7 +60,7 @@
                         <li *ngFor="let l of langs"><a [class]="l._id === currentLang._id ? 'active' : ''" [routerLink]="getLangLink(l.slug)">{{l.name}}</a></li>                            
                     </ul>
                 </div>
-                <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}"></span>
+                <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
                 <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
             </div>
         </div>			
@@ -71,7 +71,7 @@
 <header id="mobile">
     <div id="hm-logo" routerLink="/{{currentLang.slug}}"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
     <div id="hm-dash">
-        <div class="hm-btn hm-search" title="{{currentLang.s('search')}}"><span></span></div>
+        <div class="hm-btn hm-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"><span></span></div>
         <div class="hm-btn hm-login" title="{{currentLang.s('login')}}"><span></span></div>
     </div>    
 </header>
@@ -88,7 +88,7 @@
         <div id="mm-menu">
             <nav>
                 <ul>
-                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3">{{currentLang.s('home')}}</a></li>
+                    <li><a routerLink="/{{currentLang.slug}}" [class.active]="url.length < 3 && url[1] != '404'">{{currentLang.s('home')}}</a></li>
                     <li *ngFor="let c of categories"><a [class.active]="url[4] === c.slug" routerLink="/{{currentLang.slug}}/catalogue/category/{{c.slug}}" [innerHTML]="c.name[currentLang._id]"></a></li>
                 </ul>
             </nav>

@@ -15,14 +15,32 @@ export class UsersService extends APIService {
     }
 
     public async one(_id: string): Promise<IAnswer<UserDTO>> {
+        if (!mongoose.Types.ObjectId.isValid(_id)) {
+            return {statusCode: 404, error: "invalid user id"};
+        }
+        
         try {
-            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1};
+            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1};
             const filter: any = {_id: mongoose.Types.ObjectId(_id)};
             const data: UserDTO[] = await this.model.aggregate([
                 {$match: filter},
-                {$lookup: {from: "articles", localField: "_id", foreignField: "user", as: "articles"}},                
-                {$lookup: {from: "comments", localField: "_id", foreignField: "user", as: "comments"}},
-                {$addFields: {__commentsq: {$size: "$comments"}, __articlesq: {$size: "$articles"}}},
+                {
+                    $lookup: {
+                        from: "articles", 
+                        let: {userId: "$_id"},
+                        // join only active articles!
+                        pipeline: [
+                            {$match: {$expr: {$and: [{$eq: ["$user", "$$userId"]}, {$eq: ["$active", true]}]}}}
+                        ],
+                        as: "articles"
+                    }
+                },                
+                {$lookup: {from: "comments", localField: "_id", foreignField: "user", as: "comments"}},                
+                {$addFields: {
+                    __commentsq: {$size: "$comments"}, 
+                    __articlesq: {$size: "$articles"}, 
+                    __createdat: {$toDate: "$_id"}
+                }},
                 {$project: projection},
             ]);            
             return data.length ? {statusCode: 200, data: data[0]} : {statusCode: 404, error: "user not found"};            

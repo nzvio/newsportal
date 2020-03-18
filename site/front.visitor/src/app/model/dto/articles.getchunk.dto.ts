@@ -8,4 +8,5 @@ export interface IArticlesGetchunkDTO {
     readonly filterCategory?: string;
     readonly filterLang?: string;
     readonly filterLoadedAt?: number;
+    readonly filterUser?: string;
 }
