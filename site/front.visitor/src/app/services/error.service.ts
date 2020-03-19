@@ -5,13 +5,15 @@ import { AppService } from './app.service';
 
 @Injectable()
 export class ErrorService {
+    private responsable: number[] = [200, 401, 409];
+
     constructor(
         private router: Router,
         private appService: AppService,        
     ) {}
 
     public processResponse(res: any): boolean {
-        if (res.statusCode === 200 || res.statusCode === 401) {
+        if (this.responsable.includes(res.statusCode)) {
             return true;
         }
 

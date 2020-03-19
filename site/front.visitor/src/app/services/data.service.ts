@@ -16,6 +16,8 @@ import { Comment } from '../model/orm/comment.model';
 import { IGetallDTO } from '../model/dto/getall.dto';
 import { Setting } from '../model/orm/setting.model';
 import { User } from '../model/orm/user.model';
+import { IVoteDTO } from '../model/dto/vote.dto';
+import { IVoteAnswerDTO } from "../model/dto/vote.answer.dto";
 
 @Injectable()
 export class DataService {
@@ -41,6 +43,7 @@ export class DataService {
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
+    public vote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

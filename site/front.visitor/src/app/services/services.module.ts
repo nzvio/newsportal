@@ -21,6 +21,7 @@ import { SettingRepository } from './repositories/setting.repository';
 import { UserRepository } from './repositories/user.repository';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
+import { VoteService } from './vote.service';
 
 @NgModule({
     imports: [                
@@ -34,6 +35,7 @@ import { AuthGuard } from './auth.guard';
         AuthGuard,
         ErrorService,
         DataService,
+        VoteService,
         LangRepository,
         PageRepository,
         CategoryRepository,

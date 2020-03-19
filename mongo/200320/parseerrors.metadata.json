@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"newsportal.parseerrors"}],"uuid":"258c3e8b92a3457a9171b0345e9e0a01"}

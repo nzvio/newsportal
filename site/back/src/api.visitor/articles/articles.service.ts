@@ -9,12 +9,16 @@ import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
 import { ICategory } from "../../model/orm/interfaces/category.interface";
+import { IVote } from "../../model/orm/interfaces/vote.interface";
+import { IVoteDTO } from "./dto/vote.dto";
+import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
 
 @Injectable()
 export class ArticlesService extends APIService {
     constructor (
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         @InjectModel("Category") private readonly categoryModel: Model<ICategory>,
+        @InjectModel("Vote") private readonly voteModel: Model<IVote>,
     ) {
         super();
     }
@@ -261,5 +265,35 @@ export class ArticlesService extends APIService {
         }
         
         return filter;
+    }
+
+    public async vote(dto: IVoteDTO): Promise<IAnswer<IVoteAnswerDTO>> {
+        try {
+            let votes: IVote[] = await this.voteModel.find({article: dto.articleId, user: dto.userId});
+
+            if (votes.length) {
+                return {statusCode: 409, error: "already voted"};
+            }
+
+            let article: IArticle = await this.articleModel.findById(dto.articleId);
+
+            if (!article) {
+                return {statusCode: 500, error: "article not found"};
+            } 
+
+            article.rating += dto.rating;
+            article.votesq++;
+            await article.save();
+            let vote: IVote = new this.voteModel();
+            vote.article = dto.articleId;
+            vote.user = dto.userId;
+            await vote.save();
+
+            return {statusCode: 200, data: {rating: article.rating, votesq: article.votesq}};
+        } catch (err) {
+            let errTxt: string = `Error in ArticlesService.vote: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
     }
 }

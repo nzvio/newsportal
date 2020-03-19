@@ -37,7 +37,7 @@
                         &.filled::after {content: "\f2fc";}
                         &.halffilled::after {content: "\f3ad";}
                         &:hover {
-                            color: $color-yellow-light;
+                            color: $color-blue;
                             &::after {content: "\f2fc";}
                         }
                     }

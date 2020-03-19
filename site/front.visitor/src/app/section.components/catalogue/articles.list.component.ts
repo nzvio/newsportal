@@ -1,11 +1,10 @@
 import { Component, Input } from "@angular/core";
-import { Router } from '@angular/router';
 
 import { Article } from '../../model/orm/article.model';
 import { AppService } from '../../services/app.service';
 import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/orm/lang.model';
-import { Tag } from '../../model/orm/tag.model';
+import { VoteService } from '../../services/vote.service';
 
 @Component({
     selector: "articles-list",
@@ -21,8 +20,8 @@ export class ArticlesListComponent {
 
     constructor(
         private appService: AppService,
-        private langRepository: LangRepository,
-        private router: Router,
+        private langRepository: LangRepository,  
+        private voteService: VoteService,      
     ) {}
 
     get currentLang(): Lang {return this.langRepository.current.value;}
@@ -34,4 +33,8 @@ export class ArticlesListComponent {
     public shareTw (article: Article): void {        
         this.appService.shareTw(this.currentLang, article);		
     }    
+
+    public vote(article: Article, rating: number): void {
+        this.voteService.vote(article, rating);
+    }
 }

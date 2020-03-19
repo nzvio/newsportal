@@ -14,11 +14,11 @@
                     <div class="ca-comments">{{a.__commentsq}}</div>
                     <div class="ca-rating">
                         <div class="car-stars">
-                            <span [class.filled]="a.formatedRating >= 1"></span>
-                            <span [class.filled]="a.formatedRating >= 2"></span>
-                            <span [class.filled]="a.formatedRating >= 3"></span>
-                            <span [class.filled]="a.formatedRating >= 4"></span>
-                            <span [class.filled]="a.formatedRating === 5"></span>
+                            <span [class.filled]="a.formatedRating >= 1" (click)="vote(a, 1);"></span>
+                            <span [class.filled]="a.formatedRating >= 2" (click)="vote(a, 2);"></span>
+                            <span [class.filled]="a.formatedRating >= 3" (click)="vote(a, 3);"></span>
+                            <span [class.filled]="a.formatedRating >= 4" (click)="vote(a, 4);"></span>
+                            <span [class.filled]="a.formatedRating === 5" (click)="vote(a, 5);"></span>
                         </div>
                         <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('votes')}})</div>
                     </div>

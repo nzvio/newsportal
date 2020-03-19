@@ -5,6 +5,8 @@ import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { IVoteDTO } from "./dto/vote.dto";
+import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
 
 @Controller('api/visitor/articles')
 export class ArticlesController {
@@ -44,5 +46,11 @@ export class ArticlesController {
     @Post("chunkby")
     public chunkByCategory(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
         return this.articlesService.chunkBy(dto);
+    }
+
+    // vote
+    @Post("vote")
+    public vote(@Body() dto: IVoteDTO): Promise<IAnswer<IVoteAnswerDTO>> {
+        return this.articlesService.vote(dto);
     }
 }
