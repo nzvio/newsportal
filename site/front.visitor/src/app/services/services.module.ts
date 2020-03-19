@@ -11,11 +11,13 @@ import { ArticleMainRepository } from './repositories/article.main.repository';
 import { ArticlePopularRepository } from './repositories/article.popular.repository';
 import { ArticleRepository } from './repositories/article.repository';
 import { ArticleRecommendedRepository } from './repositories/article.recommended.repository';
+import { ArticleByCategoryRepository } from './repositories/article.bycategory.repository';
+import { ArticleByUserRepository } from './repositories/article.byuser.repository';
+import { ArticleByNameRepository } from './repositories/article.byname.repository';
+import { ArticleByTagRepository } from './repositories/article.bytag.repository';
 import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
 import { SettingRepository } from './repositories/setting.repository';
-import { ArticleByCategoryRepository } from './repositories/article.bycategory.repository';
-import { ArticleByUserRepository } from './repositories/article.byuser.repository';
 import { UserRepository } from './repositories/user.repository';
 
 @NgModule({
@@ -38,6 +40,8 @@ import { UserRepository } from './repositories/user.repository';
         ArticleRecommendedRepository,
         ArticleByCategoryRepository,
         ArticleByUserRepository,
+        ArticleByNameRepository,
+        ArticleByTagRepository,
         CommentRepository,
         TagRepository,
         SettingRepository,

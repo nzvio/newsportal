@@ -28,12 +28,12 @@ export class ArticleByCategoryRepository extends SimpleRepository<Article> {
                 filterCategory: this.filterCategory,
                 filterLoadedAt: this.loadedAt,
             };
-            this.dataService.articlesChunkByCategory(dto).subscribe(res => {
+            this.dataService.articlesChunkBy(dto).subscribe(res => {
                 if (res.statusCode === 200) {
                     const data: Article[] =  res.data.length ? res.data.map(d => new Article().build(d)) : [];                      
                     this.xl = [...this.xl, ...data];
                     this.fullLength = res.fullLength;                                     
-                    this.exhausted = this.currentPart + 1 === Math.ceil(this.fullLength / this.chunkLength);
+                    this.exhausted = !this.fullLength || this.currentPart + 1 === Math.ceil(this.fullLength / this.chunkLength);
                     // time of first load, will be used in "infinite scroll" on "loading more"
                     // articles, that created after first load, will not be displayed
                     !this.loadedAt ? this.loadedAt = new Date().getTime() : null; 

@@ -1,18 +1,22 @@
-    <div class="data-form">        
-        <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-tags-name']}}:</div>
-        <div class="df-inputwrap"><input type="text" name="name" [(ngModel)]="x.name"></div>        
-        
-        <div [class]="isRequired('lang') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-tags-lang']}}:</div>
-        <div class="df-inputwrap">
-            <select [(ngModel)]="x.lang">
-                <option [ngValue]="null">{{currentLang.phrases['workspace-empty']}}</option>
-                <option *ngFor="let l of ll" [value]="l._id" [innerHTML]="l.name"></option>                
-            </select>
-        </div>
-        
-        <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-tags-active']}}:</div>
-        <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>   
+<div class="data-langs">
+    <div class="data-langs-title">{{currentLang.phrases['workspace-tags-lang']}}:</div>
+    <div class="data-langs-btns">
+        <label *ngFor="let l of ll" (click)="selectedLang = l;"><input type="radio" [checked]="selectedLang._id === l._id">{{l.name}}</label>
+    </div>                    
+</div>
+<hr>
 
-        <div class="df-title"></div>
-        <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
-    </div>    
+<div class="data-form">        
+    <div [class]="isRequired('name') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-tags-name']}}:</div>
+    <div class="df-inputwrap">
+        <ng-container *ngFor="let l of ll">
+            <input type="text" name="name_{{l.name}}" [(ngModel)]="x.name[l._id]" *ngIf="selectedLang._id === l._id">
+        </ng-container>            
+    </div>
+        
+    <div [class]="isRequired('active') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-tags-active']}}:</div>
+    <div class="df-inputwrap"><checkbox-slider [(value)]="x.active"></checkbox-slider></div>   
+
+    <div class="df-title"></div>
+    <div class="df-inputwrap"><button type="submit">{{currentLang.phrases['workspace-save']}}</button></div>   
+</div>    

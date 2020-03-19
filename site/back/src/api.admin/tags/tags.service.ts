@@ -17,7 +17,7 @@ export class TagsService extends APIService {
     }
 
     public async all(dto: GetallDTO): Promise<IAnswer<ITag[]>> {
-        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "name";
+        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "_id";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
 
         try {
@@ -31,7 +31,7 @@ export class TagsService extends APIService {
     }
 
     public async chunk(dto: GetchunkDTO): Promise<IAnswer<ITag[]>> {
-        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "name";
+        let sortBy: string = !this.isEmpty(dto.sortBy) ? dto.sortBy : "_id";
         let sortDir: number = !this.isEmpty(dto.sortDir) ? dto.sortDir : 1;
         let from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         let q: number = !this.isEmpty(dto.q) ? dto.q : 10;        

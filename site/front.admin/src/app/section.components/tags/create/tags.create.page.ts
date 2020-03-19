@@ -35,8 +35,13 @@ export class TagsCreatePage extends ObjectPage<Tag> implements OnInit {
 		try {
 			this.x = new Tag().init();        
 			await this.langRepository.loadFull();
-			this.appService.monitorLog("[tags create] page loaded");
-			this.ready = true;			
+
+			if (this.ll.length) {
+				this.appService.monitorLog("[tags create] page loaded");
+				this.ready = true;			
+			} else {
+				this.appService.monitorLog("no languages found", true);
+			}
 		} catch (err) {
 			this.appService.monitorLog(err, true);
 		}		

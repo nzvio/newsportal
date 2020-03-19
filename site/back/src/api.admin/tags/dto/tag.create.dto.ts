@@ -1,5 +1,4 @@
 export class TagCreateDTO {        
-    public readonly name: string;
-    public readonly lang: string;
+    public readonly name: Object;    
     public readonly active: boolean;
 }

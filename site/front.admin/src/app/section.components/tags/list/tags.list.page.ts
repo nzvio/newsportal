@@ -15,6 +15,8 @@ import { Lang } from '../../../model/orm/lang.model';
 export class TagsListPage extends ListPage<Tag> implements OnInit {
     // inherited
     public homeUrl: string = "/catalogue/tags";
+    // local
+    public selectedLang: Lang | null = null;
     
     constructor(
         protected admlangRepository: AdmLangRepository,
@@ -31,8 +33,14 @@ export class TagsListPage extends ListPage<Tag> implements OnInit {
         try {
             await this.tagRepository.loadChunk();
             await this.langRepository.loadFull();
-            this.appService.monitorLog("[tags] page loaded");    
-            this.ready = true;            
+            
+            if (this.ll.length) {
+                this.selectedLang = this.ll[0];
+                this.appService.monitorLog("[tags] page loaded");    
+                this.ready = true;            
+            } else {
+                this.appService.monitorLog("no languages found", true);            
+            }
         } catch (err) {
             this.appService.monitorLog(err, true);
         }

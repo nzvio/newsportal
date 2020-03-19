@@ -39,7 +39,7 @@ export abstract class ListPage<T extends Model> extends SectionPage {
             this.appService.monitorLog(`data reloaded, currentPart=${this.currentPart}, sortBy=${this.sortBy}, sortDir=${this.sortDir}`);
                     
             if (this.currentPart > 0 && this.currentPart > Math.ceil(this.fullLength / this.length) - 1) { // after deleting or filtering may be currentPart is out of possible diapason, then decrease and reload again            
-                this.currentPart--;
+                this.currentPart = 0;
                 this.rebuildList();
             } else {
                 setTimeout(() => {this.reloading = false;}, 500);        

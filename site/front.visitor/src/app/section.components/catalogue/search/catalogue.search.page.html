@@ -4,11 +4,8 @@
             <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
             <span [innerHTML]="currentLang.s('search')"></span>
         </div>
-        <h1><span [innerHTML]="currentLang.s('search')"></span>: <span [innerHTML]="searchKeyword"></span></h1>
-        
-        
-
-        
+        <h1><span [innerHTML]="currentLang.s('search')"></span>: <span [innerHTML]="searchKeyword"></span></h1>        
+        <articles-list [articles]="articles" [articlesReady]="articlesReady" [loadingMore]="loadingMore" [displayUser]="true" [categoryAsLink]="true"></articles-list>
     </main>
     <aside>
         <the-sidebar></the-sidebar>

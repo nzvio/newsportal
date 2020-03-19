@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 
 import { TagRepository } from '../../../services/repositories/tag.repository';
 import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
 import { Tag } from '../../../model/orm/tag.model';
+import { Lang } from '../../../model/orm/lang.model';
 
 @Component({
     selector: "tags",
@@ -17,9 +19,11 @@ export class TagsComponent implements OnInit {
         private tagRepository: TagRepository,
         private langRepository: LangRepository,
         private appService: AppService,
+        private router: Router,
     ) {}
 
-    get tags(): Tag[] {return this.tagRepository.xl.filter(x => x.lang === this.langRepository.current.value._id);}
+    get currentLang(): Lang {return this.langRepository.current.value;}
+    get tags(): Tag[] {return this.tagRepository.xl;}
 
     public async ngOnInit(): Promise<void> {
         try {
@@ -28,5 +32,5 @@ export class TagsComponent implements OnInit {
         } catch (err) {
             this.appService.showNotification(err, "error");
         }
-    }
+    }    
 }

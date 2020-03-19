@@ -9,4 +9,5 @@ export class ArticlesGetchunkDTO {
     public readonly filterLang?: string; 
     public readonly filterLoadedAt?: number;   
     public readonly filterUser?: string;
+    public readonly filterTag?: string;
 }

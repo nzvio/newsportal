@@ -38,8 +38,13 @@ export class TagsEditPage extends ObjectPage<Tag> implements OnInit {
 				this.ready = false;
 				this.x = await this.tagRepository.loadOne(p["_id"]);
 				await this.langRepository.loadFull();
-				this.appService.monitorLog("[tags edit] page loaded");
-				this.ready = true;				
+
+				if (this.ll.length) {
+					this.appService.monitorLog("[tags edit] page loaded");
+					this.ready = true;				
+				} else {
+					this.appService.monitorLog("no languages found", true);
+				}
 			} catch (err) {
 				this.appService.monitorLog(err, true);
 			}			

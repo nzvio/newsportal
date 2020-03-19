@@ -60,7 +60,7 @@
         <div [class]="isRequired('tags') ? 'df-title required' : 'df-title'">{{currentLang.phrases['workspace-articles-tags']}}:</div>
         <div class="df-inputwrap">
             <select [(ngModel)]="x.tags" multiple>                
-                <option *ngFor="let t of tags" [value]="t._id" [innerHTML]="t.name"></option>                
+                <option *ngFor="let t of tl" [value]="t._id" [innerHTML]="t.name[x.lang || selectedLang._id]"></option>
             </select>
         </div>
 

@@ -41,8 +41,8 @@ export class ArticlesController {
     }
 
     // get fragment from category
-    @Post("chunkbycategoryoruser")
+    @Post("chunkby")
     public chunkByCategory(@Body() dto: ArticlesGetchunkDTO): Promise<IAnswer<ArticleDTO[]>> {
-        return this.articlesService.chunkByCategoryOrUser(dto);
+        return this.articlesService.chunkBy(dto);
     }
 }

@@ -266,10 +266,10 @@ export class TargetsExecutorService extends APIService {
 
     private async buildTags(article: IArticle): Promise<void> {
         let articleTags: string[] = [];
-        const tags: ITag[] = await this.tagModel.find({lang: article.lang});
+        const tags: ITag[] = await this.tagModel.find();
 
         for (let tag of tags) {
-            article.name.toLowerCase().includes(tag.name.toLowerCase()) ? articleTags.push(tag._id) : null;
+            article.name.toLowerCase().includes(tag.name[article.lang].toLowerCase()) ? articleTags.push(tag._id) : null;
         }
 
         articleTags.length ? article.tags = articleTags : null;

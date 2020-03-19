@@ -125,5 +125,9 @@ export class AppService {
             let text: string = article.name;
             window.open('http://twitter.com/share?url='+encodeURIComponent(url)+'&text='+encodeURIComponent(text));		
         }        
-	}
+    }
+    
+    public capitalize(s: string): string {
+        return s.charAt(0).toUpperCase() + s.slice(1);
+    }
 }

@@ -1,44 +1,56 @@
 <div class="articleslist">            
+    <!-- loaded -->
     <ng-container *ngIf="articlesReady">
-        <article *ngFor="let a of articles">
-            <a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a>
-            <div class="ca-details1">
-                <div class="ca-cat">
-                    <span *ngIf="!categoryAsLink" [innerHTML]="a.category.name[currentLang._id]"></span>
-                    <a *ngIf="categoryAsLink" [innerHTML]="a.category.name[currentLang._id]" routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}"></a>
-                </div>
-                <div class="ca-date">{{a.formatedDate(currentLang)}}</div>
-                <div class="ca-comments">{{a.__commentsq}}</div>
-                <div class="ca-rating">
-                    <div class="car-stars">
-                        <span [class.filled]="a.formatedRating >= 1"></span>
-                        <span [class.filled]="a.formatedRating >= 2"></span>
-                        <span [class.filled]="a.formatedRating >= 3"></span>
-                        <span [class.filled]="a.formatedRating >= 4"></span>
-                        <span [class.filled]="a.formatedRating === 5"></span>
+        <!-- articles available -->
+        <ng-container *ngIf="articles.length">
+            <article *ngFor="let a of articles">
+                <a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a>
+                <div class="ca-details1">
+                    <div class="ca-cat">
+                        <span *ngIf="!categoryAsLink" [innerHTML]="a.category.name[currentLang._id]"></span>
+                        <a *ngIf="categoryAsLink" [innerHTML]="a.category.name[currentLang._id]" routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}"></a>
                     </div>
-                    <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('votes')}})</div>
+                    <div class="ca-date">{{a.formatedDate(currentLang)}}</div>
+                    <div class="ca-comments">{{a.__commentsq}}</div>
+                    <div class="ca-rating">
+                        <div class="car-stars">
+                            <span [class.filled]="a.formatedRating >= 1"></span>
+                            <span [class.filled]="a.formatedRating >= 2"></span>
+                            <span [class.filled]="a.formatedRating >= 3"></span>
+                            <span [class.filled]="a.formatedRating >= 4"></span>
+                            <span [class.filled]="a.formatedRating === 5"></span>
+                        </div>
+                        <div class="car-info">{{a.formatedRating | number:'1.2-2'}} ({{a.votesq || 0}} {{currentLang.s('votes')}})</div>
+                    </div>
+                    <div class="ca-views">{{a.viewsq}}</div>
                 </div>
-                <div class="ca-views">{{a.viewsq}}</div>
-            </div>
-            <div class="ca-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
-            <div class="ca-details2">
-                <div class="ca-socnets">
-                    <div class="ca-socnet fb" (click)="shareFb(a);"><span></span></div>
-                    <div class="ca-socnet tw" (click)="shareTw(a);"><span></span></div>
+                <div class="ca-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                <div class="ca-details2">
+                    <div class="ca-socnets">
+                        <div class="ca-socnet fb" (click)="shareFb(a);"><span></span></div>
+                        <div class="ca-socnet tw" (click)="shareTw(a);"><span></span></div>
+                    </div>
+                    <div class="ca-author" *ngIf="displayUser && a.user">
+                        <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(/assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
+                        <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
+                    </div>
                 </div>
-                <div class="ca-author" *ngIf="displayUser && a.user">
-                    <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(/assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
-                    <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
+                <div class="ca-short" [innerHTML]="a.contentshort+'...'"></div>
+                <div class="ca-tags">
+                    <ng-container *ngFor="let t of a.tags; let i = index;">
+                        <a [innerHTML]="t.name[currentLang._id]" routerLink="/{{currentLang.slug}}/catalogue/tag/{{t._id}}"></a>
+                        <span *ngIf="i < a.tags.length - 1">,&nbsp;</span>
+                    </ng-container>                    
                 </div>
-            </div>
-            <div class="ca-short" [innerHTML]="a.contentshort+'...'"></div>
-            <div class="ca-tags">
-                <span class="ca-tag" *ngFor="let t of a.tags" [innerHTML]="t.name"></span>                        
-            </div>
-            <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">{{currentLang.s('more')}}</a></div>
-        </article>
-    </ng-container>            
+                <div class="ca-more"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}">{{currentLang.s('more')}}</a></div>
+            </article>
+        </ng-container>
+        <!-- no articles -->
+        <ng-container *ngIf="!articles.length">
+            <p [innerHTML]="currentLang.s('empty')"></p>
+        </ng-container>        
+    </ng-container> 
+    <!-- loading -->           
     <ng-container *ngIf="!articlesReady || loadingMore">
         <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>
         <article class="loading"><figure></figure><label></label><label></label><label></label><label></label></article>

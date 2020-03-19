@@ -28,23 +28,28 @@ export class CommentsService extends APIService {
                 {$unwind: "$article"},                
                 {$lookup: {from: "categories", localField: "article.category", foreignField: "_id", as: "article.category"}},
                 {$unwind: "$article.category"},
-                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
-                {$unwind: "$user"},                
+                
                 {$match: filter},                
-                {$sort: {[sortBy]: sortDir}}, 
+                {$sort: {[sortBy]: sortDir, _id: 1}}, // !!IMPORTANT!! When aggregating, second criteria is required to prevent repeating items with same field values in different chunk                             
                 {$skip: from},
                 {$limit: q},                
+
+                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
+                {$unwind: "$user"},                
+                
                 {$project: projection}                
             ]);
             const allData: any = await this.commentModel.aggregate([
                 {$lookup: {from: "articles", localField: "article", foreignField: "_id", as: "article"}},                
                 {$lookup: {from: "categories", localField: "article.category", foreignField: "_id", as: "article.category"}},                    
+                {$match: filter},
+
                 {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}}, 
                 {$unwind: "$user"}, // to preserve not existing, because this operation uses "preserveNullAndEmptyArrays" by default
-                {$match: filter},
+                
                 {$count: "fullLength"}
             ]);            
-            const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;            
+            const fullLength: number = allData.length ? allData[0]["fullLength"] : 0;              
             return {statusCode: 200, data, fullLength};        
         } catch (err) {
             let errTxt: string = `Error in CommentsService.chunk: ${String(err)}`;

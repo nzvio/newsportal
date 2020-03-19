@@ -1,0 +1,15 @@
+<div class="wrap2 padded">
+    <main>
+        <ng-container *ngIf="tagReady">
+            <div id="breadcrumbs">
+                <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+                <span [innerHTML]="tag.name[currentLang._id]"></span>
+            </div>
+            <h1><span [innerHTML]="currentLang.s('catalogue-tag')"></span>: <span [innerHTML]="tag.name[currentLang._id]"></span></h1>
+        </ng-container>        
+        <articles-list [articles]="articles" [articlesReady]="articlesReady" [loadingMore]="loadingMore" [displayUser]="true" [categoryAsLink]="true"></articles-list>                
+    </main>
+    <aside>
+        <the-sidebar></the-sidebar>
+    </aside>  
+</div>

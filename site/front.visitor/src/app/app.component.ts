@@ -66,7 +66,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 				// this.initNavScrolling();					
 				this.router.events
 					.pipe(filter(event => event instanceof NavigationEnd))
-					.subscribe(event => {setTimeout(() => {this.wrapper.scrollTo(0,0)}, 1);});
+					.subscribe(event => {setTimeout(() => {this.wrapper.scrollTop = 0;}, 1);});
 			}, 1);
 		}		
 	}

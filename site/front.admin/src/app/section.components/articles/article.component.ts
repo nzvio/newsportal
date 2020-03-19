@@ -29,9 +29,7 @@ export class ArticleComponent extends ObjectComponent implements OnInit {
 
     constructor(private slugService: SlugService) {
         super();
-    }
-
-    get tags(): Tag[] {return (this.x.lang) ? this.tl.filter(t => t.lang === this.x.lang) : this.tl;}
+    }    
 
     public ngOnInit(): void {
         this.selectedLang = this.ll[0];            

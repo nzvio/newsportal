@@ -21,7 +21,7 @@ export class ArticlesService extends APIService {
         let from: number = !this.isEmpty(dto.from) ? dto.from : 0;
         let q: number = !this.isEmpty(dto.q) ? dto.q : 10;
         let filterDate: string | null = dto.filterDate !== undefined ? dto.filterDate : null; // can be null in DTO!
-        let filterName: string = !this.isEmpty(dto.q) ? dto.filterName : "";
+        let filterName: string = !this.isEmpty(dto.filterName) ? dto.filterName : "";
         let filterCategory: string = dto.filterCategory !== undefined ? dto.filterCategory : "any"; // can be null in DTO!
         let filterLang: string = dto.filterLang !== undefined ? dto.filterLang : "any"; // can be null in DTO!
         let filter: Object = this.buildFilter(filterDate, filterName, filterCategory, filterLang);          

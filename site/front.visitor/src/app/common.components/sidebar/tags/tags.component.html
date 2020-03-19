@@ -1,6 +1,8 @@
 <div class="aside-tags">
     <ng-container *ngIf="ready">
-        <div class="aside-tag" *ngFor="let t of tags" [innerHTML]="t.name"></div>
+        <div class="aside-tag" *ngFor="let t of tags">
+            <a [innerHTML]="t.name[currentLang._id]" routerLink="/{{currentLang.slug}}/catalogue/tag/{{t._id}}"></a>
+        </div>
     </ng-container>
     <ng-container *ngIf="!ready">
         <div class="aside-tag loading">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
