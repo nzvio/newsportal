@@ -8,6 +8,8 @@ import { PageRepository } from '../../services/repositories/page.repository';
 import { Page } from '../../model/orm/page.model';
 import { CategoryRepository } from '../../services/repositories/category.repository';
 import { Category } from '../../model/orm/category.model';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../model/orm/user.model';
 
 @Component({
     selector:"the-header", 
@@ -21,6 +23,7 @@ export class HeaderComponent implements AfterViewInit {
 
     constructor(
         private appService: AppService,        
+        private authService: AuthService,
         private langRepository: LangRepository,  
         private pageRepository: PageRepository,
         private categoryRepository: CategoryRepository,
@@ -35,7 +38,9 @@ export class HeaderComponent implements AfterViewInit {
     get currentLang(): Lang {return this.langRepository.current.value;}
     get langs(): Lang[] {return this.langRepository.xl;}
     get pages(): Page[] {return this.pageRepository.xl;}
-    get categories(): Category[] {return this.categoryRepository.xl;}     
+    get categories(): Category[] {return this.categoryRepository.xl;}   
+    get authenticated(): boolean {return this.authService.authenticated;}  
+    get user(): User {return this.authService.authData.user;}
 
     public async ngAfterViewInit(): Promise<void> {
         if (this.isBrowser) {

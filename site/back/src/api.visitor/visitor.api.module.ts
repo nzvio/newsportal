@@ -8,6 +8,7 @@ import { CommentsModule } from "./comments/comments.module";
 import { TagsModule } from "./tags/tags.module";
 import { SettingsModule } from "./settings/settings.module";
 import { UsersModule } from "./users/users.module";
+import { AuthModule } from "./auth/auth.module";
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { UsersModule } from "./users/users.module";
         TagsModule,
         SettingsModule,
         UsersModule,
+        AuthModule,
     ],    
 })
 export class VisitorAPIModule {}

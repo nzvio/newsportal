@@ -40,6 +40,7 @@ export class DataService {
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}
+    public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

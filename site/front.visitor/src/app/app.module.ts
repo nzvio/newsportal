@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './section.components/home/home.module';
 import { ServicesModule } from './services/services.module';
-import { NotfoundModule } from './section.components/notfound/notfound.module';
+import { ErrorsModule } from './section.components/errors/errors.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CacheModule } from './cache/cache.module';
 import { CCModule } from './common.components/cc.module';
@@ -23,7 +23,7 @@ import { CCModule } from './common.components/cc.module';
 		CCModule,
 		ServicesModule,
 		HomeModule,
-		NotfoundModule,
+		ErrorsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]

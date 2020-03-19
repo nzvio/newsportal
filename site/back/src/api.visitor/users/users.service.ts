@@ -50,4 +50,9 @@ export class UsersService extends APIService {
             return {statusCode: 500, error: errTxt};
         }
     }
+
+    // for auth service
+    public async oneByEmail(email: string): Promise<IUser | undefined> {
+        return this.model.findOne({email: email});
+    }
 }

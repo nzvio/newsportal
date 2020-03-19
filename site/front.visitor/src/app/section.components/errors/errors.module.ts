@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { NotfoundPage } from './notfound.page';
+import { ForbiddenPage } from './forbidden.page';
 
 @NgModule({
     imports: [
@@ -9,9 +10,11 @@ import { NotfoundPage } from './notfound.page';
     ],
     declarations: [
         NotfoundPage,
+        ForbiddenPage,
     ],
     exports: [
         NotfoundPage,
+        ForbiddenPage,
     ],    
 })
-export class NotfoundModule {}
+export class ErrorsModule {}

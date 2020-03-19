@@ -19,6 +19,8 @@ import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
 import { SettingRepository } from './repositories/setting.repository';
 import { UserRepository } from './repositories/user.repository';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
     imports: [                
@@ -28,6 +30,8 @@ import { UserRepository } from './repositories/user.repository';
     exports: [],
     providers: [
         AppService,
+        AuthService,
+        AuthGuard,
         ErrorService,
         DataService,
         LangRepository,

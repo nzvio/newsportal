@@ -1,0 +1,28 @@
+@import "../../var";
+
+.sign-form {
+    margin-bottom: 80px; display: flex; justify-content: center;
+    form {
+        @media (min-width: 0) {width: 100%;}
+        @media (min-width: 640px) {width: 300px;}
+        .sf-row {
+            margin-bottom: 15px;
+            input[type='text'], input[type='email'], input[type='password']  {
+                width: 100%; border: 1px $color-grey-superlight solid; height: 40px; padding: 0 5px;
+                &:focus {border-color: $color-blue;}
+                &.error {animation-name: error-blink; animation-duration: 2s; animation-iteration-count: infinite;}
+                @keyframes error-blink {
+                    0% {border-color: #f00;}
+                    50% {border-color: #900;}
+                    100% {border-color: #f00;}
+                }
+            }
+            button {
+                width: 100%; border: none; height: 40px; background-color: $color-blue; color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 20px; text-transform: uppercase; transition: background-color 0.3s ease 0s; cursor: pointer; letter-spacing: 1px;
+                &:hover {background-color: $color-blue-dark;}
+                &:disabled {background-color: $color-grey-light;}
+            }
+            ::placeholder {color: $color-grey-light;}
+        }
+    }
+}

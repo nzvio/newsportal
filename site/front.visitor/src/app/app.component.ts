@@ -108,7 +108,7 @@ export class AppComponent implements AfterViewInit, OnInit {
 	}
 	
 	private buildCurrentLang(urlPart: string): void {
-		if (urlPart && urlPart != "404") {
+		if (urlPart && urlPart != "404" && urlPart != "403") {
 			let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === urlPart) || null;
 			
 			if (currentLang) {

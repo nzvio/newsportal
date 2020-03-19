@@ -11,14 +11,14 @@ export class ErrorService {
     ) {}
 
     public processResponse(res: any): boolean {
-        if (res.statusCode === 200) {
+        if (res.statusCode === 200 || res.statusCode === 401) {
             return true;
         }
 
         (res.error) ? setTimeout(() => {this.appService.showNotification(res.error, "error");}, 1000) : null;
         
         if (res.statusCode === 403) {                
-            this.router.navigateByUrl("/auth/logout");
+            this.router.navigateByUrl("/403");
         }
 
         if (res.statusCode === 404) {                

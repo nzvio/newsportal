@@ -1,0 +1,9 @@
+<div class="wrap2 padded">
+    <main class="full">        
+        <div id="breadcrumbs">
+            <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+            <span [innerHTML]="currentLang.s('user-private')"></span>
+        </div>     
+        <h1 [innerHTML]="currentLang.s('user-private')"></h1>               
+    </main>
+</div>

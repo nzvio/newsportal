@@ -37,7 +37,12 @@
                         </ul>
                     </div>
                     <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
-                    <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
+                    <ng-container *ngIf="authenticated">
+                        <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+                    </ng-container>
+                    <ng-container *ngIf="!authenticated">
+                        <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"></span>
+                    </ng-container>                    
                 </div>
             </div>			
         </div>			
@@ -61,7 +66,12 @@
                     </ul>
                 </div>
                 <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
-                <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}"></span>
+                <ng-container *ngIf="authenticated">
+                    <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+                </ng-container>
+                <ng-container *ngIf="!authenticated">
+                    <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"></span>
+                </ng-container>  
             </div>
         </div>			
     </div>			
@@ -71,8 +81,13 @@
 <header id="mobile">
     <div id="hm-logo" routerLink="/{{currentLang.slug}}"><span>{{currentLang.s('sitename1')}}</span><span>{{currentLang.s('sitename2')}}</span></div>
     <div id="hm-dash">
-        <div class="hm-btn hm-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"><span></span></div>
-        <div class="hm-btn hm-login" title="{{currentLang.s('login')}}"><span></span></div>
+        <div class="hm-btn hm-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"><span></span></div>        
+        <ng-container *ngIf="authenticated">
+            <div class="hm-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+        </ng-container>
+        <ng-container *ngIf="!authenticated">
+            <div class="hm-btn hm-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"><span></span></div>
+        </ng-container>        
     </div>    
 </header>
 

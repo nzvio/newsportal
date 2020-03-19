@@ -29,14 +29,14 @@ html {
                     font-family: "teko", Arial, Helvetica, sans-serif; font-weight: normal; letter-spacing: 2px;
                 }
                 main {
-                    @media (min-width:0) {width: 100%; padding: 0;}
-                    @media (min-width:1000px) {width: 75%; padding: 0 60px 0 0;}
+                    @media (min-width:0) {width: 100%; padding: 0; min-height: auto;}
+                    @media (min-width:1000px) {width: 75%; padding: 0 60px 0 0; min-height: calc(100vh - 430px);}
                     overflow: hidden; letter-spacing: 1px;
                     &.full {width:100%;}   
                     #breadcrumbs {
                         border-bottom: 1px $color-grey-superlight solid; margin: 0 0 30px 0; font-size: 12px; letter-spacing: normal;
                         span {
-                            display: inline-block; margin-right: 32px; position: relative; color: $color-grey-light; margin-bottom: 15px; text-transform: capitalize;
+                            display: inline-block; margin-right: 32px; position: relative; color: $color-grey-light; margin-bottom: 15px; 
                             &:not(:last-child)::after {content: "\f125"; font-family: "ionicons"; font-size: 10px; position: absolute; right: -20px; top:1px;}
                             a, a:visited {color: $color-main; text-decoration: none;}
                             a:hover {color: $color-blue;}

@@ -130,4 +130,9 @@ export class AppService {
     public capitalize(s: string): string {
         return s.charAt(0).toUpperCase() + s.slice(1);
     }
+
+    public validateEmail (email: string): boolean {
+        const re: RegExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test (email.toLowerCase());
+    }
 }
