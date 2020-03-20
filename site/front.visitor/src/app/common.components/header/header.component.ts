@@ -40,7 +40,7 @@ export class HeaderComponent implements AfterViewInit {
     get pages(): Page[] {return this.pageRepository.xl;}
     get categories(): Category[] {return this.categoryRepository.xl;}   
     get authenticated(): boolean {return this.authService.authenticated;}  
-    get user(): User {return this.authService.authData.user;}
+    get user(): User {return this.authService.authData.user;}    
 
     public async ngAfterViewInit(): Promise<void> {
         if (this.isBrowser) {
@@ -90,5 +90,5 @@ export class HeaderComponent implements AfterViewInit {
 
     public activateSearch(): void {
         this.appService.searchActive.next(true);
-    }
+    }    
 }

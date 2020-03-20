@@ -2,7 +2,9 @@
     <ng-container *ngIf="ready">
         <div class="aside-comment" *ngFor="let c of comments">
             <div class="ac-left">
-                <div class="ac-imgwrap" [style.background-image]="c.user.img_s ? 'url(/assets/images/users/'+c.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}"></div>
+                <div class="ac-imgwrap" [style.background-image]="c.user.img_s ? 'url(/assets/images/users/'+c.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}">
+                    <span *ngIf="!c.user.img_s">{{c.user.firstLetter}}</span>
+                </div>
             </div>                    
             <div class="ac-right">
                 <div class="ac-author"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}" [innerHTML]="c.user.name"></a></div>

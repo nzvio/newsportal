@@ -12,8 +12,14 @@ export class AuthService {
         private appService: AppService,
     ) {
         if (this.appService.isBrowser) {
-            let data: string = localStorage.getItem("authdata");
-            data ? this.authData = JSON.parse(data) : null;        
+            const data: string = localStorage.getItem("authdata");
+
+            if (data) {
+                const parsedData: any = JSON.parse(data);
+                this.authData = {user: new User().build(parsedData.user), token: parsedData.token};
+            } else {
+                this.authData = null;
+            }            
         }        
     }
 
@@ -25,7 +31,7 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.dataService.login(email, password).subscribe(res => {
                 if (res.statusCode === 200) {                    
-                    this.authData = res.data;
+                    this.authData = {user: new User().build(res.data.user), token: res.data.token};
                     this.save();                       
                 } 
 

@@ -54,7 +54,7 @@ header {
                 &.hm-search {span::after {content: "\f2f5";}}
                 &.hm-login {span::after {content: "\f29e";}}
             }  
-            .hm-user {margin-left: 15px; width: 30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-size: cover; background-position: center top; cursor: pointer;}          
+            .hm-user {margin-left: 15px; width: 30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-size: cover; background-position: center top; cursor: pointer; color: #fff; font-size: 14px; display: flex; justify-content: center; align-items: center;}          
         }
         
     }
@@ -108,7 +108,7 @@ header {
                     }
                 }
             }   
-            .h-user {margin-left: 20px; width: 40px; height: 40px; border-radius: 20px; background-color: $color-blue; background-size: cover; background-position: center top; cursor: pointer; box-shadow: 1px 0px 2px 0px rgba(255,255,255,0.5);}
+            .h-user {margin-left: 20px; width: 40px; height: 40px; border-radius: 20px; background-color: $color-blue; background-size: cover; background-position: center top; cursor: pointer; box-shadow: 1px 0px 2px 0px rgba(255,255,255,0.5); color: #fff; font-size: 16px; display: flex; justify-content: center; align-items: center;}
         }
     }                 
 } 

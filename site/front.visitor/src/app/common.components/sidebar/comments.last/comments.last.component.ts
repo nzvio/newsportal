@@ -40,5 +40,5 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {
         this.langSubscription.unsubscribe();
-    }
+    }    
 }

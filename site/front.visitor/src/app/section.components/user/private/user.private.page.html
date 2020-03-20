@@ -4,6 +4,48 @@
             <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
             <span [innerHTML]="currentLang.s('user-private')"></span>
         </div>     
-        <h1 [innerHTML]="currentLang.s('user-private')"></h1>               
+        <h1 [innerHTML]="currentLang.s('user-private')"></h1>   
+        
+        <ng-container *ngIf="ready">
+            <div class="userprivate">    
+                <div class="up-menu">
+                    <ul>
+                        <li><span [class.active]="tab === 1" (click)="tab = 1;" [innerHTML]="currentLang.s('user-private-info')"></span></li>
+                        <li><span [class.active]="tab === 2" (click)="tab = 2;" [innerHTML]="currentLang.s('user-private-edit')"></span></li>
+                        <li><span [class.active]="tab === 3" (click)="tab = 3;" [innerHTML]="currentLang.s('user-private-exit')"></span></li>
+                    </ul>
+                </div>    
+                <div class="up-main">
+                    <!-- info -->
+                    <ng-container *ngIf="tab === 1">
+                        <div class="up-info">
+                            <div class="upi-left">
+                                <figure [style.background-image]="user.img_s ? 'url(/assets/images/users/'+user.img_s+')' : 'none'">
+                                    <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+                                </figure>
+                            </div>
+                            <div class="upi-right">
+                                <p>{{currentLang.s('catalogue-user-articles')}}: <strong>{{user.__articlesq}}</strong></p>
+                                <p>{{currentLang.s('catalogue-user-comments')}}: <strong>{{user.__commentsq}}</strong></p>
+                                <p>{{currentLang.s('catalogue-user-createdat')}}: <strong>{{user.formatedCreatedAt(currentLang)}}</strong></p>
+                                <p>{{currentLang.s('catalogue-user-rating')}}: <strong>{{user.formatedRating | number:'1.2-2'}} ({{user.__votesq}} {{currentLang.s('catalogue-user-votes')}})</strong></p>
+                            </div>                
+                        </div>
+                    </ng-container>
+                    <!-- edit -->
+                    <ng-container *ngIf="tab === 2">
+                        tab 2
+                    </ng-container>
+                    <!-- exit -->
+                    <ng-container *ngIf="tab === 3">
+                        <button routerLink="/{{currentLang.slug}}/user/logout">{{currentLang.s('user-private-bye')}}</button>
+                    </ng-container>                    
+                </div>        
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="!ready">
+            loading...
+        </ng-container>
     </main>
 </div>

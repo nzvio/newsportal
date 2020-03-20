@@ -7,7 +7,7 @@
         &:last-child {margin: 0;}
         .ac-left {
             width: 50px;
-            .ac-imgwrap {width:50px; height: 50px; background-color: $color-blue; background-size: cover; background-position: center top; border-radius: 25px; cursor: pointer;}
+            .ac-imgwrap {width:50px; height: 50px; background-color: $color-blue; background-size: cover; background-position: center top; border-radius: 25px; cursor: pointer; font-size: 16px; color: #fff; display: flex; justify-content: center; align-items: center;}
         }
         .ac-right {
             width:calc(100% - 60px);

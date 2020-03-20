@@ -20,7 +20,7 @@ export class UsersService extends APIService {
         }
         
         try {
-            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1};
+            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1, __rating: 1, __votesq: 1};
             const filter: any = {_id: mongoose.Types.ObjectId(_id)};
             const data: UserDTO[] = await this.model.aggregate([
                 {$match: filter},
@@ -39,7 +39,9 @@ export class UsersService extends APIService {
                 {$addFields: {
                     __commentsq: {$size: "$comments"}, 
                     __articlesq: {$size: "$articles"}, 
-                    __createdat: {$toDate: "$_id"}
+                    __createdat: {$toDate: "$_id"},                    
+                    __rating: {$sum: "$articles.rating"},
+                    __votesq: {$sum: "$articles.votesq"},   
                 }},
                 {$project: projection},
             ]);            
@@ -52,7 +54,38 @@ export class UsersService extends APIService {
     }
 
     // for auth service
-    public async oneByEmail(email: string): Promise<IUser | undefined> {
-        return this.model.findOne({email: email});
+    public async oneByEmail(email: string): Promise<UserDTO | null> {
+        try {            
+            const filter: any = {email};    
+            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1, __rating: 1, __votesq: 1, active: 1, password: 1};
+            const data: UserDTO[] = await this.model.aggregate([
+                {$match: filter},
+                {
+                    $lookup: {
+                        from: "articles", 
+                        let: {userId: "$_id"},
+                        // join only active articles!
+                        pipeline: [
+                            {$match: {$expr: {$and: [{$eq: ["$user", "$$userId"]}, {$eq: ["$active", true]}]}}}
+                        ],
+                        as: "articles"
+                    }
+                },                
+                {$lookup: {from: "comments", localField: "_id", foreignField: "user", as: "comments"}},                
+                {$addFields: {
+                    __commentsq: {$size: "$comments"}, 
+                    __articlesq: {$size: "$articles"}, 
+                    __createdat: {$toDate: "$_id"},                    
+                    __rating: {$sum: "$articles.rating"},
+                    __votesq: {$sum: "$articles.votesq"},   
+                }},   
+                {$project: projection},
+            ]);             
+            return data.length ? data[0] : null;
+        } catch (err) {
+            let errTxt: string = `Error in UsersService.oneByEmail: ${String(err)}`;
+            console.log(errTxt);
+            return null;
+        }
     }
 }

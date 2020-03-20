@@ -6,9 +6,8 @@ import { APIService } from "../../services/_api.service";
 import { UsersService } from "../users/users.service";
 import { LoginDTO } from "./dto/login.dto";
 import { IAnswer } from "../../model/answer.interface";
-import { IUser } from "../../model/orm/interfaces/user.interface";
-import { IAuthData } from "../../model/authdata.interface";
-import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
+import { UserDTO } from "../users/dto/user.dto";
+import { IAuthDataDTO } from "./dto/authdata.dto";
 
 @Injectable()
 export class AuthService extends APIService {
@@ -19,12 +18,13 @@ export class AuthService extends APIService {
         super();
     }
 
-    public async login(dto: LoginDTO): Promise<IAnswer<IAuthData>> {
+    public async login(dto: LoginDTO): Promise<IAnswer<IAuthDataDTO>> {
         try {            
-            let user: IUser | null = await this.validateUser(dto.email, dto.password);
+            let user: UserDTO | null = await this.validateUser(dto.email, dto.password);
 
             if (user) {
                 const payload: Object = {username: user.email, sub: user._id};
+                user.password = undefined;
                 return {statusCode: 200, data: {token: this.jwtService.sign(payload), user}};
             } else {
                 return {statusCode: 401, error: "Unauthorized"};
@@ -36,11 +36,11 @@ export class AuthService extends APIService {
         }
     }
 
-    private async validateUser(email: string, password: string): Promise<IUser> {
-        let user: IUser = await this.usersService.oneByEmail(email);        
+    private async validateUser(email: string, password: string): Promise<UserDTO> {
+        let user: UserDTO = await this.usersService.oneByEmail(email);        
 
         if (user && user.active && await this.compare(password, user.password)) {
-            delete user.password;
+            user.password = undefined;
             return user;
         } else {
             return null;

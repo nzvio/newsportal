@@ -36,5 +36,5 @@ export class ArticlesListComponent {
 
     public vote(article: Article, rating: number): void {
         this.voteService.vote(article, rating);
-    }
+    }    
 }

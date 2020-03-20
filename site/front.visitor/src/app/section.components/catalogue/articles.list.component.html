@@ -31,7 +31,9 @@
                         <div class="ca-socnet tw" (click)="shareTw(a);"><span></span></div>
                     </div>
                     <div class="ca-author" *ngIf="displayUser && a.user">
-                        <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(/assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}"></div>
+                        <div class="ca-author-ava" [style.background-image]="a.user.img_s ? 'url(/assets/images/users/'+a.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}">
+                            <span *ngIf="!a.user.img_s">{{a.user.firstLetter}}</span>
+                        </div>
                         <div class="ca-author-name"><a routerLink="/{{currentLang.slug}}/catalogue/user/{{a.user._id}}" [innerHTML]="a.user.name"></a></div>
                     </div>
                 </div>

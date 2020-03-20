@@ -8,8 +8,8 @@ import { UsergroupsService } from "../usergroups/usergroups.service";
 import { LoginDTO } from "./dto/login.dto";
 import { IAnswer } from "../../model/answer.interface";
 import { IUser } from "../../model/orm/interfaces/user.interface";
-import { IAuthData } from "../../model/authdata.interface";
 import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
+import { IAuthDataDTO } from "./dto/authdata.dto";
 
 @Injectable()
 export class AuthService extends APIService {
@@ -21,7 +21,7 @@ export class AuthService extends APIService {
         super();
     }
 
-    public async login(dto: LoginDTO): Promise<IAnswer<IAuthData>> {
+    public async login(dto: LoginDTO): Promise<IAnswer<IAuthDataDTO>> {
         try {            
             let user: IUser | null = await this.validateUser(dto.email, dto.password);
 

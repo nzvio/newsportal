@@ -38,7 +38,9 @@
                     </div>
                     <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
                     <ng-container *ngIf="authenticated">
-                        <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+                        <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private">
+                            <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+                        </div>
                     </ng-container>
                     <ng-container *ngIf="!authenticated">
                         <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"></span>
@@ -67,7 +69,9 @@
                 </div>
                 <span class="h-btn h-btn-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"></span>
                 <ng-container *ngIf="authenticated">
-                    <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+                    <div class="h-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private">
+                        <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+                    </div>
                 </ng-container>
                 <ng-container *ngIf="!authenticated">
                     <span class="h-btn h-btn-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"></span>
@@ -83,7 +87,9 @@
     <div id="hm-dash">
         <div class="hm-btn hm-search" title="{{currentLang.s('search')}}" (click)="activateSearch();"><span></span></div>        
         <ng-container *ngIf="authenticated">
-            <div class="hm-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private"></div>
+            <div class="hm-user" [style.background-image]="user.img_s ? 'url(../../assets/images/users/'+user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/user/private">
+                <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+            </div>
         </ng-container>
         <ng-container *ngIf="!authenticated">
             <div class="hm-btn hm-login" title="{{currentLang.s('login')}}" routerLink="/{{currentLang.slug}}/user/login"><span></span></div>

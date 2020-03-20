@@ -73,7 +73,7 @@
             }
             .ca-author {
                 display: flex; align-items: center;
-                .ca-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-position: center top; background-size: cover; margin-right: 10px; cursor: pointer;}
+                .ca-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-position: center top; background-size: cover; margin-right: 10px; cursor: pointer; font-size: 12px; color: #fff; display: flex; justify-content: center; align-items: center;}
                 .ca-author-name {
                     font-size: 12px; letter-spacing: 1px;
                     a, a:visited {text-decoration: none; color: $color-grey-light;}    

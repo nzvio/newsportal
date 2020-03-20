@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from "@nestjs/common";
+import { Controller, Post, Body, UseGuards } from "@nestjs/common";
 
 import { ArticlesService } from "./articles.service";
 import { IAnswer } from "../../model/answer.interface";
@@ -7,6 +7,7 @@ import { ArticleDTO } from "./dto/article.dto";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
 import { IVoteDTO } from "./dto/vote.dto";
 import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
+import { AuthGuard } from "../auth/auth.guard";
 
 @Controller('api/visitor/articles')
 export class ArticlesController {
@@ -49,7 +50,8 @@ export class ArticlesController {
     }
 
     // vote
-    @Post("vote")
+    @UseGuards(AuthGuard)
+    @Post("vote")    
     public vote(@Body() dto: IVoteDTO): Promise<IAnswer<IVoteAnswerDTO>> {
         return this.articlesService.vote(dto);
     }

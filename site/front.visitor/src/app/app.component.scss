@@ -7,7 +7,12 @@ html {
         * {box-sizing: border-box; outline: none;}
         p {margin: 0 0 20px 0;}
         a {transition: color 0.3s ease 0s;}
-        .red {color: #f00;}        
+        .red {color: #f00;}    
+        button {
+            border: none; padding: 0 30px; height: 40px; background-color: $color-blue; color: #fff; font-family: "teko", Arial, Helvetica, sans-serif; font-size: 20px; text-transform: uppercase; transition: background-color 0.3s ease 0s; cursor: pointer; letter-spacing: 1px;
+            &:hover {background-color: $color-blue-dark;}
+            &:disabled {background-color: $color-grey-light;}
+        }    
         #wrap {
             height: 100%; width: 100%; overflow-y: scroll; overflow-x: hidden; position: relative; color: $color-main; overflow-anchor: none; scroll-behavior: smooth;
             .wrap2 {

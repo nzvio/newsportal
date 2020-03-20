@@ -85,5 +85,5 @@ export class CatalogueUserPage implements OnInit, AfterViewInit, OnDestroy {
 				this.appService.showNotification(err, "error");
 			}			
 		}
-	}	
+	}		
 }
