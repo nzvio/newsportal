@@ -15,6 +15,9 @@ import { User } from '../../../model/orm/user.model';
 export class UserPrivatePage implements OnInit {    
     public ready: boolean = false;
     public tab: number = 1;
+    public loading: boolean = false;
+    public errorName: boolean = false;
+    public errorEmail: boolean = false;
 
     constructor(
         private langRepository: LangRepository,
@@ -41,5 +44,9 @@ export class UserPrivatePage implements OnInit {
     private validate(): boolean {
         let error: boolean = false;
         return !error;
-    }    
+    } 
+    
+    public update(): void {
+
+    }
 }

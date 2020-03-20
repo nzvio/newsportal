@@ -57,7 +57,7 @@ export class UsersService extends APIService {
     public async oneByEmail(email: string): Promise<UserDTO | null> {
         try {            
             const filter: any = {email};    
-            const projection: any = {name: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1, __rating: 1, __votesq: 1, active: 1, password: 1};
+            const projection: any = {name: 1, email: 1, img: 1, img_s: 1, __commentsq: 1, __articlesq: 1, __createdat: 1, __rating: 1, __votesq: 1, active: 1, password: 1};
             const data: UserDTO[] = await this.model.aggregate([
                 {$match: filter},
                 {

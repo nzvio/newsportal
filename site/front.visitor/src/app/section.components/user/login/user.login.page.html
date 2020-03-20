@@ -7,11 +7,11 @@
             </div>     
             <h1 [innerHTML]="currentLang.s('user-login')"></h1>    
             
-            <div class="sign-form">
+            <div class="user-form sign-form">
                 <form (submit)="login();">
-                    <div class="sf-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="email" [placeholder]="currentLang.s('user-login-email')"></div>
-                    <div class="sf-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="password" [placeholder]="currentLang.s('user-login-pw')"></div>
-                    <div class="sf-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-login-send')}}</button></div>
+                    <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="email" [placeholder]="currentLang.s('user-login-email')"></div>
+                    <div class="f-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="password" [placeholder]="currentLang.s('user-login-pw')"></div>
+                    <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-login-send')}}</button></div>
                 </form>    
             </div>        
         </ng-container>        

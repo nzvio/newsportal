@@ -4,7 +4,7 @@
             <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
             <span [innerHTML]="currentLang.s('user-private')"></span>
         </div>     
-        <h1 [innerHTML]="currentLang.s('user-private')"></h1>   
+        <h1 [innerHTML]="currentLang.s('user-private')+': '+user.name"></h1>   
         
         <ng-container *ngIf="ready">
             <div class="userprivate">    
@@ -34,11 +34,30 @@
                     </ng-container>
                     <!-- edit -->
                     <ng-container *ngIf="tab === 2">
-                        tab 2
+                        <div class="user-form useredit-form">
+                            <form (submit)="update();">
+                                <div class="uef-left">
+                                    <figure [style.background-image]="user.img_s ? 'url(/assets/images/users/'+user.img_s+')' : 'none'">
+                                        <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+                                    </figure>
+                                </div>
+                                <div class="uef-right">
+                                    <div class="f-row"><input [class.error]="errorName" type="text" name="name" [(ngModel)]="user.name" [placeholder]="currentLang.s('user-private-name')"></div>
+                                    <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="user.email" [placeholder]="currentLang.s('user-private-email')"></div>
+                                    <div class="f-row"><input type="password" name="password" [(ngModel)]="user.password" [placeholder]="currentLang.s('user-private-pw')"></div>
+                                    
+                                    
+                                    
+                                    <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-private-save')}}</button></div>
+                                </div>                                
+                            </form>
+                        </div>
                     </ng-container>
                     <!-- exit -->
                     <ng-container *ngIf="tab === 3">
-                        <button routerLink="/{{currentLang.slug}}/user/logout">{{currentLang.s('user-private-bye')}}</button>
+                        <div class="up-logout">
+                            <button routerLink="/{{currentLang.slug}}/user/logout">{{currentLang.s('user-private-bye')}}</button>
+                        </div>                        
                     </ng-container>                    
                 </div>        
             </div>
