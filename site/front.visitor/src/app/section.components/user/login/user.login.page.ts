@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth.service';
 @Component({
     selector: "user-login-page",
     templateUrl: "./user.login.page.html",
-    styleUrls: ["../user.forms.scss"],
+    styleUrls: ["../user.forms.scss", "./user.login.page.scss"],
 })
 export class UserLoginPage implements OnInit {
     public email: string = "";

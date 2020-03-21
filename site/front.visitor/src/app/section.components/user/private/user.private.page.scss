@@ -51,5 +51,36 @@
                 @media (min-width: 640px) {width: auto;}         
             }   
         }
+        .up-form {
+            form {
+                @media (min-width: 0) {display: block; width:100%;}
+                @media (min-width: 640px) {display: flex; width: 600px;}
+                justify-content: space-between; margin-bottom: 80px;
+                .f-row {        
+                    input[type='text'], input[type='email'], input[type='password'] {width: 100%;}
+                    button {
+                        @media (min-width: 0) {width:100%;}
+                        @media (min-width: 640px) {width: auto;}
+                    }
+                }
+                .upf-left {
+                    @media (min-width: 0) {width: 100%; margin: 0 0 20px 0; justify-content: center;}
+                    @media (min-width: 640px) {width: 150px; margin: 0; justify-content: flex-start;}
+                    display: flex; 
+                    .upf-imgwrap {
+                        width: 150px; height: 150px; border: 1px $color-blue dashed; position: relative; display: flex; justify-content: center; align-items: center;
+                        figure {margin: 0; width: 140px; height: 140px; border-radius: 70px; background-color: $color-blue; background-position: center top; background-size: cover; color: #fff; font-size: 36px; display: flex; justify-content: center; align-items: center;}
+                        .upf-dnd {
+                            position: absolute; left: 5px; top: 5px;
+                            span::before {font-family: "ionicons"; font-size: 20px; color: $color-blue; content: "\f366";}
+                        }
+                    }                    
+                }
+                .upf-right {
+                    @media (min-width: 0) {width: 100%; font-size: 14px; }
+                    @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; }
+                }
+            }           
+        }
     }
 }

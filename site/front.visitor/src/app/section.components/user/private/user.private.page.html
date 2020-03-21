@@ -33,20 +33,21 @@
                 </ng-container>
                 <!-- edit -->
                 <ng-container *ngIf="tab === 2">
-                    <div class="user-form useredit-form">
+                    <div class="user-form up-form">
                         <form (submit)="update();">
-                            <div class="uef-left">
-                                <figure [style.background-image]="user.img_s ? 'url(/assets/images/users/'+user.img_s+')' : 'none'">
-                                    <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
-                                </figure>
+                            <div class="upf-left">
+                                <div class="upf-imgwrap" [title]="currentLang.s('user-private-img')">
+                                    <figure [style.background-image]="user.img_s ? 'url(/assets/images/users/'+user.img_s+')' : 'none'">
+                                        <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
+                                    </figure>                                
+                                    <div class="upf-dnd"><span></span></div>
+                                    <div class="upf-selectfile"><span></span></div>
+                                </div>                                
                             </div>
-                            <div class="uef-right">
+                            <div class="upf-right">
                                 <div class="f-row"><input [class.error]="errorName" type="text" name="name" [(ngModel)]="user.name" [placeholder]="currentLang.s('user-private-name')"></div>
                                 <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="user.email" [placeholder]="currentLang.s('user-private-email')"></div>
-                                <div class="f-row"><input type="password" name="password" [(ngModel)]="user.password" [placeholder]="currentLang.s('user-private-pw')"></div>
-                                
-                                
-                                
+                                <div class="f-row"><input type="password" name="password" [(ngModel)]="user.password" [placeholder]="currentLang.s('user-private-pw')"></div>                                
                                 <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-private-save')}}</button></div>
                             </div>                                
                         </form>
