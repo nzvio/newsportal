@@ -19,6 +19,7 @@ export class UsersCreatePage extends ObjectPage<User> implements OnInit {
 	public homeUrl: string = "/users/users";
 	public folder: string = "users";
 	public requiredFields: string[] = ["name", "email", "password", "usergroup"];
+	public imgCopyWidth: number = 150;
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,

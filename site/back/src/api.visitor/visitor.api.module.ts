@@ -9,6 +9,7 @@ import { TagsModule } from "./tags/tags.module";
 import { SettingsModule } from "./settings/settings.module";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
+import { FilesModule } from "./files/files.module";
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { AuthModule } from "./auth/auth.module";
         SettingsModule,
         UsersModule,
         AuthModule,
+        FilesModule,
     ],    
 })
 export class VisitorAPIModule {}

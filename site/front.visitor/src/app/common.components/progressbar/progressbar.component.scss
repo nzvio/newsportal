@@ -1,0 +1,11 @@
+@import "../../var";
+
+.pb-container {
+    width: 100%; margin: 5px 0; display: flex; justify-content: space-between; align-items: center; transition: opacity 0.3s ease 1s; opacity: 0;
+    &.active {opacity: 1; transition: opacity 0s ease 0s;}
+    .pb-scale {
+        height: 4px; background: $color-grey-light; width: 80%;
+        .pb-filled {height:100%; background: $color-blue;}
+    }
+    .pb-number {white-space: nowrap; margin: 0 0 0 5px; width:20%; font-size: 12px;}
+}

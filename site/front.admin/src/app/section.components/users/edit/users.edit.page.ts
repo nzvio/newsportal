@@ -20,6 +20,7 @@ export class UsersEditPage extends ObjectPage<User> implements OnInit {
 	public homeUrl: string = "/users/users";
 	public folder: string = "users";
 	public requiredFields: string[] = ["name", "email", "usergroup"];
+	public imgCopyWidth: number = 150;
 
 	constructor(
 		protected admlangRepository: AdmLangRepository,

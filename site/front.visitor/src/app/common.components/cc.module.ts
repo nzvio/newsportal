@@ -11,6 +11,7 @@ import { ArticlesRecommendedComponent } from './sidebar/articles.recommended/art
 import { CommentsLastComponent } from './sidebar/comments.last/comments.last.component';
 import { TagsComponent } from './sidebar/tags/tags.component';
 import { SearchComponent } from './search/search.component';
+import { ProgressbarComponent } from './progressbar/progressbar.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { SearchComponent } from './search/search.component';
         CommentsLastComponent,
         TagsComponent,
         SearchComponent,
+        ProgressbarComponent,
     ],
     exports: [
         HeaderComponent,
@@ -37,6 +39,7 @@ import { SearchComponent } from './search/search.component';
         CommentsLastComponent,
         TagsComponent,
         SearchComponent,
+        ProgressbarComponent,
     ],    
 })
 export class CCModule {    

@@ -1,0 +1,6 @@
+<div class="pb-container" [class.active]="progress > 0 && progress < 100">
+    <div class="pb-scale">
+        <div class="pb-filled" [ngStyle]="{'width':progress+'%'}"></div>
+    </div>
+    <div class="pb-number">{{progress}} %</div>
+</div>

@@ -22,6 +22,7 @@ import { UserRepository } from './repositories/user.repository';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { VoteService } from './vote.service';
+import { UploadService } from './upload.service';
 
 @NgModule({
     imports: [                
@@ -52,6 +53,7 @@ import { VoteService } from './vote.service';
         TagRepository,
         SettingRepository,
         UserRepository,
+        UploadService,
     ],
 })
 export class ServicesModule {    

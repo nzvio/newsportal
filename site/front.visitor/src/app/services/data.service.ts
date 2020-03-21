@@ -18,6 +18,7 @@ import { Setting } from '../model/orm/setting.model';
 import { User } from '../model/orm/user.model';
 import { IVoteDTO } from '../model/dto/vote.dto';
 import { IVoteAnswerDTO } from "../model/dto/vote.answer.dto";
+import { IImagable } from '../model/imagable.interface';
 
 @Injectable()
 export class DataService {
@@ -45,6 +46,8 @@ export class DataService {
     public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", `users/update`, x, true);}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public vote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
+    public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, true, true);}
+    public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, true, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;
