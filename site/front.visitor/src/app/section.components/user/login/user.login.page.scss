@@ -1,11 +1,34 @@
-.sign-form {
-    display: flex; justify-content: center;
+@import "../../../var";
+
+.sign-form {    
     form {
-        @media (min-width: 0) {width: 100%;}
-        @media (min-width: 640px) {width: 300px;}
         .f-row {        
             input[type='text'], input[type='email'], input[type='password'] {width: 100%;}
             button {width: 100%;}            
+        }
+    }
+}
+
+.login {
+    @media (min-width: 0) {display: block;}
+    @media (min-width: 640px) {display: flex;}
+    justify-content: center; margin-bottom: 80px;
+    .login-left {
+        @media (min-width: 0) {width: 100%; padding: 0 0 30px 0; border-right: none; border-bottom: 1px $color-grey-superlight solid;}
+        @media (min-width: 640px) {width: 285px; padding: 0 30px 0 0; border-right: 1px $color-grey-superlight solid; border-bottom: none;}        
+    }
+    .login-right {
+        @media (min-width: 0) {width: 100%; padding: 30px 0 0 0;}
+        @media (min-width: 640px) {width: 285px; padding: 0 0 0 30px;}       
+        .lr-link {
+            margin: 0 0 15px 0;
+            a, a:visited {
+                text-decoration: none; color: $color-main; font-size: 20px; font-family: "teko", Arial, Helvetica, sans-serif; text-transform: uppercase; transition: color 0.3s ease 0s;
+                &::before {font-family: "ionicons"; display: inline-block; width: 30px;}
+            }
+            a:hover {color: $color-blue;}
+            &.lr-signup {a::before {content: "\f211"}}
+            &.lr-forgot {a::before {content: "\f132"}}
         }
     }
 }

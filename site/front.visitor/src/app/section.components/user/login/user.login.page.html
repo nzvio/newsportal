@@ -5,15 +5,23 @@
                 <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
                 <span [innerHTML]="currentLang.s('user-login')"></span>
             </div>     
-            <h1 [innerHTML]="currentLang.s('user-login')"></h1>    
+            <h1 [innerHTML]="currentLang.s('user-login')"></h1>            
             
-            <div class="user-form sign-form">
-                <form (submit)="login();">
-                    <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="email" [placeholder]="currentLang.s('user-login-email')"></div>
-                    <div class="f-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="password" [placeholder]="currentLang.s('user-login-pw')"></div>
-                    <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-login-send')}}</button></div>
-                </form>    
-            </div>        
+            <div class="login">
+                <div class="login-left">
+                    <div class="user-form sign-form">
+                        <form (submit)="login();">
+                            <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="email" [placeholder]="currentLang.s('user-login-email')"></div>
+                            <div class="f-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="password" [placeholder]="currentLang.s('user-login-pw')"></div>
+                            <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-login-send')}}</button></div>
+                        </form>    
+                    </div>        
+                </div>
+                <div class="login-right">
+                    <div class="lr-link lr-signup"><a [innerHTML]="currentLang.s('user-login-signup')" routerLink="/{{currentLang.slug}}/user/register"></a></div>
+                    <div class="lr-link lr-forgot"><a [innerHTML]="currentLang.s('user-login-forgot')" routerLink="/{{currentLang.slug}}/user/restore"></a></div>
+                </div>
+            </div>
         </ng-container>        
     </main>
 </div>

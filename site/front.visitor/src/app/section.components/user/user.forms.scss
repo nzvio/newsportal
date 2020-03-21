@@ -1,10 +1,10 @@
 @import "../../var";
 
-.user-form {
-    margin-bottom: 80px;
+.user-form {    
     form {
         .f-row {
             margin-bottom: 15px;
+            &:last-child {margin-bottom: 0;}
             input[type='text'], input[type='email'], input[type='password']  {
                 border: 1px $color-grey-superlight solid; height: 40px; padding: 0 5px;
                 &:focus {border-color: $color-blue;}
