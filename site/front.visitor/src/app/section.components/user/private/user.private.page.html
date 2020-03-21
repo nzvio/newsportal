@@ -36,7 +36,15 @@
                     <div class="user-form up-form">
                         <form (submit)="update();">
                             <div class="upf-left">
-                                <div class="upf-imgwrap" [title]="currentLang.s('user-private-imgdnd')">
+                                <div 
+                                    class="upf-imgwrap" 
+                                    [class.active]="dropAreaActive"
+                                    [title]="currentLang.s('user-private-imgdnd')" 
+                                    (drop)="onDrop($event);" 
+                                    (dragenter)="onDragEnter($event);" 
+                                    (dragover)="onDragOver($event);" 
+                                    (dragleave)="onDragLeave($event);"
+                                >
                                     <figure [style.background-image]="user.img_s ? 'url(/assets/images/users/'+user.img_s+')' : 'none'">
                                         <span *ngIf="!user.img_s">{{user.firstLetter}}</span>
                                     </figure>                                

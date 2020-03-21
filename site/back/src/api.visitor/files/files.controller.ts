@@ -32,7 +32,7 @@ export class FilesController
                 cb(null, fullDir);
             },
             filename: (req, file, cb) => {
-                const newfilename: string = Math.round(+new Date()/1000).toString ();
+                const newfilename: string = Math.round(+new Date()/1000).toString ();                
                 return cb(null, `${newfilename}${extname(file.originalname)}`)
             }
         })
@@ -49,14 +49,14 @@ export class FilesController
             destination: (req, file, cb) => {                
                 const subdir = (new Date ()).getFullYear () + "-" + ((new Date ()).getMonth () + 1);
                 const fullDir = `../static/assets/images/${req.body.dir}/${subdir}`;
-                if (!fs.existsSync (fullDir)) fs.mkdirSync (fullDir);
+                if (!fs.existsSync (fullDir)) fs.mkdirSync (fullDir);                
                 cb(null, fullDir);
             },
             filename: (req, file, cb) => {
-                const newfilename: string = Math.round(+new Date()/1000).toString ();
-                return cb(null, `${newfilename}${extname(file.originalname)}`)
+                const newfilename: string = Math.round(+new Date()/1000).toString ();                
+                return cb(null, `${newfilename}${extname(file.originalname)}`);
             }
-        })
+        }),        
     }))
     @UseGuards(AuthGuard)
     public uploadImgWithCopy(@UploadedFile() file, @Param("width") width: string): Promise<IAnswer<IImagable>> {        

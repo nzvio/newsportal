@@ -23,6 +23,8 @@ export class UserPrivatePage implements OnInit {
     public errorName: boolean = false;
     public errorEmail: boolean = false;
     public uploadProgress: number = 0;
+    public dropAreaActive: boolean = false;
+    private maxFileSize: number = 5 * 1024 * 1024; // 5Mb
 
     constructor(        
         private route: ActivatedRoute,
@@ -85,10 +87,17 @@ export class UserPrivatePage implements OnInit {
     public openFileDialog(): void {
         let input: HTMLInputElement = document.createElement("input");
         input.type = "file";
-        input.accept = "image/*";
+        input.accept = "image/*";        
         input.onchange = (event: IHTMLInputEvent) => {
             const file: File = event.target.files[0];
-            file ? this.upload(file) : null;            
+            
+            if (file) {
+                if (file.size > this.maxFileSize) {
+                    this.appService.showNotification(this.currentLang.s("user-private-imglimit"), "error");
+                } else {
+                    this.upload(file);            
+                }
+            }            
         };
         input.click();
     }
@@ -116,5 +125,37 @@ export class UserPrivatePage implements OnInit {
         }, err => {
             this.appService.showNotification(err.message, "error");
         }); 
+    }
+
+    public onDrop(event: DragEvent): void {
+        event.stopPropagation();
+        event.preventDefault();        
+        this.dropAreaActive = false;
+        const file: File = event.dataTransfer.files[0];
+        
+        if (file.type.includes("image/")) {            
+            if (file.size > this.maxFileSize) {
+                this.appService.showNotification(this.currentLang.s("user-private-imglimit"), "error");
+            } else {
+                this.upload(file);
+            }
+        }                
+    }
+    
+    public onDragOver(event: DragEvent): void {
+        event.stopPropagation();
+        event.preventDefault();
+    }
+
+    public onDragEnter(event: DragEvent) {
+        event.stopPropagation();
+        event.preventDefault();        
+        this.dropAreaActive = true;
+    }
+
+    public onDragLeave(event: DragEvent) {
+        event.stopPropagation();
+        event.preventDefault();                
+        this.dropAreaActive = false;        
     }
 }
