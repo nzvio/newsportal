@@ -2,7 +2,6 @@ import { Component, Input } from "@angular/core";
 
 import { Article } from '../../model/orm/article.model';
 import { AppService } from '../../services/app.service';
-import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/orm/lang.model';
 import { VoteService } from '../../services/vote.service';
 
@@ -19,12 +18,11 @@ export class ArticlesListComponent {
     @Input() categoryAsLink: boolean = false;
 
     constructor(
-        private appService: AppService,
-        private langRepository: LangRepository,  
+        private appService: AppService,        
         private voteService: VoteService,      
     ) {}
 
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public shareFb(article: Article): void {                        
         this.appService.shareFb(this.currentLang, article);        

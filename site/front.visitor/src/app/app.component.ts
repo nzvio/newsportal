@@ -112,13 +112,13 @@ export class AppComponent implements AfterViewInit, OnInit {
 			let currentLang: Lang | null = this.langRepository.xl.find(x => x.name === urlPart) || null;
 			
 			if (currentLang) {
-				this.langRepository.current.next(currentLang);
+				this.appService.currentLang.next(currentLang);
 			} else {
-				this.langRepository.current.next(this.langRepository.xl[0]);
+				this.appService.currentLang.next(this.langRepository.xl[0]);
 				this.router.navigateByUrl("/404");
 			}						 
 		} else {
-			this.langRepository.current.next(this.langRepository.xl[0]);
+			this.appService.currentLang.next(this.langRepository.xl[0]);
 		}
 	}
 	

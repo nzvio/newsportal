@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { AppService } from './app.service';
 import { DataService } from './data.service';
 import { AuthService } from './auth.service';
-import { LangRepository } from './repositories/lang.repository';
 import { Lang } from '../model/orm/lang.model';
 import { Article } from '../model/orm/article.model';
 import { IVoteDTO } from '../model/dto/vote.dto';
@@ -13,11 +12,10 @@ export class VoteService {
     constructor(
         private dataService: DataService,
         private appService: AppService,
-        private authService: AuthService,
-        private langRepository: LangRepository,
+        private authService: AuthService,        
     ) {}
 
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public async vote(article: Article, rating): Promise<void> {
         if (!this.authService.authenticated) {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/orm/lang.model';
+import { AppService } from '../../services/app.service';
 
 @Component({
     selector:"the-sidebar", 
@@ -9,9 +9,9 @@ import { Lang } from '../../model/orm/lang.model';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-    constructor(private langRepository: LangRepository) {}    
+    constructor(private appService: AppService) {}    
     
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
     get facebookLink(): string {return this.currentLang.s("facebook");}
     get twitterLink(): string {return this.currentLang.s("twitter");}
 }

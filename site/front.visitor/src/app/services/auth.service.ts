@@ -16,7 +16,7 @@ export class AuthService {
 
             if (data) {
                 const parsedData: any = JSON.parse(data);
-                this.authData = {user: new User().build(parsedData.user), token: parsedData.token};
+                this.authData = {user: new User().build(parsedData.user), token: parsedData.token};                
             } else {
                 this.authData = null;
             }            
@@ -50,14 +50,9 @@ export class AuthService {
         }        
     }
 
-    private save(): void {
-        if (this.appService.isBrowser && this.authData) {
+    public save(): void {
+        if (this.appService.isBrowser && this.authData) {            
             localStorage.setItem("authdata", JSON.stringify(this.authData));            
         } 
-    }
-    
-    public updateUser(user: User): void {
-        this.authData.user = user;
-        this.save();
-    }
+    }    
 }

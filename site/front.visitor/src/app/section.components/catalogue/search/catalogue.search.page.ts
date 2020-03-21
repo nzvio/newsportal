@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AppService } from '../../../services/app.service';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Lang } from '../../../model/orm/lang.model';
 import { ArticleByNameRepository } from '../../../services/repositories/article.byname.repository';
 import { Article } from '../../../model/orm/article.model';
@@ -19,12 +18,11 @@ export class CatalogueSearchPage implements OnInit, OnDestroy, AfterViewInit {
     
     constructor(
         private appService: AppService,
-        private route: ActivatedRoute,
-        private langRepository: LangRepository,     
+        private route: ActivatedRoute,        
         private articleByNameRepository: ArticleByNameRepository,   
     ) {}
 
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
     get searchKeyword(): string {return this.appService.searchKeyword.value;}
     get articles(): Article[] {return this.articleByNameRepository.xl;}
     get scrolledToBottom(): boolean {return this.appService.wrapper.scrollTop + this.appService.wrapper.offsetHeight > this.appService.wrapper.scrollHeight - 400;}	

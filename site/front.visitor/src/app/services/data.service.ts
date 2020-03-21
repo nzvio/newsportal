@@ -42,6 +42,7 @@ export class DataService {
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}
+    public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", `users/update`, x, true);}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public vote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
     

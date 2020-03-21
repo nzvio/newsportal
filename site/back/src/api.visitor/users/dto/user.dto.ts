@@ -1,12 +1,13 @@
 export class UserDTO {    
     public readonly _id: string;
     public readonly name: string;    
-    public readonly email: string;
+    public readonly email?: string;
     public password: string;
     public readonly img: string;
     public readonly img_s: string;    
-    public readonly active: boolean;    
+    public active: boolean;    
     public readonly usergroup: string;
+    public readonly defended: boolean;
     
     public readonly __articlesq: number;
     public readonly __commentsq: number;

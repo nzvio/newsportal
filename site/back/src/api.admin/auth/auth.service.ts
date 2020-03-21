@@ -43,7 +43,7 @@ export class AuthService extends APIService {
         let usergroup: IUsergroup = await this.usergroupsService.oneByName("admin");              
 
         if (user && usergroup && user.usergroup == usergroup._id && user.active && await this.compare(password, user.password)) {
-            delete user.password;
+            user.password = undefined;
             return user;
         } else {
             return null;

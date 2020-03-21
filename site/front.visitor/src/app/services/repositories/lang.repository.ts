@@ -7,9 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 import { IGetallDTO } from 'src/app/model/dto/getall.dto';
 
 @Injectable()
-export class LangRepository extends SimpleRepository<Lang> {        
-    public current: BehaviorSubject<Lang | null> = new BehaviorSubject(null);
-
+export class LangRepository extends SimpleRepository<Lang> {
     constructor(protected dataService: DataService) {
         super();
         this.sortBy = "pos";

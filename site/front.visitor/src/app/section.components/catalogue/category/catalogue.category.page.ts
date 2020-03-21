@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleByCategoryRepository } from '../../../services/repositories/article.bycategory.repository';
 import { CategoryRepository } from '../../../services/repositories/category.repository';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
 import { Lang } from '../../../model/orm/lang.model';
 import { Category } from '../../../model/orm/category.model';
@@ -22,13 +21,12 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 	constructor(
 		private appService: AppService,
 		private route: ActivatedRoute,
-		private router: Router,
-		private langRepository: LangRepository,
+		private router: Router,		
 		private categoryRepository: CategoryRepository,
 		private articleByCategoryRepository: ArticleByCategoryRepository
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current.value;}
+	get currentLang(): Lang {return this.appService.currentLang.value;}
 	get articles(): Article[] {return this.articleByCategoryRepository.xl;}
 	get scrolledToBottom(): boolean {return this.appService.wrapper.scrollTop + this.appService.wrapper.offsetHeight > this.appService.wrapper.scrollHeight - 400;}	
 

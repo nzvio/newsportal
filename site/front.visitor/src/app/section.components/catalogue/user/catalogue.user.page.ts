@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../model/orm/user.model';
 import { UserRepository } from '../../../services/repositories/user.repository';
 import { AppService } from '../../../services/app.service';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Lang } from '../../../model/orm/lang.model';
 import { ArticleByUserRepository } from '../../../services/repositories/article.byuser.repository';
 import { Article } from '../../../model/orm/article.model';
@@ -22,13 +21,12 @@ export class CatalogueUserPage implements OnInit, AfterViewInit, OnDestroy {
 
 	constructor(
 		private appService: AppService,
-		private route: ActivatedRoute,		
-		private langRepository: LangRepository,
+		private route: ActivatedRoute,				
 		private userRepository: UserRepository,
 		private articleByUserRepository: ArticleByUserRepository,
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current.value;}
+	get currentLang(): Lang {return this.appService.currentLang.value;}
 	get articles(): Article[] {return this.articleByUserRepository.xl;}
 	get scrolledToBottom(): boolean {return this.appService.wrapper.scrollTop + this.appService.wrapper.offsetHeight > this.appService.wrapper.scrollHeight - 400;}	
 

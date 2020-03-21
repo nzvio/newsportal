@@ -6,7 +6,6 @@ import { Lang } from '../../../model/orm/lang.model';
 import { ArticleMainRepository } from '../../../services/repositories/article.main.repository';
 import { CategoryRepository } from '../../../services/repositories/category.repository';
 import { Category } from '../../../model/orm/category.model';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,17 +21,16 @@ export class ArticlesMainComponent implements OnDestroy, OnInit {
 
     constructor(
         private articleMainRepository: ArticleMainRepository,
-        private categoryRepository: CategoryRepository,
-        private langRepository: LangRepository,
+        private categoryRepository: CategoryRepository,        
         private appService: AppService,
     ) {}
 
     get categories(): Category[] {return this.categoryRepository.xl;}   
-    get currentLang(): Lang {return this.langRepository.current.value;} 
+    get currentLang(): Lang {return this.appService.currentLang.value;} 
 
     public ngOnInit(): void {
         this.currentCategoryId = this.categories[0]._id;
-        this.langSubscription = this.langRepository.current.subscribe(async lang => {
+        this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
                 this.articleMainRepository.filterLang = lang._id;

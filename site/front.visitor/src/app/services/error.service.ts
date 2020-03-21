@@ -2,31 +2,24 @@ import { Injectable } from "@angular/core";
 import { Router } from '@angular/router';
 
 import { AppService } from './app.service';
+import { Lang } from '../model/orm/lang.model';
 
 @Injectable()
 export class ErrorService {
-    private responsable: number[] = [200, 401, 409];
-
     constructor(
         private router: Router,
-        private appService: AppService,        
+        private appService: AppService,             
     ) {}
 
-    public processResponse(res: any): boolean {
-        if (this.responsable.includes(res.statusCode)) {
-            return true;
-        }
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
-        (res.error) ? setTimeout(() => {this.appService.showNotification(res.error, "error");}, 1000) : null;
-        
+    public processResponse(res: any): boolean {        
         if (res.statusCode === 403) {                
-            this.router.navigateByUrl("/403");
+            setTimeout(() => {this.appService.showNotification(res.error, "error");}, 1000);
+            this.router.navigateByUrl(`/${this.currentLang.slug}/user/logout`);
+            return false;
         }
-
-        if (res.statusCode === 404) {                
-            this.router.navigateByUrl("/404");            
-        }        
         
-        return false;
+        return true;                
     }
 }

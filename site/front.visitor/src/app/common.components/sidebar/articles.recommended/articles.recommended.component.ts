@@ -4,7 +4,6 @@ import { Article } from '../../../model/orm/article.model';
 import { AppService } from '../../../services/app.service';
 import { Lang } from '../../../model/orm/lang.model';
 import { Subscription } from 'rxjs';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { ArticleRecommendedRepository } from '../../../services/repositories/article.recommended.repository';
 
 @Component({
@@ -17,16 +16,15 @@ export class ArticlesRecommendedComponent implements OnInit, OnDestroy {
     private langSubscription: Subscription;
 
     constructor(
-        private articleRecommendedRepository: ArticleRecommendedRepository,
-        private langRepository: LangRepository,
+        private articleRecommendedRepository: ArticleRecommendedRepository,        
         private appService: AppService,
     ) {}    
 
     get articles(): Article[] {return this.articleRecommendedRepository.xl;}    
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public ngOnInit(): void {
-        this.langSubscription = this.langRepository.current.subscribe(async lang => {
+        this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
                 this.articleRecommendedRepository.filterLang = lang._id;

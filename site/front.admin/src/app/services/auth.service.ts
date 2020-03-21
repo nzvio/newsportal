@@ -15,7 +15,7 @@ export class AuthService {
         let data: string = localStorage.getItem("authdata");
 
         if (data) {
-            this.authData = JSON.parse(data);
+            this.authData = JSON.parse(data);            
         }
     }
 

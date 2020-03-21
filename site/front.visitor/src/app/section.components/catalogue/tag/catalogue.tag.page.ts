@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ArticleByTagRepository } from '../../../services/repositories/article.bytag.repository';
 import { TagRepository } from '../../../services/repositories/tag.repository';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { AppService } from '../../../services/app.service';
 import { Lang } from '../../../model/orm/lang.model';
 import { Tag } from '../../../model/orm/tag.model';
@@ -22,13 +21,12 @@ export class CatalogueTagPage implements OnInit, AfterViewInit, OnDestroy {
 	constructor(
 		private appService: AppService,
 		private route: ActivatedRoute,
-		private router: Router,
-		private langRepository: LangRepository,
+		private router: Router,		
 		private tagRepository: TagRepository,
 		private articleByTagRepository: ArticleByTagRepository
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current.value;}
+	get currentLang(): Lang {return this.appService.currentLang.value;}
 	get articles(): Article[] {return this.articleByTagRepository.xl;}
 	get scrolledToBottom(): boolean {return this.appService.wrapper.scrollTop + this.appService.wrapper.offsetHeight > this.appService.wrapper.scrollHeight - 400;}	
 

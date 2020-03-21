@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 
-import { LangRepository } from '../../../services/repositories/lang.repository';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Lang } from '../../../model/orm/lang.model';
 import { AppService } from '../../../services/app.service';
@@ -18,15 +17,14 @@ export class UserLoginPage implements OnInit {
     public errorPassword: boolean = false;
     public loading: boolean = false;    
     
-    constructor(
-        private langRepository: LangRepository,
+    constructor(        
         private route: ActivatedRoute,
         private router: Router,
         private appService: AppService,
         private authService: AuthService,
     ) {}
 
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
     get isBrowser(): boolean {return this.appService.isBrowser;}
 
     public ngOnInit(): void {
@@ -57,6 +55,7 @@ export class UserLoginPage implements OnInit {
             }
         } catch (err) {
             this.appService.showNotification(err, "error");
+            this.loading = false;
         }        
     }
 

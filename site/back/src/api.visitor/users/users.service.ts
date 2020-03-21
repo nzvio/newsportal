@@ -2,11 +2,13 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as mongoose from 'mongoose';
+import * as bcrypt from "bcrypt";
 
 import { APIService } from "../../services/_api.service";
 import { IUser } from "../../model/orm/interfaces/user.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { UserDTO } from "./dto/user.dto";
+import { UserUpdateDTO } from "./dto/user.update.dto";
 
 @Injectable()
 export class UsersService extends APIService {
@@ -87,5 +89,24 @@ export class UsersService extends APIService {
             console.log(errTxt);
             return null;
         }
+    }
+
+    public async update(dto: UserUpdateDTO): Promise<IAnswer<void>> {
+        try {
+            let _id: string = dto._id;
+
+            if (dto.password) {                
+                dto.password = bcrypt.hashSync(dto.password, 10);
+            } else {
+                delete dto.password; // if we got empty or null password, then it will not change in DB
+            }
+
+            await this.model.updateOne ({_id: _id}, dto, {runValidators: true});
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in UsersService.update: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        } 
     }
 }

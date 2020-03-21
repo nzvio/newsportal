@@ -20,6 +20,7 @@ export class AppService {
     public indicatorWidth: number = 0;
     public searchActive: BehaviorSubject<boolean> = new BehaviorSubject(false);
     public searchKeyword: BehaviorSubject<string> = new BehaviorSubject("");
+    public currentLang: BehaviorSubject<Lang | null> = new BehaviorSubject(null);
 
     constructor(
         @Inject(PLATFORM_ID) private platformId: Object,

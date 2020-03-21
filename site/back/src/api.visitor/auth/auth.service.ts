@@ -41,6 +41,7 @@ export class AuthService extends APIService {
 
         if (user && user.active && await this.compare(password, user.password)) {
             user.password = undefined;
+            user.active = undefined;
             return user;
         } else {
             return null;

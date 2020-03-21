@@ -35,7 +35,7 @@ export class HeaderComponent implements AfterViewInit {
     get url(): string[] {return this.appService.url;}   
     get stickyVisible(): boolean {return this.appService.stickyVisible;} 
     get indicatorWidth(): number {return this.appService.indicatorWidth;}    
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
     get langs(): Lang[] {return this.langRepository.xl;}
     get pages(): Page[] {return this.pageRepository.xl;}
     get categories(): Category[] {return this.categoryRepository.xl;}   

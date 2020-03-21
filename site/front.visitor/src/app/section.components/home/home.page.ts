@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../../services/app.service';
-import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/orm/lang.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,18 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomePage implements OnInit {
 	constructor(
-		private appSerice: AppService,
-		private langRepository: LangRepository,		
+		private appService: AppService,		
 		private route: ActivatedRoute,
 	) {}
 
-	get currentLang(): Lang {return this.langRepository.current.value;}	
+	get currentLang(): Lang {return this.appService.currentLang.value;}	
 
 	public ngOnInit(): void {
 		this.route.params.subscribe(p => {
-			this.appSerice.setTitle(this.currentLang.s("home-title"));
-			this.appSerice.setMeta("keywords", this.currentLang.s("home-keywords"));
-			this.appSerice.setMeta("description", this.currentLang.s("home-description"));			
+			this.appService.setTitle(this.currentLang.s("home-title"));
+			this.appService.setMeta("keywords", this.currentLang.s("home-keywords"));
+			this.appService.setMeta("description", this.currentLang.s("home-description"));			
 		});		
 	}
 }

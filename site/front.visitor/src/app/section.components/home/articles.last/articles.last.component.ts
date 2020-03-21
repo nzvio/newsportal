@@ -5,7 +5,6 @@ import { Lang } from '../../../model/orm/lang.model';
 import { ArticleRepository } from '../../../services/repositories/article.repository';
 import { AppService } from '../../../services/app.service';
 import { Article } from '../../../model/orm/article.model';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 
 @Component({
     selector: "articles-last",
@@ -18,8 +17,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
     private langSubscription: Subscription;
 
     constructor(
-        private articleRepository: ArticleRepository,
-        private langRepository: LangRepository,        
+        private articleRepository: ArticleRepository,        
         private appService: AppService,
     ) {}  
 
@@ -27,10 +25,10 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
     get fullLength(): number {return this.articleRepository.fullLength;}
     get length(): number {return this.articleRepository.chunkLength;}
     get currentPart(): number {return this.articleRepository.currentPart;}
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
     
     public ngOnInit(): void {
-        this.langSubscription = this.langRepository.current.subscribe(async lang => {
+        this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
                 this.articleRepository.filterLang = lang._id;

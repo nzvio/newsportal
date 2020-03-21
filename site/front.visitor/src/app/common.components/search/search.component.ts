@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef, OnInit } from "@angular/core";
 import { Router } from '@angular/router';
 
 import { AppService } from '../../services/app.service';
-import { LangRepository } from '../../services/repositories/lang.repository';
 import { Lang } from '../../model/orm/lang.model';
 
 @Component({
@@ -15,13 +14,12 @@ export class SearchComponent implements OnInit {
     @ViewChild("searchinput", {static: false}) searchinput: ElementRef;
 
     constructor(
-        private appService: AppService,
-        private langRepository: LangRepository,
+        private appService: AppService,        
         private router: Router,
     ) {}
 
     get active(): boolean {return this.appService.searchActive.value;}    
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public ngOnInit(): void {
         this.appService.searchActive.subscribe(active => {

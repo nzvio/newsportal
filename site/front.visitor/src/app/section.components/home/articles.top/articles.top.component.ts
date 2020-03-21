@@ -5,7 +5,6 @@ import { Article } from '../../../model/orm/article.model';
 import { AppService } from '../../../services/app.service';
 import { Lang } from '../../../model/orm/lang.model';
 import { Subscription } from 'rxjs';
-import { LangRepository } from '../../../services/repositories/lang.repository';
 
 @Component({
     selector: "articles-top",
@@ -17,16 +16,15 @@ export class ArticlesTopComponent implements OnInit, OnDestroy {
     private langSubscription: Subscription;
 
     constructor(
-        private articleTopRepository: ArticleTopRepository,
-        private langRepository: LangRepository,
+        private articleTopRepository: ArticleTopRepository,        
         private appService: AppService,
     ) {}    
 
     get articles(): Article[] {return this.articleTopRepository.xl;}    
-    get currentLang(): Lang {return this.langRepository.current.value;}
+    get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public ngOnInit(): void {
-        this.langSubscription = this.langRepository.current.subscribe(async lang => {
+        this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
                 this.articleTopRepository.filterLang = lang._id;

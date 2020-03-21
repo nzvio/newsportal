@@ -43,4 +43,18 @@ export class UserRepository extends SimpleRepository<User> {
             });
         });
     }
+
+    public update(x: User): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usersUpdate(x).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
 }
