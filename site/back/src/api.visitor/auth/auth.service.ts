@@ -23,8 +23,9 @@ export class AuthService extends APIService {
             let user: UserDTO | null = await this.validateUser(dto.email, dto.password);
 
             if (user) {
-                const payload: Object = {username: user.email, sub: user._id};
                 user.password = undefined;
+                user.active = undefined;
+                const payload: Object = {username: user.email, sub: user._id};                
                 return {statusCode: 200, data: {token: this.jwtService.sign(payload), user}};
             } else {
                 return {statusCode: 401, error: "Unauthorized"};
@@ -39,9 +40,7 @@ export class AuthService extends APIService {
     private async validateUser(email: string, password: string): Promise<UserDTO> {
         let user: UserDTO = await this.usersService.oneByEmail(email);        
 
-        if (user && user.active && await this.compare(password, user.password)) {
-            user.password = undefined;
-            user.active = undefined;
+        if (user && user.active && await this.compare(password, user.password)) {            
             return user;
         } else {
             return null;
