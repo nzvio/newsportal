@@ -9,7 +9,7 @@
         <div class="userregister">    
             <div class="tabs">
                 <ul>
-                    <li><span (click)="step = 1;" [class.active]="step === 1" [innerHTML]="currentLang.s('user-register-step')+' 1'"></span></li>
+                    <li><span (click)="toStep1();" [class.active]="step === 1" [innerHTML]="currentLang.s('user-register-step')+' 1'"></span></li>
                     <li><span class="disabled" [class.active]="step === 2" [innerHTML]="currentLang.s('user-register-step')+' 2'"></span></li>                    
                 </ul>
             </div>    
@@ -17,7 +17,7 @@
                 <!-- step 1 -->      
                 <ng-container *ngIf="step === 1">
                     <div class="user-form useredit-form">
-                        <form (submit)="preregister();">
+                        <form (submit)="toStep2();">
                             <div class="uef-left">
                                 <div 
                                     class="uef-imgwrap" 
@@ -44,15 +44,26 @@
                             <div class="uef-right">
                                 <div class="f-row"><input [class.error]="errorName" type="text" name="name" [(ngModel)]="user.name" [placeholder]="currentLang.s('user-private-name')"></div>
                                 <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="user.email" [placeholder]="currentLang.s('user-private-email')"></div>
-                                <div class="f-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="user.password" [placeholder]="currentLang.s('user-private-pw')"></div>                                
-                                <div class="f-row"><button type="submit" [disabled]="loading">{{currentLang.s('user-private-save')}}</button></div>
+                                <div class="f-row"><input [class.error]="errorPassword" type="password" name="password" [(ngModel)]="user.password" [placeholder]="currentLang.s('user-register-pw')"></div>                                
+                                <div class="f-row">
+                                    <div><button type="submit" [disabled]="loading">{{currentLang.s('user-private-save')}}</button></div>
+                                    <div [class.error]="statusError" class="f-status" [innerHTML]="status"></div>
+                                </div>
                             </div>                                
                         </form>
                     </div>
                 </ng-container>
                 <!-- step 2 -->      
                 <ng-container *ngIf="step === 2">
-                    
+                    <div class="user-form verification-form">
+                        <form (submit)="register();">
+                            <div class="f-row"><input [class.error]="errorCode" type="text" name="code" [(ngModel)]="code" [placeholder]="currentLang.s('user-register-code')"></div>
+                            <div class="f-row">
+                                <div><button type="submit" [disabled]="loading">{{currentLang.s('user-private-save')}}</button></div>
+                                <div [class.error]="statusError" class="f-status" [innerHTML]="status"></div>
+                            </div>
+                        </form>
+                    </div>
                 </ng-container>
             </div>
         </div>

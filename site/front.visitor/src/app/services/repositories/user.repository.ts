@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { SimpleRepository } from './_simple.repository';
 import { DataService } from '../data.service';
 import { User } from '../../model/orm/user.model';
+import { IPreregisterDTO } from '../../model/dto/preregister.dto';
+import { IRegisterDTO } from '../../model/dto/register.dto';
 
 @Injectable()
 export class UserRepository extends SimpleRepository<User> {
@@ -47,6 +49,34 @@ export class UserRepository extends SimpleRepository<User> {
     public update(x: User): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.usersUpdate(x).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
+    public preregister(dto: IPreregisterDTO): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usersPreregister(dto).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
+    public register(dto: IRegisterDTO): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usersRegister(dto).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    

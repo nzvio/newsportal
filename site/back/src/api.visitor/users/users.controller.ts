@@ -5,6 +5,8 @@ import { IAnswer } from "../../model/answer.interface";
 import { UserDTO } from "./dto/user.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { UserUpdateDTO } from "./dto/user.update.dto";
+import { IPreregisterDTO } from "./dto/preregister.dto";
+import { IRegisterDTO } from "./dto/register.dto";
 
 @Controller('api/visitor/users')
 export class UsersController {
@@ -21,5 +23,17 @@ export class UsersController {
     @Post("update")
     public update(@Body() dto: UserUpdateDTO): Promise<IAnswer<void>> {
         return this.usersService.update(dto);
+    }
+
+    // check email and send code
+    @Post("preregister")
+    public preregister(@Body() dto: IPreregisterDTO): Promise<IAnswer<void>> {
+        return this.usersService.preregister(dto);
+    }
+
+    // check code and regoster
+    @Post("register")
+    public register(@Body() dto: IRegisterDTO): Promise<IAnswer<void>> {
+        return this.usersService.register(dto);
     }
 }

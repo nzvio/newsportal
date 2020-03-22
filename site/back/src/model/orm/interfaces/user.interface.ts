@@ -8,6 +8,6 @@ export interface IUser extends Document {
     readonly img: string;
     readonly img_s: string;
     readonly active: boolean;
-    readonly usergroup: string;
+    usergroup: string; // not readonly because it will be set when registering
     readonly defended: boolean;
 }

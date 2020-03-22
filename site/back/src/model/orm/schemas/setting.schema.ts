@@ -3,7 +3,8 @@ import * as mongoose from 'mongoose';
 export const SettingSchema = new mongoose.Schema ({
     p: {
         type: String,
-        trim: true
+        trim: true,
+        unique: true
     },
     v: {
         type: String,
