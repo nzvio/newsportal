@@ -1,18 +1,18 @@
-@import "../../../var";
+@import "./var";
 
-.user {
+.user-info {
     @media (min-width: 0) {display: block;}
     @media (min-width: 640px) {display: flex;}
-    justify-content: space-between; margin-bottom: 80px; 
-    .u-left {
+    justify-content: space-between; margin-bottom: 80px;
+    .ui-left {
         @media (min-width: 0) {width: 100%; margin: 0 0 20px 0; justify-content: center;}
         @media (min-width: 640px) {width: 150px; margin: 0; justify-content: flex-start;}
         display: flex;
         figure {margin: 0; width: 150px; height: 150px; border-radius: 75px; background-color: $color-blue; background-position: center top; background-size: cover; color: #fff; font-size: 36px; display: flex; justify-content: center; align-items: center;}
     }
-    .u-right {
+    .ui-right {
         @media (min-width: 0) {width: 100%; font-size: 14px; text-align: center;}
-        @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; text-align: left;}        
+        @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; text-align: left;}                
         p {
             margin: 0 0 10px 0;
             strong {white-space: nowrap;}

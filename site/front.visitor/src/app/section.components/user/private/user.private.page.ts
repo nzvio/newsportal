@@ -15,7 +15,7 @@ import { IImagable } from '../../../model/imagable.interface';
 @Component({
     selector: "user-private-page",
     templateUrl: "./user.private.page.html",
-    styleUrls: ["../user.forms.scss", "./user.private.page.scss"],
+    styleUrls: ["../../../common.styles/user.forms.scss", "../../../common.styles/tabs.scss", "../../../common.styles/user.info.scss", "./user.private.page.scss"],
 })
 export class UserPrivatePage implements OnInit {        
     public tab: number = 1;

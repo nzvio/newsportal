@@ -1,0 +1,71 @@
+@import "./var";
+
+.user-form {    
+    form {
+        .f-row {
+            margin-bottom: 15px;
+            &:last-child {margin-bottom: 0;}
+            input[type='text'], input[type='email'], input[type='password']  {
+                border: 1px $color-grey-superlight solid; height: 40px; padding: 0 5px;
+                &:focus {border-color: $color-blue;}
+                &.error {animation-name: error-blink; animation-duration: 2s; animation-iteration-count: infinite;}
+                @keyframes error-blink {
+                    0% {border-color: #f00;}
+                    50% {border-color: #900;}
+                    100% {border-color: #f00;}
+                }
+            }
+            ::placeholder {color: $color-grey-light;}
+        }
+    }
+}
+
+.useredit-form {
+    form {
+        @media (min-width: 0) {display: block; width:100%;}
+        @media (min-width: 640px) {display: flex; width: 600px;}
+        justify-content: space-between; margin-bottom: 80px;
+        .f-row {        
+            input[type='text'], input[type='email'], input[type='password'] {width: 100%;}
+            button {
+                @media (min-width: 0) {width:100%;}
+                @media (min-width: 640px) {width: auto;}
+            }
+        }
+        .uef-left {
+            @media (min-width: 0) {width: 100%; margin: 0 0 20px 0; align-items: center;}
+            @media (min-width: 640px) {width: 150px; margin: 0; align-items: flex-start;}
+            display: flex; flex-direction: column;
+            .uef-imgwrap {
+                width: 150px; height: 150px; border: 1px $color-blue dashed; position: relative; display: flex; justify-content: center; align-items: center;                        
+                * {pointer-events: none;}
+                figure {margin: 0; width: 140px; height: 140px; border-radius: 70px; background-color: $color-blue; background-position: center top; background-size: cover; color: #fff; font-size: 36px; display: flex; justify-content: center; align-items: center;}
+                .uef-dnd {
+                    position: absolute; left: 5px; top: 0; 
+                    span::before {color: $color-blue; font-family: "ionicons"; font-size: 20px; content: "\f366";}
+                }                        
+                &.active {
+                    border-color: $color-grey-superlight;
+                    .uef-dnd {
+                        span::before {color: $color-grey-superlight;}
+                    }
+                }
+            }    
+            .uef-filedash {                        
+                display: flex; justify-content: space-between; width:150px;
+                span {
+                    color: $color-blue; cursor: pointer;                         
+                    &:hover {color: $color-blue-dark;}
+                    &::before {font-family: "ionicons"; font-size: 20px; }
+                    &.uef-select {&::before {content: "\f396";}}
+                    &.uef-delete {&::before {content: "\f2d7";}}
+                }
+            } 
+            .uef-progress {width: 150px; height: 30px;}
+        }
+        .uef-right {
+            @media (min-width: 0) {width: 100%; font-size: 14px; }
+            @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; }
+        }
+    }           
+}

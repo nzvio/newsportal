@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: "articles-main",
     templateUrl: "./articles.main.component.html",
-    styleUrls: ["./articles.main.component.scss"]
+    styleUrls: ["./articles.main.component.scss", "../../../common.styles/tabs.scss"]
 })
 export class ArticlesMainComponent implements OnDestroy, OnInit {    
     public currentCategoryId: string = "";

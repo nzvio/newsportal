@@ -1,108 +1,14 @@
-@import "../../../var";
+@import "../../../common.styles/var";
 
 .userprivate {
-    margin: 0 0 80px 0; 
-    .up-menu {
-        border-bottom: 1px $color-grey-superlight solid; margin: 0 0 25px 0;
-        ul {
-            margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap;
-            li {
-                @media (min-width:0) {margin-right: 10px;}
-                @media (min-width:1000px) {margin-right: 30px;}    
-                margin-bottom: 10px;
-                span {
-                    text-decoration: none; color: $color-main; font-size: 12px; letter-spacing: 1px; display: inline-block; position: relative; cursor: pointer;
-                    &::after {
-                        @media (min-width:0) {top: 14px;}
-                        @media (min-width:1000px) {top: 30px;}            
-                        display: block; height: 1px; background-color: rgba(0,0,0,0); content: " "; position: absolute; width:100%; transition: background-color 0.3s ease 0s; pointer-events: none;
-                    }
-                    &:hover, &.active {
-                        color: $color-blue;
-                        &::after {background-color: $color-blue;}
-                    }                    
-                }                
-            }
-        }
-    }
-    .up-main {
-        margin-bottom: 80px;
-        // "info" tab
-        .up-info {
-            @media (min-width: 0) {display: block;}
-            @media (min-width: 640px) {display: flex;}
-            justify-content: space-between; margin-bottom: 80px;
-            .upi-left {
-                @media (min-width: 0) {width: 100%; margin: 0 0 20px 0; justify-content: center;}
-                @media (min-width: 640px) {width: 150px; margin: 0; justify-content: flex-start;}
-                display: flex;
-                figure {margin: 0; width: 150px; height: 150px; border-radius: 75px; background-color: $color-blue; background-position: center top; background-size: cover; color: #fff; font-size: 36px; display: flex; justify-content: center; align-items: center;}
-            }
-            .upi-right {
-                @media (min-width: 0) {width: 100%; font-size: 14px; text-align: center;}
-                @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; text-align: left;}                
-                p {
-                    margin: 0 0 10px 0;
-                    strong {white-space: nowrap;}
-                }
-            }
-        }
+    margin: 0 0 80px 0;     
+    .up-main {        
         // "sign out" tab
         .up-logout {
             button {
                 @media (min-width: 0) {width: 100%;}
                 @media (min-width: 640px) {width: auto;}         
             }   
-        }
-        // "edit" tab
-        .up-form {
-            form {
-                @media (min-width: 0) {display: block; width:100%;}
-                @media (min-width: 640px) {display: flex; width: 600px;}
-                justify-content: space-between; margin-bottom: 80px;
-                .f-row {        
-                    input[type='text'], input[type='email'], input[type='password'] {width: 100%;}
-                    button {
-                        @media (min-width: 0) {width:100%;}
-                        @media (min-width: 640px) {width: auto;}
-                    }
-                }
-                .upf-left {
-                    @media (min-width: 0) {width: 100%; margin: 0 0 20px 0; align-items: center;}
-                    @media (min-width: 640px) {width: 150px; margin: 0; align-items: flex-start;}
-                    display: flex; flex-direction: column;
-                    .upf-imgwrap {
-                        width: 150px; height: 150px; border: 1px $color-blue dashed; position: relative; display: flex; justify-content: center; align-items: center;                        
-                        * {pointer-events: none;}
-                        figure {margin: 0; width: 140px; height: 140px; border-radius: 70px; background-color: $color-blue; background-position: center top; background-size: cover; color: #fff; font-size: 36px; display: flex; justify-content: center; align-items: center;}
-                        .upf-dnd {
-                            position: absolute; left: 5px; top: 0; 
-                            span::before {color: $color-blue; font-family: "ionicons"; font-size: 20px; content: "\f366";}
-                        }                        
-                        &.active {
-                            border-color: $color-grey-superlight;
-                            .upf-dnd {
-                                span::before {color: $color-grey-superlight;}
-                            }
-                        }
-                    }    
-                    .upf-filedash {                        
-                        display: flex; justify-content: space-between; width:150px;
-                        span {
-                            color: $color-blue; cursor: pointer;                         
-                            &:hover {color: $color-blue-dark;}
-                            &::before {font-family: "ionicons"; font-size: 20px; }
-                            &.upf-select {&::before {content: "\f396";}}
-                            &.upf-delete {&::before {content: "\f2d7";}}
-                        }
-                    } 
-                    .upf-progress {width: 150px; height: 30px;}
-                }
-                .upf-right {
-                    @media (min-width: 0) {width: 100%; font-size: 14px; }
-                    @media (min-width: 640px) {width: calc(100% - 200px); font-size: 16px; }
-                }
-            }           
-        }
+        }        
     }
 }

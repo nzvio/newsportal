@@ -1,0 +1,26 @@
+<div class="wrap2 padded">
+    <main class="full">        
+        <div id="breadcrumbs">
+            <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+            <span [innerHTML]="currentLang.s('user-register')"></span>
+        </div>     
+        <h1 [innerHTML]="currentLang.s('user-register')"></h1>
+
+        <div class="userregister">    
+            <div class="tabs">
+                <ul>
+                    <li><span class="disabled" [class.active]="step === 1" [innerHTML]="currentLang.s('user-register-step')+' 1'"></span></li>
+                    <li><span class="disabled" [class.active]="step === 2" [innerHTML]="currentLang.s('user-register-step')+' 2'"></span></li>                    
+                </ul>
+            </div>    
+            <div class="ur-main">                
+                <ng-container *ngIf="step === 1">
+
+                </ng-container>
+                <ng-container *ngIf="step === 2">
+                    
+                </ng-container>
+            </div>
+        </div>
+    </main>
+</div>

@@ -11,7 +11,7 @@ import { Article } from '../../../model/orm/article.model';
 @Component({
 	selector: 'catalogue-user-page',
 	templateUrl: './catalogue.user.page.html',
-	styleUrls: ['./catalogue.user.page.scss']
+	styleUrls: ["../../../common.styles/user.info.scss"]
 })
 export class CatalogueUserPage implements OnInit, AfterViewInit, OnDestroy {	
 	public user: User | null = null;

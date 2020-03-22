@@ -1,4 +1,4 @@
-@import "../../var";
+@import "../../common.styles/var";
 
 header {
     position: fixed; background-color: $color-bg-dark; z-index: 10; height: 72px; width:100%; left:0; top: 0; box-shadow: 0 0 13px rgba(0,0,0,.22); overflow: hidden; align-items: center; transition: background-color 0.6s ease 0s; will-change: background-color;
