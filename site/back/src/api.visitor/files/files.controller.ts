@@ -36,8 +36,7 @@ export class FilesController
                 return cb(null, `${newfilename}${extname(file.originalname)}`)
             }
         })
-    }))
-    @UseGuards(AuthGuard)
+    }))    
     public uploadImg(@UploadedFile() file): Promise<IAnswer<IImagable>> {
         return this.filesService.uploadImg (file);
     }
@@ -57,8 +56,7 @@ export class FilesController
                 return cb(null, `${newfilename}${extname(file.originalname)}`);
             }
         }),        
-    }))
-    @UseGuards(AuthGuard)
+    }))    
     public uploadImgWithCopy(@UploadedFile() file, @Param("width") width: string): Promise<IAnswer<IImagable>> {        
         return this.filesService.uploadImg (file, width);
     }

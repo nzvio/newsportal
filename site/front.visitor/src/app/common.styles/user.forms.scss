@@ -11,7 +11,7 @@
                 &.error {animation-name: error-blink; animation-duration: 2s; animation-iteration-count: infinite;}
                 @keyframes error-blink {
                     0% {border-color: #f00;}
-                    50% {border-color: #900;}
+                    50% {border-color: #fff;}
                     100% {border-color: #f00;}
                 }
             }

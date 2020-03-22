@@ -19,8 +19,17 @@ export class User extends Model {
     public __loadedat: number;
 
     get formatedRating(): number {return this.__votesq ? this.__rating / this.__votesq : 0;}
-    get firstLetter(): string {return this.name.substr(0, 1);}
+    get firstLetter(): string {return this.name ? this.name.substr(0, 1) : "";}
 
+    public init(): User {
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.active = true;
+        
+        return this;
+    }
+    
     public formatedCreatedAt(lang: Lang): string {
         const date: Date = new Date(this.__createdat);
         return `${date.getDate()} ${lang.s('month-'+(date.getMonth()+1))} ${date.getFullYear()}, ${date.getHours()}:${this.twoDigits(date.getMinutes())}`;
