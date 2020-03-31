@@ -7,6 +7,7 @@ import { AuthGuard } from "../auth/auth.guard";
 import { UserUpdateDTO } from "./dto/user.update.dto";
 import { IPreregisterDTO } from "./dto/preregister.dto";
 import { IRegisterDTO } from "./dto/register.dto";
+import { IRecoverDTO } from "./dto/recover.dto";
 
 @Controller('api/visitor/users')
 export class UsersController {
@@ -35,5 +36,11 @@ export class UsersController {
     @Post("register")
     public register(@Body() dto: IRegisterDTO): Promise<IAnswer<void>> {
         return this.usersService.register(dto);
+    }
+
+    // recover password
+    @Post("recover")
+    public recover(@Body() dto: IRecoverDTO): Promise<IAnswer<void>> {
+        return this.usersService.recover(dto);
     }
 }

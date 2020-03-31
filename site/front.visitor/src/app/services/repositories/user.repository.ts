@@ -5,6 +5,7 @@ import { DataService } from '../data.service';
 import { User } from '../../model/orm/user.model';
 import { IPreregisterDTO } from '../../model/dto/preregister.dto';
 import { IRegisterDTO } from '../../model/dto/register.dto';
+import { IRecoveryDTO } from 'src/app/model/dto/recovery.dto';
 
 @Injectable()
 export class UserRepository extends SimpleRepository<User> {
@@ -77,6 +78,20 @@ export class UserRepository extends SimpleRepository<User> {
     public register(dto: IRegisterDTO): Promise<void> {
         return new Promise((resolve, reject) => {
             this.dataService.usersRegister(dto).subscribe(res => {
+                if (res.statusCode === 200) {
+                    resolve();
+                } else {                    
+                    reject(res.error);
+                }
+            }, err => {
+                reject(err.message);
+            });
+        });
+    }
+
+    public recover(dto: IRecoveryDTO): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.dataService.usersRecover(dto).subscribe(res => {
                 if (res.statusCode === 200) {
                     resolve();
                 } else {                    

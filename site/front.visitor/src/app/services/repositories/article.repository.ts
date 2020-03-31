@@ -15,7 +15,7 @@ export class ArticleRepository extends SimpleRepository<Article> {
         this.chunkLength = 6;        
     }
 
-    public load(): Promise<void> {
+    public loadChunk(): Promise<void> {
         return new Promise((resolve, reject) => {
             let dto: IArticlesGetchunkDTO = {
                 from: this.currentPart * this.chunkLength,
@@ -35,6 +35,17 @@ export class ArticleRepository extends SimpleRepository<Article> {
             }, err => {
                 reject(err.message);
             });            
+        });
+    }
+
+    public loadOne(_id: string): Promise<Article> {
+        return new Promise((resolve, reject) => {
+            // TODO
+
+
+
+
+
         });
     }
 }

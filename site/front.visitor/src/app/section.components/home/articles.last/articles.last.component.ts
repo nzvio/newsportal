@@ -33,7 +33,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
                 this.ready = false;
                 this.articleRepository.filterLang = lang._id;
                 this.articleRepository.currentPart = 0;
-                await this.articleRepository.load();   
+                await this.articleRepository.loadChunk();
                 this.ready = true;
             } catch (err) {
                 this.appService.showNotification(err, "error");
@@ -50,7 +50,7 @@ export class ArticlesLastComponent implements OnInit, OnDestroy {
             try {            
                 this.reloading = true;
                 this.articleRepository.currentPart = i;
-                await this.articleRepository.load();            
+                await this.articleRepository.loadChunk();            
                 setTimeout(() => {this.reloading = false;}, 500);
             } catch (err) {
                 this.appService.showNotification(err, "error");

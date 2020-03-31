@@ -28,4 +28,16 @@ export abstract class APIService {
     protected getRandom(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min)) + min;
     }
+
+    protected createPassword(length: number): string {
+        let result: string = '';
+        let characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        
+        for (let i: number = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        
+        return result;
+     }
 }

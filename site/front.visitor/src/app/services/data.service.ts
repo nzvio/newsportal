@@ -21,6 +21,7 @@ import { IVoteAnswerDTO } from "../model/dto/vote.answer.dto";
 import { IImagable } from '../model/imagable.interface';
 import { IPreregisterDTO } from '../model/dto/preregister.dto';
 import { IRegisterDTO } from '../model/dto/register.dto';
+import { IRecoveryDTO } from '../model/dto/recovery.dto';
 
 @Injectable()
 export class DataService {
@@ -48,6 +49,7 @@ export class DataService {
     public usersUpdate(x: User): Observable<IAnswer<void>> {return this.sendRequest("POST", `users/update`, x, true);}
     public usersPreregister(dto: IPreregisterDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", `users/preregister`, dto, false);}
     public usersRegister(dto: IRegisterDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/register", dto, false);}
+    public usersRecover(dto: IRecoveryDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/recover", dto, false);}
     public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
     public vote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
     public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, false, true);}

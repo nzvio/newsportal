@@ -9,12 +9,14 @@ import { UserPrivatePage } from './private/user.private.page';
 import { AuthGuard } from '../../services/auth.guard';
 import { UserLogoutPage } from './logout/user.logout.page';
 import { UserRegisterPage } from './register/user.register.page';
+import { UserRecoveryPage } from './recovery/user.recovery.page';
 
 let routes = RouterModule.forChild ([        
     {path: "login", component: UserLoginPage, pathMatch: "full"},    
     {path: "private", component: UserPrivatePage, pathMatch: "full", canActivate: [AuthGuard]},    
     {path: "logout", component: UserLogoutPage, pathMatch: "full"},    
     {path: "register", component: UserRegisterPage, pathMatch: "full"},
+    {path: "recovery", component: UserRecoveryPage, pathMatch: "full"},
 ]);
 
 @NgModule({
@@ -29,12 +31,14 @@ let routes = RouterModule.forChild ([
         UserPrivatePage,
         UserLogoutPage,
         UserRegisterPage,
+        UserRecoveryPage,
     ],
     exports: [
         UserLoginPage,
         UserPrivatePage,
         UserLogoutPage,
         UserRegisterPage,
+        UserRecoveryPage,
     ],    
 })
 export class UserModule {}

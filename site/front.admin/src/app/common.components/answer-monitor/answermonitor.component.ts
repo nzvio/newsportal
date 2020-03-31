@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnChanges, SimpleChanges, OnInit } from "@angular/core";
-import { IAnswer } from 'src/app/model/answer.interface';
+import { IAnswer } from '../../model/answer.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

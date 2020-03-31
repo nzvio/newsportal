@@ -1,0 +1,25 @@
+<div class="wrap2 padded">
+    <main class="full">        
+        <div id="breadcrumbs">
+            <span><a routerLink="/{{currentLang.slug}}">{{currentLang.s('home')}}</a></span>
+            <span [innerHTML]="currentLang.s('user-recovery')"></span>
+        </div>     
+        <h1 [innerHTML]="currentLang.s('user-recovery')"></h1>        
+        <div class="userrecovery">
+            <ng-container *ngIf="!sent">
+                <div class="user-form recovery-form">
+                    <form (submit)="recover();">
+                        <div class="f-row"><input [class.error]="errorEmail" type="email" name="email" [(ngModel)]="email" [placeholder]="currentLang.s('user-recovery-email')"></div>                    
+                        <div class="f-row">
+                            <div><button type="submit" [disabled]="loading">{{currentLang.s('user-login-send')}}</button></div>
+                            <div [class.error]="statusError" class="f-status" [innerHTML]="status"></div>
+                        </div>
+                    </form>    
+                </div>
+            </ng-container>
+            <ng-container *ngIf="sent">
+                <div [innerHTML]="currentLang.s('user-recovery-ok')"></div>
+            </ng-container>            
+        </div>
+    </main>
+</div>

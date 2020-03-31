@@ -17,6 +17,7 @@ import { ILang } from "../../model/orm/interfaces/lang.interface";
 import { IPhrase } from "../../model/orm/interfaces/phrase.interface";
 import { IRegisterDTO } from "./dto/register.dto";
 import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
+import { IRecoverDTO } from "./dto/recover.dto";
 
 @Injectable()
 export class UsersService extends APIService {
@@ -126,7 +127,8 @@ export class UsersService extends APIService {
 
     public async preregister(dto: IPreregisterDTO): Promise<IAnswer<void>> {
         try {
-            const user: IUser = await this.userModel.findOne({email: dto.email});
+            const email: string = dto.email;            
+            const user: IUser = await this.userModel.findOne({email});
 
             if (user) {
                 return {statusCode: 409, error: "email duplication"};
@@ -153,8 +155,7 @@ export class UsersService extends APIService {
             }
 
             const code: string = this.getRandom(100000, 999999).toString();
-            const html: string = `${phrase.text} ${code}`;
-            const email: string = dto.email;            
+            const html: string = `${phrase.text} ${code}`;            
             await this.mail(email, subject, html);
             let userCode: IUsercode = await this.usercodeModel.findOne({email: dto.email});
 
@@ -201,6 +202,49 @@ export class UsersService extends APIService {
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in UsersService.register: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async recover(dto: IRecoverDTO): Promise<IAnswer<void>> {
+        try {
+            const email: string = dto.email;     
+            const user: IUser = await this.userModel.findOne({email});
+
+            if (!user) {
+                return {statusCode: 404, error: "e-mail not found"};
+            }
+
+            const lang: ILang = await this.langModel.findById(dto.lang);
+            
+            if (!lang) {
+                return {statusCode: 500, error: "lang not found"};
+            }
+
+            let phrase: IPhrase = lang.phrases.find(ph => ph.mark === "user-recovery-mailsubj");
+
+            if (!phrase) {
+                return {statusCode: 500, error: "phrase 'user-recovery-mailsubj' not found"};
+            }
+
+            const subject: string = phrase.text;
+
+            phrase = lang.phrases.find(ph => ph.mark === "user-recovery-mailtxt");
+
+            if (!phrase) {
+                return {statusCode: 500, error: "phrase 'user-recovery-mailtxt' not found"};
+            }
+
+            const password: string = this.createPassword(8);
+            user.password = bcrypt.hashSync(password, 10);
+            await user.save();
+            const html: string = `${phrase.text} ${password}`;
+            await this.mail(email, subject, html);
+            
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in UsersService.recover: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }
