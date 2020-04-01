@@ -12,6 +12,7 @@ import { ICategory } from "../../model/orm/interfaces/category.interface";
 import { IVote } from "../../model/orm/interfaces/vote.interface";
 import { IVoteDTO } from "./dto/vote.dto";
 import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
+import { IArticleGetDTO } from "./dto/article.get.dto";
 
 @Injectable()
 export class ArticlesService extends APIService {
@@ -223,20 +224,30 @@ export class ArticlesService extends APIService {
             return {statusCode: 500, error: errTxt};
         }
     }
+    
+    public async one(dto: IArticleGetDTO): Promise<IAnswer<ArticleDTO>> {
+        const projection: any = {name: 1, img: 1, slug: 1, date: 1, content: 1, h1: 1, title: 1, keywords: 1, description: 1, source: 1, "category.slug": 1, "user._id": 1, "user.name": 1, "user.img_s": 1, viewsq: 1, rating: 1, votesq: 1, tags: 1, __commentsq: 1};               
+        const filter: any = {slug: dto.slug, lang: mongoose.Types.ObjectId(dto.lang), active: true, "category.active": true};
 
-    /*
-    public async one(_id: string): Promise<IAnswer<IArticle>> {
         try {
-            let data: IArticle = await this.model.findById(_id);            
-            return {statusCode: 200, data};
+            const data: ArticleDTO[] = await this.articleModel.aggregate([
+                {$lookup: {from: "categories", localField: "category", foreignField: "_id", as: "category"}},
+                {$unwind: "$category"},
+                {$match: filter},
+                {$lookup: {from: "comments", localField: "_id", foreignField: "article", as: "comments"}},
+                {$addFields: {__commentsq: {$size: "$comments"}}},
+                {$lookup: {from: "users", localField: "user", foreignField: "_id", as: "user"}},                
+                {$unwind: {path: "$user", preserveNullAndEmptyArrays: false}}, // if user not exist, article will still be displayed                
+                {$lookup: {from: "tags", localField: "tags", foreignField: "_id", as: "tags"}}, // unwind not needed for array field
+                {$project: projection},
+            ]);
+            return data.length ? {statusCode: 200, data: data[0]} : {statusCode: 404, error: "article not found"};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.one: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }
-    }    
-    */    
-
+    }
 
     private buildFilter(dto: ArticlesGetchunkDTO): any {
         let filter: any = {lang: mongoose.Types.ObjectId(dto.filterLang), active: true};
@@ -263,6 +274,10 @@ export class ArticlesService extends APIService {
         if (dto.filterLoadedAt != 0) {
             filter.created_at = {$lt: new Date(dto.filterLoadedAt)};
         }
+
+        if (dto.filterExcludeId) {
+            filter["_id"] = {$ne: mongoose.Types.ObjectId(dto.filterExcludeId)};
+        }
         
         return filter;
     }
@@ -278,7 +293,7 @@ export class ArticlesService extends APIService {
             let article: IArticle = await this.articleModel.findById(dto.articleId);
 
             if (!article) {
-                return {statusCode: 500, error: "article not found"};
+                return {statusCode: 404, error: "article not found"};
             } 
 
             article.rating += dto.rating;
@@ -292,6 +307,25 @@ export class ArticlesService extends APIService {
             return {statusCode: 200, data: {rating: article.rating, votesq: article.votesq}};
         } catch (err) {
             let errTxt: string = `Error in ArticlesService.vote: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async increaseViewsq(_id: string): Promise<IAnswer<void>> {
+        try {
+            const article: IArticle = await this.articleModel.findById(_id);
+
+            if (!article) {
+                return {statusCode: 404, error: "article not found"};
+            }
+
+            article.viewsq++;
+            await article.save();
+
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in ArticlesService.increaseViews: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

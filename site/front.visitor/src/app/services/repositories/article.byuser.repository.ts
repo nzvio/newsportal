@@ -8,6 +8,7 @@ import { IArticlesGetchunkDTO } from '../../model/dto/articles.getchunk.dto';
 export class ArticleByUserRepository extends SimpleRepository<Article> {
     public filterLang: string = "";
     public filterUser: string = "";
+    public filterExcludeId: string = "";
     public exhausted: boolean = false;
 
     constructor(protected dataService: DataService) {
@@ -27,6 +28,7 @@ export class ArticleByUserRepository extends SimpleRepository<Article> {
                 filterLang: this.filterLang,
                 filterUser: this.filterUser,
                 filterLoadedAt: this.loadedAt,
+                filterExcludeId: this.filterExcludeId,
             };
             this.dataService.articlesChunkBy(dto).subscribe(res => {
                 if (res.statusCode === 200) {

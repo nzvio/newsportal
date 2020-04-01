@@ -2,6 +2,7 @@ import { Model } from '../model';
 import { Category } from './category.model';
 import { Lang } from './lang.model';
 import { User } from './user.model';
+import { Tag } from './tag.model';
 
 export class Article extends Model {
     public _id: string;
@@ -25,6 +26,7 @@ export class Article extends Model {
     public category: Category;
     public lang: string;
     public user: User;
+    public tags: Tag[];
     public viewsq: number;
     public rating: number;
     public votesq: number;       

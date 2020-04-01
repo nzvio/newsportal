@@ -35,12 +35,11 @@ export class CatalogueCategoryPage implements OnInit, AfterViewInit, OnDestroy {
 			this.categoryReady = false;
 			this.articlesReady = false;			
 			const slug: string = p["category"];
-			const category: Category | null = this.categoryRepository.xl.find(x => x.slug === slug) || null;
+			this.category = this.categoryRepository.xl.find(x => x.slug === slug) || null;
 
-			if (!category) {
+			if (!this.category) {
 				this.router.navigateByUrl("/404");
-			} else {
-				this.category = category;
+			} else {				
 				this.appService.setTitle(this.category.title[this.currentLang._id] || this.category.name[this.currentLang._id]);
 				this.appService.setMeta("keywords", this.category.keywords[this.currentLang._id]);
 				this.appService.setMeta("description", this.category.description[this.currentLang._id]);

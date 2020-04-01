@@ -67,7 +67,7 @@ article {
         }
         #a-author {
             display: flex; align-items: center;
-            #a-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-size: cover; background-position: center top; margin-right: 10px; cursor: pointer;}
+            #a-author-ava {width:30px; height: 30px; border-radius: 15px; background-color: $color-blue; background-size: cover; background-position: center top; margin-right: 10px; cursor: pointer; font-size: 12px; color: #fff; display: flex; justify-content: center; align-items: center;}
             #a-author-name {
                 font-size: 12px; letter-spacing: 1px;
                 a, a:visited {text-decoration: none; color: $color-grey-light;}                        
@@ -80,15 +80,22 @@ article {
         ul {
             margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap;
             li {
-                display: flex; padding: 5px 10px; border:1px $color-grey-light solid; font-size: 12px; color: $color-grey-light; margin-right: 10px; cursor: pointer; transition: all 0.3s ease 0s; margin-bottom: 10px;
-                &:hover {background-color: $color-blue; color: #fff; border-color: $color-blue;}
-                &:first-child {
-                    background-color: #000; color: #fff; cursor: inherit; border: 1px #000 solid;
-                    &:hover {background-color: #000; color: #fff; border-color: #000;}
-                }
+                font-size: 12px; margin-right: 10px; margin-bottom: 10px;
+                &:first-child {background-color: #000; color: #fff; border: 1px #000 solid; padding: 5px 10px;}
+                a, a:visited {display: flex; padding: 5px 10px;  color: $color-grey-light; text-decoration: none; transition: all 0.3s ease 0s; border:1px $color-grey-light solid;}
+                a:hover {background-color: $color-blue; color: #fff; border-color: $color-blue;}                
             }
         }
-    }    
+    } 
+    &.loading {
+        figure {padding-bottom: 50%; background-color: #f9f9f9; animation-name: loading-blink; animation-duration: 2s; animation-iteration-count: infinite; margin: 0 0 15px 0;}
+        label {
+            display: block; height: 30px; margin-bottom: 15px; background: #f9f9f9; animation-name: loading-blink; animation-duration: 2s; animation-iteration-count: infinite;
+            &:nth-child(1) {width:50%;}
+            &:nth-child(3) {width:30%;}
+            &:nth-child(4) {width:50%;}
+        }
+    }   
 }
 
 #other {
@@ -100,10 +107,17 @@ article {
             ul {
                 margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap;
                 li {
-                    font-size: 12px; color:$color-grey-light; cursor: pointer; transition: color 0.3s ease 0s; margin-bottom: 10px;
+                    font-size: 12px; color:$color-grey-light; cursor: pointer; transition: color 0.3s ease 0s; margin-bottom: 10px; position: relative;
                     &:first-child {margin-right: 25px;}
-                    &:hover {color: $color-blue;}
-                    &.active {color: $color-blue; cursor: inherit;}
+                    &::after {
+                        @media (min-width:0) {display: none;}
+                        @media (min-width:1000px) {display: block;}            
+                        top: 34px; height: 1px; background-color: rgba(0,0,0,0); content: " "; position: absolute; width:100%; transition: background-color 0.3s ease 0s; pointer-events: none;
+                    }
+                    &:hover, &.active {
+                        color: $color-blue;
+                        &::after {background-color: $color-blue;}
+                    }
                 }
             }
         }

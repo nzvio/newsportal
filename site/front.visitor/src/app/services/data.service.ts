@@ -22,6 +22,7 @@ import { IImagable } from '../model/imagable.interface';
 import { IPreregisterDTO } from '../model/dto/preregister.dto';
 import { IRegisterDTO } from '../model/dto/register.dto';
 import { IRecoveryDTO } from '../model/dto/recovery.dto';
+import { IArticleGetDTO } from '../model/dto/article.get.dto';
 
 @Injectable()
 export class DataService {
@@ -42,6 +43,8 @@ export class DataService {
     public articlesRecommended(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/recommended", dto, false);}
     public articlesChunk(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunk", dto, false);}
     public articlesChunkBy(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunkby", dto, false);}
+    public articlesOne(dto: IArticleGetDTO): Observable<IAnswer<Article>> {return this.sendRequest("POST", `articles/one`, dto, false);}
+    public articlesIncreaseViewsq(_id: string): Observable<IAnswer<void>> {return this.sendRequest("GET", `articles/increaseviewsq/${_id}`, null, false);}
     public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
