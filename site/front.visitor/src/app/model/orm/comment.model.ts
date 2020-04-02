@@ -6,8 +6,8 @@ import { Lang } from './lang.model';
 export class Comment extends Model {
     public _id: string;
     public date: Date;
-    public article: Article;
-    public user: User;
+    public article: string | Article;
+    public user: string | User;
     public content: string;
     public likes: number;
     public dislikes: number;
@@ -24,6 +24,14 @@ export class Comment extends Model {
                 this[field] = o[field];
             }            
         }
+        
+        return this;
+    }
+
+    public init(article: string, user: string): Comment {
+        this.article = article;
+        this.user = user;        
+        this.content = "";
         
         return this;
     }

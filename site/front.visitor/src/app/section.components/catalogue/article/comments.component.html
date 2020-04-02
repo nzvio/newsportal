@@ -1,0 +1,74 @@
+<!-- add comment -->            
+<div id="add-comment" #addcomment>
+    <div id="ac-head" [innerHTML]="currentLang.s('comments-add')"></div>
+    <ng-container *ngIf="authenticated">
+        <form (submit)="send();">
+            <div class="form-row-1cell">
+                <div class="form-cell">
+                    <label class="block" [innerHTML]="currentLang.s('comments-comment')"></label>
+                    <!--<textarea name="content" [class.error]="errorContent" [(ngModel)]="comment.content"></textarea>-->
+                    <editor 
+                        apiKey="vyqpgkbwnitqsjn9livngxdsuxggz6aowmwwx6d1spe78nnv" 
+                        [init]="tinyCfg" 
+                        [(ngModel)]="comment.content"
+                        name="content"
+                    ></editor>
+                    <div class="form-error" [innerHTML]="errorContentTxt"></div>
+                </div>
+            </div>        
+            <button type="submit">{{currentLang.s('comments-send')}}</button>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="!authenticated">
+        <span [innerHTML]="currentLang.s('comments-login')"></span>
+    </ng-container>    
+</div>
+            
+<!-- comments -->            
+<div id="comments">
+    <div id="comments-head">{{currentLang.s('comments')}}</div>
+    <!-- ready -->
+    <ng-container *ngIf="commentsReady">
+        <ng-container *ngIf="comments.length">
+            <div class="comment" *ngFor="let c of comments">
+                <div class="comment-left">
+                    <div class="comment-imgwrap" [style.background-image]="c.user.img_s ? 'url(/assets/images/users/'+c.user.img_s+')' : 'none'" routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}">
+                        <span *ngIf="!c.user.img_s">{{c.user.firstLetter}}</span>
+                    </div>
+                </div>                    
+                <div class="comment-right">
+                    <div class="comment-author">
+                        <a routerLink="/{{currentLang.slug}}/catalogue/user/{{c.user._id}}" [innerHTML]="c.user.name"></a>
+                    </div>
+                    <div class="comment-text" [innerHTML]="c.content"></div>
+                    <div class="comment-date">{{c.formatedDate(currentLang)}}</div>
+                    <div class="comment-dash">
+                        <div class="comment-action comment-like">{{c.likes}}</div>
+                        <div class="comment-action comment-dislike">{{c.dislikes}}</div>
+                        <div class="comment-action comment-answer" (click)="answer(c);">{{currentLang.s('comments-answer')}}</div>
+                        <div class="comment-action comment-quote" (click)="quote(c);">{{currentLang.s('comments-quote')}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!comments.length">
+            <span [innerHTML]="currentLang.s('empty')"></span>
+        </ng-container>
+    </ng-container>
+    <!-- loading -->
+    <ng-container *ngIf="!commentsReady">
+        <div class="comment loading">
+            <div class="comment-left"><div class="comment-imgwrap"></div></div>
+            <div class="comment-right"><label></label><label></label><label></label></div>
+        </div>
+        <div class="comment loading">
+            <div class="comment-left"><div class="comment-imgwrap"></div></div>
+            <div class="comment-right"><label></label><label></label><label></label></div>
+        </div>
+        <div class="comment loading">
+            <div class="comment-left"><div class="comment-imgwrap"></div></div>
+            <div class="comment-right"><label></label><label></label><label></label></div>
+        </div>
+    </ng-container>            
+</div>
+            

@@ -14,4 +14,10 @@ export class CommentsController {
     public chunk(@Body() dto: CommentsGetchunkDTO): Promise<IAnswer<IComment[]>> {
         return this.commentsService.chunk(dto);
     }
+
+    // get fragment by article
+    @Post("chunkbyarticle")
+    public chunkByArticle(@Body() dto: CommentsGetchunkDTO): Promise<IAnswer<IComment[]>> {
+        return this.commentsService.chunkByArticle(dto);
+    }
 }

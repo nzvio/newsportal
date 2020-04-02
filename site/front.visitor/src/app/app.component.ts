@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, ElementRef, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import { AppService } from './services/app.service';
 import { Router, NavigationStart, NavigationEnd, RouterEvent } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -31,9 +31,8 @@ export class AppComponent implements AfterViewInit, OnInit {
 		private langRepository: LangRepository,
 		private pageRepository: PageRepository,
 		private categoryRepository: CategoryRepository,
-		private settingRepository: SettingRepository,
-	) {			
-	}
+		private settingRepository: SettingRepository,				
+	) {}
 
 	get wrapper(): HTMLElement {return this.appService.wrapper;}
 	set wrapper(v: HTMLElement) {this.appService.wrapper = v;}		
@@ -56,9 +55,9 @@ export class AppComponent implements AfterViewInit, OnInit {
 		this.settingRepository
 			.load()
 			.then(() => {this.settingsReady = true;})
-			.catch(err => {this.appService.showNotification(err.message, "error")});
+			.catch(err => {this.appService.showNotification(err.message, "error")});		
 	}
-
+	
 	public ngAfterViewInit(): void {
 		if (this.appService.isBrowser) {
 			setTimeout(() => {

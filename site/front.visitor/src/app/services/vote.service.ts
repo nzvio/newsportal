@@ -17,13 +17,13 @@ export class VoteService {
 
     get currentLang(): Lang {return this.appService.currentLang.value;}
 
-    public async vote(article: Article, rating): Promise<void> {
+    public async voteForArticle(article: Article, rating): Promise<void> {
         if (!this.authService.authenticated) {
             this.appService.showNotification(this.currentLang.s("login-to-vote"));
             return;
         } else {
             const dto: IVoteDTO = {articleId: article._id, userId: this.authService.authData.user._id, rating};
-            this.dataService.vote(dto).subscribe(res => {
+            this.dataService.articlesVote(dto).subscribe(res => {
                 if (res.statusCode === 200) {
                     article.rating = res.data.rating;
                     article.votesq = res.data.votesq;

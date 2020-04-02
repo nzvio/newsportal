@@ -9,6 +9,10 @@ import { CatalogueArticlePage } from './article/catalogue.article.page';
 import { CatalogueUserPage } from './user/catalogue.user.page';
 import { CatalogueSearchPage } from './search/catalogue.search.page';
 import { CatalogueTagPage } from './tag/catalogue.tag.page';
+import { OtherArticlesComponent } from './article/otherarticles.component';
+import { CommentsComponent } from './article/comments.component';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 let routes = RouterModule.forChild ([        
     {path: "category/:category", component: CatalogueCategoryPage},
@@ -22,15 +26,19 @@ let routes = RouterModule.forChild ([
     imports: [
         CCModule,
         CommonModule,
+        FormsModule,
+        EditorModule,
         routes,
     ],
     declarations: [
         ArticlesListComponent,
+        OtherArticlesComponent,
+        CommentsComponent,
         CatalogueCategoryPage,
         CatalogueArticlePage,
         CatalogueUserPage,
         CatalogueSearchPage,
-        CatalogueTagPage,
+        CatalogueTagPage,        
     ],
     exports: [
         CatalogueCategoryPage,

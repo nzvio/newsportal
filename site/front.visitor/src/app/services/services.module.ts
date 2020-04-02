@@ -23,6 +23,8 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { VoteService } from './vote.service';
 import { UploadService } from './upload.service';
+import { CommentByArticleRepository } from './repositories/commentbyarticle.repository';
+import { SocketService } from './socket.service';
 
 @NgModule({
     imports: [                
@@ -50,10 +52,12 @@ import { UploadService } from './upload.service';
         ArticleByNameRepository,
         ArticleByTagRepository,
         CommentRepository,
+        CommentByArticleRepository,
         TagRepository,
         SettingRepository,
         UserRepository,
         UploadService,
+        SocketService,
     ],
 })
 export class ServicesModule {    

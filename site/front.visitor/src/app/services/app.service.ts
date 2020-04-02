@@ -113,6 +113,10 @@ export class AppService {
         return text;
     }
 
+    public encodeHTMLEntities(text: string): string {        
+        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');        
+    }
+
     public shareFb(lang: Lang, article: Article): void {                        
         if (this.isBrowser && FB) {
             let fbParam: Object = {method: 'share', href: `${window.location.protocol}//${window.location.host}/${lang.slug}/catalogue/category/${article.category.slug}/${article.slug}`};

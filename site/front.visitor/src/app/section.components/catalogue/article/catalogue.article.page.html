@@ -46,130 +46,10 @@
                     </ul>
                 </div>
             </article>
-            <!-- other articles -->        
-            <div id="other">
-                <div id="other-head">
-                    <div id="other-title">{{currentLang.s('catalogue-article-other')}}</div>
-                    <div id="other-types">
-                        <ul>
-                            <li [class.active]="otherBy === 'category'" (click)="otherBy = 'category';">{{currentLang.s('catalogue-article-othercat')}}</li>
-                            <li [class.active]="otherBy === 'user'" (click)="otherBy = 'user';">{{currentLang.s('catalogue-article-otheruser')}}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="other-articles">
-                    <ng-container *ngIf="otherBy === 'category'">
-                        <ng-container *ngIf="articlesByCategoryReady">
-                            <article *ngFor="let a of articlesByCategory">
-                                <div class="oa-left"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a></div>
-                                <div class="oa-right">
-                                    <div class="oa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
-                                    <div class="oa-date">{{a.formatedDate(currentLang)}}</div>
-                                </div>
-                            </article>
-                        </ng-container>                    
-                    </ng-container>
-                    <ng-container *ngIf="otherBy === 'user'">
-                        <ng-container *ngIf="articlesByUserReady">
-                            <article *ngFor="let a of articlesByUser">
-                                <div class="oa-left"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a></div>
-                                <div class="oa-right">
-                                    <div class="oa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
-                                    <div class="oa-date">{{a.formatedDate(currentLang)}}</div>
-                                </div>
-                            </article>
-                        </ng-container>                    
-                    </ng-container>                
-                </div>            
-            </div>
-
-            <!-- add comment -->
-            <!--
-            <div id="add-comment">
-                <div id="ac-head">Добавить комментарий</div>
-                <form>
-                    <div class="form-row-1cell">
-                        <div class="form-cell">
-                            <label>Поля, отмеченные знаком <span class="red">*</span>, обязательны для заполнения</label>
-                        </div>
-                    </div>
-                    <div class="form-row-1cell">
-                        <div class="form-cell">
-                            <label class="block">Комментарий</label>
-                            <textarea name="content"></textarea>
-                            <div class="form-error">Ошибка такая-то</div>
-                        </div>
-                    </div>
-                    <div class="form-row-2cell">
-                        <div class="form-cell">
-                            <label class="block required">Имя</label>
-                            <input type="text" name="name" required>
-                            <div class="form-error">Ошибка такая-то</div>
-                        </div>
-                        <div class="form-cell">
-                            <label class="block required">E-mail</label>
-                            <input type="email" name="email" required>
-                            <div class="form-error">Ошибка такая-то</div>
-                        </div>
-                    </div>
-                    <button>Отправить</button>
-                </form>
-            </div>
-            -->
-            <!-- comments -->
-            <!--
-            <div id="comments">
-                <div id="comments-head">Комментарии</div>
-                <div class="comment">
-                    <div class="comment-left">
-                        <div class="comment-imgwrap" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                    </div>                    
-                    <div class="comment-right">
-                        <div class="comment-author">Some user name</div>
-                        <div class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                        <div class="comment-date">8 февраля 2020, 23:20</div>
-                        <div class="comment-dash">
-                            <div class="comment-action comment-like">45</div>
-                            <div class="comment-action comment-dislike">156</div>
-                            <div class="comment-action comment-answer">Ответить</div>
-                            <div class="comment-action comment-quote">Цитировать</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="comment-left">
-                        <div class="comment-imgwrap" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                    </div>                    
-                    <div class="comment-right">
-                        <div class="comment-author">Some user name</div>
-                        <div class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                        <div class="comment-date">8 февраля 2020, 23:20</div>
-                        <div class="comment-dash">
-                            <div class="comment-action comment-like">45</div>
-                            <div class="comment-action comment-dislike">156</div>
-                            <div class="comment-action comment-answer">Ответить</div>
-                            <div class="comment-action comment-quote">Цитировать</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="comment">
-                    <div class="comment-left">
-                        <div class="comment-imgwrap" [style.background-image]="'url(/assets/images/users/ava-test.gif)'"></div>
-                    </div>                    
-                    <div class="comment-right">
-                        <div class="comment-author">Some user name</div>
-                        <div class="comment-text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
-                        <div class="comment-date">8 февраля 2020, 23:20</div>
-                        <div class="comment-dash">
-                            <div class="comment-action comment-like">45</div>
-                            <div class="comment-action comment-dislike">156</div>
-                            <div class="comment-action comment-answer">Ответить</div>
-                            <div class="comment-action comment-quote">Цитировать</div>
-                        </div>
-                    </div>
-                </div>                      
-            </div>
-            -->
+            <!-- other articles -->   
+            <other-articles [article]="article" [category]="category"></other-articles>            
+            <!-- comment -->
+            <article-comments [article]="article"></article-comments>            
         </ng-container>
         <ng-container *ngIf="!(categoryReady && articleReady)">
             <article class="loading">
@@ -182,11 +62,7 @@
                 <label></label>
                 <label></label>
             </article>
-        </ng-container>        
-        
-        
-
-        
+        </ng-container>
     </main>
     <aside>
         <the-sidebar></the-sidebar>

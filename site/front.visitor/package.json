@@ -26,8 +26,11 @@
     "@angular/router": "~9.0.0",
     "@nguniversal/express-engine": "^9.0.0",
     "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
+    "@tinymce/tinymce-angular": "^3.5.0",
+    "@types/socket.io-client": "^1.4.32",
     "express": "^4.15.2",
     "rxjs": "~6.5.4",
+    "socket.io-client": "^2.3.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
@@ -53,5 +56,9 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.1",
+    "utf-8-validate": "^5.0.2"
   }
 }

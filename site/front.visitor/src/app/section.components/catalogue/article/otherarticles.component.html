@@ -1,0 +1,45 @@
+<div id="other">
+    <div id="other-head">
+        <div id="other-title">{{currentLang.s('catalogue-article-other')}}</div>
+        <div id="other-types">
+            <ul>
+                <li [class.active]="otherBy === 'category'" (click)="otherBy = 'category';">{{currentLang.s('catalogue-article-othercat')}}</li>
+                <li [class.active]="otherBy === 'user'" (click)="otherBy = 'user';">{{currentLang.s('catalogue-article-otheruser')}}</li>
+            </ul>
+        </div>
+    </div>
+    <div id="other-articles">
+        <ng-container *ngIf="otherBy === 'category'">
+            <ng-container *ngIf="articlesByCategoryReady">
+                <ng-container *ngIf="articlesByCategory.length">
+                    <article *ngFor="let a of articlesByCategory">
+                        <div class="oa-left"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a></div>
+                        <div class="oa-right">
+                            <div class="oa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                            <div class="oa-date">{{a.formatedDate(currentLang)}}</div>
+                        </div>
+                    </article>
+                </ng-container>
+                <ng-container *ngIf="!articlesByCategory.length">
+                    <span [innerHTML]="currentLang.s('empty')"></span>
+                </ng-container>                
+            </ng-container>                    
+        </ng-container>
+        <ng-container *ngIf="otherBy === 'user'">
+            <ng-container *ngIf="articlesByUserReady">
+                <ng-container *ngIf="articlesByUser.length">
+                    <article *ngFor="let a of articlesByUser">
+                        <div class="oa-left"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}"><img [src]="a.img ? '/assets/images/articles/'+a.img : '/assets/images/templates/visitor/default/noimage.jpg'"></a></div>
+                        <div class="oa-right">
+                            <div class="oa-title"><a routerLink="/{{currentLang.slug}}/catalogue/category/{{a.category.slug}}/{{a.slug}}" [innerHTML]="a.name"></a></div>
+                            <div class="oa-date">{{a.formatedDate(currentLang)}}</div>
+                        </div>
+                    </article>
+                </ng-container>
+                <ng-container *ngIf="!articlesByUser.length">
+                    <span [innerHTML]="currentLang.s('empty')"></span>
+                </ng-container>                
+            </ng-container>                    
+        </ng-container>                
+    </div>            
+</div>

@@ -10,6 +10,7 @@ import { SettingsModule } from "./settings/settings.module";
 import { UsersModule } from "./users/users.module";
 import { AuthModule } from "./auth/auth.module";
 import { FilesModule } from "./files/files.module";
+import { VisitorAPIGateway } from "./visitor.api.gateway";
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { FilesModule } from "./files/files.module";
         UsersModule,
         AuthModule,
         FilesModule,
-    ],    
+    ],
+    providers: [VisitorAPIGateway]
 })
 export class VisitorAPIModule {}

@@ -45,7 +45,9 @@ export class DataService {
     public articlesChunkBy(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunkby", dto, false);}
     public articlesOne(dto: IArticleGetDTO): Observable<IAnswer<Article>> {return this.sendRequest("POST", `articles/one`, dto, false);}
     public articlesIncreaseViewsq(_id: string): Observable<IAnswer<void>> {return this.sendRequest("GET", `articles/increaseviewsq/${_id}`, null, false);}
+    public articlesVote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
     public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
+    public commentsChunkByArticle(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunkbyarticle", dto, false);}
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}
@@ -53,8 +55,7 @@ export class DataService {
     public usersPreregister(dto: IPreregisterDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", `users/preregister`, dto, false);}
     public usersRegister(dto: IRegisterDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/register", dto, false);}
     public usersRecover(dto: IRecoveryDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", "users/recover", dto, false);}
-    public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}
-    public vote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
+    public login(email: string, password: string): Observable<IAnswer<IAuthData>> {return this.sendRequest("POST", "auth/login", {email, password}, false);}    
     public uploadImg (fd: FormData): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/upload`, fd, false, true);}
     public uploadImgWithCopy (fd: FormData, width: number): Observable<HttpEvent<IAnswer<IImagable>>> {return this.sendRequest("POST", `files/img/uploadwithcopy/${width}`, fd, false, true);}
     

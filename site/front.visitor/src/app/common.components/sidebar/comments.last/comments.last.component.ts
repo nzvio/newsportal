@@ -5,6 +5,8 @@ import { CommentRepository } from '../../../services/repositories/comment.reposi
 import { AppService } from '../../../services/app.service';
 import { Comment } from '../../../model/orm/comment.model';
 import { Lang } from '../../../model/orm/lang.model';
+import { SocketService } from '../../../services/socket.service';
+import { Article } from '../../../model/orm/article.model';
 
 @Component({
     selector: "comments-last",
@@ -18,12 +20,14 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
     constructor(
         private commentRepository: CommentRepository,        
         private appService: AppService,
+        private socketService: SocketService,
     ) {}
 
     get comments(): Comment[] {return this.commentRepository.xl;}
     get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public async ngOnInit(): Promise<void> {
+        this.initSocket();
         this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
@@ -35,6 +39,22 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
             }   
         });        
     }
+
+    private initSocket(): void {
+        this.socketService.on<Comment>("comment-created").subscribe(msg => {            
+            if (msg.statusCode === 200) {
+                if ((msg.data.article as Article).lang === this.currentLang._id) {
+                    this.comments.unshift(new Comment().build(msg.data));
+                    this.comments.splice(this.comments.length-1, 1);
+                }                
+            } else {
+                console.log(msg);
+            }
+        }, err => {
+            this.appService.showNotification(err, "error");
+            console.log(err);
+        });
+    }  
 
     public ngOnDestroy(): void {
         this.langSubscription.unsubscribe();

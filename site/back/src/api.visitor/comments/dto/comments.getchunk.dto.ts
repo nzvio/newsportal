@@ -5,4 +5,5 @@ export class CommentsGetchunkDTO {
     public readonly sortDir?: number;    
     public readonly filterArticle?: string;    
     public readonly filterLang?: string;
+    public readonly filterLoadedAt?: number;   
 }

@@ -9,8 +9,6 @@ import { Category } from '../../../model/orm/category.model';
 import { Lang } from '../../../model/orm/lang.model';
 import { IArticleGetDTO } from '../../../model/dto/article.get.dto';
 import { VoteService } from '../../../services/vote.service';
-import { ArticleByCategoryRepository } from '../../../services/repositories/article.bycategory.repository';
-import { ArticleByUserRepository } from '../../../services/repositories/article.byuser.repository';
 
 @Component({
 	selector: 'catalogue-article-page',
@@ -22,16 +20,11 @@ export class CatalogueArticlePage implements OnInit {
 	public categoryReady: boolean = false;
 	public article: Article | null = null;
 	public articleReady: boolean = false;
-	public articlesByCategoryReady: boolean = false;
-	public articlesByUserReady: boolean = false;
-	public previousLang: string = "";
-	public otherBy: string = "category";
+	public previousLang: string = "";	
 
 	constructor(
 		private categoryRepository: CategoryRepository,
-		private articleRepository: ArticleRepository,
-		private articleByCategoryRepository: ArticleByCategoryRepository,
-		private articleByUserRepository: ArticleByUserRepository,
+		private articleRepository: ArticleRepository,		
 		private appService: AppService,
 		private voteService: VoteService,
 		private route: ActivatedRoute,
@@ -39,15 +32,11 @@ export class CatalogueArticlePage implements OnInit {
 	) {}
 
 	get currentLang(): Lang {return this.appService.currentLang.value;}
-	get articlesByCategory(): Article[] {return this.articleByCategoryRepository.xl;}
-	get articlesByUser(): Article[] {return this.articleByUserRepository.xl;}
-
+	
 	public ngOnInit(): void {
 		this.route.params.subscribe(async p => {			
 			this.categoryReady = false;
-			this.articleReady = false;
-			this.articlesByCategoryReady = false;
-			this.articlesByUserReady = false;
+			this.articleReady = false;			
 			const categorySlug: string = p["category"];
 			const articleSlug: string = p["article"];
 			this.category = this.categoryRepository.xl.find(x => x.slug === categorySlug) || null;
@@ -67,25 +56,7 @@ export class CatalogueArticlePage implements OnInit {
 					this.appService.setMeta("description", this.article.description);
 					this.article.viewsq++;					
 					this.articleReady = true;
-					this.articleRepository.increaseViewsq(this.article._id);
-					// other articles
-					this.articleByCategoryRepository.filterLang = this.currentLang._id;
-					this.articleByCategoryRepository.filterCategory = this.category._id;
-					this.articleByCategoryRepository.filterExcludeId = this.article._id;
-					this.articleByCategoryRepository.xl = [];
-					this.articleByCategoryRepository.currentPart = 0;
-					this.articleByCategoryRepository.loadedAt = 0;					
-					this.articleByCategoryRepository.load().then(() => {this.articlesByCategoryReady = true});					
-
-					if (this.article.user) {
-						this.articleByUserRepository.filterLang = this.currentLang._id;
-						this.articleByUserRepository.filterUser = this.article.user._id;
-						this.articleByUserRepository.filterExcludeId = this.article._id;
-						this.articleByUserRepository.xl = [];
-						this.articleByUserRepository.currentPart = 0;
-						this.articleByUserRepository.loadedAt = 0;
-						this.articleByUserRepository.load().then(() => {this.articlesByUserReady = true});					
-					}
+					this.articleRepository.increaseViewsq(this.article._id);					
 				} catch (err) {					
 					(err === "article not found") ? this.router.navigateByUrl("/404") : this.appService.showNotification(err, "error");					
 				}				
@@ -102,6 +73,6 @@ export class CatalogueArticlePage implements OnInit {
 	}  
 	
 	public vote(rating: number): void {
-        this.voteService.vote(this.article, rating);
+        this.voteService.voteForArticle(this.article, rating);
     }    
 }

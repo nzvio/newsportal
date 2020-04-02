@@ -5,4 +5,5 @@ export interface ICommentsGetchunkDTO {
     readonly sortDir?: number;    
     readonly filterArticle?: string;
     readonly filterLang?: string;
+    readonly filterLoadedAt?: number;
 }
