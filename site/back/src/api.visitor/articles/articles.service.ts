@@ -3,15 +3,15 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as mongoose from 'mongoose';
 
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
 import { ICategory } from "../../model/orm/interfaces/category.interface";
-import { IVote } from "../../model/orm/interfaces/vote.interface";
-import { IVoteDTO } from "./dto/vote.dto";
-import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
+import { IArticleVote } from "../../model/orm/interfaces/articlevote.interface";
+import { IArticleVoteDTO } from "./dto/articlevote.dto";
+import { IArticleVoteAnswerDTO } from "./dto/articlevote.answer.dto";
 import { IArticleGetDTO } from "./dto/article.get.dto";
 
 @Injectable()
@@ -19,7 +19,7 @@ export class ArticlesService extends APIService {
     constructor (
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         @InjectModel("Category") private readonly categoryModel: Model<ICategory>,
-        @InjectModel("Vote") private readonly voteModel: Model<IVote>,
+        @InjectModel("ArticleVote") private readonly articlevoteModel: Model<IArticleVote>,
     ) {
         super();
     }
@@ -282,9 +282,9 @@ export class ArticlesService extends APIService {
         return filter;
     }
 
-    public async vote(dto: IVoteDTO): Promise<IAnswer<IVoteAnswerDTO>> {
+    public async vote(dto: IArticleVoteDTO): Promise<IAnswer<IArticleVoteAnswerDTO>> {
         try {
-            let votes: IVote[] = await this.voteModel.find({article: dto.articleId, user: dto.userId});
+            let votes: IArticleVote[] = await this.articlevoteModel.find({article: dto.articleId, user: dto.userId});
 
             if (votes.length) {
                 return {statusCode: 409, error: "already voted"};
@@ -299,7 +299,7 @@ export class ArticlesService extends APIService {
             article.rating += dto.rating;
             article.votesq++;
             await article.save();
-            let vote: IVote = new this.voteModel();
+            let vote: IArticleVote = new this.articlevoteModel();
             vote.article = dto.articleId;
             vote.user = dto.userId;
             await vote.save();

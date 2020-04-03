@@ -9,8 +9,8 @@ export interface IComment extends Document {
     readonly article: string | IArticle;
     user: string | IUser;
     readonly content: string;
-    readonly likes: number;
-    readonly dislikes: number;
+    likes: number;
+    dislikes: number;
     readonly active: boolean;
     readonly defended: boolean;
 }

@@ -8,7 +8,7 @@ import { TargetsController } from "./targets.controller";
 import { jwtConstants } from "../auth/auth.constants";
 import { TargetsExecutorService } from "./targetsexecutor.service";
 import { ArticleSchema } from "../../model/orm/schemas/article.schema";
-import { ServicesModule } from "../../services/services.module";
+import { CommonServicesModule } from "../../common.services/commonservices.module";
 import { ParseerrorSchema } from "../../model/orm/schemas/parseerror.schema";
 import { UserSchema } from "../../model/orm/schemas/user.schema";
 import { TagSchema } from "../../model/orm/schemas/tag.schema";
@@ -24,7 +24,7 @@ import { TagSchema } from "../../model/orm/schemas/tag.schema";
         ]),        
         JwtModule.register(jwtConstants),
         HttpModule.register({timeout: 10000}),
-        ServicesModule,
+        CommonServicesModule,
     ],
     controllers: [TargetsController],
     providers: [TargetsService, TargetsExecutorService],

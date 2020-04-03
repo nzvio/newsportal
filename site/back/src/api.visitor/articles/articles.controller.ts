@@ -5,8 +5,8 @@ import { IAnswer } from "../../model/answer.interface";
 import { ArticlesGetchunkDTO } from "./dto/articles.getchunk.dto";
 import { ArticleDTO } from "./dto/article.dto";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
-import { IVoteDTO } from "./dto/vote.dto";
-import { IVoteAnswerDTO } from "./dto/vote.answer.dto";
+import { IArticleVoteDTO } from "./dto/articlevote.dto";
+import { IArticleVoteAnswerDTO } from "./dto/articlevote.answer.dto";
 import { AuthGuard } from "../auth/auth.guard";
 import { IArticleGetDTO } from "./dto/article.get.dto";
 
@@ -59,7 +59,7 @@ export class ArticlesController {
     // vote
     @UseGuards(AuthGuard)
     @Post("vote")    
-    public vote(@Body() dto: IVoteDTO): Promise<IAnswer<IVoteAnswerDTO>> {
+    public vote(@Body() dto: IArticleVoteDTO): Promise<IAnswer<IArticleVoteAnswerDTO>> {
         return this.articlesService.vote(dto);
     }
 

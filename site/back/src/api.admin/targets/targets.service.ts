@@ -5,7 +5,7 @@ import { Model } from "mongoose";
 import { ITarget } from "../../model/orm/interfaces/target.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { TargetCreateDTO } from "./dto/target.create.dto";
 import { TargetUpdateDTO } from "./dto/target.update.dto";
 

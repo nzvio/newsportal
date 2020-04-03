@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { ArticleCreateDTO } from "./dto/article.create.dto";

@@ -6,7 +6,7 @@ import { IDonor } from "../../model/orm/interfaces/donor.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { GetallDTO } from "../../model/dto/getall.dto";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { DonorCreateDTO } from "./dto/donor.create.dto";
 import { DonorUpdateDTO } from "./dto/donor.update.dto";
 

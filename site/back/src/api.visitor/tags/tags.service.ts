@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 
 import { ITag } from "../../model/orm/interfaces/tag.interface";
 import { IAnswer } from "../../model/answer.interface";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { TagsGetallDTO } from "./dto/tags.getall.dto";
 
 @Injectable()

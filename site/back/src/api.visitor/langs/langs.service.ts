@@ -5,7 +5,7 @@ import { Model } from "mongoose";
 import { ILang } from "../../model/orm/interfaces/lang.interface";
 import { GetallDTO } from "../../model/dto/getall.dto";
 import { IAnswer } from "../../model/answer.interface";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 
 @Injectable()
 export class LangsService extends APIService {

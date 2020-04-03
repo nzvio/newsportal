@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 import * as bcrypt from "bcrypt";
 import * as Nodemailer from "nodemailer";
 
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { IUser } from "../../model/orm/interfaces/user.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { UserDTO } from "./dto/user.dto";

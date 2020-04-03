@@ -43,8 +43,8 @@
                     <div class="comment-text" [innerHTML]="c.content"></div>
                     <div class="comment-date">{{c.formatedDate(currentLang)}}</div>
                     <div class="comment-dash">
-                        <div class="comment-action comment-like">{{c.likes}}</div>
-                        <div class="comment-action comment-dislike">{{c.dislikes}}</div>
+                        <div class="comment-action comment-like" (click)="vote(c, 1);">{{c.likes}}</div>
+                        <div class="comment-action comment-dislike" (click)="vote(c, -1);">{{c.dislikes}}</div>
                         <div class="comment-action comment-answer" (click)="answer(c);">{{currentLang.s('comments-answer')}}</div>
                         <div class="comment-action comment-quote" (click)="quote(c);">{{currentLang.s('comments-quote')}}</div>
                     </div>
@@ -56,7 +56,7 @@
         </ng-container>
     </ng-container>
     <!-- loading -->
-    <ng-container *ngIf="!commentsReady">
+    <ng-container *ngIf="!commentsReady || loadingMore">
         <div class="comment loading">
             <div class="comment-left"><div class="comment-imgwrap"></div></div>
             <div class="comment-right"><label></label><label></label><label></label></div>

@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 
 import { IComment } from "../../model/orm/interfaces/comment.interface";
 import { IAnswer } from "../../model/answer.interface";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { CommentsGetallbyarticleDTO } from "./dto/comments.getallbyarticle.dto";
 import { CommentUpdateDTO } from "./dto/comment.update.dto";
 

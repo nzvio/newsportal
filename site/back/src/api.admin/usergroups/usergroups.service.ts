@@ -6,7 +6,7 @@ import { IUsergroup } from "../../model/orm/interfaces/usergroup.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { GetallDTO } from "../../model/dto/getall.dto";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { UsergroupCreateDTO } from "./dto/usergroup.create.dto";
 import { UsergroupUpdateDTO } from "./dto/usergroup.update.dto";
 

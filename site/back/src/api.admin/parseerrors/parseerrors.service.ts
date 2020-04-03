@@ -5,7 +5,7 @@ import { Model } from "mongoose";
 import { IParseerror } from "../../model/orm/interfaces/parseerror.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 
 @Injectable()
 export class ParseerrorsService extends APIService {

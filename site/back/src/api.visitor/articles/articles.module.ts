@@ -6,7 +6,7 @@ import { ArticleSchema } from "../../model/orm/schemas/article.schema";
 import { ArticlesController } from "./articles.controller";
 import { ArticlesService } from "./articles.service";
 import { CategorySchema } from "../../model/orm/schemas/category.schema";
-import { VoteSchema } from "../../model/orm/schemas/vote.schema";
+import { ArticleVoteSchema } from "../../model/orm/schemas/articlevote.schema";
 import { jwtConstants } from "../auth/auth.constants";
 
 @Module({
@@ -15,7 +15,7 @@ import { jwtConstants } from "../auth/auth.constants";
         MongooseModule.forFeature([
             {name: 'Article', schema: ArticleSchema},
             {name: 'Category', schema: CategorySchema},
-            {name: 'Vote', schema: VoteSchema},
+            {name: 'ArticleVote', schema: ArticleVoteSchema},
         ]),        
     ],
     controllers: [ArticlesController],

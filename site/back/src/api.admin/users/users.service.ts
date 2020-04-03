@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as bcrypt from "bcrypt";
 
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { IUser } from "../../model/orm/interfaces/user.interface";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { IAnswer } from "../../model/answer.interface";

@@ -15,7 +15,8 @@ import { Article } from '../../../model/orm/article.model';
 })
 export class CommentsLastComponent implements OnInit, OnDestroy {
     public ready: boolean = false;
-    private langSubscription: Subscription;
+    private langSubscription: Subscription | null = null;
+    private socketSubscription: Subscription | null = null;
 
     constructor(
         private commentRepository: CommentRepository,        
@@ -27,7 +28,7 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
     get currentLang(): Lang {return this.appService.currentLang.value;}
 
     public async ngOnInit(): Promise<void> {
-        this.initSocket();
+        this.appService.isBrowser ? this.initSocket() : null;
         this.langSubscription = this.appService.currentLang.subscribe(async lang => {
             try {
                 this.ready = false;
@@ -41,7 +42,7 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
     }
 
     private initSocket(): void {
-        this.socketService.on<Comment>("comment-created").subscribe(msg => {            
+        this.socketSubscription = this.socketService.on<Comment>("comment-created").subscribe(msg => {            
             if (msg.statusCode === 200) {
                 if ((msg.data.article as Article).lang === this.currentLang._id) {
                     this.comments.unshift(new Comment().build(msg.data));
@@ -57,6 +58,7 @@ export class CommentsLastComponent implements OnInit, OnDestroy {
     }  
 
     public ngOnDestroy(): void {
-        this.langSubscription.unsubscribe();
+        this.langSubscription ? this.langSubscription.unsubscribe() : null;
+        this.socketSubscription ? this.socketSubscription.unsubscribe() : null;
     }    
 }

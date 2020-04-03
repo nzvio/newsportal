@@ -4,7 +4,7 @@ import { Model } from "mongoose";
 
 import { ISetting } from "../../model/orm/interfaces/setting.interface";
 import { IAnswer } from "../../model/answer.interface";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 
 @Injectable()
 export class SettingsService extends APIService {

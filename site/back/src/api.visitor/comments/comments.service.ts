@@ -5,16 +5,19 @@ import * as mongoose from 'mongoose';
 import { Server } from 'socket.io';
 
 import { IComment } from "../../model/orm/interfaces/comment.interface";
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { CommentsGetchunkDTO } from "./dto/comments.getchunk.dto";
 import { IAnswer } from "../../model/answer.interface";
 import { CommentCreateDTO } from "./dto/comment.create.dto";
-import { IUser } from "../../model/orm/interfaces/user.interface";
-import { IArticle } from "../../model/orm/interfaces/article.interface";
+import { ICommentVote } from "../../model/orm/interfaces/commentvote.interface";
+import { ICommentVoteDTO } from "./dto/commentvote.dto";
 
 @Injectable()
 export class CommentsService extends APIService {
-    constructor (@InjectModel("Comment") private readonly commentModel: Model<IComment>) {
+    constructor (
+        @InjectModel("Comment") private readonly commentModel: Model<IComment>,
+        @InjectModel("CommentVote") private readonly commentvoteModel: Model<ICommentVote>,
+    ) {
         super();
     }  
 
@@ -123,6 +126,42 @@ export class CommentsService extends APIService {
             return {statusCode: 200};
         } catch (err) {
             let errTxt: string = `Error in CommentsService.create: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async vote(dto: ICommentVoteDTO): Promise<IAnswer<void>> {
+        try {
+            let votes: ICommentVote[] = await this.commentvoteModel.find({comment: dto.commentId, user: dto.userId});
+
+            if (votes.length) {
+                return {statusCode: 409, error: "already voted"};
+            }
+
+            let comment: IComment = await this.commentModel.findById(dto.commentId);
+
+            if (!comment) {
+                return {statusCode: 404, error: "comment not found"};
+            } 
+
+            if (dto.vote === 1) {
+                comment.likes++;
+            } else if (dto.vote === -1) {
+                comment.dislikes++;
+            } else {
+                return {statusCode: 500, error: "invalid vote data"};
+            }
+            
+            await comment.save();
+            let vote: ICommentVote = new this.commentvoteModel();
+            vote.comment = dto.commentId;
+            vote.user = dto.userId;
+            await vote.save();
+
+            return {statusCode: 200};
+        } catch (err) {
+            let errTxt: string = `Error in CommentsService.vote: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

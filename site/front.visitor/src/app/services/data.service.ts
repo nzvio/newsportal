@@ -16,13 +16,14 @@ import { Comment } from '../model/orm/comment.model';
 import { IGetallDTO } from '../model/dto/getall.dto';
 import { Setting } from '../model/orm/setting.model';
 import { User } from '../model/orm/user.model';
-import { IVoteDTO } from '../model/dto/vote.dto';
-import { IVoteAnswerDTO } from "../model/dto/vote.answer.dto";
+import { IArticleVoteDTO } from '../model/dto/articlevote.dto';
+import { IArticleVoteAnswerDTO } from "../model/dto/articlevote.answer.dto";
 import { IImagable } from '../model/imagable.interface';
 import { IPreregisterDTO } from '../model/dto/preregister.dto';
 import { IRegisterDTO } from '../model/dto/register.dto';
 import { IRecoveryDTO } from '../model/dto/recovery.dto';
 import { IArticleGetDTO } from '../model/dto/article.get.dto';
+import { ICommentVoteDTO } from '../model/dto/commentvote.dto';
 
 @Injectable()
 export class DataService {
@@ -45,9 +46,10 @@ export class DataService {
     public articlesChunkBy(dto: IArticlesGetchunkDTO): Observable<IAnswer<Article[]>> {return this.sendRequest("POST", "articles/chunkby", dto, false);}
     public articlesOne(dto: IArticleGetDTO): Observable<IAnswer<Article>> {return this.sendRequest("POST", `articles/one`, dto, false);}
     public articlesIncreaseViewsq(_id: string): Observable<IAnswer<void>> {return this.sendRequest("GET", `articles/increaseviewsq/${_id}`, null, false);}
-    public articlesVote(dto: IVoteDTO): Observable<IAnswer<IVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
+    public articlesVote(dto: IArticleVoteDTO): Observable<IAnswer<IArticleVoteAnswerDTO>> {return this.sendRequest("POST", "articles/vote", dto, true);}
     public commentsChunk(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunk", dto, false);}
     public commentsChunkByArticle(dto: ICommentsGetchunkDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "comments/chunkbyarticle", dto, false);}
+    public commentsVote(dto: ICommentVoteDTO): Observable<IAnswer<void>> {return this.sendRequest("POST", "comments/vote", dto, true);}
     public tagsAll(dto: IGetallDTO): Observable<IAnswer<Comment[]>> {return this.sendRequest("POST", "tags/all", dto, false);}
     public settingsAll(): Observable<IAnswer<Setting[]>> {return this.sendRequest("GET", "settings/all", null, false);}
     public usersOne(_id: string): Observable<IAnswer<User>> {return this.sendRequest("GET", `users/one/${_id}`, null, false);}

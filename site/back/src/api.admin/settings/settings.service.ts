@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { APIService } from "../../services/_api.service";
+import { APIService } from "../../common.services/_api.service";
 import { ISetting } from "../../model/orm/interfaces/setting.interface";
 import { GetchunkDTO } from "../../model/dto/getchunk.dto";
 import { IAnswer } from "../../model/answer.interface";
