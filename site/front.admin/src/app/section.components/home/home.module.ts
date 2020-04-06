@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
-//import { EditorModule } from '@tinymce/tinymce-angular';
+import { CommonModule } from '@angular/common';
 
 import { HomePage } from './home.page';
 import { CCModule } from '../../common.components/cc.module';
+import { ApmComponent } from './articlespermonth/apm.component';
+import { ApmRepository } from './articlespermonth/apm.repository';
 
 @NgModule({	
     imports: [	
-//		EditorModule,	
+		CommonModule,
 		CCModule,
 	],
 	declarations: [
 		HomePage,
+		ApmComponent,
 	],
-    providers: [],    
+    providers: [
+		ApmRepository,
+	],    
 })
 export class HomeModule { }

@@ -1,7 +1,7 @@
 import { DataService } from '../data.service';
 
 export abstract class Repository<T> {
-    public abstract schema: string; // name of Mongoose schema
+    public schema?: string; // name of Mongoose schema
     
     public xlChunk: T[] = []; // fragment
     public chunkCurrentPart: number = 0; // current paging state for fragment

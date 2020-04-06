@@ -1,0 +1,14 @@
+<div class="apm" #apm>
+    <ng-container *ngIf="ready">
+        <div class="scale"></div>
+        <div class="divisions">
+            <div class="division" *ngFor="let c of columns; let i = index;">
+                <div class="mark">{{months[i]}}</div>
+                <div class="column" [style.height]="columnHeight(c)"></div>
+            </div>            
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        loading...
+    </ng-container>        
+</div>

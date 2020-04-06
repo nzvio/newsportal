@@ -125,6 +125,8 @@ export class DataService {
     public settingsDelete(_id: string): Observable<IAnswer<void>> {return this.sendRequest("DELETE", `settings/delete/${_id}`, null, true);}
     public settingsDeleteBulk(_ids: string[]): Observable<IAnswer<void>> {return this.sendRequest("DELETE", "settings/deletebulk", _ids, true);}    
     public settingsCreate(x: Setting): Observable<IAnswer<void>> {return this.sendRequest("POST", "settings/create", x, true);}
+
+    public statArticlesPerMonth(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlespermonth", null, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

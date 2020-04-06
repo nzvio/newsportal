@@ -42,6 +42,7 @@
             "workspace-logout-txt": "<p>Bye!</p>",            
 
             "workspace-home-h1": "Home",
+            "workspace-home-apm": "Articles per month",
 
             "workspace-users-h1": "Users",
             "workspace-users-name": "Name",
@@ -213,6 +214,7 @@
             "workspace-logout-txt": "<p>До свидания!</p>",            
 
             "workspace-home-h1": "Главная",
+            "workspace-home-apm": "Статьи по месяцам",
 
             "workspace-users-h1": "Пользователи",
             "workspace-users-name": "Имя",

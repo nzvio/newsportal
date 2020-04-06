@@ -1,0 +1,21 @@
+@import "../../../_var";
+
+.apm {
+    width: 100%; height: 100%; position: relative; color: $color-transparent;
+    .scale {position: absolute; bottom: 20px; left: 0; height: 1px; width: 100%; background-color: $color-transparent;}
+    .divisions {
+        position: absolute; bottom: 18px; left: 0; height: 2px; width: 100%; display: flex; justify-content: space-between; padding: 0 10px;
+        .division {
+            width: 1px; height: 2px; border-left: 1px $color-transparent solid; position: relative;
+            .mark {
+                @media (min-width: 0) {font-size: 8px;}
+                @media (min-width: 360px) {font-size: 10px;}                            
+            }
+            .column {
+                @media (min-width: 0) {left:-5px; width: 9px;}
+                @media (min-width: 360px) {left:-8px; width: 15px;}
+                position: absolute; bottom: 100%; background-color: $color-transparent;
+            }
+        }
+    }    
+}

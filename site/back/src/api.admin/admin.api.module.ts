@@ -16,6 +16,7 @@ import { ParseerrorsModule } from "./parseerrors/parseerrors.module";
 import { CommentsModule } from "./comments/comments.module";
 import { TagsModule } from "./tags/tags.module";
 import { SettingsModule } from "./settings/settings.module";
+import { StatModule } from "./stat/stat.module";
 
 @Module({
     imports: [
@@ -34,6 +35,7 @@ import { SettingsModule } from "./settings/settings.module";
 		CommentsModule,
 		TagsModule,
 		SettingsModule,
+		StatModule,
     ],
     providers: [
 		AdminAPIGateway,
