@@ -1,9 +1,9 @@
 @import "../../../_var";
 
-.cpd {
-    width: 100%; height: 100%; position: relative; color: $color-transparent;
+.apd {
+    width: 100%; height: 100%; overflow: hidden; position: relative; color: $color-transparent;
     svg {
-        width: 100%; height: 100%; position: absolute; left: 0; top: 0;
+        width: 100%; height: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); animation-name: svg-viewport; animation-duration: 1s;
         path {
             &:nth-child(1) {fill: rgba(255,255,255,0.8);}
             &:nth-child(2) {fill: rgba(255,255,255,0.7);}
@@ -14,4 +14,9 @@
             &:nth-child(7) {fill: rgba(255,255,255,0.6);}
         }        
     }
+}
+
+@keyframes svg-viewport {
+    0%   {width: 0; height: 0;}    
+    100% {width: 100%; height: 100%;}
 }

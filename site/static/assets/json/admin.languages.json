@@ -42,8 +42,8 @@
             "workspace-logout-txt": "<p>Bye!</p>",            
 
             "workspace-home-h1": "Home",
-            "workspace-home-apm": "Articles per month",
-            "workspace-home-cpm": "Comments by day of week",
+            "workspace-home-apm": "Articles by month",
+            "workspace-home-apd": "Articles by day",
 
             "workspace-users-h1": "Users",
             "workspace-users-name": "Name",
@@ -216,7 +216,7 @@
 
             "workspace-home-h1": "Главная",
             "workspace-home-apm": "Статьи по месяцам",
-            "workspace-home-cpd": "Комментарии по дням недели",
+            "workspace-home-apd": "Статьи по дням недели",
 
             "workspace-users-h1": "Пользователи",
             "workspace-users-name": "Имя",

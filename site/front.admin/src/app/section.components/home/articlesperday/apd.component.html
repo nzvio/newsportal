@@ -1,0 +1,17 @@
+<div class="apd">
+    <ng-container *ngIf="ready">                
+        <ng-container *ngIf="allAreNull">
+            <svg viewBox="0 0 100 100" id="asd">
+                <path *ngFor="let r of radiuses; let i = index;" [attr.d]="sector(50, 50, radius, i*2*PI/7, (i+1)*2*PI/7)"></path>            
+            </svg>
+        </ng-container>
+        <ng-container *ngIf="!allAreNull">
+            <svg viewBox="0 0 100 100" id="dsa">
+                <path *ngFor="let r of radiuses; let i = index;" [attr.d]="sector(50, 50, r, i*2*PI/7, (i+1)*2*PI/7)"></path>            
+            </svg>        
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        <div class="reloading"><span></span></div>
+    </ng-container>        
+</div>

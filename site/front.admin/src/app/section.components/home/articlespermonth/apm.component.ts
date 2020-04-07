@@ -36,7 +36,7 @@ export class ApmComponent implements AfterViewInit {
             } catch (err) {
                 this.appService.monitorLog(err, true);
             }            
-        }, 1000);
+        }, 500);
     }
 
     private initMonths(): void {
