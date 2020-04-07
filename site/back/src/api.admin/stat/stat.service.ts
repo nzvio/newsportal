@@ -42,6 +42,7 @@ export class StatService extends APIService {
             }
 
             return {statusCode: 200, data};
+            //return {statusCode: 200, data: [456, 89, 647, 950, 10, 95, 367, 800, 45, 190, 789, 6600]}; // fake
         } catch (err) {
             let errTxt: string = `Error in StatService.articlesPerMonth: ${String(err)}`;
             console.log(errTxt);

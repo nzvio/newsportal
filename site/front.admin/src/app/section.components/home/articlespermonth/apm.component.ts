@@ -13,6 +13,7 @@ export class ApmComponent implements AfterViewInit {
     private element: HTMLElement | null = null;
     public ready: boolean = false;
     private height: number = 0;
+    public data: number[] = [];
     public columns: number[] = []; // heights in percents
     public months: number[] = [];
 
@@ -27,16 +28,15 @@ export class ApmComponent implements AfterViewInit {
                 this.element = this.elementRef.nativeElement;
                 this.height = this.element.offsetHeight - 30;
                 await this.apmRepository.load();
-                const data: number[] = this.apmRepository.xlFull;
-                const maxApm: number = Math.max(...data);
-                this.columns = data.map(x => Math.round(x * 100 / maxApm));
+                this.data = this.apmRepository.xlFull;
+                const maxApm: number = Math.max(...this.data);
+                this.columns = this.data.map(x => Math.round(x * 100 / maxApm));
                 this.initMonths();
                 this.ready = true;
             } catch (err) {
                 this.appService.monitorLog(err, true);
-            }
-            
-        }, 1);
+            }            
+        }, 1000);
     }
 
     private initMonths(): void {
@@ -53,6 +53,11 @@ export class ApmComponent implements AfterViewInit {
     // percent to px
     public columnHeight(h: number): string {
         return `${Math.round(h * this.height / 100)}px`;
+    }
+
+    // analogue for columnHeight for last month line
+    public currentMonthLevel(): string {
+        return `${Math.round(this.columns[this.columns.length-1] * this.height / 100) + 2}px`;
     }
 
     @HostListener('window:resize', ['$event'])

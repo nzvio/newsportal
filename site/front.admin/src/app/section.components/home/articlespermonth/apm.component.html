@@ -1,14 +1,18 @@
 <div class="apm" #apm>
     <ng-container *ngIf="ready">
-        <div class="scale"></div>
+        <div class="x-axis"></div>
+        <div class="y-axis"></div>
         <div class="divisions">
             <div class="division" *ngFor="let c of columns; let i = index;">
                 <div class="mark">{{months[i]}}</div>
                 <div class="column" [style.height]="columnHeight(c)"></div>
             </div>            
-        </div>
+            <div class="lastmonth" [style.bottom]="currentMonthLevel()">
+                <div class="lastmonth-value">{{data[data.length-1]}}</div>
+            </div>
+        </div>        
     </ng-container>
     <ng-container *ngIf="!ready">
-        loading...
+        <div class="reloading"><span></span></div>
     </ng-container>        
 </div>
