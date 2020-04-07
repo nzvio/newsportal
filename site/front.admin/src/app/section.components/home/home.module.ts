@@ -5,6 +5,7 @@ import { HomePage } from './home.page';
 import { CCModule } from '../../common.components/cc.module';
 import { ApmComponent } from './articlespermonth/apm.component';
 import { ApmRepository } from './articlespermonth/apm.repository';
+import { CpdComponent } from './commentsperday/cpd.component';
 
 @NgModule({	
     imports: [	
@@ -14,6 +15,7 @@ import { ApmRepository } from './articlespermonth/apm.repository';
 	declarations: [
 		HomePage,
 		ApmComponent,
+		CpdComponent,
 	],
     providers: [
 		ApmRepository,
