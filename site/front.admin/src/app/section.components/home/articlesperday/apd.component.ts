@@ -4,6 +4,7 @@ import { AppService } from '../../../services/app.service';
 import { IPoint } from '../../../model/point.interface';
 import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
 import { AdmLang } from '../../../model/admlang.model';
+import { ApdRepository } from './apd.repository';
 
 @Component({
     selector: "articles-per-day",
@@ -12,7 +13,8 @@ import { AdmLang } from '../../../model/admlang.model';
 })
 export class ApdComponent implements OnInit {            
     public ready: boolean = false;    
-    public data: number[] = [300,100,400,100,100,200,300];
+    //public data: number[] = [300,100,400,100,100,200,300];
+    public data: number[] = [];
     public radius: number = 40;
     public PI: number = Math.PI;
     public radiuses: number[] = []; // radiuses of sectors in percents
@@ -25,6 +27,7 @@ export class ApdComponent implements OnInit {
     constructor(        
         private appService: AppService,
         private admlangRepository: AdmLangRepository,
+        private apdRepository: ApdRepository,
     ) {}
 
     get allAreNull(): boolean {return !this.radiuses.find(r => r);}    
@@ -32,10 +35,9 @@ export class ApdComponent implements OnInit {
 
     public ngOnInit(): void {
         setTimeout(async () => {
-            try {
-                // TODO: load data
-
-
+            try {                
+                await this.apdRepository.load();
+                this.data = this.apdRepository.xlFull;
                 this.initDays();
                 const maxApd: number = Math.max(...this.data);
                 const preradiuses: number[] = this.data.map(x => Math.round(x * 100 / maxApd));

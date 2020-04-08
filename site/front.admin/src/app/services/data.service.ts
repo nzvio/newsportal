@@ -127,6 +127,7 @@ export class DataService {
     public settingsCreate(x: Setting): Observable<IAnswer<void>> {return this.sendRequest("POST", "settings/create", x, true);}
 
     public statArticlesPerMonth(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlespermonth", null, true);}
+    public statArticlesPerDay(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlesperday", null, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

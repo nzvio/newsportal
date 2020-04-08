@@ -15,7 +15,9 @@
                     (mouseover)="selectedDate = days[i]; selectedData = data[i]; selectedDateActive = selectedDataActive = true;" 
                     (mouseout)="selectedDateActive = selectedDataActive = false;"
                 ></path>
-                <text *ngFor="let d of data; let i = index;" [attr.x]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).x" [attr.y]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).y">{{d}}</text>
+                <ng-container *ngFor="let d of data; let i = index;">
+                    <text *ngIf="d" [attr.x]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).x" [attr.y]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).y">{{d}}</text>
+                </ng-container>                
             </svg>        
         </ng-container>
     </ng-container>

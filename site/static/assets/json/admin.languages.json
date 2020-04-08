@@ -43,8 +43,8 @@
             "workspace-logout-txt": "<p>Bye!</p>",            
 
             "workspace-home-h1": "Home",
-            "workspace-home-apm": "Articles by month",
-            "workspace-home-apd": "Articles by day",
+            "workspace-home-apm": "Articles per month",
+            "workspace-home-apd": "Articles per day",
             "workspace-home-date": "Date",
             "workspace-home-articles": "Articles",
 

@@ -13,5 +13,12 @@ export class StatController {
     @Get("articlespermonth")
     public articlesPerMonth(): Promise<IAnswer<number[]>> {
         return this.statService.articlesPerMonth();
-    } 
+    }
+    
+    // articles quantity per day
+    @UseGuards(AuthGuard)
+    @Get("articlesperday")
+    public articlesPerDay(): Promise<IAnswer<number[]>> {
+        return this.statService.articlesPerDay();
+    }
 }
