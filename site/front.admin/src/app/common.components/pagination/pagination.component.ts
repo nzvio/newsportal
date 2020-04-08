@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+import { AdmLangRepository } from '../../services/repositories/admlang.repository';
+import { AdmLang } from '../../model/admlang.model';
+
 @Component({
     selector: 'pagination',
     templateUrl: './pagination.component.html',  
@@ -11,6 +14,10 @@ export class PaginationComponent {
     @Input() current: number = 0; // current fragment
     @Output() currentChanged: EventEmitter<number> = new EventEmitter ();    
     public changeTo: string | null = null;
+
+    constructor(private admlangRepository: AdmLangRepository) {}
+
+    get currentLang(): AdmLang {return this.admlangRepository.currentLang;}
     
     get parts (): number[] {
         let parts = [];

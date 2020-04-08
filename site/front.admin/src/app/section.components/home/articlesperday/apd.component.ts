@@ -2,13 +2,15 @@ import { Component, OnInit } from "@angular/core";
 
 import { AppService } from '../../../services/app.service';
 import { IPoint } from '../../../model/point.interface';
+import { AdmLangRepository } from '../../../services/repositories/admlang.repository';
+import { AdmLang } from '../../../model/admlang.model';
 
 @Component({
     selector: "articles-per-day",
     templateUrl: "./apd.component.html",
     styleUrls: ["./apd.component.scss"]
 })
-export class ApdComponent implements OnInit {        
+export class ApdComponent implements OnInit {            
     public ready: boolean = false;    
     public data: number[] = [300,100,400,100,100,200,300];
     public radius: number = 40;
@@ -16,12 +18,17 @@ export class ApdComponent implements OnInit {
     public radiuses: number[] = []; // radiuses of sectors in percents
     public days: Date[] = [];
     public selectedDate: Date | null = null;
+    public selectedDateActive: boolean = false;
+    public selectedData: number | null = null;
+    public selectedDataActive: boolean = false;
     
     constructor(        
         private appService: AppService,
+        private admlangRepository: AdmLangRepository,
     ) {}
 
-    get allAreNull(): boolean {return !this.radiuses.find(r => r);}
+    get allAreNull(): boolean {return !this.radiuses.find(r => r);}    
+    get currentLang(): AdmLang {return this.admlangRepository.currentLang;}
 
     public ngOnInit(): void {
         setTimeout(async () => {
@@ -71,6 +78,10 @@ export class ApdComponent implements OnInit {
     } 
     
     public selectedDateFormat(): string {
-        return this.selectedDate ? `${this.selectedDate.getUTCDate()}/${this.appService.twoDigits(this.selectedDate.getUTCMonth()+1)}/${this.selectedDate.getUTCFullYear()}` : "";
+        return this.selectedDate !== null ? `${this.currentLang.phrases['workspace-home-date']}: ${this.selectedDate.getUTCDate()}/${this.appService.twoDigits(this.selectedDate.getUTCMonth()+1)}/${this.selectedDate.getUTCFullYear()}` : "";
+    }
+
+    public selectedDataFormat(): string {
+        return this.selectedData !== null ? `${this.currentLang.phrases['workspace-home-articles']}: ${this.selectedData}` : "";
     }
 }

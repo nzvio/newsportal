@@ -3,7 +3,7 @@
 .apd {
     width: 100%; height: 100%; overflow: hidden; position: relative; color: $color-transparent;
     svg {
-        width: 100%; height: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); animation-name: svg-viewport; animation-duration: 1s;
+        width: 100%; height: 100%; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); animation-name: svg-animation; animation-duration: 1s;
         path {
             transition: fill 0.3s ease 0s; will-change: ease;            
             &:nth-child(1) {fill: rgba(255,255,255,0.8);}
@@ -15,11 +15,19 @@
             &:nth-child(7) {fill: rgba(255,255,255,0.6);}
             &:hover {fill: #fff;}
         }    
-        text {fill: $color-transparent; font-size: 3px;}
+        text {fill: $color-transparent; font-size: 3px;}        
+    }
+    .selected-date {
+        font-size: 12px; transition: opacity 0.3s ease 0s; opacity: 0;
+        &.active {opacity: 1;}
+    }
+    .selected-data {
+        font-size: 12px; transition: opacity 0.3s ease 0.2s; opacity: 0;
+        &.active {opacity: 1;}
     }
 }
 
-@keyframes svg-viewport {
+@keyframes svg-animation {
     0%   {width: 0; height: 0; }    
     100% {width: 100%; height: 100%; }
 }
