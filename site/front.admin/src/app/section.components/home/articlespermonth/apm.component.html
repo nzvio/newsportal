@@ -5,7 +5,7 @@
         <div class="divisions">
             <div class="division" *ngFor="let c of columns; let i = index;">
                 <div class="mark">{{months[i]}}</div>
-                <div class="column" [style.height]="columnHeight(c)"></div>
+                <div class="column" [style.height]="columnHeight(c)" [title]="data[i]"></div>
             </div>            
             <div class="lastmonth" [style.bottom]="currentMonthLevel()">
                 <div class="lastmonth-value">{{data[data.length-1]}}</div>

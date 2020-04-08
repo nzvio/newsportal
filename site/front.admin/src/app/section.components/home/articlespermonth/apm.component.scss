@@ -15,7 +15,8 @@
             .column {
                 @media (min-width: 0) {left:-5px; width: 9px;}
                 @media (min-width: 360px) {left:-8px; width: 15px;}
-                position: absolute; bottom: 100%; background-color: $color-transparent; animation-name: column-height; animation-duration: 3s;
+                position: absolute; bottom: 100%; background-color: $color-transparent; animation-name: column-height; animation-duration: 3s; transition: background-color 0.3s ease 0s;
+                &:hover {background-color: #fff;}
             }            
         }
         .lastmonth {

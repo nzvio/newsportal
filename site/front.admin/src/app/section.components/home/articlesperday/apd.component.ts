@@ -10,10 +10,12 @@ import { IPoint } from '../../../model/point.interface';
 })
 export class ApdComponent implements OnInit {        
     public ready: boolean = false;    
-    public data: number[] = [3,1,4,1,1,2,3];
+    public data: number[] = [300,100,400,100,100,200,300];
     public radius: number = 40;
     public PI: number = Math.PI;
     public radiuses: number[] = []; // radiuses of sectors in percents
+    public days: Date[] = [];
+    public selectedDate: Date | null = null;
     
     constructor(        
         private appService: AppService,
@@ -27,6 +29,7 @@ export class ApdComponent implements OnInit {
                 // TODO: load data
 
 
+                this.initDays();
                 const maxApd: number = Math.max(...this.data);
                 const preradiuses: number[] = this.data.map(x => Math.round(x * 100 / maxApd));
                 this.radiuses = preradiuses.map(pr => Math.round(pr * this.radius / 100));                
@@ -35,9 +38,18 @@ export class ApdComponent implements OnInit {
                 this.appService.monitorLog(err, true);
             }            
         }, 1000);
-    }   
+    }  
     
-    private polarToCartesian(centerX: number, centerY: number, radius: number, angleRad: number): IPoint {      
+    private initDays(): void {
+        const currentDate: Date = new Date();
+
+        for (let i: number = 0; i < 12; i++) {
+            const date: Date = new Date(currentDate.getTime() - i * 1000 * 60 * 60 * 24);            
+            this.days.push(date);
+        }
+    }
+    
+    public polarToCartesian(centerX: number, centerY: number, radius: number, angleRad: number): IPoint {      
         return {
             x: centerX + (radius * Math.cos(angleRad)),
             y: centerY + (radius * Math.sin(angleRad))
@@ -56,5 +68,9 @@ export class ApdComponent implements OnInit {
         ].join(" ");        
     
         return d;       
-    }    
+    } 
+    
+    public selectedDateFormat(): string {
+        return this.selectedDate ? `${this.selectedDate.getUTCDate()}/${this.appService.twoDigits(this.selectedDate.getUTCMonth()+1)}/${this.selectedDate.getUTCFullYear()}` : "";
+    }
 }

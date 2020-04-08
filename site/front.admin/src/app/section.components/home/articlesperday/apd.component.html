@@ -1,13 +1,15 @@
 <div class="apd">
     <ng-container *ngIf="ready">                
+        <div>{{selectedDateFormat()}}</div>
         <ng-container *ngIf="allAreNull">
-            <svg viewBox="0 0 100 100" id="asd">
+            <svg viewBox="0 0 100 100">
                 <path *ngFor="let r of radiuses; let i = index;" [attr.d]="sector(50, 50, radius, i*2*PI/7, (i+1)*2*PI/7)"></path>            
             </svg>
         </ng-container>
         <ng-container *ngIf="!allAreNull">
-            <svg viewBox="0 0 100 100" id="dsa">
-                <path *ngFor="let r of radiuses; let i = index;" [attr.d]="sector(50, 50, r, i*2*PI/7, (i+1)*2*PI/7)"></path>            
+            <svg viewBox="0 0 100 100">
+                <path *ngFor="let r of radiuses; let i = index;" [attr.d]="sector(50, 50, r, i*2*PI/7, (i+1)*2*PI/7)" (mouseover)="selectedDate = days[i];" (mouseout)="selectedDate = null;"></path>
+                <text *ngFor="let d of data; let i = index;" [attr.x]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).x" [attr.y]="polarToCartesian(50, 50, radiuses[i]+7, (0.5+i)*2*PI/7).y">{{d}}</text>
             </svg>        
         </ng-container>
     </ng-container>
