@@ -6,6 +6,8 @@ import { AdmLangRepository } from '../../../services/repositories/admlang.reposi
 import { AdmLang } from '../../../model/admlang.model';
 import { ApdRepository } from './apd.repository';
 
+
+
 @Component({
     selector: "articles-per-day",
     templateUrl: "./apd.component.html",

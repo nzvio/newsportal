@@ -11,7 +11,7 @@ export class ApdRepository extends Repository<number> {
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
-                resolve();
+                resolve();                
             } else {                
                 this.dataService.statArticlesPerDay().subscribe(res => {
                     if (res.statusCode === 200) {                        

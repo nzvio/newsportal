@@ -7,6 +7,7 @@ import { ApmComponent } from './articlespermonth/apm.component';
 import { ApmRepository } from './articlespermonth/apm.repository';
 import { ApdComponent } from './articlesperday/apd.component';
 import { ApdRepository } from './articlesperday/apd.repository';
+import { ApcComponent } from './articlespercategory/apc.component';
 
 @NgModule({	
     imports: [	
@@ -17,6 +18,7 @@ import { ApdRepository } from './articlesperday/apd.repository';
 		HomePage,
 		ApmComponent,
 		ApdComponent,
+		ApcComponent,
 	],
     providers: [
 		ApmRepository,
