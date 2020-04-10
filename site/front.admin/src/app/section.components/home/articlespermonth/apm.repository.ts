@@ -10,12 +10,13 @@ export class ApmRepository extends Repository<number> {
     
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (new Date().getTime() - this.chunkLoadedAt < this.ttl) {
+            if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
                 resolve();
             } else {                
                 this.dataService.statArticlesPerMonth().subscribe(res => {
                     if (res.statusCode === 200) {                        
                         this.xlFull = res.data.length ? res.data : [];
+                        this.fullLoadedAt = new Date().getTime();
                         resolve();
                     } else {                        
                         reject(res.error);
