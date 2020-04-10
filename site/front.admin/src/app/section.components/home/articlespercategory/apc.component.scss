@@ -8,7 +8,7 @@
             margin: 0 0 10px 0; 
             .apc-cat-name {font-size: 10px; margin: 0 0 2px;}
             .apc-cat-scale {
-                height: 20px; background-color: $color-transparent; transition: background-color 0.3s ease 0s; animation-name: scale-width; animation-duration: 1s;
+                height: 15px; background-color: $color-transparent; transition: background-color 0.3s ease 0s; animation-name: scale-width; animation-duration: 1s;
                 &:hover {background-color: #fff;}
             }            
         }

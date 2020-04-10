@@ -5,10 +5,17 @@ import { Model } from "mongoose";
 import { APIService } from "../../common.services/_api.service";
 import { IArticle } from "../../model/orm/interfaces/article.interface";
 import { IAnswer } from "../../model/answer.interface";
+import { IApcDTO } from "./dto/apc.dto";
+import { ILang } from "../../model/orm/interfaces/lang.interface";
+import { ICategory } from "src/model/orm/interfaces/category.interface";
 
 @Injectable()
 export class StatService extends APIService {
-    constructor (@InjectModel("Article") private readonly articleModel: Model<IArticle>) {
+    constructor (
+        @InjectModel("Article") private readonly articleModel: Model<IArticle>,
+        @InjectModel("Lang") private readonly langModel: Model<ILang>,
+        @InjectModel("Category") private readonly categoryModel: Model<ICategory>,
+    ) {
         super();
     }
 
@@ -66,6 +73,25 @@ export class StatService extends APIService {
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in StatService.articlesPerDay: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async articlesPerCategory(): Promise<IAnswer<IApcDTO[]>> {
+        try {
+            let data: IApcDTO[] = [];
+            const lang: ILang = await this.langModel.findOne({sluggable: true});
+            const categories: ICategory[] = await this.categoryModel.find();
+
+            for (let category of categories) {
+                const q: number = await this.articleModel.countDocuments({category});
+                data.push({catname: category.name[lang._id], q});
+            }
+
+            return {statusCode: 200, data};
+        } catch (err) {
+            let errTxt: string = `Error in StatService.articlesByCategory: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

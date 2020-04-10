@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Repository } from '../../../services/repositories/_repository';
 import { DataService } from '../../../services/data.service';
+import { IApcDTO } from './apc.dto';
 
 @Injectable()
-export class ApdRepository extends Repository<number> {    
+export class ApcRepository extends Repository<IApcDTO> {    
     constructor(protected dataService: DataService) {
         super(dataService);
     }    
@@ -11,9 +12,9 @@ export class ApdRepository extends Repository<number> {
     public load(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (new Date().getTime() - this.fullLoadedAt < this.ttl) {
-                resolve();                
+                resolve();
             } else {                
-                this.dataService.statArticlesPerDay().subscribe(res => {
+                this.dataService.statArticlesPerCategory().subscribe(res => {
                     if (res.statusCode === 200) {                        
                         this.xlFull = res.data.length ? res.data : [];
                         this.fullLoadedAt = new Date().getTime();

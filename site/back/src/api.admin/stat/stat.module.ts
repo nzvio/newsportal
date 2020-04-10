@@ -6,10 +6,16 @@ import { ArticleSchema } from "../../model/orm/schemas/article.schema";
 import { StatController } from "./stat.controller";
 import { StatService } from "./stat.service";
 import { jwtConstants } from "../auth/auth.constants";
+import { CategorySchema } from "../../model/orm/schemas/category.schema";
+import { LangSchema } from "../../model/orm/schemas/lang.schema";
 
 @Module({
     imports: [
-        MongooseModule.forFeature([{name: 'Article', schema: ArticleSchema}]),     
+        MongooseModule.forFeature([
+            {name: 'Article', schema: ArticleSchema},
+            {name: 'Category', schema: CategorySchema},
+            {name: 'Lang', schema: LangSchema},
+        ]),     
         JwtModule.register(jwtConstants),   
     ],
     controllers: [StatController],

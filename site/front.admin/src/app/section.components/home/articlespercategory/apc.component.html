@@ -1,18 +1,10 @@
 <div class="apc">
     <ng-container *ngIf="ready">
         <div class="apc-content">
-            <div class="apc-cat">
-                <div class="apc-cat-name">Category name</div>
-                <div class="apc-cat-scale" [style.width.%]="50" [title]="999"></div>
-            </div>
-            <div class="apc-cat">
-                <div class="apc-cat-name">Category name</div>
-                <div class="apc-cat-scale" [style.width.%]="100" [title]="888"></div>
-            </div>
-            <div class="apc-cat">
-                <div class="apc-cat-name">Category name</div>
-                <div class="apc-cat-scale" [style.width.%]="40" [title]="555"></div>
-            </div>
+            <div class="apc-cat" *ngFor="let apc of data; let i = index;">
+                <div class="apc-cat-name" [innerHTML]="apc.catname"></div>
+                <div class="apc-cat-scale" [style.width.%]="widths[i]" [title]="apc.q"></div>
+            </div>            
         </div>
     </ng-container>
     <ng-container *ngIf="!ready">

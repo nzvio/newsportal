@@ -24,6 +24,7 @@ import { IGetchunkDTO } from '../model/dto/getchunk.dto';
 import { ICommentsGetallDTO } from '../model/dto/comments.getall.dto';
 import { Tag } from '../model/orm/tag.model';
 import { Setting } from '../model/orm/setting.model';
+import { IApcDTO } from '../section.components/home/articlespercategory/apc.dto';
 
 @Injectable()
 export class DataService {
@@ -128,6 +129,7 @@ export class DataService {
 
     public statArticlesPerMonth(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlespermonth", null, true);}
     public statArticlesPerDay(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlesperday", null, true);}
+    public statArticlesPerCategory(): Observable<IAnswer<IApcDTO[]>> {return this.sendRequest("GET", "stat/articlespercategory", null, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;
