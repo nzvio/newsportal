@@ -48,6 +48,10 @@
             "workspace-home-apc": "Articles per category",
             "workspace-home-date": "Date",
             "workspace-home-articles": "Articles",
+            "workspace-home-categories": "Categories",
+            "workspace-home-comments": "Comments",
+            "workspace-home-users": "Users",
+            "workspace-home-summary": "Summary",
 
             "workspace-users-h1": "Users",
             "workspace-users-name": "Name",
@@ -225,6 +229,10 @@
             "workspace-home-apc": "Статьи по категориям",
             "workspace-home-date": "Дата",
             "workspace-home-articles": "Статьи",
+            "workspace-home-categories": "Категории",
+            "workspace-home-comments": "Комментарии",
+            "workspace-home-users": "Пользователи",
+            "workspace-home-summary": "Сводка",
 
             "workspace-users-h1": "Пользователи",
             "workspace-users-name": "Имя",

@@ -8,13 +8,17 @@ import { StatService } from "./stat.service";
 import { jwtConstants } from "../auth/auth.constants";
 import { CategorySchema } from "../../model/orm/schemas/category.schema";
 import { LangSchema } from "../../model/orm/schemas/lang.schema";
+import { CommentSchema } from "../../model/orm/schemas/comment.schema";
+import { UserSchema } from "../../model/orm/schemas/user.schema";
 
 @Module({
     imports: [
         MongooseModule.forFeature([
             {name: 'Article', schema: ArticleSchema},
             {name: 'Category', schema: CategorySchema},
+            {name: 'Comment', schema: CommentSchema},
             {name: 'Lang', schema: LangSchema},
+            {name: 'User', schema: UserSchema},
         ]),     
         JwtModule.register(jwtConstants),   
     ],

@@ -7,7 +7,10 @@ import { IArticle } from "../../model/orm/interfaces/article.interface";
 import { IAnswer } from "../../model/answer.interface";
 import { IApcDTO } from "./dto/apc.dto";
 import { ILang } from "../../model/orm/interfaces/lang.interface";
-import { ICategory } from "src/model/orm/interfaces/category.interface";
+import { ICategory } from "../../model/orm/interfaces/category.interface";
+import { IComment } from "../../model/orm/interfaces/comment.interface";
+import { ISummary } from "./dto/summary.dto";
+import { IUser } from "../../model/orm/interfaces/user.interface";
 
 @Injectable()
 export class StatService extends APIService {
@@ -15,6 +18,8 @@ export class StatService extends APIService {
         @InjectModel("Article") private readonly articleModel: Model<IArticle>,
         @InjectModel("Lang") private readonly langModel: Model<ILang>,
         @InjectModel("Category") private readonly categoryModel: Model<ICategory>,
+        @InjectModel("Comment") private readonly commentModel: Model<IComment>,
+        @InjectModel("User") private readonly userModel: Model<IUser>,
     ) {
         super();
     }
@@ -92,6 +97,22 @@ export class StatService extends APIService {
             return {statusCode: 200, data};
         } catch (err) {
             let errTxt: string = `Error in StatService.articlesByCategory: ${String(err)}`;
+            console.log(errTxt);
+            return {statusCode: 500, error: errTxt};
+        }
+    }
+
+    public async summary(): Promise<IAnswer<ISummary>> {
+        try {
+            const articles: number = await this.articleModel.countDocuments();
+            const categories: number = await this.categoryModel.countDocuments();
+            const comments: number = await this.commentModel.countDocuments();
+            const users: number = await this.userModel.countDocuments();
+            const summary: ISummary = {articles, categories, comments, users};
+
+            return {statusCode: 200, data: summary};
+        } catch (err) {
+            let errTxt: string = `Error in StatService.summary: ${String(err)}`;
             console.log(errTxt);
             return {statusCode: 500, error: errTxt};
         }

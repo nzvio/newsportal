@@ -1,4 +1,4 @@
 export interface IApcDTO {
-    catname: string;
-    q: number;
+    readonly catname: string;
+    readonly q: number;
 }

@@ -4,6 +4,7 @@ import { IAnswer } from "../../model/answer.interface";
 import { AuthGuard } from "../auth/auth.guard";
 import { StatService } from "./stat.service";
 import { IApcDTO } from "./dto/apc.dto";
+import { ISummary } from "./dto/summary.dto";
 
 @Controller('api/admin/stat')
 export class StatController {
@@ -28,5 +29,12 @@ export class StatController {
     @Get("articlespercategory")
     public articlesPerCategory(): Promise<IAnswer<IApcDTO[]>> {
         return this.statService.articlesPerCategory();
+    }
+
+    // all entities quantity
+    @UseGuards(AuthGuard)
+    @Get("summary")
+    public summary(): Promise<IAnswer<ISummary>> {
+        return this.statService.summary();
     }
 }

@@ -1,0 +1,13 @@
+<div class="summary">    
+    <ng-container *ngIf="ready">
+        <div class="summary-content">
+            <div class="summary-item">{{currentLang.phrases['workspace-home-articles']}}: {{summary.articles}}</div>
+            <div class="summary-item">{{currentLang.phrases['workspace-home-categories']}}: {{summary.categories}}</div>
+            <div class="summary-item">{{currentLang.phrases['workspace-home-comments']}}: {{summary.comments}}</div>
+            <div class="summary-item">{{currentLang.phrases['workspace-home-users']}}: {{summary.users}}</div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="!ready">
+        <div class="reloading"><span></span></div>
+    </ng-container>    
+</div>
