@@ -108,7 +108,8 @@ export class StatService extends APIService {
             const categories: number = await this.categoryModel.countDocuments();
             const comments: number = await this.commentModel.countDocuments();
             const users: number = await this.userModel.countDocuments();
-            const summary: ISummary = {articles, categories, comments, users};
+            const articleviews: number = (await this.articleModel.aggregate([{$group: {_id: null, views: {$sum: "$viewsq"}}}]))[0].views;            
+            const summary: ISummary = {articles, categories, comments, users, articleviews} ;
 
             return {statusCode: 200, data: summary};
         } catch (err) {

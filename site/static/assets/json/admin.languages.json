@@ -52,6 +52,7 @@
             "workspace-home-comments": "Comments",
             "workspace-home-users": "Users",
             "workspace-home-summary": "Summary",
+            "workspace-home-articleviews": "Article views",
 
             "workspace-users-h1": "Users",
             "workspace-users-name": "Name",
@@ -233,6 +234,7 @@
             "workspace-home-comments": "Комментарии",
             "workspace-home-users": "Пользователи",
             "workspace-home-summary": "Сводка",
+            "workspace-home-articleviews": "Просмотры статей",
 
             "workspace-users-h1": "Пользователи",
             "workspace-users-name": "Имя",

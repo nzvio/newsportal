@@ -3,4 +3,5 @@ export interface ISummary {
     readonly categories: number;
     readonly comments: number;
     readonly users: number;
+    readonly articleviews: number;
 }

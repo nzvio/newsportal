@@ -1,10 +1,11 @@
 <div class="summary">    
     <ng-container *ngIf="ready">
         <div class="summary-content">
-            <div class="summary-item">{{currentLang.phrases['workspace-home-articles']}}: {{summary.articles}}</div>
-            <div class="summary-item">{{currentLang.phrases['workspace-home-categories']}}: {{summary.categories}}</div>
-            <div class="summary-item">{{currentLang.phrases['workspace-home-comments']}}: {{summary.comments}}</div>
-            <div class="summary-item">{{currentLang.phrases['workspace-home-users']}}: {{summary.users}}</div>
+            <div class="summary-item"><span>{{currentLang.phrases['workspace-home-articles']}}:</span><span>{{summary.articles}}</span></div>
+            <div class="summary-item"><span>{{currentLang.phrases['workspace-home-categories']}}:</span><span>{{summary.categories}}</span></div>
+            <div class="summary-item"><span>{{currentLang.phrases['workspace-home-comments']}}:</span><span>{{summary.comments}}</span></div>
+            <div class="summary-item"><span>{{currentLang.phrases['workspace-home-users']}}:</span><span>{{summary.users}}</span></div>
+            <div class="summary-item"><span>{{currentLang.phrases['workspace-home-articleviews']}}:</span><span>{{summary.articleviews}}</span></div>            
         </div>
     </ng-container>
     <ng-container *ngIf="!ready">
