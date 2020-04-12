@@ -27,7 +27,7 @@ import { ICommentVoteDTO } from '../model/dto/commentvote.dto';
 
 @Injectable()
 export class DataService {
-    private root: string = "https://back.sc.vio.net.ua/api/visitor";
+    private root: string = "http://back.sclub.net.ua/api/visitor";
     public authData: IAuthData | null = null;                
     
     constructor (

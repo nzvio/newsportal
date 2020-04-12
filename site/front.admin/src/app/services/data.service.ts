@@ -29,7 +29,7 @@ import { ISummary } from '../section.components/home/summary/summary.dto';
 
 @Injectable()
 export class DataService {
-    private root: string = "https://back.sc.vio.net.ua/api/admin";
+    private root: string = "http://back.sclub.net.ua/api/admin";
     public authData: IAuthData | null = null;                
     
     constructor (

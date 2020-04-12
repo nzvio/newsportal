@@ -6,7 +6,7 @@ import { IAnswer } from '../model/answer.interface';
 
 @Injectable()
 export class SocketService {
-    private host: string = "https://back.sc.vio.net.ua";
+    private host: string = "http://back.sclub.net.ua";
     private socket: SocketIOClient.Socket;
 
     constructor(private appService: AppService) {        
