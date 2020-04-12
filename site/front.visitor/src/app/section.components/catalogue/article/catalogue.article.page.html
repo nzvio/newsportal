@@ -38,7 +38,8 @@
                     <div id="a-views">{{article.viewsq}}</div>
                 </div>
                 <img src="/assets/images/articles/{{article.img}}" *ngIf="article.img">
-                <div class="content" [innerHTML]="article.content"></div>
+                <div class="content womargin" [innerHTML]="article.content"></div>
+                <div id="a-source">/<a [href]="article.source" target="_blank">{{currentLang.s("catalogue-article-source")}}</a>/</div>
                 <div id="a-tags" *ngIf="article.tags.length">
                     <ul>
                         <li [innerHTML]="currentLang.s('catalogue-article-tags')"></li>

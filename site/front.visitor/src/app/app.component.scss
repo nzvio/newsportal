@@ -55,6 +55,7 @@ html {
                 }
                 .content {
                     font-size: 14px; line-height: 28px; margin-bottom: 50px;
+                    &.womargin {margin-bottom: 0;}
                     &::first-letter {font-size: 50px; vertical-align: text-top;}
                     a, a:visited {color: $color-blue;}
                     a:hover {color:#000;}

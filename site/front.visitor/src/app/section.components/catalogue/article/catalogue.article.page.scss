@@ -87,6 +87,11 @@ article {
             }
         }
     } 
+    #a-source {
+        text-align: right; margin: 0 0 20px 0; font-size: 12px; font-style: italic; color: $color-grey-light;
+        a, a:visited {color: $color-grey-light; transition: color 0.3s ease 0s;}
+        a:hover {color: $color-blue;}
+    }
     &.loading {
         figure {padding-bottom: 50%; background-color: #f9f9f9; animation-name: loading-blink; animation-duration: 2s; animation-iteration-count: infinite; margin: 0 0 15px 0;}
         label {
