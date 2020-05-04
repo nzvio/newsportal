@@ -1,0 +1,25 @@
+<div class="content">
+    <div class="content-head">
+        <h1>{{currentLang.phrases['workspace-sitemap-h1']}}</h1>
+        <div class="content-dash">
+            
+        </div>
+    </div>    
+    <div class="data">
+        <ng-container *ngIf="ready">
+            <div class="sitemap">
+                <div class="sitemap-content"><textarea [(ngModel)]="data"></textarea></div>
+                <div class="sitemap-buttons">
+                    <button (click)="build();">{{currentLang.phrases['workspace-sitemap-build']}}</button>
+                    <button (click)="save();">{{currentLang.phrases['workspace-sitemap-save']}}</button>
+                </div>
+            </div>            
+        </ng-container>
+        <ng-container  *ngIf="!ready">
+            <loading-table [columns]="1"></loading-table>
+        </ng-container>
+        <ng-container *ngIf="reloading">
+            <div class="reloading"><span></span></div>
+        </ng-container>        
+    </div>    
+</div>

@@ -21,6 +21,7 @@ import { ParseerrorRepository } from './repositories/parseerror.repository';
 import { CommentRepository } from './repositories/comment.repository';
 import { TagRepository } from './repositories/tag.repository';
 import { SettingRepository } from './repositories/setting.repository';
+import { SitemapRepository } from './repositories/sitemap.repository';
 
 @NgModule({
     declarations: [],
@@ -47,6 +48,7 @@ import { SettingRepository } from './repositories/setting.repository';
 		CommentRepository,
 		TagRepository,
 		SettingRepository,
+		SitemapRepository,
 	],
 })
 export class ServicesModule { }

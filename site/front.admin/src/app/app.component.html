@@ -1,17 +1,12 @@
 <ng-container *ngIf="langsReady">
 	<the-header 
 		[currentUrl]="currentUrl" 
-		[sub1Active]="sub1Active" 
-		[sub2Active]="sub2Active" 
 		[monitorContent]="monitorContent"
 		[authenticated]="authenticated"
 		[currentLang]="currentLang"
 	></the-header>
 	<the-sidebar 
 		[currentUrl]="currentUrl" 
-		[(sub1Active)]="sub1Active" 
-		[(sub2Active)]="sub2Active" 
-		[(sub3Active)]="sub3Active" 
 		[(active)]="mmActive" 		
 		[currentLang]="currentLang"
 	></the-sidebar>

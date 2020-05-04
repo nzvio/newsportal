@@ -2,6 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { AppService } from './services/app.service';
 import { Router, RouterEvent, NavigationStart } from '@angular/router';
 import { filter } from "rxjs/operators";
+
 import { URL } from './model/url';
 import { AuthService } from './services/auth.service';
 import { AdmLangRepository } from './services/repositories/admlang.repository';
@@ -14,8 +15,7 @@ import { AdmLang } from './model/admlang.model';
 	encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-	public time: string = "";
-	public currentUrl: URL = new URL();
+	public time: string = "";	
 	public sub1Active: boolean = false;	
 	public sub2Active: boolean = false;	
 	public sub3Active: boolean = false;	
@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
 	get authenticated(): boolean {return this.authService.authData !== null;}
 	get langsReady(): boolean {return this.admlangRepository.currentLang != null;}
 	get currentLang(): AdmLang {return this.admlangRepository.currentLang;}
+	get currentUrl(): URL {return this.appService.currentUrl;}
 
 	public ngOnInit(): void {
 		this.admlangRepository.load();
@@ -46,9 +47,6 @@ export class AppComponent implements OnInit {
 			.subscribe(event => {
 				this.currentUrl.build(event.url);				
 				setTimeout(() => {
-					this.sub1Active = this.currentUrl.parts[0] === "catalogue";
-					this.sub2Active = this.currentUrl.parts[0] === "users";					
-					this.sub3Active = this.currentUrl.parts[0] === "parsing";					
 					window.scrollTo(0, 0);
 				}, 1);
 			});

@@ -12,7 +12,7 @@ import { AdmLangRepository } from '../../../services/repositories/admlang.reposi
 })
 export class SettingsListPage extends ListPage<Setting> implements OnInit {
     // inherited
-    public homeUrl: string = "/settings";
+    public homeUrl: string = "/service/settings";
 
     constructor(
         protected admlangRepository: AdmLangRepository,

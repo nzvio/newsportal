@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 
 import { Childable } from '../model/childable.interface';
+import { URL } from '../model/url';
 
 @Injectable()
 export class AppService {
     public monitorContent: string = "";
     public mmActive: boolean = false;   
+    public currentUrl: URL = new URL();
     
     constructor() {}
     

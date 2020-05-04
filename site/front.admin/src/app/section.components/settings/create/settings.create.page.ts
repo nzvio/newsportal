@@ -13,7 +13,7 @@ import { AdmLangRepository } from '../../../services/repositories/admlang.reposi
 })
 export class SettingsCreatePage extends ObjectPage<Setting> implements OnInit {
 	public x: Setting | null = null;
-	public homeUrl: string = "/settings";
+	public homeUrl: string = "/service/settings";
 	public folder: string | null = null;
 	public requiredFields: string[] = [];
 

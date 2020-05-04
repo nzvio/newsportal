@@ -132,6 +132,10 @@ export class DataService {
     public statArticlesPerDay(): Observable<IAnswer<number[]>> {return this.sendRequest("GET", "stat/articlesperday", null, true);}
     public statArticlesPerCategory(): Observable<IAnswer<IApcDTO[]>> {return this.sendRequest("GET", "stat/articlespercategory", null, true);}
     public statSummary(): Observable<IAnswer<ISummary>> {return this.sendRequest("GET", "stat/summary", null, true);}
+
+    public sitemapLoad(): Observable<IAnswer<string>> {return this.sendRequest("GET", "sitemap/load", null, true);}
+    public sitemapSave(data: string): Observable<IAnswer<void>> {return this.sendRequest("POST", "sitemap/save", {data}, true);}
+    public sitemapBuild(): Observable<IAnswer<string>> {return this.sendRequest("GET", "sitemap/build", null, true);}
     
     private sendRequest (method: string, url: string, body: Object = {}, authNeeded: boolean, withProgress: boolean = false): Observable<any> | null {        
         let headers: HttpHeaders | null = null;

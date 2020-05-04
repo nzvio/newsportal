@@ -11,8 +11,8 @@ import { AdmLang } from '../../model/admlang.model';
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() currentUrl: URL = new URL();
-    @Input() sub1Active: boolean = false;
-    @Input() sub2Active: boolean = false;
+    //@Input() sub1Active: boolean = false;
+    //@Input() sub2Active: boolean = false;
     @Input() monitorContent: string = "";
     @Input() authenticated: boolean = false;
     @Input() currentLang: AdmLang;

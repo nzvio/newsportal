@@ -17,6 +17,7 @@ import { CommentsModule } from "./comments/comments.module";
 import { TagsModule } from "./tags/tags.module";
 import { SettingsModule } from "./settings/settings.module";
 import { StatModule } from "./stat/stat.module";
+import { SitemapModule } from "./sitemap/sitemap.module";
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { StatModule } from "./stat/stat.module";
 		TagsModule,
 		SettingsModule,
 		StatModule,
+		SitemapModule,
     ],
     providers: [
 		AdminAPIGateway,
