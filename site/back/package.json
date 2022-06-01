@@ -37,7 +37,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.4",
-    "sharp": "^0.24.1",
+    "sharp": "^0.30.5",
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
